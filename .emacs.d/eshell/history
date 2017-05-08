@@ -1,0 +1,13 @@
+ls
+cd Coding/
+ls
+cd ProjectEuler/
+ls
+git init
+git add .
+git commit -m "Initial check-in"
+git log
+logr important: Programming and CS are two different exams in TUMOnline, sign up for both, always. 
+important: Homework 1 may be out today
+logr important: Homework 1 may be out today
+logr you do get used to noise, damn. 

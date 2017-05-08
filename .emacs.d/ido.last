@@ -1,0 +1,192 @@
+;;; -*- coding: utf-8 -*-
+
+;; ----- ido-last-directory-list -----
+(
+ ("/Users/az/org/Nikki/" . "stories/")
+ ("/Users/az/Coding/Elixir/crestTest/" . "lib/")
+ ("/Users/az/org/letters/" . "Nikki/")
+ ("/Users/az/Coding/Elixir/haemonculus/" . "test/")
+ ("/Users/az/Coding/Elixir/" . "crestTest/")
+ ("/Users/az/org/university/" . "CN_slides/")
+ ("/Users/az/org/" . "Nikki/")
+ ("/Users/az/Coding/Rust/bad-gtd/src/" . "todo/")
+ ("/Users/az/Coding/Rust/bad-gtd/" . "src/")
+ ("/Users/az/Coding/Rust/" . "bad-gtd/")
+ ("/Users/az/_org/letters/Nikki/" . "unsent/")
+ ("/Users/az/_org/letters/" . "Nikki/")
+ ("/Users/az/_org/" . "letters/")
+ ("/Users/az/Coding/Rust/hexasperas/" . "src/")
+ ("/Users/az/university/" . "documents/")
+ ("/" . "Users/")
+ ("/Users/az/Coding/Haskell/" . "DiaryDaemon/")
+ ("/Users/az/Coding/" . "Haskell/")
+ ("/Users/az/.emacs.d/" . "auto-save-list/")
+ ("/Users/" . "az/")
+ ("/Users/az/" . "org/")
+)
+
+;; ----- ido-work-directory-list -----
+(
+ "/Users/az/org/Nikki/stories/"
+ "/Users/az/org/job-applications/"
+ "/Users/az/org/CV/"
+ "/Users/az/org/Nikki/"
+ "/Users/az/Coding/Haskell/DiaryDaemon/src/"
+ "/Users/az/Coding/Haskell/DiaryDaemon/"
+ "/Users/az/Coding/Elixir/crestTest/lib/"
+ "/Users/az/Coding/Elixir/crestTest/"
+ "/Users/az/org/letters/Nikki/"
+ "/Users/az/org/"
+ "/Users/az/org/Haskell-Jornal/Exercises/"
+ "/Users/az/org/Haskell-Jornal/Exercises/code/"
+ "/Users/az/org/Haskell-Jornal/"
+ "Haskell-Journal/journal/"
+ "/Users/az/Coding/Haskell/BadGtd/"
+ "/Users/az/org/university/"
+ "/Users/az/Coding/Elixir/haemonculus/test/"
+ "/Users/az/.emacs.d/"
+ "/Users/az/Coding/Elixir/haemonculus/lib/"
+ "/Users/az/Coding/Elixir/haemonculus/"
+ "/Users/az/org/Tracking/"
+ "/Users/az/Tracking/"
+ "/Users/az/Coding/Rust/bad-gtd/src/todo/"
+ "/Users/az/university/"
+ "/Users/az/Coding/Rust/bad-gtd/src/"
+ "/Users/az/cooking/"
+ "/Users/az/Coding/specs-and-concepts/"
+ "/Users/az/_org/letters/Nikki/unsent/"
+ "/Users/az/Coding/Rust/hexasperas/src/"
+ "/Users/az/Coding/Haskell/AdventOfCode/"
+ "/Users/az/org/letters/Father/"
+ "/Users/az/"
+)
+
+;; ----- ido-work-file-list -----
+(
+ "truth"
+ "stump-application"
+ "realisations"
+ "cv.tex"
+ "Lebenslauf.tex"
+ "2016-02-29-sueddeutscher-verlag"
+ "letters"
+ "Lib.hs"
+ "Setup.hs"
+ "crestTest.ex"
+)
+
+;; ----- ido-dir-file-cache -----
+(
+ ("/Users/az/.emacs.d/" (22267 30623 0 0) "tramp" "tazjins-emacs/" "smex-items" "init.el~" "init.el" "ido.last~" "ido.last" "eshell/" "elpa/" "auto-save-list/" ".git/" "../" "./")
+
+ ("/Users/az/org/CV/" (22289 7310 0 0) "SimplerLebenslauf.tex~" "SimplerLebenslauf.tex" "SimplerLebenslauf.pdf" "SimplerLebenslauf.out" "SimplerLebenslauf.log" "SimplerLebenslauf.aux" "Lebenslauf.tex~" "Lebenslauf.tex" "Lebenslauf.pdf" "Lebenslauf.out" "Lebenslauf.log" "Lebenslauf.aux" "cv.tex~" "cv.tex" "cv.pdf" "cv.out" "cv.log" "cv.aux" ".gitignore~" ".gitignore" ".git/" ".DS_Store" "../" "./")
+
+ ("/Users/az/org/job-applications/" (22267 29416 0 0) "stump-application" "2016-02-29-sueddeutscher-verlag~" "2016-02-29-sueddeutscher-verlag.tex" "2016-02-29-sueddeutscher-verlag.pdf" "2016-02-29-sueddeutscher-verlag" "../" "./")
+
+ ("/Users/az/" (22296 50496 0 0) "vim" "PycharmProjects/" "Public/" "Projects/" "Praat_processing/" "Pictures/" "org/" "Music/" "Movies/" "logfile" "Library/" "Homunculus/" "Home/" "fonts/" "Dropbox/" "Downloads/" "Documents/" "Desktop/" "Coding/" "campaigns/" "Applications/" ".zshrc.pre-oh-my-zsh" ".zshrc" ".zsh_history" ".zsh_favlist" ".zsh-update" ".zcompdump-albatross-5.2" ".zcompdump-albatross-5.0.8" ".zcompdump" ".yjp/" ".wget-hsts" ".weechat/" ".virtualenvs/" ".vimshell/" ".vimrc" ".viminfo" ".vim/" ".vagrant.d/" ".utop-history" ".Trash/" ".subversion/" ".stack/" ".ssh/" ".sqlite_history" ".scala_history" ".sbt/" ".RubyMine80/" ".rnd" ".python_history" ".pylint.d/" ".PyCharm50/" ".PyCharm40/" ".psql_history" ".pry_history" ".profile" ".opam/" ".oh-my-zsh/" ".ocamlinit" ".npm/" ".notes" ".node-gyp/" ".mysql_history" ".mono/" ".mix/" ".matplotlib/" ".m2/" ".local/" ".lesshst" ".lein/" ".kwmrc" ".kotlin-daemon/" ".ivy2/" ".irssi/" ".IntelliJIdea15/" ".idea-build/" ".histfile" ".hex/" ".hammerspoon/" ".gradle/" ".gitkraken/" ".gitignore_global" ".gitconfig" ".ghc-mod/" ".ghc/" ".gem/" ".exercism.json" ".emacs~" ".emacs.d/" ".DS_Store" ".dropbox/" ".discordrb_token_cache.json" ".config/" ".codex" ".codeintel/" ".CFUserTextEncoding" ".cargo/" ".cache/" ".cabal/" ".bundle/" ".bash_sessions/" ".bash_profile" ".bash_history" ".atom/" ".anyconnect" ".android/" "../" "./")
+
+ ("/Users/az/org/Nikki/stories/" (22254 40302 0 0) "strange-letters" "realisations~" "realisations" "../" "./")
+
+ ("/Users/az/org/Nikki/" (22229 30856 0 0) "translations/" "the-control-book-notes" "syllabus" "stories/" "letters~" "letters" "letter-to-my-mom~" "letter-to-my-mom.tex" "letter-to-my-mom.pdf" "letter-to-my-mom" "ds-documentation~" "ds-documentation" "compendium~" "compendium" "codex~" "codex.tex~" "codex.tex" "codex.pdf" "codex" "a-house-prologue.tex" "a-house-prologue.html" "a-house-prologue" "24-7-rules" ".DS_Store" "#a-letter-about-tucker#" "../" "./")
+
+ ("/Users/az/org/" (22241 31531 0 0) "university/" "Tracking/" "Notes/" "Nikki/" "miri-vertrag.pdf" "miri-vertrag.pages" "letters/" "job-applications/" "Haskell-Jornal/" "CV/" "cooking/" "bafoeg/" "adnymics" ".DS_Store" "../" "./")
+
+ ("/Users/az/Coding/Elixir/crestTest/" (22221 34713 0 0) "test/" "README.md" "mix.lock" "mix.exs" "lib/" "deps/" "config/" "_build/" ".gitignore" "../" "./")
+
+ ("/Users/az/Coding/Elixir/crestTest/lib/" (22221 34743 0 0) "crestTest.ex" "../" "./")
+
+ ("/Users/az/Coding/Haskell/DiaryDaemon/src/" (22221 36410 0 0) "Lib.hs" "../" "./")
+
+ ("/Users/az/Coding/Haskell/DiaryDaemon/" (22221 36424 0 0) "test/" "stack.yaml" "src/" "Setup.hs" "LICENSE" "DiaryDaemon.cabal" "app/" ".stack-work/" "../" "./")
+
+ ("/Users/az/Coding/Haskell/" (22221 36410 0 0) "DiaryDaemon/" "BadGtd/" ".DS_Store" "../" "./")
+
+ ("/Users/az/Coding/Elixir/" (22221 34193 0 0) "crestTest/" "../" "./")
+
+ ("/Users/az/Coding/Rust/bad-gtd/src/" (22192 41917 0 0) "todo/" "main.rs" "database/" "cli/" "../" "./")
+
+ ("/Users/az/Coding/Haskell/BadGtd/" (22192 42129 0 0) "test/" "stack.yaml" "src/" "Setup.hs" "LICENSE" "BadGtd.cabal" "app/" ".stack-work/" "../" "./")
+
+ ("/Users/az/org/Haskell-Jornal/" (22192 40565 0 0) "journal~" "journal" "Exercises/" "../" "./")
+
+ ("/Users/az/org/Haskell-Jornal/Exercises/" (22192 40567 0 0) "code/" "4-Basic-Datatypes" "3-Chapter-Exercises" "2-Operator-Precedence" "2-Fixing-syntax" "2-Chapter-End" "1-Lambda-Calculus~" "1-Lambda-Calculus" "../" "./")
+
+ ("/Users/az/org/letters/Nikki/" (22192 40563 0 0) "unsent/" "laoganma.jpg" "2016-01-30-chinese-cooking~" "2016-01-30-chinese-cooking.tex~" "2016-01-30-chinese-cooking.tex" "2016-01-30-chinese-cooking" "2015-11-30--post-fight" "../" "./")
+
+ ("/Users/az/org/letters/" (22108 27051 0 0) "Nikki/" "Father/" "../" "./")
+
+ ("/Users/az/org/Haskell-Jornal/Exercises/code/" (22185 49219 0 0) "test.hs~" "test.hs" "../" "./")
+
+ ("/Users/az/Coding/" (22174 13096 0 0) "specs-and-concepts/" "Scala/" "Rust/" "Ruby/" "Python/" "neobundle/" "Kotlin/" "Java/" "Haskell/" "Elixir/" "clones/" "Clojure/" "cljs/" "C/" ".DS_Store" "../" "./")
+
+ ("/Users/az/Coding/Elixir/haemonculus/" (22149 2600 0 0) "web/" "test/" "README.md" "priv/" "package.json" "node_modules/" "mix.lock" "mix.exs" "logfile" "lib/" "deps/" "config/" "brunch-config.js" "_build/" ".gitignore" "../" "./")
+
+ ("/Users/az/Coding/Elixir/haemonculus/lib/" (22149 1563 0 0) "haemonculus.ex" "haemonculus/" "../" "./")
+
+ ("/Users/az/Coding/Elixir/haemonculus/test/" (22149 1563 0 0) "views/" "test_helper.exs" "support/" "models/" "controllers/" "channels/" "../" "./")
+
+ ("/Users/az/Coding/specs-and-concepts/" (22147 32329 0 0) "tournament" "stats-kit" "standard-crud-app" "gtd-cli~" "gtd-cli" "dnd-helper" "diarism" "cli-notes" "az-notes" "automatic-tournament" "atrophy" "../" "./")
+
+ ("/Users/az/Coding/Rust/bad-gtd/src/todo/" (22137 9601 0 0) "task.rs" "project.rs" "mod.rs" "../" "./")
+
+ ("/Users/az/org/Tracking/" (22144 64691 0 0) "food~" "food" "../" "./")
+
+ ("/Users/az/org/university/" (22145 14057 0 0) "sweng-06~" "sweng-06.tex~" "software-engineering-prac/" "PM_slides/" "PM_prac" "math-i-outline" "iii-software-engineering~" "iii-software-engineering" "iii-project-management~" "iii-project-management" "iii-pm-studying~" "iii-pm-studying" "iii-exam-studying~" "iii-exam-studying" "iii-controlling-systems" "iii-communication-networks~" "iii-communication-networks" "ii-math" "ii-accounting" "exam-schedule~" "exam-schedule.tex~" "exam-schedule.tex" "exam-schedule.pdf" "exam-schedule" "documents/" "courses-sem-3" "CN_slides/" ".DS_Store" "../" "./")
+
+ ("/Users/az/org/university/CN_slides/" (22133 25205 0 0) "Review-Chapter-2.pdf" "Review-Chapter-1-03.pdf" "Review-Chapter-1-02.pdf" "Review-Chapter-1-01.pdf" "Review-Chapter-02-Solutions.pdf" "Excercises-03.pdf" "Excercises-02.pdf" "Excercises-01.pdf" "Chapter-4.pdf" "Chapter-3-02.pdf" "Chapter-3-01.pdf" "Chapter-2.pdf" "Chapter-1-02.pdf" "Chapter-1-01.pdf" ".DS_Store" "../" "./")
+
+ ("/Users/az/university/" (22136 63265 0 0) "sweng-06~" "sweng-06.tex~" "software-engineering-prac/" "PM_slides/" "PM_prac~" "PM_prac.tex~" "PM_prac.tex" "PM_prac" "math-i-outline" "iii-software-engineering~" "iii-software-engineering" "iii-project-management~" "iii-project-management" "iii-pm-studying~" "iii-pm-studying" "iii-exam-studying~" "iii-exam-studying" "iii-controlling-systems" "iii-communication-networks~" "iii-communication-networks" "ii-math" "ii-accounting" "exam-schedule~" "exam-schedule.tex~" "exam-schedule.tex" "exam-schedule.pdf" "exam-schedule" "documents/" "courses-sem-3" "CN_slides/" ".DS_Store" "../" "./")
+
+ ("/Users/az/Coding/Rust/bad-gtd/" (22142 28734 0 0) "target/" "src/" "Cargo.toml" "Cargo.lock" ".gitignore" ".git/" ".DS_Store" "../" "./")
+
+ ("/Users/az/Tracking/" (22143 42442 0 0) "food" "../" "./")
+
+ ("/Users/az/.emacs.d/auto-save-list/" (22135 57316 0 0) "../" "./")
+
+ ("/Users/az/Coding/clones/" (22135 51893 0 0) "rust-src/" "racer/" "pizza-auth/" "linux/" "intellij-colors-solarized/" "clojure-cookbook/" "../" "./")
+
+ ("/Users/az/Coding/clones/racer/" (22135 51436 0 0) "tests/" "target/" "src2.rs" "src.rs" "src/" "README.md" "LICENSE-MIT" "images/" "CHANGELOG.md" "Cargo.toml" "Cargo.lock" ".travis.yml" ".gitignore" ".git/" "../" "./")
+
+ ("/Users/az/Coding/clones/racer/target/" (22135 51436 0 0) "release/" "../" "./")
+
+ ("/Users/az/Coding/clones/racer/target/release/" (22135 51657 0 0) "racer.dSYM/" "racer" "native/" "libracer.rlib" "examples/" "deps/" "build/" ".fingerprint/" "../" "./")
+
+ ("/Users/az/Coding/Rust/" (22133 10643 0 0) "bad-gtd/" "../" "./")
+
+ ("/Users/az/WebstormProjects/" (22069 55549 0 0) "webstormTest/" "untitled/" "intel-mine/" "../" "./")
+
+ ("/Users/az/_org/letters/Nikki/unsent/" (22122 38279 0 0) "2015-12-11-about-self-hatred" "../" "./")
+
+ ("/Users/az/_org/letters/Nikki/" (22122 38279 0 0) "unsent/" "2015-11-30--post-fight" "../" "./")
+
+ ("/Users/az/_org/letters/" (22108 27051 0 0) "Nikki/" "Father/" "../" "./")
+
+ ("/Users/az/_org/" (22110 37999 0 0) "letters/" "bafoeg/" ".DS_Store" "../" "./")
+
+ ("/Users/az/Coding/Rust/hexasperas/src/" (22123 57438 0 0) "todo/" "main.rs" "../" "./")
+
+ ("/Users/az/Coding/Rust/hexasperas/" (22123 58258 0 0) "target/" "src/" "Cargo.toml" "Cargo.lock" ".gitignore" ".git/" ".DS_Store" "../" "./")
+
+ ("/Users/az/university/documents/" (22119 58389 0 0) "SWENG-prac-02.png" "sweng-05.pdf" "sweng-05.pages" "sweng-04.tex~" "sweng-04.tex" "sweng-04.pdf" "sweng-04.pages" "sweng-04" "sweng-03" "stakeholder-portfolio.png" "Software Engineering Praktikum 02.tex" "Software Engineering Praktikum 02.pdf" "Software Engineering Praktikum 02" "Software Engineering Praktikum 01.pdf" "Software Engineering Praktikum 01" "Screen Shot 2015-12-03 at 13.40.03.png" "Screen Shot 2015-12-03 at 13.31.25.png" "iii-sweng-prac-05~" "iii-sweng-prac-05" ".DS_Store" "../" "./")
+
+ ("/Users/az/cooking/" (22118 61470 0 0) "warplan-holidays-2015" "porotos-con-riendas~" "porotos-con-riendas.tex" "porotos-con-riendas.pdf" "porotos-con-riendas" ".DS_Store" "../" "./")
+
+ ("/Users/az/Coding/Haskell/AdventOfCode/" (22109 45098 0 0) "day1.o" "day1.hs~" "day1.hs" "day1.hi" "../" "./")
+
+ ("/Users/az/org/letters/Father/" (22108 3504 0 0) "bafoeg" "../" "./")
+
+ ("/Users/az/Documents/" (22075 10311 0 0) "Xcode/" "WS 201516_Controlling-Systeme_Kapitel 4.1 Aufgabenstellungen.pages" "WS 201516_Controlling-Systeme_Kapitel 3 Aufgabenstellungen.pages" "VPProjects/" "Untitled1.ipynb" "test.clj" "saplogin_macos_erp.sapc" "Rust/" "Python/" "Minecraft/" "Lebenslauf.pdf" "Lebenslauf.pages" "Kuchen-calc.numbers" "English-essay.oo3/" "English Essay.pages" "emacs.tiff" "Design Resources/" "AppCode/" "about-that-morning.pages" ".localized" ".ipynb_checkpoints/" ".DS_Store" "../" "./")
+
+ ("/Users/" (22028 56107 0 0) "Shared/" "Guest/" "az/" ".localized" "../" "./")
+
+ ("/Users/az/Coding/Clojure/" (22072 30476 0 0) "util/" "typeid-converter/" "siphonator/" "killboard-parser/" "eve-fitting/" "eve-api/" "demo/" "cider_test.clj" ".DS_Store" "../" "./")
+
+ ("/Users/az/Coding/Clojure/eve-api/" (22088 3312 0 0) "test/" "target/" "src/" "resources/" "README.md" "projectFilesBackup/" "project.clj" "LICENSE" "eve-api.iml" "doc/" "dev-resources/" "classes/" ".nrepl-port" ".lein-repl-history" ".lein-failures" ".idea/" ".gitignore" ".git/" "../" "./")
+
+ ("/Users/az/Coding/Clojure/eve-api/src/" (22060 36945 0 0) "eve_api/" "../" "./")
+
+ ("/Users/az/Coding/Clojure/eve-api/src/eve_api/" (22088 49393 0 0) "xml.clj" "util.clj" "crest.clj" "core.clj" ".#xml.clj" "#xml.clj#" "../" "./")
+)
+
+;; ----- ido-unc-hosts-cache -----
+t
