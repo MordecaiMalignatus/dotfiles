@@ -1,81 +1,57 @@
-"NeoBundle Scripts-----------------------------
-if has('vim_starting')
-  if &compatible
-    set nocompatible               " Be iMproved
-  endif
 
-  " Required:
-  set runtimepath+=/Users/az/.vim/bundle/neobundle.vim/
-endif
+" Az' vimrc, take MKLLVXII.
 
-" Required:
-call neobundle#begin(expand('/Users/az/.vim/bundle'))
+set shell=/usr/local/bin/zsh " This solely so vim doesn't shit itself with fish.
+set nocompatible             " be iMproved, required
+syntax on                    " We ain't found shit!
 
-" Let NeoBundle manage NeoBundle
-" Required:
-NeoBundleFetch 'Shougo/neobundle.vim'
+set showmatch                " Matching brackets.
+set showcmd                  " Shadowing partial commands for completion!
 
-" Add or remove your Bundles here:
-NeoBundle 'tpope/vim-fugitive'      " git support
-NeoBundle 'ctrlpvim/ctrlp.vim'      " codebase search
-NeoBundle 'flazz/vim-colorschemes'  " extra themes
-NeoBundle 'davidhalter/jedi-vim'    " python integration
-NeoBundle 'derekwyatt/vim-scala'    " scala integration
-NeoBundle 'elixir-lang/vim-elixir'  " elixir integration.
-NeoBundle 'vim-ruby/vim-ruby'       " Ruby integration.
-NeoBundle 'Valloric/YouCompleteMe'  " autocompletion for a lot of languages
-NeoBundle 'oblitum/rainbow'         " rainbow braces
-NeoBundle 'fatih/vim-go'            " go integration
-NeoBundle 'bling/vim-airline'       " status bar
-NeoBundle 'tpope/vim-surround'      " command to surround selection with text
-NeoBundle 'tpope/vim-commentary'    " command to comment out stuff
-NeoBundle 'airblade/vim-gitgutter'  " git gutter
+" Vundle! :D
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
 
-" Required:
-call neobundle#end()
+filetype off                  " required
+call vundle#begin()
+Plugin 'VundleVim/Vundle.vim'
 
-" Required:
-filetype plugin indent on
+Plugin 'tpope/vim-fugitive'
+Plugin 'git://git.wincent.com/command-t.git'
+Plugin 'junegunn/vim-easy-align'
+Plugin 'jnurmine/Zenburn'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+Plugin 'airblade/vim-gitgutter' 
 
-" If there are uninstalled bundles found on startup,
-" this will conveniently prompt you to install them.
-NeoBundleCheck
-"End NeoBundle Scripts-------------------------
+call vundle#end()            " required
+filetype plugin indent on    " required
 
-set nocp
+set expandtab                     " We use spaces here.
+set tabstop=2                     " And they're two spaces. Because Scala.
+set softtabstop=2                 " Because Scala.
+set shiftwidth=2                  " Scala aint changing soon sonny.
+set autoindent                    " You can't escape.
 
-set smartindent
-set tabstop=4
-set shiftwidth=4
-set expandtab
+set foldenable                    " Make shit orderly.
+set cursorline                    " I do like to find my cursor
+set number                        " And I like to see my numbers.
+set relativenumber                " And I want vim motions to be usable.
+set t_Co=256                      " Terminal stuff for Zenburn
+colors zenburn                    " Be pretty
 
-filetype on
-syntax on
+let g:airline_theme='zenburn'     " Make our powerline suit the theme at hand.
+let g:airline_powerline_fonts = 1 " And make it pretty.
+set laststatus=2                  " And make it... work.
 
-" Colour Schemes
-set t_Co=256
-set number
-set backspace=indent,eol,start
-colorscheme desert
-hi LineNr ctermfg=grey
+" Remaps.
+let mapleader=' ' " we emacs now. 
 
-" Encodings
-autocmd BufWritePre * :%s/\s\+$//e
-set encoding=utf-8
+nnoremap <leader>gs :Gstatus<CR>
+nnoremap <leader>gc :Gcommit<CR>
+nnoremap <leader>gl :Glog<CR><CR><CR>
+nnoremap <leader>gb :Gblame<CR>
+nnoremap <leader>gg :!tig<CR>
 
-" Status Bar
-set laststatus=2
-let g:airline_powerline_fonts = 1
-
-" Rainbow brackets
-let g:rainbow_active = 1
-
-" Keymaps
-nnoremap <F2> :set nu!<CR>
-nnoremap <F3> :set paste!<CR>
-nnoremap <F4> :GitGutterToggle<CR>
-au FileType tex map <F5> :w<CR> :exec "!pdflatex %"<CR> :exec "!pdflatex %"<CR><CR>
-au FileType python map <F5> :w<CR> :exec "!python %"<CR>
-nmap <F8> :TagbarToggle<CR>
-
-autocmd BufRead,BufNewFile *.csdl set filetype=csdl
+nnoremap <leader>cf :EasyAlign
+vnoremap <leader>cf :EasyAlign
