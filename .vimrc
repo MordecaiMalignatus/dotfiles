@@ -3,7 +3,7 @@
 
 set shell=/bin/bash
 set nocompatible             " be iMproved, required
-syntax on
+syntax on                   
 
 set showmatch                " Matching brackets.
 set showcmd                  " Shadowing partial commands for completion!
@@ -30,6 +30,7 @@ Plugin 'rust-lang/rust.vim'
 call vundle#end()            " required
 filetype plugin indent on    " required
 
+set backspace=indent,eol,start    " Allow Backspace to delete everythng.
 set expandtab                     " We use spaces here.
 set tabstop=2                     " And they're two spaces. Because Scala.
 set softtabstop=2                 " Because Scala.
@@ -54,17 +55,27 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
 " Remaps.
-let mapleader=' ' " we emacs now.
+let mapleader=' ' " we emacs now. 
 
+" Git things {{{
 nnoremap <leader>gs :Gstatus<CR>
 nnoremap <leader>gc :Gcommit<CR>
 nnoremap <leader>gl :Glog<CR><CR>
 nnoremap <leader>gb :Gblame<CR>
 nnoremap <leader>gg :!tig<CR>
+" }}}
 
+" Easy Align things
 nnoremap <leader>cf :EasyAlign
 vnoremap <leader>cf :EasyAlign
 
+" Rust
 nnoremap <leader>rf :RustFmt
 nnoremap <leader>rb :!cargo build<CR>
 nnoremap <leader>rt :!cargo test<CR>
+
+" Python
+let g:syntastic_python_checkers = ['pyflakes']
+
+nnoremap <leader>pr :!python3 %:p<CR>
+nnoremap <leader>pt :!pytest %:p<CR>
