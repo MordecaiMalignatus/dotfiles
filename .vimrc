@@ -1,9 +1,9 @@
 
 " Az' vimrc, take MKLLVXII.
 
-set shell=/usr/local/bin/zsh " This solely so vim doesn't shit itself with fish.
+set shell=/bin/bash
 set nocompatible             " be iMproved, required
-syntax on                    " We ain't found shit!
+syntax on
 
 set showmatch                " Matching brackets.
 set showcmd                  " Shadowing partial commands for completion!
@@ -22,7 +22,10 @@ Plugin 'junegunn/vim-easy-align'
 Plugin 'jnurmine/Zenburn'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
-Plugin 'airblade/vim-gitgutter' 
+Plugin 'airblade/vim-gitgutter'
+Plugin 'vim-syntastic/syntastic'
+
+Plugin 'rust-lang/rust.vim'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -44,14 +47,24 @@ let g:airline_theme='zenburn'     " Make our powerline suit the theme at hand.
 let g:airline_powerline_fonts = 1 " And make it pretty.
 set laststatus=2                  " And make it... work.
 
+" Syntastic Settings
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
 " Remaps.
-let mapleader=' ' " we emacs now. 
+let mapleader=' ' " we emacs now.
 
 nnoremap <leader>gs :Gstatus<CR>
 nnoremap <leader>gc :Gcommit<CR>
-nnoremap <leader>gl :Glog<CR><CR><CR>
+nnoremap <leader>gl :Glog<CR><CR>
 nnoremap <leader>gb :Gblame<CR>
 nnoremap <leader>gg :!tig<CR>
 
 nnoremap <leader>cf :EasyAlign
 vnoremap <leader>cf :EasyAlign
+
+nnoremap <leader>rf :RustFmt
+nnoremap <leader>rb :!cargo build<CR>
+nnoremap <leader>rt :!cargo test<CR>
