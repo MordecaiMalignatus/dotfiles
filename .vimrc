@@ -85,4 +85,4 @@ nnoremap <leader>pt :!pytest %:p<CR>
 " Markdown things. 
 nnoremap <leader>mpd :!pandoc %:p -f markdown -t latex -o pandoc_output.pdf -S --latex-engine=xelatex<CR>
 nnoremap <leader>mt :Toc<CR>
-let g:vim_markdown_folding_level = 3 " Fold anything past a level of 3, so the structure is visible. 
+let g:vim_markdown_folding_level = 4 " Fold anything past a level of 3, so the structure is visible. 
