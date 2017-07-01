@@ -5,9 +5,6 @@ set shell=/bin/bash
 set nocompatible             " be iMproved, required
 syntax on                   
 
-set showmatch                " Matching brackets.
-set showcmd                  " Shadowing partial commands for completion!
-
 " Vundle! :D
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -17,7 +14,7 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 Plugin 'tpope/vim-fugitive'
-Plugin 'git://git.wincent.com/command-t.git'
+Plugin 'wincent/command-t'
 Plugin 'junegunn/vim-easy-align'
 Plugin 'jnurmine/Zenburn'
 Plugin 'vim-airline/vim-airline'
@@ -25,17 +22,22 @@ Plugin 'vim-airline/vim-airline-themes'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'vim-syntastic/syntastic'
 
+Plugin 'godlygeek/tabular'
+Plugin 'plasticboy/vim-markdown'
+
 Plugin 'rust-lang/rust.vim'
 
-call vundle#end()            " required
-filetype plugin indent on    " required
+call vundle#end()                 " required
+filetype plugin indent on         " required
 
+set showmatch                     " Matching brackets.
+set showcmd                       " Shadowing partial commands for completion!
 set backspace=indent,eol,start    " Allow Backspace to delete everythng.
 set expandtab                     " We use spaces here.
 set tabstop=2                     " And they're two spaces. Because Scala.
 set softtabstop=2                 " Because Scala.
 set shiftwidth=2                  " Scala aint changing soon sonny.
-set autoindent                    " You can't escape.
+set autoindent                    " You can't escape
 
 set foldenable                    " Make shit orderly.
 set cursorline                    " I do like to find my cursor
@@ -66,8 +68,8 @@ nnoremap <leader>gg :!tig<CR>
 " }}}
 
 " Easy Align things
-nnoremap <leader>cf :EasyAlign
-vnoremap <leader>cf :EasyAlign
+xmap ga <Plug>(EasyAlign)
+nmap ga <Plug>(EasyAlign)
 
 " Rust
 nnoremap <leader>rf :RustFmt
@@ -79,3 +81,8 @@ let g:syntastic_python_checkers = ['pyflakes']
 
 nnoremap <leader>pr :!python3 %:p<CR>
 nnoremap <leader>pt :!pytest %:p<CR>
+
+" Markdown things. 
+nnoremap <leader>mpd :!pandoc %:p -f markdown -t latex -o pandoc_output.pdf -S --latex-engine=xelatex<CR>
+nnoremap <leader>mt :Toc<CR>
+let g:vim_markdown_folding_level = 3 " Fold anything past a level of 3, so the structure is visible. 
