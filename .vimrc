@@ -1,8 +1,7 @@
-
 " Az' vimrc, take MKLLVXII.
 
-set shell=/bin/bash
-set nocompatible             " be iMproved, required
+set shell=/bin/bash " Vim chokes on fish.
+set nocompatible    " be iMproved, required
 syntax on                   
 
 " Vundle! :D
@@ -13,6 +12,7 @@ filetype off                  " required
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
+Plugin 'rust-lang/rust.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'wincent/command-t'
 Plugin 'junegunn/vim-easy-align'
@@ -24,8 +24,6 @@ Plugin 'vim-syntastic/syntastic'
 
 Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
-
-Plugin 'rust-lang/rust.vim'
 
 call vundle#end()                 " required
 filetype plugin indent on         " required
@@ -59,13 +57,12 @@ let g:syntastic_check_on_wq = 0
 " Remaps.
 let mapleader=' ' " we emacs now. 
 
-" Git things {{{
+" Git things
 nnoremap <leader>gs :Gstatus<CR>
 nnoremap <leader>gc :Gcommit<CR>
 nnoremap <leader>gl :Glog<CR><CR>
 nnoremap <leader>gb :Gblame<CR>
 nnoremap <leader>gg :!tig<CR>
-" }}}
 
 " Easy Align things
 xmap ga <Plug>(EasyAlign)
@@ -77,12 +74,15 @@ nnoremap <leader>rb :!cargo build<CR>
 nnoremap <leader>rt :!cargo test<CR>
 
 " Python
-let g:syntastic_python_checkers = ['pyflakes']
-
 nnoremap <leader>pr :!python3 %:p<CR>
 nnoremap <leader>pt :!pytest %:p<CR>
+let g:syntastic_python_checkers = ['pyflakes']
 
-" Markdown things. 
+" Markdown things.
 nnoremap <leader>mpd :!pandoc %:p -f markdown -t latex -o pandoc_output.pdf -S --latex-engine=xelatex<CR>
-nnoremap <leader>mt :Toc<CR>
-let g:vim_markdown_folding_level = 4 " Fold anything past a level of 3, so the structure is visible. 
+nnoremap <leader>mt  :Toc<CR>
+let g:vim_markdown_folding_level        = 4 " Fold anything past a level of 3, so the structure is visible.
+let g:vim_markdown_toc_autofit          = 1 " Shrink TOC to avoid wasted whitespace.
+let g:vim_markdown_math                 = 1 " Turn on Latex math, $...$ and $$...$$
+let g:vim_markdown_new_list_item_indent = 2 " Make o insert indentation as 'new list item'
+
