@@ -81,7 +81,7 @@ let g:syntastic_python_checkers = ['pyflakes']
 " Markdown things.
 nnoremap <leader>mpd :!pandoc %:p -f markdown -t latex -o pandoc_output.pdf -S --latex-engine=xelatex<CR>
 nnoremap <leader>mt  :Toc<CR>
-let g:vim_markdown_folding_level        = 4 " Fold anything past a level of 3, so the structure is visible.
+let g:vim_markdown_folding_disabled     = 1 " Fuck folding in markdown documents.
 let g:vim_markdown_toc_autofit          = 1 " Shrink TOC to avoid wasted whitespace.
 let g:vim_markdown_math                 = 1 " Turn on Latex math, $...$ and $$...$$
 let g:vim_markdown_new_list_item_indent = 2 " Make o insert indentation as 'new list item'
