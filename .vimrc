@@ -46,7 +46,7 @@ colors zenburn                    " Be pretty
 
 let g:airline_theme='zenburn'     " Make our powerline suit the theme at hand.
 let g:airline_powerline_fonts = 1 " And make it pretty.
-set laststatus=2                  " And make it... work.
+set laststatus=2                  " And make it... appear.
 
 " Syntastic Settings
 let g:syntastic_always_populate_loc_list = 1
@@ -79,7 +79,8 @@ nnoremap <leader>pt :!pytest %:p<CR>
 let g:syntastic_python_checkers = ['pyflakes']
 
 " Markdown things.
-nnoremap <leader>mpd :!pandoc %:p -f markdown -t latex -o pandoc_output.pdf -S --latex-engine=xelatex<CR>
+nnoremap <leader>mp :!pandoc %:p -f markdown -t latex -o pandoc_output.pdf -S --latex-engine=xelatex<CR>
+nnoremap <leader>mo :!open -a Skim pandoc_output.pdf
 nnoremap <leader>mt  :Toc<CR>
 let g:vim_markdown_folding_disabled     = 1 " Fuck folding in markdown documents.
 let g:vim_markdown_toc_autofit          = 1 " Shrink TOC to avoid wasted whitespace.
