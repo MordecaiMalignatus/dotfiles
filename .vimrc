@@ -14,6 +14,7 @@ Plugin 'VundleVim/Vundle.vim'
 
 Plugin 'rust-lang/rust.vim'
 Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-dispatch'
 Plugin 'wincent/command-t'
 Plugin 'junegunn/vim-easy-align'
 Plugin 'jnurmine/Zenburn'
@@ -48,11 +49,15 @@ let g:airline_theme='zenburn'     " Make our powerline suit the theme at hand.
 let g:airline_powerline_fonts = 1 " And make it pretty.
 set laststatus=2                  " And make it... appear.
 
+" Vim dispatch
+nnoremap <leader>ro <ESC>:w<CR>:Dispatch<CR> " Run Open
+nnoremap <leader>rh <ESC>:w<CR>:Dispatch!<CR> " Run Hidden
+
 " Syntastic Settings
 let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
+let g:syntastic_auto_loc_list            = 1
+let g:syntastic_check_on_open            = 1
+let g:syntastic_check_on_wq              = 0
 
 " Remaps.
 let mapleader=' ' " we emacs now. 
@@ -70,20 +75,24 @@ nmap ga <Plug>(EasyAlign)
 
 " Rust
 nnoremap <leader>rf :RustFmt
-nnoremap <leader>rb :!cargo build<CR>
 nnoremap <leader>rt :!cargo test<CR>
+autocmd Filetype rust let b:dispatch = 'cargo build'
 
 " Python
-nnoremap <leader>pr :!python3 %:p<CR>
-nnoremap <leader>pt :!pytest %:p<CR>
+nnoremap <leader>pt :Dispatch pytest %<CR>
 let g:syntastic_python_checkers = ['pyflakes']
+autocmd FileType python let b:dispatch = 'python3 %'
 
 " Markdown things.
-nnoremap <leader>mp :!pandoc %:p -f markdown -t latex -o pandoc_output.pdf -S --latex-engine=xelatex<CR>
+autocmd FileType markdown let b:dispatch = 'pandoc %:p -f markdown -t latex -o pandoc_output.pdf -S --latex-engine=xelatex'
 nnoremap <leader>mo :!open -a Skim pandoc_output.pdf<CR>
-nnoremap <leader>mt  :Toc<CR>
+nnoremap <leader>mt :Toc<CR>
 let g:vim_markdown_folding_disabled     = 1 " Fuck folding in markdown documents.
 let g:vim_markdown_toc_autofit          = 1 " Shrink TOC to avoid wasted whitespace.
 let g:vim_markdown_math                 = 1 " Turn on Latex math, $...$ and $$...$$
 let g:vim_markdown_new_list_item_indent = 2 " Make o insert indentation as 'new list item'
 
+augroup markdown_text_settings
+  au! 
+  au FileType markdown set tw=79
+augroup END
