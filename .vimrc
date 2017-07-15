@@ -48,10 +48,13 @@ colors zenburn                    " Be pretty
 let g:airline_theme='zenburn'     " Make our powerline suit the theme at hand.
 let g:airline_powerline_fonts = 1 " And make it pretty.
 set laststatus=2                  " And make it... appear.
+<<<<<<< HEAD
 
 " Vim dispatch
 nnoremap <leader>ro <ESC>:w<CR>:Dispatch<CR> " Run Open
 nnoremap <leader>rh <ESC>:w<CR>:Dispatch!<CR> " Run Hidden
+=======
+>>>>>>> efc203dcd7364df3ea0e32bca4c364f0e079e224
 
 " Syntastic Settings
 let g:syntastic_always_populate_loc_list = 1
@@ -84,9 +87,15 @@ let g:syntastic_python_checkers = ['pyflakes']
 autocmd FileType python let b:dispatch = 'python3 %'
 
 " Markdown things.
+<<<<<<< HEAD
 autocmd FileType markdown let b:dispatch = 'pandoc %:p -f markdown -t latex -o pandoc_output.pdf -S --latex-engine=xelatex'
 nnoremap <leader>mo :!open -a Skim pandoc_output.pdf<CR>
 nnoremap <leader>mt :Toc<CR>
+=======
+nnoremap <leader>mp :!pandoc %:p -f markdown -t latex -o pandoc_output.pdf -S --latex-engine=xelatex<CR>
+nnoremap <leader>mo :!open -a Skim pandoc_output.pdf
+nnoremap <leader>mt  :Toc<CR>
+>>>>>>> efc203dcd7364df3ea0e32bca4c364f0e079e224
 let g:vim_markdown_folding_disabled     = 1 " Fuck folding in markdown documents.
 let g:vim_markdown_toc_autofit          = 1 " Shrink TOC to avoid wasted whitespace.
 let g:vim_markdown_math                 = 1 " Turn on Latex math, $...$ and $$...$$
