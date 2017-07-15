@@ -15,6 +15,7 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'rust-lang/rust.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-dispatch'
+Plugin 'tpope/vim-surround'
 Plugin 'wincent/command-t'
 Plugin 'junegunn/vim-easy-align'
 Plugin 'jnurmine/Zenburn'
@@ -64,8 +65,6 @@ let mapleader=' ' " we emacs now.
 
 " Git things
 nnoremap <leader>gs :Gstatus<CR>
-nnoremap <leader>gc :Gcommit<CR>
-nnoremap <leader>gl :Glog<CR><CR>
 nnoremap <leader>gb :Gblame<CR>
 nnoremap <leader>gg :!tig<CR>
 
@@ -85,7 +84,7 @@ autocmd FileType python let b:dispatch = 'python3 %'
 
 " Markdown things.
 autocmd FileType markdown let b:dispatch = 'pandoc %:p -f markdown -t latex -o pandoc_output.pdf -S --latex-engine=xelatex'
-nnoremap <leader>mo :!open -a Skim pandoc_output.pdf<CR>
+nnoremap <leader>mo :!open -a Skim pandoc_output.pdf<CR><CR>
 nnoremap <leader>mt :Toc<CR>
 let g:vim_markdown_folding_disabled     = 1 " Fuck folding in markdown documents.
 let g:vim_markdown_toc_autofit          = 1 " Shrink TOC to avoid wasted whitespace.
