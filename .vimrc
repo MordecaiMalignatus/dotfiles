@@ -16,16 +16,18 @@ Plugin 'rust-lang/rust.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-dispatch'
 Plugin 'tpope/vim-surround'
-Plugin 'wincent/command-t'
-Plugin 'junegunn/vim-easy-align'
-Plugin 'jnurmine/Zenburn'
-Plugin 'vim-airline/vim-airline'
+Plugin 'altercation/vim-colors-solarized'
 Plugin 'vim-airline/vim-airline-themes'
+Plugin 'flazz/vim-colorschemes'
+Plugin 'jnurmine/Zenburn'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'vim-syntastic/syntastic'
-
 Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
+Plugin 'junegunn/fzf'
+Plugin 'junegunn/vim-easy-align'
 
 call vundle#end()                 " required
 filetype plugin indent on         " required
@@ -44,24 +46,41 @@ set cursorline                    " I do like to find my cursor
 set number                        " And I like to see my numbers.
 set relativenumber                " And I want vim motions to be usable.
 set t_Co=256                      " Terminal stuff for Zenburn
-colors zenburn                    " Be pretty
+colors solarized                  " Be pretty
+set background=light              " Use solarized-light.
 
-let g:airline_theme='zenburn'     " Make our powerline suit the theme at hand.
+" Remaps.
+let mapleader=' '                        " we emacs now.
+nnoremap <leader>evrc :tabe ~/.vimrc<CR> " I type this entirely too often.
+
+" Switching theme
+nnoremap <leader>td :AirlineTheme seoul256<CR>:colors zenburn<CR>
+nnoremap <leader>tl :AirlineTheme solarized<CR>:colors solarized<CR>:set background=light<CR>
+
+" Statusbar
+let g:airline_theme='solarized'   " Make our powerline suit the theme at hand.
 let g:airline_powerline_fonts = 1 " And make it pretty.
 set laststatus=2                  " And make it... appear.
 
+" Snippers
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+let g:UltiSnipsExpandTrigger='<c-e>'
+
 " Vim dispatch
-nnoremap <leader>ro <ESC>:w<CR>:Dispatch<CR> " Run Open
+nnoremap <leader>ro <ESC>:w<CR>:Dispatch<CR>  " Run Open
 nnoremap <leader>rh <ESC>:w<CR>:Dispatch!<CR> " Run Hidden
+
+" FZF stuff.
+nnoremap <leader>t :FZF<CR>
+nnoremap <leader>sh :FZF ~<CR>
+nnoremap <leader>ss :FZF!<CR>
 
 " Syntastic Settings
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list            = 1
 let g:syntastic_check_on_open            = 1
 let g:syntastic_check_on_wq              = 0
-
-" Remaps.
-let mapleader=' ' " we emacs now. 
 
 " Git things
 nnoremap <leader>gs :Gstatus<CR>
@@ -75,15 +94,15 @@ nmap ga <Plug>(EasyAlign)
 " Rust
 nnoremap <leader>rf :RustFmt
 nnoremap <leader>rt :!cargo test<CR>
-autocmd Filetype rust let b:dispatch = 'cargo build'
+au Filetype rust let b:dispatch = 'cargo build'
 
 " Python
 nnoremap <leader>pt :Dispatch pytest %<CR>
 let g:syntastic_python_checkers = ['pyflakes']
-autocmd FileType python let b:dispatch = 'python3 %'
+au FileType python let b:dispatch = 'python3 %'
 
 " Markdown things.
-autocmd FileType markdown let b:dispatch = 'pandoc %:p -f markdown -t latex -o pandoc_output.pdf -S --latex-engine=xelatex'
+au FileType markdown let b:dispatch = 'pandoc %:p -f markdown -t latex -o pandoc_output.pdf -S --latex-engine=xelatex'
 nnoremap <leader>mo :!open -a Skim pandoc_output.pdf<CR><CR>
 nnoremap <leader>mt :Toc<CR>
 let g:vim_markdown_folding_disabled     = 1 " Fuck folding in markdown documents.
