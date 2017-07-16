@@ -12,22 +12,35 @@ filetype off                  " required
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
+" language specific things.
 Plugin 'rust-lang/rust.vim'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-dispatch'
-Plugin 'tpope/vim-surround'
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'flazz/vim-colorschemes'
-Plugin 'jnurmine/Zenburn'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'vim-syntastic/syntastic'
-Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
-Plugin 'SirVer/ultisnips'
-Plugin 'honza/vim-snippets'
+
+" Git Things.
+Plugin 'tpope/vim-fugitive'
+Plugin 'airblade/vim-gitgutter'
+
+" Code Navigation
+Plugin 'Valloric/YouCompleteMe'
 Plugin 'junegunn/fzf'
 Plugin 'junegunn/vim-easy-align'
+Plugin 'vim-syntastic/syntastic'
+Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-dispatch'
+Plugin 'godlygeek/tabular'
+
+" Snippets.
+Plugin 'honza/vim-snippets'
+Plugin 'SirVer/ultisnips'
+
+" Themes and colorschemes.
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'jnurmine/Zenburn'
+Plugin 'flazz/vim-colorschemes'
+
+" Status/Air/Powerline
+Plugin 'vim-airline/vim-airline-themes'
+Plugin 'vim-airline/vim-airline'
 
 call vundle#end()                 " required
 filetype plugin indent on         " required
