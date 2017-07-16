@@ -13,34 +13,34 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 " language specific things.
-Plugin 'rust-lang/rust.vim'
-Plugin 'plasticboy/vim-markdown'
+Plugin 'rust-lang/rust.vim'               " Racer/RLS integration.
+Plugin 'plasticboy/vim-markdown'          " good markdown support.
 
 " Git Things.
-Plugin 'tpope/vim-fugitive'
-Plugin 'airblade/vim-gitgutter'
+Plugin 'tpope/vim-fugitive'               " Git integration by tpope. May get tossed.
+Plugin 'airblade/vim-gitgutter'           " Shows changed/added/removed lines in gutter.
 
 " Code Navigation
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'junegunn/fzf'
-Plugin 'junegunn/vim-easy-align'
-Plugin 'vim-syntastic/syntastic'
-Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-dispatch'
-Plugin 'godlygeek/tabular'
+Plugin 'Valloric/YouCompleteMe'           " Generic expander, integrates with ultisnips
+Plugin 'junegunn/fzf'                     " Fuzzy File Finder, replacement for command-t
+Plugin 'junegunn/vim-easy-align'          " Make shit look pretty.
+Plugin 'vim-syntastic/syntastic'          " Syntax checking for a lot of languages.
+Plugin 'tpope/vim-surround'               " Makes changing delimiters far less of a pain.
+Plugin 'tpope/vim-dispatch'               " non-focus stealing builds/tests hooray!
+Plugin 'godlygeek/tabular'                " Required for markdown.
 
 " Snippets.
-Plugin 'honza/vim-snippets'
-Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'               " Snippet collection that comes in handy.
+Plugin 'SirVer/ultisnips'                 " Snippet engine, integrates with YCM
 
 " Themes and colorschemes.
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'jnurmine/Zenburn'
-Plugin 'flazz/vim-colorschemes'
+Plugin 'altercation/vim-colors-solarized' " Solarised yessss
+Plugin 'jnurmine/Zenburn'                 " For dark themes. Still not a fan of solarized-dark.
+Plugin 'flazz/vim-colorschemes'           " Giant-ass collection because why not.
 
 " Status/Air/Powerline
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'   " Make the status bar match the theme.
+Plugin 'vim-airline/vim-airline'          " Swag up my statusbar.
 
 call vundle#end()                 " required
 filetype plugin indent on         " required
