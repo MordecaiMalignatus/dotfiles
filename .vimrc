@@ -109,7 +109,7 @@ nmap ga <Plug>(EasyAlign)
 " Rust
 nnoremap <leader>rf :RustFmt
 nnoremap <leader>rt :!cargo test<CR>
-au Filetype rust let b:dispatch = 'cargo build'
+au FileType rust let b:dispatch = 'cargo build'
 
 " Python
 nnoremap <leader>pt :Dispatch pytest %<CR>
