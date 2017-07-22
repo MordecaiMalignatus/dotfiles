@@ -27,6 +27,7 @@ Plugin 'junegunn/vim-easy-align'          " Make shit look pretty.
 Plugin 'vim-syntastic/syntastic'          " Syntax checking for a lot of languages.
 Plugin 'tpope/vim-surround'               " Makes changing delimiters far less of a pain.
 Plugin 'tpope/vim-dispatch'               " non-focus stealing builds/tests hooray!
+Plugin 'tpope/vim-commentary'             " Makes commenting not a pain.
 Plugin 'godlygeek/tabular'                " Required for markdown.
 
 " Snippets.
@@ -84,7 +85,8 @@ nnoremap <leader>ro <ESC>:w<CR>:Dispatch<CR>  " Run Open
 nnoremap <leader>rh <ESC>:w<CR>:Dispatch!<CR> " Run Hidden
 
 " FZF stuff
-nnoremap <leader>t :FZF<CR>
+nnoremap <leader>ts :FZF<CR>
+nnoremap <leader>tn :tabe<CR>:FZF<CR>
 nnoremap <leader>sh :FZF ~<CR>
 nnoremap <leader>ss :FZF!<CR>
 
@@ -111,7 +113,7 @@ au Filetype rust let b:dispatch = 'cargo build'
 
 " Python
 nnoremap <leader>pt :Dispatch pytest %<CR>
-let g:syntastic_python_checkers = ['pyflakes']
+let g:syntastic_python_checkers = ['pyflakes', 'pylint']
 au FileType python let b:dispatch = 'python3 %'
 
 " Markdown things.
