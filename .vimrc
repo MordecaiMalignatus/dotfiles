@@ -65,6 +65,8 @@ colors seoul256                " Be pretty
 " Remaps.
 let mapleader=' '                        " we emacs now.
 nnoremap <leader>evim :tabe ~/.vimrc<CR> " I type this entirely too often.
+nnoremap H gT " Tab navigation left.
+nnoremap L gt " Tab navigation right.
 
 " Switching theme
 nnoremap <leader>cd :AirlineTheme seoul256<CR>:colors seoul256<CR>:set background=dark<CR>
@@ -85,10 +87,9 @@ nnoremap <leader>ro <ESC>:w<CR>:Dispatch<CR>  " Run Open
 nnoremap <leader>rh <ESC>:w<CR>:Dispatch!<CR> " Run Hidden
 
 " FZF stuff
-nnoremap <leader>ts :FZF<CR>
-nnoremap <leader>tn :tabe<CR>:FZF<CR>
-nnoremap <leader>sh :FZF ~<CR>
-nnoremap <leader>ss :FZF!<CR>
+nnoremap <leader>ti :FZF<CR>
+nnoremap <leader>tt :tabe<CR>:FZF<CR>
+nnoremap <leader>th :FZF ~<CR>
 
 " Syntastic Settings
 let g:syntastic_always_populate_loc_list = 1
@@ -107,9 +108,10 @@ xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 
 " Rust
-nnoremap <leader>rf :RustFmt
-nnoremap <leader>rt :!cargo test<CR>
-au FileType rust let b:dispatch = 'cargo build'
+nnoremap <leader>rf :RustFmt<CR>
+nnoremap <leader>rt :Dispatch cargo test<CR>
+au FileType rust let b:dispatch = 'cargo run'
+let g:ycm_rust_src_path = '/Users/az/.rustup/toolchains/stable-x86_64-apple-darwin/lib/rustlib/src/'
 
 " Python
 nnoremap <leader>pt :Dispatch pytest %<CR>
