@@ -15,6 +15,7 @@ Plugin 'VundleVim/Vundle.vim'
 " language specific things.
 Plugin 'rust-lang/rust.vim'               " Racer/RLS integration.
 Plugin 'plasticboy/vim-markdown'          " good markdown support.
+Plugin 'vim-ruby/vim-ruby'                " Ruby. 
 
 " Git Things.
 Plugin 'tpope/vim-fugitive'               " Git integration by tpope. May get tossed.
@@ -117,6 +118,11 @@ let g:ycm_rust_src_path = '/Users/az/.rustup/toolchains/stable-x86_64-apple-darw
 nnoremap <leader>pt :Dispatch pytest %<CR>
 let g:syntastic_python_checkers = ['pyflakes', 'pylint']
 au FileType python let b:dispatch = 'python3 %'
+
+" Ruby Things.
+nnoremap <leader>rt :Dispatch rspec %<CR> 
+let g:syntastic_ruby_checkers = ['rubocop'] 
+au FileType ruby let b:dispatch = 'ruby %'
 
 " Markdown things.
 au FileType markdown let b:dispatch = 'pandoc %:p -f markdown -t latex -o pandoc_output.pdf -S --latex-engine=xelatex'
