@@ -55,7 +55,10 @@ set tabstop=2                  " And they're two spaces. Because Scala.
 set softtabstop=2              " Because Scala.
 set shiftwidth=2               " Scala aint changing soon sonny.
 set autoindent                 " You can't escape
-
+set incsearch                  " search while typing, not just after hitting CR
+set hlsearch                   " Highlight search terms
+set lazyredraw                 " Make vim redraw the screen less
+set wildmenu                   " Visual tab complete menu.
 set foldenable                 " Make shit orderly.
 set cursorline                 " I do like to find my cursor
 set number                     " And I like to see my numbers.
@@ -66,8 +69,9 @@ colors seoul256                " Be pretty
 " Remaps.
 let mapleader=' '                        " we emacs now.
 nnoremap <leader>evim :tabe ~/.vimrc<CR> " I type this entirely too often.
-nnoremap H gT " Tab navigation left.
-nnoremap L gt " Tab navigation right.
+nnoremap H gT                            " Tab navigation left.
+nnoremap L gt                            " Tab navigation right.
+inoremap ZXZ <c-o>zz                     " re-center the screen without leaving insert
 
 " Switching theme
 nnoremap <leader>cd :AirlineTheme seoul256<CR>:colors seoul256<CR>:set background=dark<CR>
@@ -120,7 +124,7 @@ let g:syntastic_python_checkers = ['pyflakes', 'pylint']
 au FileType python let b:dispatch = 'python3 %'
 
 " Ruby Things.
-nnoremap <leader>rt :Dispatch rspec %<CR> 
+nnoremap <leader>rt :Dispatch rspec<CR> 
 let g:syntastic_ruby_checkers = ['rubocop'] 
 au FileType ruby let b:dispatch = 'ruby %'
 
