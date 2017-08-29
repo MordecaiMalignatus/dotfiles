@@ -1,7 +1,6 @@
 ;; key bindings
 (when (eq system-type 'darwin) ;; mac specific settings
   (setq mac-command-modifier 'meta)
-  (tool-bar-mode -1)
   (global-set-key [kp-delete] 'delete-char)) ;; sets fn-delete to be right-delete
 
 ;; package config
