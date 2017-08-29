@@ -22,7 +22,6 @@ Plugin 'tpope/vim-fugitive'               " Git integration by tpope. May get to
 Plugin 'airblade/vim-gitgutter'           " Shows changed/added/removed lines in gutter.
 
 " Code Navigation
-Plugin 'Valloric/YouCompleteMe'           " Generic expander, integrates with ultisnips
 Plugin 'junegunn/fzf'                     " Fuzzy File Finder, replacement for command-t
 Plugin 'junegunn/vim-easy-align'          " Make shit look pretty.
 Plugin 'vim-syntastic/syntastic'          " Syntax checking for a lot of languages.
@@ -74,8 +73,8 @@ nnoremap L gt                            " Tab navigation right.
 inoremap ZXZ <c-o>zz                     " re-center the screen without leaving insert
 
 " Switching theme
-nnoremap <leader>cd :AirlineTheme seoul256<CR>:colors seoul256<CR>:set background=dark<CR>
-nnoremap <leader>cl :AirlineTheme solarized<CR>:colors solarized<CR>:set background=light<CR>
+nnoremap <leader>cd :colors seoul256<CR>:set background=dark<CR>
+nnoremap <leader>cl :colors solarized<CR>:set background=light<CR>
 
 " Statusbar
 let g:airline_theme='solarized'   " Make our powerline suit the theme at hand.
