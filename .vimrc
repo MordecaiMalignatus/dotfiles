@@ -23,6 +23,7 @@ Plugin 'airblade/vim-gitgutter'           " Shows changed/added/removed lines in
 
 " Code Navigation
 Plugin 'junegunn/fzf'                     " Fuzzy File Finder, replacement for command-t
+Plugin 'junegunn/fzf.vim'                 " Adds FZF vim bindings for Extra Shit
 Plugin 'junegunn/vim-easy-align'          " Make shit look pretty.
 Plugin 'vim-syntastic/syntastic'          " Syntax checking for a lot of languages.
 Plugin 'tpope/vim-surround'               " Makes changing delimiters far less of a pain.
@@ -67,10 +68,10 @@ colors seoul256                " Be pretty
 
 " Remaps.
 let mapleader=' '                        " we emacs now.
-nnoremap <leader>evim :tabe ~/.vimrc<CR> " I type this entirely too often.
-nnoremap H gT                            " Tab navigation left.
-nnoremap L gt                            " Tab navigation right.
-inoremap ZXZ <c-o>zz                     " re-center the screen without leaving insert
+nnoremap <leader>evim :tabe ~/.vimrc<CR>
+nnoremap H gT                          
+nnoremap L gt                         
+inoremap ZXZ <c-o>zz                 
 
 " Switching theme
 nnoremap <leader>cd :colors seoul256<CR>:set background=dark<CR>
@@ -87,13 +88,28 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 let g:UltiSnipsExpandTrigger='<c-e>'
 
 " Vim dispatch
-nnoremap <leader>ro <ESC>:w<CR>:Dispatch<CR>  " Run Open
-nnoremap <leader>rh <ESC>:w<CR>:Dispatch!<CR> " Run Hidden
+nnoremap <leader>ro <ESC>:w<CR>:Dispatch<CR>  
+nnoremap <leader>rh <ESC>:w<CR>:Dispatch!<CR>
 
 " FZF stuff
-nnoremap <leader>ti :FZF<CR>
-nnoremap <leader>tt :tabe<CR>:FZF<CR>
-nnoremap <leader>th :FZF ~<CR>
+let g:fzf_command_prefix = 'Fzf'
+let g:fzf_layout = { 'down': '~20%' }
+let g:fzf_tags_command = 'ctags -R -f .tags'
+let g:fzf_history_dir = '~/.fzf/history'
+
+nnoremap <leader>tf :FzfFiles<CR>  
+nnoremap <leader>tt :FzfTags<CR>
+nnoremap <leader>-  :FzfBuffers<CR>
+nnoremap <leader>th :FzfHistory<CR>
+" Search Word
+nnoremap <leader>w  :FzfAg<CR>  
+" Search This Word
+nnoremap <leader>tw :FzfAg <C-R><C-W><CR>
+" Git status
+nnoremap <leader>gs :FzfGFiles?<CR>       
+" Fuzzy search for vim helptags. 
+nnoremap <leader>h<Leader> :FzfHelptags<CR>
+
 
 " Syntastic Settings
 let g:syntastic_always_populate_loc_list = 1
@@ -102,7 +118,6 @@ let g:syntastic_check_on_open            = 1
 let g:syntastic_check_on_wq              = 0
 
 " Git things
-nnoremap <leader>gs :Gstatus<CR>
 nnoremap <leader>gb :Gblame<CR>
 nnoremap <leader>gd :Gdiff<CR>
 nnoremap <leader>gg :!tig<CR>
@@ -136,3 +151,4 @@ let g:vim_markdown_folding_disabled     = 1 " Fuck folding in markdown documents
 let g:vim_markdown_toc_autofit          = 1 " Shrink TOC to avoid wasted whitespace.
 let g:vim_markdown_math                 = 1 " Turn on Latex math, $...$ and $$...$$
 let g:vim_markdown_new_list_item_indent = 2 " Make o insert indentation as 'new list item'
+
