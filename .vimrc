@@ -102,7 +102,7 @@ nnoremap <leader>th        :FzfHistory<CR>
 " Search Word
 nnoremap <leader>w         :FzfAg<CR>
 " Search word under cursor
-nnoremap <leader>tw        :FzfAg<C-R><C-W><CR>
+nnoremap <leader>tw        :FzfAg <C-R><C-W><CR>
 nnoremap <leader>gs        :FzfGFiles?<CR>
 nnoremap <leader>h<Leader> :FzfHelptags<CR>
 
