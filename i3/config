@@ -15,6 +15,7 @@ bindsym $mod+Return exec konsole
 
 # kill focused window
 bindsym $mod+Shift+q kill
+bindsym $mod+backspace kil
 
 # start dmenu (a program launcher)
 bindsym $mod+d exec dmenu_run
@@ -26,6 +27,7 @@ bindsym $mod+d exec dmenu_run
 # Userbindings for various programs
 exec --no-startup-id ~/.fehbg
 exec --no-startup-id setxkbmap -option ctrl:nocaps
+exec ~/.config/xrandr/home_screens.sh # Set up screen setup at home.
 
 bindsym $mod+Shift+p exec i3lock -t -i "/home/az/Downloads/wallpaper.png" 
 
@@ -35,26 +37,19 @@ bindsym $mod+k focus up
 bindsym $mod+l focus right
 bindsym $mod+h focus left
 
-# move focused window
-bindsym $mod+Shift+j move down
-bindsym $mod+Shift+k move up
-bindsym $mod+Shift+l move right
-bindsym $mod+Shift+h move left
-
-# alternatively, you can use the cursor keys:
-bindsym $mod+Shift+Left move left
-bindsym $mod+Shift+Down move down
-bindsym $mod+Shift+Up move up
-bindsym $mod+Shift+Right move right
-
 # split in horizontal orientation
 bindsym $mod+Shift+Control+h split h
-
 # split in vertical orientation
 bindsym $mod+Shift+Control+v split v
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
+
+###################
+# Design Things
+###################
+
+hide_edge_borders smart
 
 # change container layout (stacked, tabbed, toggle split)
 bindsym $mod+s layout stacking
@@ -133,5 +128,7 @@ bindsym $mod+r mode "resize"
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
+        position top
         status_command i3status
+        tray_output primary
 }
