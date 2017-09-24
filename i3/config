@@ -15,7 +15,7 @@ bindsym $mod+Return exec konsole
 
 # kill focused window
 bindsym $mod+Shift+q kill
-bindsym $mod+backspace kil
+bindsym $mod+backspace kill
 
 # start dmenu (a program launcher)
 # bindsym $mod+d exec dmenu_run
