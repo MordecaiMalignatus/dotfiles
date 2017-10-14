@@ -31,7 +31,10 @@ Plugin 'vim-syntastic/syntastic'          " Syntax checking for a lot of languag
 Plugin 'tpope/vim-surround'               " Makes changing delimiters far less of a pain.
 Plugin 'tpope/vim-dispatch'               " non-focus stealing builds/tests hooray!
 Plugin 'tpope/vim-commentary'             " Makes commenting not a pain.
+Plugin 'tpope/vim-endwise'                " automatically adds 'end' and similar to certain languages.
+Plugin 'tpope/vim-ragtag'                 " Helps HTML be less awful.
 Plugin 'godlygeek/tabular'                " Required for markdown.
+Plugin 'jiangmiao/auto-pairs'             " Automatically match pairs.
 
 " Snippets.
 Plugin 'honza/vim-snippets'               " Snippet collection that comes in handy.
