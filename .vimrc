@@ -15,7 +15,9 @@ Plugin 'VundleVim/Vundle.vim'
 " language specific things.
 Plugin 'rust-lang/rust.vim'               " Racer/RLS integration.
 Plugin 'plasticboy/vim-markdown'          " good markdown support.
-Plugin 'vim-ruby/vim-ruby'                " Ruby. 
+Plugin 'vim-ruby/vim-ruby'                " Ruby.
+Plugin 'elixir-editors/vim-elixir'
+Plugin 'slashmili/alchemist.vim'
 
 " Git Things.
 Plugin 'tpope/vim-fugitive'               " Git integration by tpope. May get tossed.
@@ -69,7 +71,8 @@ colors seoul256                " Be pretty
 " Remaps.
 let mapleader=' '                        " we emacs now.
 nnoremap <leader>evm :e ~/.vimrc<CR>
-inoremap ZXZ <c-o>zz                 
+inoremap ZXZ <c-o>zz
+inoremap ± <c-o>~
 
 " Switching theme
 nnoremap <leader>cd :colors seoul256<CR>:set background=dark<CR>
@@ -86,23 +89,25 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 let g:UltiSnipsExpandTrigger='<c-e>'
 
 " Vim dispatch
-nnoremap <leader>ro <ESC>:w<CR>:Dispatch<CR>  
-nnoremap <leader>rh <ESC>:w<CR>:Dispatch!<CR>
+nnoremap <leader>ro <ESC>:w<CR>:Dispatch<CR><CR>
+nnoremap <leader>rh <ESC>:w<CR>:Dispatch!<CR><CR>
 
 " FZF stuff
+let $FZF_DEFAULT_COMMAND = 'ag -g ""'
 let g:fzf_command_prefix = 'Fzf'
 let g:fzf_layout         = { 'down': '~20%' }
 let g:fzf_tags_command   = 'ctags -R -f .tags'
 let g:fzf_history_dir    = '~/.fzf/history'
 
 nnoremap <leader>tf        :FzfFiles<CR>
+nnoremap <leader>tgf       :FzfGitFiles<CR>
 nnoremap <leader>tt        :FzfTags<CR>
 nnoremap <leader>-         :w<CR>:FzfBuffers<CR>
 nnoremap <leader>th        :FzfHistory<CR>
 " Search Word
 nnoremap <leader>w         :FzfAg<CR>
 " Search word under cursor
-nnoremap <leader>tw        :FzfAg<C-R><C-W><CR>
+nnoremap <leader>tw        :FzfAg <C-R><C-W><CR>
 nnoremap <leader>gs        :FzfGFiles?<CR>
 nnoremap <leader>h<Leader> :FzfHelptags<CR>
 
