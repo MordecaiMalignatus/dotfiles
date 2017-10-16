@@ -1,0 +1,16 @@
+# vim: st=2:ts=2:et
+
+[core]
+  excludesfile = ~/.gitignore-global
+
+[user]
+  name = Az
+  email = az4reus@gmail.com
+
+[log]
+  date = relative
+
+[merge]
+  tool = vimdiff
+
+

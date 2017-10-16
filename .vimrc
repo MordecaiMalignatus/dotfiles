@@ -15,7 +15,9 @@ Plugin 'VundleVim/Vundle.vim'
 " language specific things.
 Plugin 'rust-lang/rust.vim'               " Racer/RLS integration.
 Plugin 'plasticboy/vim-markdown'          " good markdown support.
-Plugin 'vim-ruby/vim-ruby'                " Ruby. 
+Plugin 'vim-ruby/vim-ruby'                " Ruby.
+Plugin 'elixir-editors/vim-elixir'
+Plugin 'slashmili/alchemist.vim'
 
 " Git Things.
 Plugin 'tpope/vim-fugitive'               " Git integration by tpope. May get tossed.
@@ -29,7 +31,10 @@ Plugin 'vim-syntastic/syntastic'          " Syntax checking for a lot of languag
 Plugin 'tpope/vim-surround'               " Makes changing delimiters far less of a pain.
 Plugin 'tpope/vim-dispatch'               " non-focus stealing builds/tests hooray!
 Plugin 'tpope/vim-commentary'             " Makes commenting not a pain.
+Plugin 'tpope/vim-endwise'                " automatically adds 'end' and similar to certain languages.
+Plugin 'tpope/vim-ragtag'                 " Helps HTML be less awful.
 Plugin 'godlygeek/tabular'                " Required for markdown.
+Plugin 'jiangmiao/auto-pairs'             " Automatically match pairs.
 
 " Snippets.
 Plugin 'honza/vim-snippets'               " Snippet collection that comes in handy.
@@ -69,7 +74,8 @@ colors seoul256                " Be pretty
 " Remaps.
 let mapleader=' '                        " we emacs now.
 nnoremap <leader>evm :e ~/.vimrc<CR>
-inoremap ZXZ <c-o>zz                 
+inoremap ZXZ <c-o>zz
+inoremap ± <c-o>~
 
 " Switching theme
 nnoremap <leader>cd :colors seoul256<CR>:set background=dark<CR>
@@ -86,16 +92,18 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 let g:UltiSnipsExpandTrigger='<c-e>'
 
 " Vim dispatch
-nnoremap <leader>ro <ESC>:w<CR>:Dispatch<CR>  
-nnoremap <leader>rh <ESC>:w<CR>:Dispatch!<CR>
+nnoremap <leader>ro <ESC>:w<CR>:Dispatch<CR><CR>
+nnoremap <leader>rh <ESC>:w<CR>:Dispatch!<CR><CR>
 
 " FZF stuff
+let $FZF_DEFAULT_COMMAND = 'ag -g ""'
 let g:fzf_command_prefix = 'Fzf'
 let g:fzf_layout         = { 'down': '~20%' }
 let g:fzf_tags_command   = 'ctags -R -f .tags'
 let g:fzf_history_dir    = '~/.fzf/history'
 
 nnoremap <leader>tf        :FzfFiles<CR>
+nnoremap <leader>tgf       :FzfGitFiles<CR>
 nnoremap <leader>tt        :FzfTags<CR>
 nnoremap <leader>-         :w<CR>:FzfBuffers<CR>
 nnoremap <leader>th        :FzfHistory<CR>
