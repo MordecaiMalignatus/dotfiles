@@ -102,17 +102,17 @@ let g:fzf_layout         = { 'down': '~20%' }
 let g:fzf_tags_command   = 'ctags -R -f .tags'
 let g:fzf_history_dir    = '~/.fzf/history'
 
-nnoremap <leader>tf        :FzfFiles<CR>
-nnoremap <leader>tgf       :FzfGitFiles<CR>
-nnoremap <leader>tt        :FzfTags<CR>
-nnoremap <leader>-         :w<CR>:FzfBuffers<CR>
-nnoremap <leader>th        :FzfHistory<CR>
+nnoremap <leader>tf  :FzfFiles<CR>
+nnoremap <leader>tgf :FzfGitFiles<CR>
+nnoremap <leader>tt  :FzfTags<CR>
+nnoremap <leader>;   :w<CR>:FzfBuffers<CR>
+nnoremap <leader>th  :FzfHistory<CR>
 " Search Word
-nnoremap <leader>w         :FzfAg<CR>
+nnoremap <leader>w   :FzfAg<CR>
 " Search word under cursor
-nnoremap <leader>tw        :FzfAg <C-R><C-W><CR>
-nnoremap <leader>gs        :FzfGFiles?<CR>
-nnoremap <leader>h<Leader> :FzfHelptags<CR>
+nnoremap <leader>tw  :FzfAg <C-R><C-W><CR>
+nnoremap <leader>gs  :FzfGFiles?<CR>
+nnoremap <leader>hh  :FzfHelptags<CR>
 
 " Syntastic Settings
 let g:syntastic_always_populate_loc_list = 1
@@ -155,6 +155,7 @@ let g:vim_markdown_toc_autofit          = 1 " Shrink TOC to avoid wasted whitesp
 let g:vim_markdown_math                 = 1 " Turn on Latex math, $...$ and $$...$$
 let g:vim_markdown_new_list_item_indent = 2 " Make o insert indentation as 'new list item'
 
-
+" HTML bindings
+au FileType html let b:dispatch = "open %"
 
 
