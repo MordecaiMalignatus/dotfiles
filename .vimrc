@@ -130,8 +130,8 @@ xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 
 " Rust
-nnoremap <leader>rf :RustFmt<CR>
-nnoremap <leader>rt :Dispatch cargo test<CR>
+au FileType rust nnoremap <leader>rf :RustFmt<CR>
+au FileType rust nnoremap <leader>rt :Dispatch cargo test<CR>
 au FileType rust let b:dispatch = 'cargo run'
 let g:ycm_rust_src_path = '/Users/az/.rustup/toolchains/stable-x86_64-apple-darwin/lib/rustlib/src/'
 
@@ -144,6 +144,7 @@ au FileType python let b:dispatch = 'python3 %'
 nnoremap <leader>rt :Dispatch rspec<CR> 
 let g:syntastic_ruby_checkers = ['rubocop'] 
 au FileType ruby let b:dispatch = 'ruby %'
+au FileType ruby nnoremap <leader>rt :Dispatch rspec<CR>
 
 " Markdown things.
 au FileType markdown let b:dispatch = 'pandoc %:p -f markdown -t latex -o pandoc_output.pdf -S --latex-engine=xelatex'
@@ -158,4 +159,6 @@ let g:vim_markdown_new_list_item_indent = 2 " Make o insert indentation as 'new 
 " HTML bindings
 au FileType html let b:dispatch = "open %"
 
-
+" Scala
+au FileType scala let b:dispatch = 'sbt compile'
+au FileType scala nnoremap <leader>rt :Dispatch sbt test<CR>
