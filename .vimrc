@@ -42,7 +42,6 @@ Plugin 'SirVer/ultisnips'                 " Snippet engine, integrates with YCM
 
 " Themes and colorschemes.
 Plugin 'altercation/vim-colors-solarized' " Solarised yessss
-Plugin 'jnurmine/Zenburn'                 " For dark themes. Still not a fan of solarized-dark.
 Plugin 'flazz/vim-colorschemes'           " Giant-ass collection because why not.
 
 " Status/Air/Powerline
