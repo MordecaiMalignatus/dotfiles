@@ -44,7 +44,6 @@ Plugin 'SirVer/ultisnips'                 " Snippet engine, integrates with YCM
 
 " Themes and colorschemes.
 Plugin 'altercation/vim-colors-solarized' " Solarised yessss
-Plugin 'jnurmine/Zenburn'                 " For dark themes. Still not a fan of solarized-dark.
 Plugin 'flazz/vim-colorschemes'           " Giant-ass collection because why not.
 
 " Status/Air/Powerline
@@ -104,17 +103,17 @@ let g:fzf_layout         = { 'down': '~20%' }
 let g:fzf_tags_command   = 'ctags -R -f .tags'
 let g:fzf_history_dir    = '~/.fzf/history'
 
-nnoremap <leader>tf        :FzfFiles<CR>
-nnoremap <leader>tgf       :FzfGitFiles<CR>
-nnoremap <leader>tt        :FzfTags<CR>
-nnoremap <leader>;         :w<CR>:FzfBuffers<CR>
-nnoremap <leader>th        :FzfHistory<CR>
+nnoremap <leader>tf  :FzfFiles<CR>
+nnoremap <leader>tgf :FzfGitFiles<CR>
+nnoremap <leader>tt  :FzfTags<CR>
+nnoremap <leader>;   :w<CR>:FzfBuffers<CR>
+nnoremap <leader>th  :FzfHistory<CR>
 " Search Word
-nnoremap <leader>w         :FzfAg<CR>
+nnoremap <leader>w   :FzfAg<CR>
 " Search word under cursor
-nnoremap <leader>tw        :FzfAg <C-R><C-W><CR>
-nnoremap <leader>gs        :FzfGFiles?<CR>
-nnoremap <leader>h<Leader> :FzfHelptags<CR>
+nnoremap <leader>tw  :FzfAg <C-R><C-W><CR>
+nnoremap <leader>gs  :FzfGFiles?<CR>
+nnoremap <leader>hh  :FzfHelptags<CR>
 
 " Syntastic Settings
 let g:syntastic_always_populate_loc_list = 1
@@ -132,8 +131,8 @@ xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 
 " Rust
-nnoremap <leader>rf :RustFmt<CR>
-nnoremap <leader>rt :Dispatch cargo test<CR>
+au FileType rust nnoremap <leader>rf :RustFmt<CR>
+au FileType rust nnoremap <leader>rt :Dispatch cargo test<CR>
 au FileType rust let b:dispatch = 'cargo run'
 let g:ycm_rust_src_path = '/Users/az/.rustup/toolchains/stable-x86_64-apple-darwin/lib/rustlib/src/'
 
@@ -146,6 +145,7 @@ au FileType python let b:dispatch = 'python3 %'
 nnoremap <leader>rt :Dispatch rspec<CR> 
 let g:syntastic_ruby_checkers = ['rubocop'] 
 au FileType ruby let b:dispatch = 'ruby %'
+au FileType ruby nnoremap <leader>rt :Dispatch rspec<CR>
 
 " Markdown things.
 au FileType markdown let b:dispatch = 'pandoc %:p -f markdown -t latex -o pandoc_output.pdf -S --latex-engine=xelatex'
@@ -157,6 +157,9 @@ let g:vim_markdown_toc_autofit          = 1 " Shrink TOC to avoid wasted whitesp
 let g:vim_markdown_math                 = 1 " Turn on Latex math, $...$ and $$...$$
 let g:vim_markdown_new_list_item_indent = 2 " Make o insert indentation as 'new list item'
 
+" HTML bindings
+au FileType html let b:dispatch = "open %"
 
-
-
+" Scala
+au FileType scala let b:dispatch = 'sbt compile'
+au FileType scala nnoremap <leader>rt :Dispatch sbt test<CR>
