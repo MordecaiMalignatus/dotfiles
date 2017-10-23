@@ -28,6 +28,7 @@ Plugin 'junegunn/fzf'                     " Fuzzy File Finder, replacement for c
 Plugin 'junegunn/fzf.vim'                 " Adds FZF vim bindings for Extra Shit
 Plugin 'junegunn/vim-easy-align'          " Make shit look pretty.
 Plugin 'vim-syntastic/syntastic'          " Syntax checking for a lot of languages.
+Plugin 'tpope/vim-unimpaired'             " A lot of very useful paired motions.
 Plugin 'tpope/vim-surround'               " Makes changing delimiters far less of a pain.
 Plugin 'tpope/vim-dispatch'               " non-focus stealing builds/tests hooray!
 Plugin 'tpope/vim-commentary'             " Makes commenting not a pain.
@@ -35,6 +36,7 @@ Plugin 'tpope/vim-endwise'                " automatically adds 'end' and similar
 Plugin 'tpope/vim-ragtag'                 " Helps HTML be less awful.
 Plugin 'godlygeek/tabular'                " Required for markdown.
 Plugin 'jiangmiao/auto-pairs'             " Automatically match pairs.
+Plugin 'justinmk/vim-sneak'               " f, aber in gut und wiederholbar.
 
 " Snippets.
 Plugin 'honza/vim-snippets'               " Snippet collection that comes in handy.
@@ -105,7 +107,7 @@ let g:fzf_history_dir    = '~/.fzf/history'
 nnoremap <leader>tf        :FzfFiles<CR>
 nnoremap <leader>tgf       :FzfGitFiles<CR>
 nnoremap <leader>tt        :FzfTags<CR>
-nnoremap <leader>-         :w<CR>:FzfBuffers<CR>
+nnoremap <leader>;         :w<CR>:FzfBuffers<CR>
 nnoremap <leader>th        :FzfHistory<CR>
 " Search Word
 nnoremap <leader>w         :FzfAg<CR>
