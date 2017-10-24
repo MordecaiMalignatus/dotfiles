@@ -27,7 +27,8 @@ Plugin 'airblade/vim-gitgutter'           " Shows changed/added/removed lines in
 Plugin 'junegunn/fzf'                     " Fuzzy File Finder, replacement for command-t
 Plugin 'junegunn/fzf.vim'                 " Adds FZF vim bindings for Extra Shit
 Plugin 'junegunn/vim-easy-align'          " Make shit look pretty.
-Plugin 'vim-syntastic/syntastic'          " Syntax checking for a lot of languages.
+Plugin 'w0rp/ale'
+" Plugin 'vim-syntastic/syntastic'          " Syntax checking for a lot of languages.
 Plugin 'tpope/vim-unimpaired'             " A lot of very useful paired motions.
 Plugin 'tpope/vim-surround'               " Makes changing delimiters far less of a pain.
 Plugin 'tpope/vim-dispatch'               " non-focus stealing builds/tests hooray!
@@ -116,10 +117,15 @@ nnoremap <leader>gs  :FzfGFiles?<CR>
 nnoremap <leader>hh  :FzfHelptags<CR>
 
 " Syntastic Settings
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list            = 1
-let g:syntastic_check_on_open            = 1
-let g:syntastic_check_on_wq              = 0
+" let g:syntastic_always_populate_loc_list = 1
+" let g:syntastic_auto_loc_list            = 1
+" let g:syntastic_check_on_open            = 1
+" let g:syntastic_check_on_wq              = 0
+
+" ALE settings.
+let g:ale_sign_column_always = 1
+let g:airline#extensions#ale#enabled = 1
+let g:ale_open_list = 1
 
 " Git things
 nnoremap <leader>gb :Gblame<CR>
