@@ -26,9 +26,9 @@ bindsym $mod+d exec rofi -show run -modi run
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
 # Userbindings for various programs
-exec --no-startup-id ~/.fehbg
 exec --no-startup-id setxkbmap -option ctrl:nocaps
 exec ~/.config/xrandr/home_screens.sh # Set up screen setup at home.
+exec --no-startup-id ~/.fehbg
 
 bindsym $mod+Shift+p exec i3lock -t -i "/home/az/Downloads/wallpaper.png" 
 
@@ -97,8 +97,6 @@ bindsym $mod+Shift+0 move container to workspace 10
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
-# exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
 bindsym $mod+shift+F4 mode "$logout"
 set $logout Getting out? (r)estart, (l)ogout, (s)hutdown
