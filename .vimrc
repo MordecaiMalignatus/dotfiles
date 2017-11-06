@@ -28,13 +28,13 @@ Plugin 'junegunn/fzf'                     " Fuzzy File Finder, replacement for c
 Plugin 'junegunn/fzf.vim'                 " Adds FZF vim bindings for Extra Shit
 Plugin 'junegunn/vim-easy-align'          " Make shit look pretty.
 Plugin 'w0rp/ale'
-" Plugin 'vim-syntastic/syntastic'          " Syntax checking for a lot of languages.
 Plugin 'tpope/vim-unimpaired'             " A lot of very useful paired motions.
 Plugin 'tpope/vim-surround'               " Makes changing delimiters far less of a pain.
 Plugin 'tpope/vim-dispatch'               " non-focus stealing builds/tests hooray!
 Plugin 'tpope/vim-commentary'             " Makes commenting not a pain.
 Plugin 'tpope/vim-endwise'                " automatically adds 'end' and similar to certain languages.
 Plugin 'tpope/vim-ragtag'                 " Helps HTML be less awful.
+Plugin 'tpope/vim-repeat'                 " Adds repeat motion for plugins, at least some.
 Plugin 'godlygeek/tabular'                " Required for markdown.
 Plugin 'jiangmiao/auto-pairs'             " Automatically match pairs.
 Plugin 'justinmk/vim-sneak'               " f, aber in gut und wiederholbar.
