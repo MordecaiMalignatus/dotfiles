@@ -75,7 +75,7 @@ colors seoul256                " Be pretty
 
 " Remaps.
 let mapleader=' '                        " we emacs now.
-nnoremap <leader>evm :e ~/.vimrc<CR>
+nnoremap <leader>evm :e ~/dotfiles/.vimrc<CR>
 inoremap ZXZ <c-o>zz
 inoremap ± <c-o>~
 
