@@ -116,12 +116,6 @@ nnoremap <leader>tw  :FzfAg <C-R><C-W><CR>
 nnoremap <leader>gs  :FzfGFiles?<CR>
 nnoremap <leader>hh  :FzfHelptags<CR>
 
-" Syntastic Settings
-" let g:syntastic_always_populate_loc_list = 1
-" let g:syntastic_auto_loc_list            = 1
-" let g:syntastic_check_on_open            = 1
-" let g:syntastic_check_on_wq              = 0
-
 " ALE settings.
 let g:ale_sign_column_always = 1
 let g:airline#extensions#ale#enabled = 1
@@ -130,7 +124,7 @@ let g:ale_open_list = 1
 " Git things
 nnoremap <leader>gb :Gblame<CR>
 nnoremap <leader>gd :Gdiff<CR>
-nnoremap <leader>gg :!tig<CR>
+nnoremap <leader>gg :!bash -c "cd %:p:h && tig"<CR>
 
 " Easy Align things
 xmap ga <Plug>(EasyAlign)
