@@ -74,7 +74,7 @@ set t_Co=256                   " Terminal stuff for Zenburn
 colors seoul256                " Be pretty
 
 " Remaps.
-let mapleader=' '                        " we emacs now.
+let mapleader=' '               
 nnoremap <leader>evm :e ~/dotfiles/.vimrc<CR>
 inoremap ZXZ <c-o>zz
 inoremap ± <c-o>~
@@ -120,11 +120,19 @@ nnoremap <leader>hh  :FzfHelptags<CR>
 let g:ale_sign_column_always = 1
 let g:airline#extensions#ale#enabled = 1
 let g:ale_open_list = 1
+nmap <silent> <C-n> <Plug>(ale_next_wrap)
+nmap <silent> <C-m> <Plug>(ale_previous_wrap)
+
+ " I'd use stakc-build but that only works on-save
+let g:ale_linters = {
+      \ 'haskell':['hdevtools'],
+      \}
 
 " Git things
 nnoremap <leader>gb :Gblame<CR>
 nnoremap <leader>gd :Gdiff<CR>
-nnoremap <leader>gg :!bash -c "cd %:p:h && tig"<CR>
+" nnoremap <leader>gg :!bash -c "cd %:p:h && tig"<CR>
+nnoremap <leader>gg :execute "!cd " . expand('%:p:h') . "; tig status"<CR>
 
 " Easy Align things
 xmap ga <Plug>(EasyAlign)
@@ -138,7 +146,6 @@ let g:ycm_rust_src_path = '/Users/az/.rustup/toolchains/stable-x86_64-apple-darw
 
 " Python
 nnoremap <leader>pt :Dispatch pytest %<CR>
-let g:syntastic_python_checkers = ['pyflakes', 'pylint']
 au FileType python let b:dispatch = 'python3 %'
 
 " Ruby Things.

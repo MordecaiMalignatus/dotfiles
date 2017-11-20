@@ -10,3 +10,5 @@ ln -s $DIR/.gitconfig $HOME/.gitconfig
 ## .config folders.
 ln -s $DIR/i3         $HOME/.config/i3
 ln -s $DIR/xrandr     $HOME/.config/xrandr
+ln -s $DIR/fish       $HOME/.config/fish
+ln -s $DIR/ranger     $HOME/.config/ranger
