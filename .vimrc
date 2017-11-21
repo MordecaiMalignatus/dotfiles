@@ -18,7 +18,8 @@ Plugin 'plasticboy/vim-markdown'          " good markdown support.
 Plugin 'vim-ruby/vim-ruby'                " Ruby.
 Plugin 'elixir-editors/vim-elixir'
 Plugin 'slashmili/alchemist.vim'
-
+Plugin 'dag/vim-fish'                     " vim support for fish code.
+       
 " Git Things.
 Plugin 'tpope/vim-fugitive'               " Git integration by tpope. May get tossed.
 Plugin 'airblade/vim-gitgutter'           " Shows changed/added/removed lines in gutter.
