@@ -8,6 +8,7 @@ ln -s $DIR/.zshrc     $HOME/.zshrc
 ln -s $DIR/.gitconfig $HOME/.gitconfig
 
 ## .config folders.
+mkdir -p ~/.config/
 ln -s $DIR/i3         $HOME/.config/i3
 ln -s $DIR/xrandr     $HOME/.config/xrandr
 ln -s $DIR/fish       $HOME/.config/fish
