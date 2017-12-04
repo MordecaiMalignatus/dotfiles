@@ -38,7 +38,7 @@ SET fish_pager_color_completion:\x1d
 SET fish_pager_color_description:B3A06D\x1eyellow
 SET fish_pager_color_prefix:white\x1e\x2d\x2dbold\x1e\x2d\x2dunderline
 SET fish_pager_color_progress:brwhite\x1e\x2d\x2dbackground\x3dcyan
-SET fish_user_abbreviations:styx\x20ssh\x20az\x4051\x2e15\x2e56\x2e80\x1et\x20task\x1er\x20ranger\x1eg\x20git\x1egcm\x20git\x20commit\x20\x2dm\x1esshlrz\x20ssh\x20steffenr\x40lxhalle\x2ein\x2etum\x2ede\x1ega\x20git\x20add\x1egp\x20git\x20push\x1els\x20exa\x1eitest\x20sbt\x20it\x3atest\x1egfa\x20git\x20fetch\x20\x2da\x20\x2d\x2dprune\x1egc\x20git\x20checkout\x1eadd\x20tree\x20exa\x20\x2dT\x1evim\x2dupgrade\x20vim\x20\x2bPluginInstall\x20\x2bqa\x1el\x20logrs\x1ebinstall\x20brew\x20install\x1egl\x20git\x20log\x1ev\x20vi
+SET fish_user_abbreviations:styx\x20ssh\x20az\x4051\x2e15\x2e56\x2e80\x1et\x20task\x1er\x20ranger\x1eg\x20git\x1egcm\x20git\x20commit\x20\x2dm\x1esshlrz\x20ssh\x20steffenr\x40lxhalle\x2ein\x2etum\x2ede\x1ega\x20git\x20add\x1egp\x20git\x20push\x1els\x20exa\x1eitest\x20sbt\x20it\x3atest\x1egfa\x20git\x20fetch\x20\x2da\x20\x2d\x2dprune\x1egc\x20git\x20checkout\x1eadd\x20tree\x20exa\x20\x2dT\x1evim\x2dupgrade\x20vim\x20\x2bPluginInstall\x20\x2bqa\x1el\x20logrs\x1ebinstall\x20brew\x20install\x1egl\x20git\x20log\x1ev\x20vi\x1egs\x20git\x20status\x1ecdref\x20cd\x20/Users/az/Dropbox/Reference/
 SET fish_user_paths:/Users/az/\x2elocal/bin\x1e/Users/az/Coding/Rust/logrs/target/release/\x1e/Users/az/Coding/Rust/logrs/target/release/\x1e/Users/az/\x2ecargo/bin\x1e/usr/local/opt/fzf/bin
 SET fisher_active_prompt:sol
 SET fisher_dependency_count:getopts\x1ez\x1egit_util\x1epwd_is_home\x1epwd_info\x1ehost_info\x1elast_job_id\x1ehumanize_duration\x1esol
