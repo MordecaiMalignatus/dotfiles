@@ -1,0 +1,73 @@
+# Look
+color cursor      white   color236
+color header      red     default
+color title-blur  black   color23
+color title-focus black   color23 bold
+color section     black   color23
+color status      color23 default
+
+# General Config
+set ignore-case        = true
+set editor-line-number = true
+set refresh-mode       = auto
+
+# 'unbindings'
+bind generic g none
+bind main    G none
+bind generic p none
+
+# Keybindings
+bind generic <C-D>  quit
+bind generic r      refresh
+bind generic <F5>   :source ~/.tigrc
+bind generic <Esc>j move-half-page-down
+bind generic <Esc>k move-half-page-up
+bind generic gg     move-first-line
+bind generic G      move-last-line
+bind main    G      move-last-line
+
+## View bindings
+bind generic wm view-main
+bind generic wd view-diff
+bind generic wl view-log
+bind generic wt view-tree
+bind generic wf view-blob
+bind generic wb view-blame
+bind generic wr view-refs
+bind generic wp view-pager
+bind generic wh view-help
+bind generic ws view-status
+bind generic wc view-stage
+bind generic wA view-stash
+bind generic wa view-refs
+bind generic wg view-grep
+
+## Git Bindings
+bind status c !git commit
+bind stage  c !git commit
+bind status A !git commit --amend
+
+bind status C  ?git checkout -- %(file)
+bind stage  C  ?git checkout -- %(file)
+bind status R  ?git reset    --hard
+bind stage  R  ?git reset    --hard
+bind status xr ?rm  -r       %(file)
+
+bind refs c ?git checkout %(branch)
+bind refs m ?git merge    %(branch)
+bind refs b !git checkout -b %(prompt)
+bind refs d ?git branch   -d %(branch)
+
+bind refs R ?git branch -m %(branch) %(prompt) # Rename branch
+
+bind generic y !bash -c "echo %(commit) | pbcopy" # Copy commit to clipboard
+
+bind generic f  !git fetch
+bind generic pp !git pull
+bind generic pu !git push
+bind generic pU !git push -u %(remote) %(branch)
+
+bind diff  + :toggle diff-context +1
+bind diff  - :toggle diff-context -1
+bind stage + :toggle diff-context +1
+bind stage - :toggle diff-context -1
