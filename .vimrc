@@ -55,6 +55,7 @@ Plugin 'vim-airline/vim-airline'          " Swag up my statusbar.
 call vundle#end()                 " required
 filetype plugin indent on         " required
 
+set autoread                   " automatically read file-changes from disk.
 set showmatch                  " Matching brackets.
 set showcmd                    " Shadowing partial commands for completion!
 set backspace=indent,eol,start " Allow Backspace to delete everythng.
@@ -155,7 +156,8 @@ let g:syntastic_ruby_checkers = ['rubocop']
 au FileType ruby let b:dispatch = 'ruby %'
 au FileType ruby nnoremap <leader>rt :Dispatch rspec<CR>
 
-" Markdown things.
+" {{{ Markdown things.
+
 au FileType markdown let b:dispatch = 'pandoc %:p -f markdown+smart -t latex -o pandoc_output.pdf --pdf-engine=xelatex'
 au FileType markdown set tw=79
 nnoremap <leader>mo :!open -a Skim pandoc_output.pdf<CR><CR>
@@ -164,6 +166,11 @@ let g:vim_markdown_folding_disabled     = 1 " Fuck folding in markdown documents
 let g:vim_markdown_toc_autofit          = 1 " Shrink TOC to avoid wasted whitespace.
 let g:vim_markdown_math                 = 1 " Turn on Latex math, $...$ and $$...$$
 let g:vim_markdown_new_list_item_indent = 2 " Make o insert indentation as 'new list item'
+
+" Toggle spellchecker. 
+au FileType markdown nnoremap <leader>sct :setlocal spell! spelllang=en_gb<CR>
+
+" }}}
 
 " HTML bindings
 au FileType html let b:dispatch = "open %"
