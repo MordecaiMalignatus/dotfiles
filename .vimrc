@@ -19,6 +19,7 @@ Plugin 'vim-ruby/vim-ruby'                " Ruby.
 Plugin 'elixir-editors/vim-elixir'
 Plugin 'slashmili/alchemist.vim'
 Plugin 'dag/vim-fish'                     " vim support for fish code.
+Plugin 'derekwyatt/vim-scala'
        
 " Git Things.
 Plugin 'tpope/vim-fugitive'               " Git integration by tpope. May get tossed.
@@ -133,8 +134,8 @@ let g:ale_linters = {
 " Git things
 nnoremap <leader>gb :Gblame<CR>
 nnoremap <leader>gd :Gdiff<CR>
-" nnoremap <leader>gg :!bash -c "cd %:p:h && tig"<CR>
-nnoremap <leader>gg :execute "!cd " . expand('%:p:h') . "; tig status"<CR>
+" nnoremap <leader>gg :!bash -c "cd %:p:h && tig"<CR><CR>
+nnoremap <leader>gg :execute "!cd " . expand('%:p:h') . "; tig status"<CR><CR>
 
 " Easy Align things
 xmap ga <Plug>(EasyAlign)
@@ -178,3 +179,4 @@ au FileType html let b:dispatch = "open %"
 " Scala
 au FileType scala let b:dispatch = 'sbt compile'
 au FileType scala nnoremap <leader>rt :Dispatch sbt test<CR>
+au FileType scala nnoremap <leader>rf :SortScalaImports<CR>
