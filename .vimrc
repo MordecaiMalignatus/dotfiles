@@ -134,7 +134,6 @@ let g:ale_linters = {
 " Git things
 nnoremap <leader>gb :Gblame<CR>
 nnoremap <leader>gd :Gdiff<CR>
-" nnoremap <leader>gg :!bash -c "cd %:p:h && tig"<CR><CR>
 nnoremap <leader>gg :execute "!cd " . expand('%:p:h') . "; tig status"<CR><CR>
 
 " Easy Align things
@@ -159,7 +158,7 @@ au FileType ruby nnoremap <leader>rt :Dispatch rspec<CR>
 
 " {{{ Markdown things.
 
-au FileType markdown let b:dispatch = 'pandoc %:p -f markdown+smart -t latex -o pandoc_output.pdf --pdf-engine=xelatex'
+au FileType markdown let b:dispatch = 'pandoc %:p -f markdown+smart -t latex -o '. expand('%:p:h') . '.pdf --pdf-engine=xelatex'
 au FileType markdown set tw=79
 nnoremap <leader>mo :!open -a Skim pandoc_output.pdf<CR><CR>
 nnoremap <leader>mt :Toc<CR>
