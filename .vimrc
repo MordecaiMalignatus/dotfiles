@@ -74,7 +74,7 @@ set cursorline                 " I do like to find my cursor
 set number                     " And I like to see my numbers.
 set relativenumber             " And I want vim motions to be usable.
 set t_Co=256                   " Terminal stuff for Zenburn
-colors seoul256                " Be pretty
+colors solarized               " Be pretty
 
 " Remaps.
 let mapleader=' '               
@@ -83,8 +83,8 @@ inoremap ZXZ <c-o>zz
 inoremap ± <c-o>~
 
 " Switching theme
-nnoremap <leader>cd :colors seoul256<CR>:set background=dark<CR>
-nnoremap <leader>cl :colors solarized<CR>:set background=light<CR>
+nnoremap <leader>cd :set background=dark<CR>
+nnoremap <leader>cl :set background=light<CR>
 
 " Statusbar
 let g:airline_theme='solarized'   " Make our powerline suit the theme at hand.
