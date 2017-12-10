@@ -61,9 +61,9 @@ set showmatch                  " Matching brackets.
 set showcmd                    " Shadowing partial commands for completion!
 set backspace=indent,eol,start " Allow Backspace to delete everythng.
 set expandtab                  " We use spaces here.
-set tabstop=2                  " And they're two spaces. Because Scala.
-set softtabstop=2              " Because Scala.
-set shiftwidth=2               " Scala aint changing soon sonny.
+set tabstop=4                  " And they're two spaces. Because Scala.
+set softtabstop=4              " Because Scala.
+set shiftwidth=4               " Scala aint changing soon sonny.
 set autoindent                 " You can't escape
 set incsearch                  " search while typing, not just after hitting CR
 set hlsearch                   " Highlight search terms
@@ -170,8 +170,6 @@ let g:vim_markdown_new_list_item_indent = 2 " Make o insert indentation as 'new 
 
 " Toggle spellchecker. 
 au FileType markdown nnoremap <leader>sct :setlocal spell! spelllang=en_gb<CR>
-
-" }}}
 
 " HTML bindings
 au FileType html let b:dispatch = "open %"
