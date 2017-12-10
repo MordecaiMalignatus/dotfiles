@@ -156,9 +156,10 @@ let g:syntastic_ruby_checkers = ['rubocop']
 au FileType ruby let b:dispatch = 'ruby %'
 au FileType ruby nnoremap <leader>rt :Dispatch rspec<CR>
 
-" {{{ Markdown things.
+""""""
+" Markdown things.
 
-au FileType markdown let b:dispatch = 'pandoc %:p -f markdown+smart -t latex -o '. expand('%:p:h') . '.pdf --pdf-engine=xelatex'
+au FileType markdown let b:dispatch = 'pandoc %:p -f markdown+smart -t latex -o '. expand('%:t:r') . '.pdf --pdf-engine=xelatex'
 au FileType markdown set tw=79
 nnoremap <leader>mo :!open -a Skim pandoc_output.pdf<CR><CR>
 nnoremap <leader>mt :Toc<CR>
