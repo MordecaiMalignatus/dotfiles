@@ -1,11 +1,12 @@
 # i3 config file (v4)
 #
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
-
+set $browser chromium
+set $console konsole
 set $mod Mod4
 
 # Fonts. syntax is `font pango:FontName Size`
-font pango:Fira Code Regular 8
+font pango:PragmataPro Regular 9
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -17,26 +18,24 @@ bindsym $mod+Return exec konsole
 bindsym $mod+Shift+q kill
 bindsym $mod+BackSpace kill
 
-# start dmenu (a program launcher)
+# bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 # bindsym $mod+d exec dmenu_run
 bindsym $mod+d exec rofi -show run -modi run
-# There also is the (new) i3-dmenu-desktop which only displays applications
-# shipping a .desktop file. It is a wrapper around dmenu, so you need that
-# installed.
-# bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
 # Userbindings for various programs
-exec --no-startup-id setxkbmap -option ctrl:nocaps
-exec ~/.config/xrandr/home_screens.sh # Set up screen setup at home.
-exec --no-startup-id ~/.fehbg
+exec --no-startup-id setxkbmap -layout us -option ctrl:nocaps -option compose:paus
 
-bindsym $mod+Shift+p exec i3lock -t -i "/home/az/Downloads/wallpaper.png" 
+exec ~/.config/xrandr/home_screens.sh 
+exec --no-startup-id feh --randomize --bg-fill ~/wallpapers/*
+
+bindsym $mod+Shift+p         exec i3lock -et -i "/home/az/wallpapers/lockscreen.png"
+bindsym $mod+Shift+Control+n exec feh --randomize --bg-fill ~/wallpapers/*
 
 # change focus
-bindsym $mod+j focus down
-bindsym $mod+k focus up
-bindsym $mod+l focus right
-bindsym $mod+h focus left
+bindsym $mod+j               focus down
+bindsym $mod+k               focus up
+bindsym $mod+l               focus right
+bindsym $mod+h               focus left
 
 # split in horizontal orientation
 bindsym $mod+Shift+Control+h split h
@@ -44,7 +43,15 @@ bindsym $mod+Shift+Control+h split h
 bindsym $mod+Shift+Control+v split v
 
 # enter fullscreen mode for the focused container
-bindsym $mod+f fullscreen toggle
+bindsym $mod+Shift+f               fullscreen toggle
+
+###################
+# Assignings
+###################
+
+assign [class="konsole"]    Nerdery
+assign [class="(?i)chrom"]  Browser
+
 
 ###################
 # Design Things
@@ -53,57 +60,91 @@ bindsym $mod+f fullscreen toggle
 hide_edge_borders smart
 
 # change container layout (stacked, tabbed, toggle split)
-bindsym $mod+s layout stacking
-bindsym $mod+w layout tabbed
-bindsym $mod+e layout toggle split
+bindsym $mod+s           layout stacking
+bindsym $mod+w           layout tabbed
+bindsym $mod+e           layout toggle split
 
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
 
 # change focus between tiling / floating windows
-bindsym $mod+space focus mode_toggle
+bindsym $mod+space       focus mode_toggle
 
 # focus the parent container
-bindsym $mod+a focus parent
+bindsym $mod+a           focus parent
 
 # focus the child container
 #bindsym $mod+d focus child
 
 # switch to workspace
-bindsym $mod+1 workspace 1
-bindsym $mod+2 workspace 2
-bindsym $mod+3 workspace 3
-bindsym $mod+4 workspace 4
-bindsym $mod+5 workspace 5
-bindsym $mod+6 workspace 6
-bindsym $mod+7 workspace 7
-bindsym $mod+8 workspace 8
-bindsym $mod+9 workspace 9
-bindsym $mod+0 workspace 10
+bindsym $mod+1           workspace 1
+bindsym $mod+2           workspace 2
+bindsym $mod+3           workspace 3
+bindsym $mod+4           workspace 4
+bindsym $mod+5           workspace 5
+bindsym $mod+6           workspace 6
+bindsym $mod+7           workspace 7
+bindsym $mod+8           workspace 8
+bindsym $mod+9           workspace 9
+bindsym $mod+0           workspace 10
+
+bindsym $mod+u           workspace next_on_output
+bindsym $mod+i           workspace prev_on_output
 
 # move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace 1
-bindsym $mod+Shift+2 move container to workspace 2
-bindsym $mod+Shift+3 move container to workspace 3
-bindsym $mod+Shift+4 move container to workspace 4
-bindsym $mod+Shift+5 move container to workspace 5
-bindsym $mod+Shift+6 move container to workspace 6
-bindsym $mod+Shift+7 move container to workspace 7
-bindsym $mod+Shift+8 move container to workspace 8
-bindsym $mod+Shift+9 move container to workspace 9
-bindsym $mod+Shift+0 move container to workspace 10
+bindsym $mod+Shift+1     move container to workspace 1
+bindsym $mod+Shift+2     move container to workspace 2
+bindsym $mod+Shift+3     move container to workspace 3
+bindsym $mod+Shift+4     move container to workspace 4
+bindsym $mod+Shift+5     move container to workspace 5
+bindsym $mod+Shift+6     move container to workspace 6
+bindsym $mod+Shift+7     move container to workspace 7
+bindsym $mod+Shift+8     move container to workspace 8
+bindsym $mod+Shift+9     move container to workspace 9
+bindsym $mod+Shift+0     move container to workspace 10
 
 # reload the configuration file
-bindsym $mod+Shift+c reload
-# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym $mod+Shift+r restart
+bindsym $mod+Shift+c     reload
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i2)
+bindsym $mod+Shift+r     restart
+# This "w"akes screens up if they got stuck after hibernation.
+bindsym $mod+Shift+w     exec "xset dpms force off; sleep 2; xset dpms force on"
+
+bindsym $mod+m mode "$move"
+set $move Move: (l)eft, (r)ight, (s)mall
+mode "$move" {
+        bindsym l move workspace to output DP-2-1; mode "default"
+        bindsym r move workspace to output DP-2-2; mode "default"
+        bindsym s move workspace to output eDP-1; mode "default"
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+bindsym $mod+minus mode "$focus"
+set $focus Focus: (b)rowser, (c)onsole
+mode "$focus" {
+        bindsym b workspace Browser; mode "default"
+        bindsym c workspace Nerdery; mode "default"
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+bindsym $mod+n mode "$new"
+set $new New Window: (c)onsole, (b)rowser
+mode "$new" {
+        bindsym c exec "$console"; mode "default"
+        bindsym b exec "$browser"; mode "default"
+}
 
 bindsym $mod+shift+F4 mode "$logout"
-set $logout Getting out? (r)estart, (l)ogout, (s)hutdown
+set $logout Getting out? (r)estart, (l)ogout, (s)hutdown, (h)ibernate
 mode "$logout" {
         bindsym r exec "reboot"; mode "default" 
         bindsym l exec "i3-msg exit"
         bindsym s exec "shutdown now"; mode "default" 
+        bindsym h exec "systemctl hibernate"; mode "default"
 
         bindsym Return mode "default"
         bindsym Escape mode "default"
