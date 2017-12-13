@@ -12,7 +12,7 @@ font pango:PragmataPro Regular 9
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec konsole
+bindsym $mod+Return exec $console
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -132,9 +132,8 @@ mode "$focus" {
 }
 
 bindsym $mod+n mode "$new"
-set $new New Window: (c)onsole, (b)rowser
+set $new New Window: (b)rowser
 mode "$new" {
-        bindsym c exec "$console"; mode "default"
         bindsym b exec "$browser"; mode "default"
 }
 
