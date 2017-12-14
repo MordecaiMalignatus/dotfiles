@@ -49,9 +49,9 @@ bindsym $mod+Shift+f               fullscreen toggle
 # Assignings
 ###################
 
-assign [class="konsole"]    Nerdery
-assign [class="(?i)chrom"]  Browser
-
+assign [class="konsole"]            Nerdery
+assign [class="(?i)chrom"]          Browser
+assign [class="jetbrains-phpstorm"] PHPStorm
 
 ###################
 # Design Things
