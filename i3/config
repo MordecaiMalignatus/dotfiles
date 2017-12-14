@@ -23,9 +23,9 @@ bindsym $mod+BackSpace kill
 bindsym $mod+d exec rofi -show run -modi run
 
 # Userbindings for various programs
-exec --no-startup-id setxkbmap -layout us -option ctrl:nocaps -option compose:paus
+exec_always --no-startup-id setxkbmap -layout us -option ctrl:nocaps -option compose:paus
 
-exec ~/.config/xrandr/home_screens.sh 
+exec_always ~/.config/xrandr/work-screens.sh 
 exec --no-startup-id feh --randomize --bg-fill ~/wallpapers/*
 
 bindsym $mod+Shift+p         exec i3lock -et -i "/home/az/wallpapers/lockscreen.png"

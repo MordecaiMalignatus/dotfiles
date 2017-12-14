@@ -2,9 +2,10 @@
 
 [core]
   excludesfile = ~/.gitignore-global
+	editor = /usr/bin/vim
 
 [user]
-  name = Az
+	name = Az
   email = az4reus@gmail.com
 
 [log]
