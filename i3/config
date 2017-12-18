@@ -121,11 +121,12 @@ mode "$move" {
         bindsym Escape mode "default"
 }
 
-bindsym $mod+minus mode "$focus"
-set $focus Focus: (b)rowser, (c)onsole
+bindsym $mod+semicolon mode "$focus"
+set $focus Focus: (b)rowser, (c)onsole, (p)hpstorm
 mode "$focus" {
         bindsym b workspace Browser; mode "default"
         bindsym c workspace Nerdery; mode "default"
+        bindsym p workspace PHPStorm; mode "default"
 
         bindsym Return mode "default"
         bindsym Escape mode "default"
