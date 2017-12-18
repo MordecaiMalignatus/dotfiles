@@ -24,7 +24,6 @@ bindsym $mod+d exec rofi -show run -modi run
 
 # Userbindings for various programs
 exec_always --no-startup-id setxkbmap -layout us -option ctrl:nocaps -option compose:paus
-
 exec_always ~/.config/xrandr/work-screens.sh 
 exec --no-startup-id feh --randomize --bg-fill ~/wallpapers/*
 
@@ -52,6 +51,7 @@ bindsym $mod+Shift+f               fullscreen toggle
 assign [class="konsole"]            Nerdery
 assign [class="(?i)chrom"]          Browser
 assign [class="jetbrains-phpstorm"] PHPStorm
+assign [class="jetbrains-toolbox"]  Toolbox
 
 ###################
 # Design Things
@@ -88,8 +88,8 @@ bindsym $mod+8           workspace 8
 bindsym $mod+9           workspace 9
 bindsym $mod+0           workspace 10
 
-bindsym $mod+u           workspace next_on_output
-bindsym $mod+i           workspace prev_on_output
+bindsym $mod+i           workspace next_on_output
+bindsym $mod+u           workspace prev_on_output
 
 # move focused container to workspace
 bindsym $mod+Shift+1     move container to workspace 1
@@ -152,12 +152,6 @@ mode "$logout" {
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
-        # These bindings trigger as soon as you enter the resize mode
-
-        # Pressing left will shrink the window’s width.
-        # Pressing right will grow the window’s width.
-        # Pressing up will shrink the window’s height.
-        # Pressing down will grow the window’s height.
         bindsym l resize shrink width 5 px or 5 ppt
         bindsym j resize grow height 5 px or 5 ppt
         bindsym k resize shrink height 5 px or 5 ppt
