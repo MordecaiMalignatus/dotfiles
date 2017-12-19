@@ -22,7 +22,7 @@ bindsym $mod+BackSpace kill
 # bindsym $mod+d exec dmenu_run
 bindsym $mod+d exec rofi -show run -modi run
 
-# The stubborn things.
+# Userbindings for various programs
 exec_always --no-startup-id setxkbmap -layout us -option ctrl:nocaps -option compose:paus
 exec_always                 ~/.config/xrandr/work-screens.sh 
 exec_always --no-startup-id feh --randomize --bg-fill ~/wallpapers/*
@@ -60,6 +60,8 @@ assign [class="jetbrains-toolbox"]  Toolbox
 # Design Things
 ###################
 
+# Hacky workaround that disables title bars.
+for_window [class="^.*"] border pixel 1
 hide_edge_borders smart
 
 # change container layout (stacked, tabbed, toggle split)
