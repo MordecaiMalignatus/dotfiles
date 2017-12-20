@@ -24,8 +24,11 @@ bindsym $mod+d exec rofi -show run -modi run
 
 # Userbindings for various programs
 exec_always --no-startup-id setxkbmap -layout us -option ctrl:nocaps -option compose:paus
-exec_always ~/.config/xrandr/work-screens.sh 
-exec --no-startup-id feh --randomize --bg-fill ~/wallpapers/*
+exec_always                 ~/.config/xrandr/work-screens.sh 
+exec_always --no-startup-id feh --randomize --bg-fill ~/wallpapers/*
+
+# Sensible power manager. 
+exec --no-startup-id xfce4-power-manager
 
 bindsym $mod+Shift+p         exec i3lock -et -i "/home/az/wallpapers/lockscreen.png"
 bindsym $mod+Shift+Control+n exec feh --randomize --bg-fill ~/wallpapers/*
@@ -45,7 +48,7 @@ bindsym $mod+Shift+Control+v split v
 bindsym $mod+Shift+f               fullscreen toggle
 
 ###################
-# Assignings
+# Assignments
 ###################
 
 assign [class="konsole"]            Nerdery
@@ -57,6 +60,8 @@ assign [class="jetbrains-toolbox"]  Toolbox
 # Design Things
 ###################
 
+# Hacky workaround that disables title bars.
+for_window [class="^.*"] border pixel 1
 hide_edge_borders smart
 
 # change container layout (stacked, tabbed, toggle split)
