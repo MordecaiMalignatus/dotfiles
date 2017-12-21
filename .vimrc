@@ -39,7 +39,8 @@ Plugin 'tpope/vim-ragtag'                 " Helps HTML be less awful.
 Plugin 'tpope/vim-repeat'                 " Adds repeat motion for plugins, at least some.
 Plugin 'godlygeek/tabular'                " Required for markdown.
 Plugin 'jiangmiao/auto-pairs'             " Automatically match pairs.
-Plugin 'justinmk/vim-sneak'               " f, aber in gut und wiederholbar.
+Plugin 'justinmk/vim-sneak'
+Plugin 'YankRing.vim'                     " Kill ring implementation in vim, check :h yankring-tutorial
 
 " Snippets.
 Plugin 'honza/vim-snippets'               " Snippet collection that comes in handy.
@@ -53,8 +54,8 @@ Plugin 'flazz/vim-colorschemes'           " Giant-ass collection because why not
 Plugin 'vim-airline/vim-airline-themes'   " Make the status bar match the theme.
 Plugin 'vim-airline/vim-airline'          " Swag up my statusbar.
 
-call vundle#end()                 " required
-filetype plugin indent on         " required
+call vundle#end()                       " required
+filetype plugin indent on                 " required
 
 set autoread                   " automatically read file-changes from disk.
 set showmatch                  " Matching brackets.
