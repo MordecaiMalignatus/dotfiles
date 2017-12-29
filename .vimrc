@@ -155,6 +155,8 @@ let g:ale_linters = {
 nnoremap <leader>gb :Gblame<CR>
 nnoremap <leader>gd :Gdiff<CR>
 nnoremap <leader>gg :execute "!cd " . expand('%:p:h') . "; tig status"<CR><CR>
+nnoremap <leader>hn :GitGutterNextHunk<CR>
+nnoremap <leader>hp :GitGutterPreviousHunk<CR>
 
 " Easy Align things
 xmap ga <Plug>(EasyAlign)
