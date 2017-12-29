@@ -82,6 +82,8 @@ let mapleader=' '
 nnoremap <leader>evm :e ~/dotfiles/.vimrc<CR>
 inoremap ZXZ <c-o>zz
 inoremap ± <c-o>~
+" Remaps Q to 'run last macro used' 
+nnoremap Q @@
 
 " Switching theme
 nnoremap <leader>cd :set background=dark<CR>
