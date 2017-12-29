@@ -78,12 +78,25 @@ set t_Co=256                   " Terminal stuff for Zenburn
 colors solarized               " Be pretty
 
 " Remaps.
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 let mapleader=' '               
 nnoremap <leader>evm :e ~/dotfiles/.vimrc<CR>
 inoremap ZXZ <c-o>zz
 inoremap ± <c-o>~
+
 " Remaps Q to 'run last macro used' 
 nnoremap Q @@
+
+" Remaps backspace and CR to be about paragraph wise handling instead of doing
+" nothing.
+nnoremap <BS> {
+onoremap <BS> {
+vnoremap <BS> {
+
+nnoremap <expr> <CR> empty(&buftype) ? '}' : '<CR>'
+onoremap <expr> <CR> empty(&buftype) ? '}' : '<CR>'
+vnoremap <CR> }
 
 " Switching theme
 nnoremap <leader>cd :set background=dark<CR>
