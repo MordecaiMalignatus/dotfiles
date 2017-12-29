@@ -102,6 +102,10 @@ vnoremap <CR> }
 nnoremap <leader>cd :set background=dark<CR>
 nnoremap <leader>cl :set background=light<CR>
 
+" Fast and inconvenient vs slow and convenient
+nnoremap <leader>hle :set cursorline relativenumber cursorcolumn<CR>
+nnoremap <leader>hld :set nocursorline norelativenumber nocursorcolumn<CR>
+
 " Statusbar
 let g:airline_theme='solarized'   " Make our powerline suit the theme at hand.
 let g:airline_powerline_fonts = 1 " And make it pretty.
@@ -139,8 +143,8 @@ nnoremap <leader>hh  :FzfHelptags<CR>
 let g:ale_sign_column_always = 1
 let g:airline#extensions#ale#enabled = 1
 let g:ale_open_list = 1
-nmap <silent> <C-n> <Plug>(ale_next_wrap)
-nmap <silent> <C-m> <Plug>(ale_previous_wrap)
+nnoremap <silent> <C-n> <Plug>(ale_next_wrap)
+nnoremap <silent> <C-b> <Plug>(ale_previous_wrap)
 
  " I'd use stakc-build but that only works on-save
 let g:ale_linters = {
