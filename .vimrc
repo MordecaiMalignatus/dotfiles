@@ -108,8 +108,8 @@ let g:fzf_layout         = { 'down': '~20%' }
 let g:fzf_tags_command   = 'ctags -R -f .tags'
 let g:fzf_history_dir    = '~/.fzf/history'
 
-nnoremap <leader>tf  :FzfFiles<CR>
-nnoremap <leader>tgf :FzfGitFiles<CR>
+nnoremap <leader>tgf  :FzfFiles<CR>
+nnoremap <leader>tf :FzfGitFiles<CR>
 nnoremap <leader>tt  :FzfTags<CR>
 nnoremap <leader>;   :w<CR>:FzfBuffers<CR>
 nnoremap <leader>th  :FzfHistory<CR>
