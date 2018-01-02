@@ -20,6 +20,7 @@ Plugin 'elixir-editors/vim-elixir'
 Plugin 'slashmili/alchemist.vim'
 Plugin 'dag/vim-fish'                     " vim support for fish code.
 Plugin 'derekwyatt/vim-scala'
+Plugin 'prettier/vim-prettier'            " Auto formatting for JS-universe things and Markdown
        
 " Git Things.
 Plugin 'tpope/vim-fugitive'               " Git integration by tpope. May get tossed.
@@ -72,20 +73,39 @@ set lazyredraw                 " Make vim redraw the screen less
 set wildmenu                   " Visual tab complete menu.
 set foldenable                 " Make shit orderly.
 set cursorline                 " I do like to find my cursor
+set cursorcolumn               " I do like to find my cursor
 set number                     " And I like to see my numbers.
 set relativenumber             " And I want vim motions to be usable.
 set t_Co=256                   " Terminal stuff for Zenburn
 colors solarized               " Be pretty
 
 " Remaps.
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 let mapleader=' '               
 nnoremap <leader>evm :e ~/dotfiles/.vimrc<CR>
 inoremap ZXZ <c-o>zz
 inoremap ± <c-o>~
 
+" Remaps Q to 'run last macro used' 
+nnoremap Q @@
+
+" Remaps backspace and CR to be about paragraph wise handling instead of doing
+" nothing.
+nnoremap <BS> {
+onoremap <BS> {
+vnoremap <BS> {
+
+nnoremap <expr> <CR> empty(&buftype) ? '}' : '<CR>'
+onoremap <expr> <CR> empty(&buftype) ? '}' : '<CR>'
+vnoremap <CR> }
+
 " Switching theme
 nnoremap <leader>cd :set background=dark<CR>
 nnoremap <leader>cl :set background=light<CR>
+
+" Fast and inconvenient vs slow and convenient
+nnoremap <leader>ht :set cursorline! relativenumber! cursorcolumn!<CR>
 
 " Statusbar
 let g:airline_theme='solarized'   " Make our powerline suit the theme at hand.
@@ -108,7 +128,7 @@ let g:fzf_layout         = { 'down': '~20%' }
 let g:fzf_tags_command   = 'ctags -R -f .tags'
 let g:fzf_history_dir    = '~/.fzf/history'
 
-nnoremap <leader>tf  :FzfFiles<CR>
+nnoremap <leader>gf  :FzfFiles<CR>
 nnoremap <leader>tgf :FzfGitFiles<CR>
 nnoremap <leader>tt  :FzfTags<CR>
 nnoremap <leader>;   :w<CR>:FzfBuffers<CR>
@@ -124,8 +144,8 @@ nnoremap <leader>hh  :FzfHelptags<CR>
 let g:ale_sign_column_always = 1
 let g:airline#extensions#ale#enabled = 1
 let g:ale_open_list = 1
-nmap <silent> <C-n> <Plug>(ale_next_wrap)
-nmap <silent> <C-m> <Plug>(ale_previous_wrap)
+nnoremap <silent> <C-n> <Plug>(ale_next_wrap)
+nnoremap <silent> <C-b> <Plug>(ale_previous_wrap)
 
  " I'd use stakc-build but that only works on-save
 let g:ale_linters = {
@@ -136,6 +156,8 @@ let g:ale_linters = {
 nnoremap <leader>gb :Gblame<CR>
 nnoremap <leader>gd :Gdiff<CR>
 nnoremap <leader>gg :execute "!cd " . expand('%:p:h') . "; tig status"<CR><CR>
+nnoremap <leader>hn :GitGutterNextHunk<CR>
+nnoremap <leader>hp :GitGutterPreviousHunk<CR>
 
 " Easy Align things
 xmap ga <Plug>(EasyAlign)
@@ -162,7 +184,7 @@ au FileType ruby nnoremap <leader>rt :Dispatch rspec<CR>
 
 au FileType markdown let b:dispatch = 'pandoc %:p -f markdown+smart -t latex -o '. expand('%:t:r') . '.pdf --pdf-engine=xelatex'
 au FileType markdown set tw=79
-nnoremap <leader>mo :!open -a Skim pandoc_output.pdf<CR><CR>
+nnoremap <leader>mo :execute "!open -a Skim " . expand('%:t:r') . ".pdf"<CR><CR>
 nnoremap <leader>mt :Toc<CR>
 let g:vim_markdown_folding_disabled     = 1 " Fuck folding in markdown documents.
 let g:vim_markdown_toc_autofit          = 1 " Shrink TOC to avoid wasted whitespace.
