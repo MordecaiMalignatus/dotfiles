@@ -127,8 +127,8 @@ let g:fzf_layout         = { 'down': '~20%' }
 let g:fzf_tags_command   = 'ctags -R -f .tags'
 let g:fzf_history_dir    = '~/.fzf/history'
 
-nnoremap <leader>tgf  :FzfFiles<CR>
-nnoremap <leader>tf :FzfGitFiles<CR>
+nnoremap <leader>gf  :FzfFiles<CR>
+nnoremap <leader>tgf :FzfGitFiles<CR>
 nnoremap <leader>tt  :FzfTags<CR>
 nnoremap <leader>;   :w<CR>:FzfBuffers<CR>
 nnoremap <leader>th  :FzfHistory<CR>
@@ -183,7 +183,7 @@ au FileType ruby nnoremap <leader>rt :Dispatch rspec<CR>
 
 au FileType markdown let b:dispatch = 'pandoc %:p -f markdown+smart -t latex -o '. expand('%:t:r') . '.pdf --pdf-engine=xelatex'
 au FileType markdown set tw=79
-nnoremap <leader>mo :!open -a Skim pandoc_output.pdf<CR><CR>
+nnoremap <leader>mo :execute "!open -a Skim " . expand('%:t:r') . ".pdf"<CR><CR>
 nnoremap <leader>mt :Toc<CR>
 let g:vim_markdown_folding_disabled     = 1 " Fuck folding in markdown documents.
 let g:vim_markdown_toc_autofit          = 1 " Shrink TOC to avoid wasted whitespace.
