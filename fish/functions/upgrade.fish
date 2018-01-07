@@ -1,6 +1,13 @@
-# Defined in - @ line 2
+# Defined in /tmp/fish.qqqEIr/upgrade.fish @ line 2
 function upgrade
-	brew upgrade
+	echo "Upgrading Packages"
+	switch (uname -s)
+        case Linux
+            sudo pacman -Syu
+            
+        case Darwin
+            brew upgrade
+    end
 
     echo "Updating Vim..."
     vim +PluginUpdate +qa
