@@ -11,6 +11,9 @@ set rtp+=~/.vim/bundle/Vundle.vim
 filetype off                  " required
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
+" vim "infrastructure" 
+Plugin 'kana/vim-textobj-user'
+Plugin 'bps/vim-textobj-python'
 
 " language specific things.
 Plugin 'rust-lang/rust.vim'               " Racer/RLS integration.
@@ -124,7 +127,7 @@ nnoremap <leader>rh <ESC>:w<CR>:Dispatch!<CR><CR>
 let $FZF_DEFAULT_COMMAND = 'ag -g ""'
 let g:fzf_command_prefix = 'Fzf'
 let g:fzf_layout         = { 'down': '~20%' }
-let g:fzf_tags_command   = 'ctags -R -f .tags'
+let g:fzf_tags_command   = 'ctags -R'
 let g:fzf_history_dir    = '~/.fzf/history'
 
 nnoremap <leader>gf  :FzfFiles<CR>
