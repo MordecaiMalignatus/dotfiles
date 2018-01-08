@@ -73,7 +73,6 @@ set lazyredraw                 " Make vim redraw the screen less
 set wildmenu                   " Visual tab complete menu.
 set foldenable                 " Make shit orderly.
 set cursorline                 " I do like to find my cursor
-set cursorcolumn               " I do like to find my cursor
 set number                     " And I like to see my numbers.
 set relativenumber             " And I want vim motions to be usable.
 set t_Co=256                   " Terminal stuff for Zenburn
@@ -105,7 +104,7 @@ nnoremap <leader>cd :set background=dark<CR>
 nnoremap <leader>cl :set background=light<CR>
 
 " Fast and inconvenient vs slow and convenient
-nnoremap <leader>ht :set cursorline! relativenumber! cursorcolumn!<CR>
+nnoremap <leader>ht :set cursorline! relativenumber!<CR>
 
 " Statusbar
 let g:airline_theme='solarized'   " Make our powerline suit the theme at hand.
