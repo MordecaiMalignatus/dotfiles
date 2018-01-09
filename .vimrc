@@ -72,7 +72,6 @@ set lazyredraw                 " Make vim redraw the screen less
 set wildmenu                   " Visual tab complete menu.
 set foldenable                 " Make shit orderly.
 set cursorline                 " I do like to find my cursor
-set cursorcolumn               " I do like to find my cursor
 set number                     " And I like to see my numbers.
 set relativenumber             " And I want vim motions to be usable.
 set t_Co=256                   " Terminal stuff for Zenburn
@@ -84,6 +83,7 @@ colors solarized               " Be pretty
 let mapleader=' '               
 nnoremap <leader>evm :e ~/dotfiles/.vimrc<CR>
 inoremap ZXZ <c-o>zz
+nnoremap <C-S> :w<CR>
 inoremap ± <c-o>~
 
 " Remaps Q to 'run last macro used' 
@@ -104,7 +104,7 @@ nnoremap <leader>cd :set background=dark<CR>
 nnoremap <leader>cl :set background=light<CR>
 
 " Fast and inconvenient vs slow and convenient
-nnoremap <leader>ht :set cursorline! relativenumber! cursorcolumn!<CR>
+nnoremap <leader>ht :set cursorline! relativenumber!<CR>
 
 " Statusbar
 let g:airline_theme='solarized'   " Make our powerline suit the theme at hand.
@@ -127,7 +127,7 @@ let g:fzf_layout         = { 'down': '~20%' }
 let g:fzf_tags_command   = 'ctags -R -f .tags'
 let g:fzf_history_dir    = '~/.fzf/history'
 
-nnoremap <leader>gf  :FzfFiles<CR>
+nnoremap <leader>tf  :FzfFiles<CR>
 nnoremap <leader>tgf :FzfGitFiles<CR>
 nnoremap <leader>tt  :FzfTags<CR>
 nnoremap <leader>;   :w<CR>:FzfBuffers<CR>
@@ -148,7 +148,8 @@ nnoremap <silent> <C-b> <Plug>(ale_previous_wrap)
 
  " I'd use stakc-build but that only works on-save
 let g:ale_linters = {
-      \ 'haskell':['hdevtools'],
+      \ 'haskell': ['hdevtools'],
+      \    'rust': ['cargo', 'rustfmt'],
       \}
 
 " Git things
