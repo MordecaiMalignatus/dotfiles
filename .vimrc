@@ -11,6 +11,9 @@ set rtp+=~/.vim/bundle/Vundle.vim
 filetype off                  " required
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
+" vim "infrastructure" 
+Plugin 'kana/vim-textobj-user'
+Plugin 'bps/vim-textobj-python'
 
 " language specific things.
 Plugin 'rust-lang/rust.vim'               " Racer/RLS integration.
@@ -40,7 +43,8 @@ Plugin 'tpope/vim-ragtag'                 " Helps HTML be less awful.
 Plugin 'tpope/vim-repeat'                 " Adds repeat motion for plugins, at least some.
 Plugin 'godlygeek/tabular'                " Required for markdown.
 Plugin 'jiangmiao/auto-pairs'             " Automatically match pairs.
-Plugin 'justinmk/vim-sneak'               " f, aber in gut und wiederholbar.
+Plugin 'justinmk/vim-sneak'
+Plugin 'YankRing.vim'                     " Kill ring implementation in vim, check :h yankring-tutorial
 
 " Snippets.
 Plugin 'honza/vim-snippets'               " Snippet collection that comes in handy.
@@ -54,8 +58,8 @@ Plugin 'flazz/vim-colorschemes'           " Giant-ass collection because why not
 Plugin 'vim-airline/vim-airline-themes'   " Make the status bar match the theme.
 Plugin 'vim-airline/vim-airline'          " Swag up my statusbar.
 
-call vundle#end()                 " required
-filetype plugin indent on         " required
+call vundle#end()                       " required
+filetype plugin indent on                 " required
 
 set autoread                   " automatically read file-changes from disk.
 set showmatch                  " Matching brackets.
@@ -124,7 +128,7 @@ nnoremap <leader>rh <ESC>:w<CR>:Dispatch!<CR><CR>
 let $FZF_DEFAULT_COMMAND = 'ag -g ""'
 let g:fzf_command_prefix = 'Fzf'
 let g:fzf_layout         = { 'down': '~20%' }
-let g:fzf_tags_command   = 'ctags -R -f .tags'
+let g:fzf_tags_command   = 'ctags -R'
 let g:fzf_history_dir    = '~/.fzf/history'
 
 nnoremap <leader>tf  :FzfFiles<CR>
