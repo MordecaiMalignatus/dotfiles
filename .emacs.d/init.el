@@ -12,7 +12,7 @@
 ;; Org-mode stuff.
 (setq org-startup-indented 1)
 (add-hook 'org-mode-hook 'auto-fill-mode)
-(setq fill-column 60)
+(setq fill-column 80)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
