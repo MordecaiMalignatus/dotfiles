@@ -53,7 +53,6 @@ Plugin 'SirVer/ultisnips'                 " Snippet engine, integrates with YCM
 " Themes and colorschemes.
 Plugin 'altercation/vim-colors-solarized' " Solarised yessss
 Plugin 'flazz/vim-colorschemes'           " Giant-ass collection because why not.
-Plugin 'arcticicestudio/nord-vim'  
 
 " Status/Air/Powerline
 Plugin 'vim-airline/vim-airline-themes'   " Make the status bar match the theme.
@@ -79,10 +78,7 @@ set foldenable                 " Make shit orderly.
 set number                     " And I like to see my numbers.
 set t_Co=256                   " Terminal stuff for Zenburn
 
-let g:nord_italic = 1
-let g:nord_italic_comments = 1
-
-colors nord
+colors solarized
 
 " Remaps.
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -114,7 +110,7 @@ nnoremap <leader>cl :set background=light<CR>
 nnoremap <leader>ht :set cursorline! relativenumber!<CR>
 
 " Statusbar
-let g:airline_theme='nord'   " Make our powerline suit the theme at hand.
+let g:airline_theme='solarized'   " Make our powerline suit the theme at hand.
 let g:airline_powerline_fonts = 1 " And make it pretty.
 set laststatus=2                  " And make it... appear.
 
