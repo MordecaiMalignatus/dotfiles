@@ -23,7 +23,7 @@ Plugin 'elixir-editors/vim-elixir'
 Plugin 'slashmili/alchemist.vim'
 Plugin 'dag/vim-fish'                     " vim support for fish code.
 Plugin 'derekwyatt/vim-scala'
-Plugin 'prettier/vim-prettier'            " Auto formatting for JS-universe things and Markdown
+Plugin 'zah/nim.vim'
        
 " Git Things.
 Plugin 'tpope/vim-fugitive'               " Git integration by tpope. May get tossed.
@@ -53,6 +53,7 @@ Plugin 'SirVer/ultisnips'                 " Snippet engine, integrates with YCM
 " Themes and colorschemes.
 Plugin 'altercation/vim-colors-solarized' " Solarised yessss
 Plugin 'flazz/vim-colorschemes'           " Giant-ass collection because why not.
+Plugin 'arcticicestudio/nord-vim'  
 
 " Status/Air/Powerline
 Plugin 'vim-airline/vim-airline-themes'   " Make the status bar match the theme.
@@ -75,11 +76,13 @@ set hlsearch                   " Highlight search terms
 set lazyredraw                 " Make vim redraw the screen less
 set wildmenu                   " Visual tab complete menu.
 set foldenable                 " Make shit orderly.
-set cursorline                 " I do like to find my cursor
 set number                     " And I like to see my numbers.
-set relativenumber             " And I want vim motions to be usable.
 set t_Co=256                   " Terminal stuff for Zenburn
-colors solarized               " Be pretty
+
+let g:nord_italic = 1
+let g:nord_italic_comments = 1
+
+colors nord
 
 " Remaps.
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -111,7 +114,7 @@ nnoremap <leader>cl :set background=light<CR>
 nnoremap <leader>ht :set cursorline! relativenumber!<CR>
 
 " Statusbar
-let g:airline_theme='solarized'   " Make our powerline suit the theme at hand.
+let g:airline_theme='nord'   " Make our powerline suit the theme at hand.
 let g:airline_powerline_fonts = 1 " And make it pretty.
 set laststatus=2                  " And make it... appear.
 
