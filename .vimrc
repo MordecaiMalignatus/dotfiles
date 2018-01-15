@@ -186,9 +186,9 @@ au FileType ruby nnoremap <leader>rt :Dispatch rspec<CR>
 """"""
 " Markdown things.
 
-au FileType markdown let b:dispatch = 'pandoc %:p -f markdown+smart -t latex -o '. expand('%:t:r') . '.pdf --pdf-engine=xelatex'
+au FileType markdown let b:dispatch = 'pandoc %:p -f markdown+smart -t latex -o '. expand('%:p:r') . '.pdf --pdf-engine=xelatex'
 au FileType markdown set tw=79
-nnoremap <leader>mo :execute "!open -a Skim " . expand('%:t:r') . ".pdf"<CR><CR>
+nnoremap <leader>mo :execute "!open -a Skim " . expand('%:p:r') . ".pdf"<CR><CR>
 nnoremap <leader>mt :Toc<CR>
 let g:vim_markdown_folding_disabled     = 1 " Fuck folding in markdown documents.
 let g:vim_markdown_toc_autofit          = 1 " Shrink TOC to avoid wasted whitespace.
