@@ -39,7 +39,6 @@ Plugin 'tpope/vim-surround'               " Makes changing delimiters far less o
 Plugin 'tpope/vim-dispatch'               " non-focus stealing builds/tests hooray!
 Plugin 'tpope/vim-commentary'             " Makes commenting not a pain.
 Plugin 'tpope/vim-endwise'                " automatically adds 'end' and similar to certain languages.
-Plugin 'tpope/vim-ragtag'                 " Helps HTML be less awful.
 Plugin 'tpope/vim-repeat'                 " Adds repeat motion for plugins, at least some.
 Plugin 'godlygeek/tabular'                " Required for markdown.
 Plugin 'jiangmiao/auto-pairs'             " Automatically match pairs.
@@ -88,6 +87,7 @@ nnoremap <leader>evm :e ~/dotfiles/.vimrc<CR>
 inoremap ZXZ <c-o>zz
 nnoremap <C-S> :w<CR>
 inoremap ± <c-o>~
+nnoremap <leader>tb :Tabularize /
 
 " Remaps Q to 'run last macro used' 
 nnoremap Q @@
