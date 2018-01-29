@@ -1,4 +1,4 @@
-# Defined in /tmp/fish.qqqEIr/upgrade.fish @ line 2
+# Defined in /var/folders/g7/r4g4b9_n1rqd3gk8fdq9d6wm0000gn/T//fish.G8Gx3i/upgrade.fish @ line 2
 function upgrade
 	echo "Upgrading Packages"
 	switch (uname -s)
@@ -8,9 +8,6 @@ function upgrade
         case Darwin
             brew upgrade
     end
-
-    echo "Updating Vim..."
-    vim +PluginUpdate +qa
 
     echo "Updating dotfiles..."
     pushd ~/dotfiles/
