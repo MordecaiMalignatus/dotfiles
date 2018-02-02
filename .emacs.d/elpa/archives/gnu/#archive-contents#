@@ -12,7 +12,7 @@
        ((:keywords "tools" "processes" "convenience")
 	(:url . "https://github.com/leoliu/ack-el"))])
  (ada-mode .
-	   [(5 3 1)
+qq	   [(5 3 1)
 	    ((wisi
 	      (1 1 6))
 	     (cl-lib
