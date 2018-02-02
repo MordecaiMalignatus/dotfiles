@@ -5,18 +5,18 @@
              '("melpa" . "https://melpa.org/packages/"))
 (package-initialize)
 
-;; Org-mode stuff.
-(setq org-startup-indented 1)
-(add-hook 'org-mode-hook 'auto-fill-mode)
-(setq fill-column 80)
 
 ;; Visuals
+(menu-bar-mode -1)
 (load-theme 'solarized-light)
 
 ;; key bindings
 (when (eq system-type 'darwin) ;; mac specific settings
   (setq mac-command-modifier 'meta)
   (global-set-key [kp-delete] 'delete-char)) ;; sets fn-delete to be right-delete
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Plugins
 
 ;; ParEdit
 (autoload 'enable-paredit-mode "paredit" "Turn on pseudo-structural editing of Lisp code." t)
@@ -26,14 +26,35 @@
 (add-hook 'lisp-interaction-mode-hook            #'enable-paredit-mode)
 (add-hook 'scheme-mode-hook                      #'enable-paredit-mode)
 
+
 ;; Helm 
-;(require 'helm-config)
+(require 'helm-config)
+(global-set-key (kbd "M-x") #'helm-M-x)
+(global-set-key (kbd "C-x r b") #'helm-filtered-bookmarks)
+(global-set-key (kbd "C-x C-f") #'helm-find-files)
+(helm-mode 1)
+
 
 ;; Magit
 (global-set-key (kbd "C-x M-g") 'magit-dispatch-popup)
 (global-set-key (kbd "C-x g") 'magit-status)
 
 
+;; Org-mode stuff.
+(setq org-startup-indented 1)
+(add-hook 'org-mode-hook 'auto-fill-mode)
+(setq fill-column 80)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Languages
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; Ruby
+(add-hook 'enh-ruby-mode-hook 'robe-mode)
+(add-to-list 'auto-mode-alist
+             '("\\(?:\\.rb\\|ru\\|rake\\|thor\\|jbuilder\\|gemspec\\|podspec\\|/\\(?:Gem\\|Rake\\|Cap\\|Thor\\|Vagrant\\|Guard\\|Pod\\)file\\)\\'" . enh-ruby-mode))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Custom Things.
 
 (custom-set-variables
@@ -46,7 +67,7 @@
     ("d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" default)))
  '(package-selected-packages
    (quote
-    (paredit magithub helm magit solarized-theme alchemist))))
+    (enh-ruby-mode helm-robe robe paredit magithub helm magit solarized-theme alchemist))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
