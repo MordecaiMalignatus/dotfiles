@@ -1,2 +1,9 @@
 *.swp
 #*
+.emacs.d/elpa/
+*.fish
+/fish/fishd.a0999b028ce9
+/fish/functions/test.py
+/fish/functions/z.awk
+/fish/functions/zadd.awk
+/fish/functions/zclean.awk
