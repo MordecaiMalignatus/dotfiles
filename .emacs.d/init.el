@@ -15,6 +15,14 @@
   (setq mac-command-modifier 'meta)
   (global-set-key [kp-delete] 'delete-char)) ;; sets fn-delete to be right-delete
 
+
+;; Rebind C-x k to immediately close current buffer without confirmation
+(defun az-kill-current-buffer ()
+  (interactive)
+  (kill-buffer (current-buffer)))
+
+(global-set-key (kbd "C-x k")
+		#'az-kill-current-buffer)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Plugins
 
