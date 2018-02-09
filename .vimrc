@@ -89,6 +89,12 @@ nnoremap <C-S> :w<CR>
 inoremap ± <c-o>~
 nnoremap <leader>tb :Tabularize /
 
+" Create ranger window in half-split for looking for things.
+nnoremap <leader>sr :!tmux split-window -v \; resize-pane -D 15 \; send-keys "ranger" Enter<CR><CR>
+
+" clear search highlights
+nnoremap <leader>ch :noh<CR>
+
 " Remaps Q to 'run last macro used' 
 nnoremap Q @@
 
