@@ -22,7 +22,6 @@ Plugin 'plasticboy/vim-markdown'          " good markdown support.
 Plugin 'vim-ruby/vim-ruby'                " Ruby.
 Plugin 'dag/vim-fish'                     " vim support for fish code.
 Plugin 'derekwyatt/vim-scala'
-Plugin 'zah/nim.vim'
 Plugin 'l04m33/vlime', {'rtp': 'vim/'}
        
 " Git Things.
@@ -32,7 +31,6 @@ Plugin 'airblade/vim-gitgutter'           " Shows changed/added/removed lines in
 " Code Navigation
 Plugin 'junegunn/fzf'                     " Fuzzy File Finder, replacement for command-t
 Plugin 'junegunn/fzf.vim'                 " Adds FZF vim bindings for Extra Shit
-Plugin 'junegunn/vim-easy-align'          " Make shit look pretty.
 Plugin 'w0rp/ale'
 Plugin 'tpope/vim-unimpaired'             " A lot of very useful paired motions.
 Plugin 'tpope/vim-surround'               " Makes changing delimiters far less of a pain.
@@ -174,10 +172,6 @@ nnoremap <leader>gd :Gdiff<CR>
 nnoremap <leader>gg :execute "!cd " . expand('%:p:h') . "; tig status"<CR><CR>
 nnoremap <leader>hn :GitGutterNextHunk<CR>
 nnoremap <leader>hp :GitGutterPreviousHunk<CR>
-
-" Easy Align things
-xmap ga <Plug>(EasyAlign)
-nmap ga <Plug>(EasyAlign)
 
 " Rust
 au FileType rust nnoremap <leader>rf :RustFmt<CR>
