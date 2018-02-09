@@ -86,6 +86,8 @@ inoremap ZXZ <c-o>zz
 nnoremap <C-S> :w<CR>
 inoremap ± <c-o>~
 nnoremap <leader>tb :Tabularize /
+nnoremap <leader>ln :lnext<CR>
+nnoremap <leader>lp :lprevious<CR>
 
 " Create ranger window in half-split for looking for things.
 nnoremap <leader>sr :!tmux split-window -v \; resize-pane -D 15 \; send-keys "ranger" Enter<CR><CR>
@@ -132,7 +134,12 @@ nnoremap <leader>vl :VimuxRunLastCommand<CR>
 nnoremap <leader>ro <ESC>:w<CR>:Dispatch<CR><CR>
 nnoremap <leader>rh <ESC>:w<CR>:Dispatch!<CR><CR>
 
-" FZF stuff
+" YankRing remappings for less conflicts.
+let g:yankring_replace_n_pkey = ''
+let g:yankring_replace_n_nkey = ''
+nnoremap <leader>ys :YRShow<CR>
+
+" FZF config and remaps
 let $FZF_DEFAULT_COMMAND = 'ag -g ""'
 let g:fzf_command_prefix = 'Fzf'
 let g:fzf_layout         = { 'down': '~20%' }
@@ -157,8 +164,6 @@ nnoremap <leader>hh  :FzfHelptags<CR>
 let g:ale_sign_column_always = 1
 let g:airline#extensions#ale#enabled = 1
 let g:ale_open_list = 1
-nnoremap <silent> <C-n> <Plug>(ale_next_wrap)
-nnoremap <silent> <C-b> <Plug>(ale_previous_wrap)
 
  " I'd use stakc-build but that only works on-save
 let g:ale_linters = {
