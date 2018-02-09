@@ -10,3 +10,5 @@
 /fish/functions/zadd.awk
 /fish/functions/zclean.awk
 quicklisp.lisp
+ranger/bookmarks
+ranger/history
