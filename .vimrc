@@ -14,16 +14,16 @@ Plugin 'VundleVim/Vundle.vim'
 " vim "infrastructure" 
 Plugin 'kana/vim-textobj-user'
 Plugin 'bps/vim-textobj-python'
+Plugin 'benmills/vimux'
 
 " language specific things.
 Plugin 'rust-lang/rust.vim'               " Racer/RLS integration.
 Plugin 'plasticboy/vim-markdown'          " good markdown support.
 Plugin 'vim-ruby/vim-ruby'                " Ruby.
-Plugin 'elixir-editors/vim-elixir'
-Plugin 'slashmili/alchemist.vim'
 Plugin 'dag/vim-fish'                     " vim support for fish code.
 Plugin 'derekwyatt/vim-scala'
 Plugin 'zah/nim.vim'
+Plugin 'l04m33/vlime', {'rtp': 'vim/'}
        
 " Git Things.
 Plugin 'tpope/vim-fugitive'               " Git integration by tpope. May get tossed.
@@ -65,9 +65,9 @@ set showmatch                  " Matching brackets.
 set showcmd                    " Shadowing partial commands for completion!
 set backspace=indent,eol,start " Allow Backspace to delete everythng.
 set expandtab                  " We use spaces here.
-set tabstop=4                  " And they're two spaces. Because Scala.
-set softtabstop=4              " Because Scala.
-set shiftwidth=4               " Scala aint changing soon sonny.
+set tabstop=2                  " And they're two spaces. Because Scala.
+set softtabstop=2              " Because Scala.
+set shiftwidth=2               " Scala aint changing soon sonny.
 set autoindent                 " You can't escape
 set incsearch                  " search while typing, not just after hitting CR
 set hlsearch                   " Highlight search terms
@@ -125,6 +125,11 @@ let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 let g:UltiSnipsExpandTrigger='<c-e>'
 
+" Vimux things
+let g:VimuxHeight = "30"
+nnoremap <leader>vr :VimuxPromptCommand<CR>
+nnoremap <leader>vl :VimuxRunLastCommand<CR>
+
 " Vim dispatch
 nnoremap <leader>ro <ESC>:w<CR>:Dispatch<CR><CR>
 nnoremap <leader>rh <ESC>:w<CR>:Dispatch!<CR><CR>
@@ -139,6 +144,7 @@ let g:fzf_history_dir    = '~/.fzf/history'
 nnoremap <leader>tf  :FzfFiles<CR>
 nnoremap <leader>tgf :FzfGitFiles<CR>
 nnoremap <leader>tt  :FzfTags<CR>
+nnoremap <leader>tgg :!ctags -R<CR><CR>
 nnoremap <leader>;   :w<CR>:FzfBuffers<CR>
 nnoremap <leader>th  :FzfHistory<CR>
 " Search Word
@@ -146,6 +152,7 @@ nnoremap <leader>w   :FzfAg<CR>
 " Search word under cursor
 nnoremap <leader>tw  :FzfAg <C-R><C-W><CR>
 nnoremap <leader>gs  :FzfGFiles?<CR>
+nnoremap <leader>ts  :FzfSnippets<CR>
 nnoremap <leader>hh  :FzfHelptags<CR>
 
 " ALE settings.
@@ -157,7 +164,7 @@ nnoremap <silent> <C-b> <Plug>(ale_previous_wrap)
 
  " I'd use stakc-build but that only works on-save
 let g:ale_linters = {
-      \ 'haskell': ['hdevtools'],
+      \ 'haskell': ['hdevtools', 'stack-build'],
       \    'rust': ['cargo', 'rustfmt'],
       \}
 
@@ -176,7 +183,8 @@ nmap ga <Plug>(EasyAlign)
 au FileType rust nnoremap <leader>rf :RustFmt<CR>
 au FileType rust nnoremap <leader>rt :Dispatch cargo test<CR>
 au FileType rust let b:dispatch = 'cargo run'
-let g:ycm_rust_src_path = '/Users/az/.rustup/toolchains/stable-x86_64-apple-darwin/lib/rustlib/src/'
+au BufRead *.rs :setlocal tags=./tags;/,$RUST_SRC_PATH/rusty-tags.vi
+au BufWritePost *.rs :silent! exec "!rusty-tags vi --quiet --start-dir=" . expand('%:p:h') . "&" | redraw!
 
 " Python
 nnoremap <leader>pt :Dispatch pytest %<CR>
