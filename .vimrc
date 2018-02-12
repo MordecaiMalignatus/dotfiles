@@ -14,6 +14,7 @@ Plugin 'VundleVim/Vundle.vim'
 " vim "infrastructure" 
 Plugin 'kana/vim-textobj-user'
 Plugin 'bps/vim-textobj-python'
+Plugin 'gilligan/vim-textobj-haskell'
 Plugin 'benmills/vimux'
 
 " language specific things.
@@ -23,6 +24,7 @@ Plugin 'vim-ruby/vim-ruby'                " Ruby.
 Plugin 'dag/vim-fish'                     " vim support for fish code.
 Plugin 'derekwyatt/vim-scala'
 Plugin 'l04m33/vlime', {'rtp': 'vim/'}
+Plugin 'alx741/vim-hindent'
        
 " Git Things.
 Plugin 'tpope/vim-fugitive'               " Git integration by tpope. May get tossed.
@@ -194,6 +196,11 @@ nnoremap <leader>rt :Dispatch rspec<CR>
 let g:syntastic_ruby_checkers = ['rubocop'] 
 au FileType ruby let b:dispatch = 'ruby %'
 au FileType ruby nnoremap <leader>rt :Dispatch rspec<CR>
+
+" Haskell things. 
+let g:hindent_on_save = 0
+au FileType haskell nnoremap <leader>rf :Hindent<CR>
+au FileType haskell nnoremap <leader>rt :call VimuxRunCommand('rake test')
 
 """"""
 " Markdown things.
