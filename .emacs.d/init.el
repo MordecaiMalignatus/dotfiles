@@ -8,7 +8,9 @@
 
 ;; Visuals
 (menu-bar-mode -1)
-(load-theme 'solarized-light)
+(load-theme 'solarized-light t)
+(set-frame-font "PragmataPro 12" nil t)
+
 
 ;; key bindings
 (when (eq system-type 'darwin) ;; mac specific settings
@@ -77,7 +79,7 @@
     ("d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" default)))
  '(package-selected-packages
    (quote
-    (slime ace-window enh-ruby-mode helm-robe robe paredit magithub helm magit solarized-theme))))
+    (evil-ediff helm-company slime-company evil slime ace-window enh-ruby-mode helm-robe robe paredit magithub helm magit solarized-theme))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
