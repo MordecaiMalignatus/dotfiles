@@ -14,7 +14,6 @@ Plugin 'VundleVim/Vundle.vim'
 " vim "infrastructure" 
 Plugin 'kana/vim-textobj-user'
 Plugin 'bps/vim-textobj-python'
-Plugin 'gilligan/vim-textobj-haskell'
 Plugin 'benmills/vimux'
 
 " language specific things.
