@@ -28,6 +28,10 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Plugins
 
+;; Slime
+(setq inferior-lisp-program "/usr/local/bin/sbcl")
+(add-to-list 'slime-contribs 'slime-fancy)
+
 ;; ParEdit
 (autoload 'enable-paredit-mode "paredit" "Turn on pseudo-structural editing of Lisp code." t)
 (add-hook 'emacs-lisp-mode-hook                  #'enable-paredit-mode)
