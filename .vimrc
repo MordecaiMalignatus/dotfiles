@@ -191,7 +191,6 @@ nnoremap <leader>pt :Dispatch pytest %<CR>
 au FileType python let b:dispatch = 'python3 %'
 
 " Ruby Things.
-nnoremap <leader>rt :Dispatch rspec<CR> 
 let g:syntastic_ruby_checkers = ['rubocop'] 
 au FileType ruby let b:dispatch = 'ruby %'
 au FileType ruby nnoremap <leader>rt :Dispatch rspec<CR>
@@ -204,7 +203,7 @@ au FileType haskell nnoremap <leader>rt :call VimuxRunCommand('rake test')<CR>
 """"""
 " Markdown things.
 
-au FileType markdown let b:dispatch = 'pandoc %:p -f markdown+smart -t latex -o '. expand('%:p:r') . '.pdf --pdf-engine=xelatex'
+au FileType markdown let b:dispatch = 'pandoc %:p -f markdown+smart -t latex -o '. expand('%:p:r') . '.pdf --pdf-engine=xelatex -V urlcolor=blue -V colorlinks'
 au FileType markdown set tw=79
 nnoremap <leader>mo :execute "!open -a Skim " . expand('%:p:r') . ".pdf"<CR><CR>
 nnoremap <leader>mt :Toc<CR>
