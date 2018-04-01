@@ -82,7 +82,7 @@ colors seoul256
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 let mapleader=' '               
-nnoremap <leader>evm :e ~/dotfiles/nvim/init.vim<CR>
+nnoremap <leader>evm :e ~/dotfiles/.vimrc<CR>
 inoremap ZXZ <c-o>zz
 nnoremap <C-S> :w<CR>
 inoremap ± <c-o>~
@@ -135,13 +135,6 @@ nnoremap <leader>vl :VimuxRunLastCommand<CR>
 nnoremap <leader>ro <ESC>:w<CR>:Dispatch<CR><CR>
 nnoremap <leader>rh <ESC>:w<CR>:Dispatch!<CR><CR>
 
-" Vim Test
-nmap <silent> t<C-n> :TestNearest<CR> 
-nmap <silent> t<C-f> :TestFile<CR>    
-nmap <silent> t<C-s> :TestSuite<CR>   
-nmap <silent> t<C-l> :TestLast<CR>    
-nmap <silent> t<C-g> :TestVisit<CR>   
-
 " YankRing remappings for less conflicts.
 let g:yankring_replace_n_pkey = ''
 let g:yankring_replace_n_nkey = ''
@@ -182,14 +175,13 @@ let g:ale_linters = {
 " Git things
 nnoremap <leader>gb :Gblame<CR>
 nnoremap <leader>gd :Gdiff<CR>
-nnoremap <leader>gg :call VimuxRunCommand("cd " . expand('%:p:h') . "; and tig status")<CR>
+nnoremap <leader>gg :execute "!cd " . expand('%:p:h') . "; tig status"<CR><CR>
 nnoremap <leader>hn :GitGutterNextHunk<CR>
 nnoremap <leader>hp :GitGutterPreviousHunk<CR>
 
 " Rust
 au FileType rust nnoremap <leader>rf :RustFmt<CR>
 au FileType rust nnoremap <leader>rt :Dispatch cargo test<CR>
-au FileType rust nnoremap <leader>rd :RustDoc
 au FileType rust let b:dispatch = 'cargo run'
 au BufRead *.rs :setlocal tags=./tags;/,$RUST_SRC_PATH/rusty-tags.vi
 au BufWritePost *.rs :silent! exec "!rusty-tags vi --quiet --start-dir=" . expand('%:p:h') . "&" | redraw!

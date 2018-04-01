@@ -18,3 +18,4 @@ ln -s $DIR/i3         $HOME/.config/
 ln -s $DIR/xrandr     $HOME/.config/
 ln -s $DIR/fish       $HOME/.config/
 ln -s $DIR/ranger     $HOME/.config/
+ln -s $DIR/nvim       $HOME/.config/

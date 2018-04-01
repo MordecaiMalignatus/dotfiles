@@ -1,1 +1,1 @@
-set -g EDITOR (which vim)
+set -g EDITOR (which nvim)
