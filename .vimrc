@@ -11,13 +11,15 @@ set rtp+=~/.vim/bundle/Vundle.vim
 filetype off                  " required
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
-" vim "infrastructure" 
+" vim 'infrastructure' 
 Plugin 'kana/vim-textobj-user'
 Plugin 'bps/vim-textobj-python'
 Plugin 'benmills/vimux'
+Plugin 'janko-m/vim-test'                 " Vim tests for everything! 
 
 " language specific things.
 Plugin 'rust-lang/rust.vim'               " Racer/RLS integration.
+Plugin 'rhysd/rust-doc.vim'               " Rust Doc support. 
 Plugin 'plasticboy/vim-markdown'          " good markdown support.
 Plugin 'vim-ruby/vim-ruby'                " Ruby.
 Plugin 'dag/vim-fish'                     " vim support for fish code.
