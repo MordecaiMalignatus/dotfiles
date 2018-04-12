@@ -78,13 +78,13 @@ set foldenable                 " Make shit orderly.
 set number                     " And I like to see my numbers.
 set t_Co=256                   " Terminal stuff for Zenburn
 
-colors seoul256
+colors solarized
 
 " Remaps.
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 let mapleader=' '               
-nnoremap <leader>evm :e ~/dotfiles/nvim/init.vim<CR>
+nnoremap <leader>evm :e ~/dotfiles/.vimrc<CR>
 inoremap ZXZ <c-o>zz
 nnoremap <C-S> :w<CR>
 inoremap ± <c-o>~
@@ -97,6 +97,9 @@ nnoremap <leader>sr :!tmux split-window -v \; resize-pane -D 15 \; send-keys "ra
 
 " clear search highlights
 nnoremap <leader>ch :noh<CR>
+
+" Kills WhiteSpace, at the end of the line. 
+nnoremap <leader>kws :%s/\s\+$//e<CR>
 
 " Remaps Q to 'run last macro used' 
 nnoremap Q @@
