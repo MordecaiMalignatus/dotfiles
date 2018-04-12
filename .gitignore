@@ -9,6 +9,7 @@
 /fish/functions/z.awk
 /fish/functions/zadd.awk
 /fish/functions/zclean.awk
+/fish/fishd.thinkpad-reindlaz
 quicklisp.lisp
 ranger/bookmarks
 ranger/history
