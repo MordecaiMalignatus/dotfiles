@@ -187,7 +187,7 @@ let g:ale_linters = {
 " Git things
 nnoremap <leader>gb :Gblame<CR>
 nnoremap <leader>gd :Gdiff<CR>
-nnoremap <leader>gg :call VimuxRunCommand("cd " . expand('%:p:h') . "; and tig status")<CR>
+nnoremap <leader>gg :execute(":!cd " . expand('%:p:h') . "; tig status")<CR><CR>
 nnoremap <leader>hn :GitGutterNextHunk<CR>
 nnoremap <leader>hp :GitGutterPreviousHunk<CR>
 
