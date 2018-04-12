@@ -2,7 +2,7 @@
 #
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 set $browser chromium
-set $console konsole
+set $console alacritty
 set $mod Mod4
 
 # Fonts. syntax is `font pango:FontName Size`
@@ -52,7 +52,7 @@ bindsym $mod+Shift+f               fullscreen toggle
 # Assignments
 ###################
 
-assign [class="konsole"]            Nerdery
+assign [class="Alacritty"]          Nerdery
 assign [class="(?i)chrom"]          Browser
 assign [class="jetbrains-phpstorm"] PHPStorm
 assign [class="jetbrains-toolbox"]  Toolbox
@@ -110,7 +110,7 @@ bindsym $mod+Shift+0     move container to workspace 10
 
 # reload the configuration file
 bindsym $mod+Shift+c     reload
-# restart i3 inplace (preserves your layout/session, can be used to upgrade i2)
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r     restart
 # This "w"akes screens up if they got stuck after hibernation.
 bindsym $mod+Shift+w     exec "xset dpms force off; sleep 2; xset dpms force on"
