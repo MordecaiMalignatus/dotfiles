@@ -1,7 +1,7 @@
 # i3 config file (v4)
 #
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
-set $browser chromium
+set $browser firefox
 set $console alacritty
 set $mod Mod4
 
@@ -15,7 +15,6 @@ floating_modifier $mod
 bindsym $mod+Return exec $console
 
 # kill focused window
-bindsym $mod+Shift+q kill
 bindsym $mod+BackSpace kill
 
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
@@ -40,6 +39,9 @@ bindsym $mod+k               focus up
 bindsym $mod+l               focus right
 bindsym $mod+h               focus left
 
+# Focus oldest urgent message, processing the queue. 
+bindsym $mod+f [urgent="oldest"] focus
+
 # split in horizontal orientation
 bindsym $mod+Shift+Control+h split h
 # split in vertical orientation
@@ -52,10 +54,12 @@ bindsym $mod+Shift+f               fullscreen toggle
 # Assignments
 ###################
 
-assign [class="Alacritty"]          Nerdery
-assign [class="(?i)chrom"]          Browser
-assign [class="jetbrains-phpstorm"] PHPStorm
-assign [class="jetbrains-toolbox"]  Toolbox
+assign [class="Alacritty"]          workspace Nerdery
+assign [class="(?i)chrom"]          workspace Browser
+assign [class="Firefox"]            workspace Browser
+assign [class="jetbrains-phpstorm"] workspace PHPStorm
+assign [class="(?i)toolbox"]        workspace Toolbox
+assign [class="libre"]    workspace LibreOffice
 
 ###################
 # Design Things
