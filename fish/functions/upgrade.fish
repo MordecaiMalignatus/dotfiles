@@ -1,6 +1,6 @@
-# Defined in /var/folders/g7/r4g4b9_n1rqd3gk8fdq9d6wm0000gn/T//fish.G8Gx3i/upgrade.fish @ line 2
+# Defined in /var/folders/g7/r4g4b9_n1rqd3gk8fdq9d6wm0000gn/T//fish.5BwnFI/upgrade.fish @ line 2
 function upgrade
-	echo "Upgrading Packages"
+	echo (set_color green)"Upgrading Packages"(set_color normal)
 	switch (uname -s)
         case Linux
             sudo pacman -Syu
@@ -9,7 +9,7 @@ function upgrade
             brew upgrade
     end
 
-    echo "Updating dotfiles..."
+    echo (set_color green)"Updating dotfiles..."(set_color normal)
     pushd ~/dotfiles/
     git pull
     popd
