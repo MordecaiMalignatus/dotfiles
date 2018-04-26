@@ -78,7 +78,7 @@ set foldenable                 " Make shit orderly.
 set number                     " And I like to see my numbers.
 set t_Co=256                   " Terminal stuff for Zenburn
 
-colors solarized
+colors seoul256
 
 " Remaps.
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
