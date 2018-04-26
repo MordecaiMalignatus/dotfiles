@@ -1,12 +1,28 @@
 # vim: st=2:ts=2:et
 
 [core]
-  excludesfile = ~/.gitignore-global
+  excludesfile = ~/.gitignore
 	editor = /usr/bin/vim
 
 [user]
 	name = Az
   email = az4reus@gmail.com
+
+[core]
+  editor = vim
+  excludesfile = "~/.gitignore"
+
+[fetch]
+  prune = true
+
+[rebase]
+  autostash = true
+
+[pull]
+  rebase = true
+
+[push]
+  default = simple
 
 [log]
   date = relative
@@ -16,5 +32,6 @@
 
 [init]
 	templatedir = ~/.git_template
+
 [alias]
 	ctags = !.git/hooks/ctags
