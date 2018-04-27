@@ -10,6 +10,7 @@
 /fish/functions/zclean.awk
 /fish/fishd.thinkpad-reindlaz
 /fish/functions/
+/fish/handwritten-functions/aws*
 quicklisp.lisp
 ranger/bookmarks
 ranger/history
