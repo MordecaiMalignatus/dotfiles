@@ -2,7 +2,7 @@
 
 set shell=/bin/bash " Vim chokes on fish.
 set nocompatible    " be iMproved, required
-syntax on                   
+syntax on
 
 " Vundle! :D
 " set the runtime path to include Vundle and initialize
@@ -11,22 +11,22 @@ set rtp+=~/.vim/bundle/Vundle.vim
 filetype off                  " required
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
-" vim 'infrastructure' 
+" vim 'infrastructure'
 Plugin 'kana/vim-textobj-user'
 Plugin 'bps/vim-textobj-python'
 Plugin 'benmills/vimux'
-Plugin 'janko-m/vim-test'                 " Vim tests for everything! 
+Plugin 'janko-m/vim-test'                 " Vim tests for everything!
 
 " language specific things.
 Plugin 'rust-lang/rust.vim'               " Racer/RLS integration.
-Plugin 'rhysd/rust-doc.vim'               " Rust Doc support. 
+Plugin 'rhysd/rust-doc.vim'               " Rust Doc support.
 Plugin 'plasticboy/vim-markdown'          " good markdown support.
 Plugin 'vim-ruby/vim-ruby'                " Ruby.
 Plugin 'dag/vim-fish'                     " vim support for fish code.
 Plugin 'derekwyatt/vim-scala'
 Plugin 'l04m33/vlime', {'rtp': 'vim/'}
 Plugin 'alx741/vim-hindent'
-       
+
 " Git Things.
 Plugin 'tpope/vim-fugitive'               " Git integration by tpope. May get tossed.
 Plugin 'airblade/vim-gitgutter'           " Shows changed/added/removed lines in gutter.
@@ -78,12 +78,13 @@ set foldenable                 " Make shit orderly.
 set number                     " And I like to see my numbers.
 set t_Co=256                   " Terminal stuff for Zenburn
 
-colors seoul256
+colors gruvbox
+set background=dark
 
 " Remaps.
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-let mapleader=' '               
+let mapleader=' '
 nnoremap <leader>evm :e ~/dotfiles/.vimrc<CR>
 inoremap ZXZ <c-o>zz
 nnoremap <C-S> :w<CR>
@@ -98,10 +99,10 @@ nnoremap <leader>sr :!tmux split-window -v \; resize-pane -D 15 \; send-keys "ra
 " clear search highlights
 nnoremap <leader>ch :noh<CR>
 
-" Kills WhiteSpace, at the end of the line. 
+" Kills WhiteSpace, at the end of the line.
 nnoremap <leader>kws :%s/\s\+$//e<CR>
 
-" Remaps Q to 'run last macro used' 
+" Remaps Q to 'run last macro used'
 nnoremap Q @@
 
 " Remaps backspace and CR to be about paragraph wise handling instead of doing
@@ -122,7 +123,7 @@ nnoremap <leader>cl :set background=light<CR>
 nnoremap <leader>ht :set cursorline! relativenumber!<CR>
 
 " Statusbar
-let g:airline_theme='solarized'   " Make our powerline suit the theme at hand.
+let g:airline_theme='badwolf'     " Make our powerline suit the theme at hand.
 let g:airline_powerline_fonts = 1 " And make it pretty.
 set laststatus=2                  " And make it... appear.
 
@@ -141,11 +142,11 @@ nnoremap <leader>ro <ESC>:w<CR>:Dispatch<CR><CR>
 nnoremap <leader>rh <ESC>:w<CR>:Dispatch!<CR><CR>
 
 " Vim Test
-nmap <silent> t<C-n> :TestNearest<CR> 
-nmap <silent> t<C-f> :TestFile<CR>    
-nmap <silent> t<C-s> :TestSuite<CR>   
-nmap <silent> t<C-l> :TestLast<CR>    
-nmap <silent> t<C-g> :TestVisit<CR>   
+nmap <silent> t<C-n> :TestNearest<CR>
+nmap <silent> t<C-f> :TestFile<CR>
+nmap <silent> t<C-s> :TestSuite<CR>
+nmap <silent> t<C-l> :TestLast<CR>
+nmap <silent> t<C-g> :TestVisit<CR>
 
 " YankRing remappings for less conflicts.
 let g:yankring_replace_n_pkey = ''
@@ -204,11 +205,11 @@ nnoremap <leader>pt :Dispatch pytest %<CR>
 au FileType python let b:dispatch = 'python3 %'
 
 " Ruby Things.
-let g:syntastic_ruby_checkers = ['rubocop'] 
+let g:syntastic_ruby_checkers = ['rubocop']
 au FileType ruby let b:dispatch = 'ruby %'
 au FileType ruby nnoremap <leader>rt :Dispatch rspec<CR>
 
-" Haskell things. 
+" Haskell things.
 let g:hindent_on_save = 0
 au FileType haskell nnoremap <leader>rf :Hindent<CR>
 au FileType haskell nnoremap <leader>rt :call VimuxRunCommand('rake test')<CR>
@@ -225,7 +226,7 @@ let g:vim_markdown_toc_autofit          = 1 " Shrink TOC to avoid wasted whitesp
 let g:vim_markdown_math                 = 1 " Turn on Latex math, $...$ and $$...$$
 let g:vim_markdown_new_list_item_indent = 2 " Make o insert indentation as 'new list item'
 
-" Toggle spellchecker. 
+" Toggle spellchecker.
 au FileType markdown nnoremap <leader>sct :setlocal spell! spelllang=en_gb<CR>
 
 " HTML bindings
