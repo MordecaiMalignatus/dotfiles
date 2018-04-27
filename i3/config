@@ -160,10 +160,11 @@ mode "$logout" {
 }
 
 bindsym $mod+F9 mode "$mode_workstation"
-set $mode_workstation Workstation config, (w)ork, (l)aptop, (h)ome
+set $mode_workstation Workstation config, (w)ork, (l)aptop, (h)ome, (a)rmin's desk
 mode "$mode_workstation" {
         bindsym w exec "sh ~/dotfiles/xrandr/only-laptop-screen.sh && sleep 1s && ~/dotfiles/xrandr/work-screens.sh"; mode "default"
         bindsym l exec "sh ~/dotfiles/xrandr/only-laptop-screen.sh"; mode "default"
+        bindsym a exec "sh ~/dotfiles/xrandr/armin-workstation.sh"; mode "default"
 
         bindsym Escape mode "default"
         bindsym Return mode "default"
