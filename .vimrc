@@ -26,6 +26,7 @@ Plugin 'dag/vim-fish'                     " vim support for fish code.
 Plugin 'derekwyatt/vim-scala'
 Plugin 'l04m33/vlime', {'rtp': 'vim/'}
 Plugin 'alx741/vim-hindent'
+Plugin 'hashivim/vim-terraform'
 
 " Git Things.
 Plugin 'tpope/vim-fugitive'               " Git integration by tpope. May get tossed.
