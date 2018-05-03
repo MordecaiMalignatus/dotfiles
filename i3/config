@@ -124,8 +124,8 @@ set $sound Sound: (r)aise Volume, (l)ower volume, (m)ute, (u)nmute
 mode "$sound" {
         bindsym r exec "amixer -q set Master 5%+"
         bindsym l exec "amixer -q set Master 5%-"
-        bindsym m exec "amixer -q set Master mute"
-        bindsym u exec "amixer -q set Master unmute"
+        bindsym m exec "amixer -q set Master mute"; mode "default"
+        bindsym u exec "amixer -q set Master unmute"; mode "default"
 
         bindsym Escape mode "default"
         bindsym Return mode "default"
