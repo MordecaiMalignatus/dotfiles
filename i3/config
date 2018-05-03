@@ -141,12 +141,6 @@ mode "$focus" {
         bindsym Escape mode "default"
 }
 
-bindsym $mod+n mode "$new"
-set $new New Window: (b)rowser
-mode "$new" {
-        bindsym b exec "$browser"; mode "default"
-}
-
 bindsym $mod+shift+F4 mode "$logout"
 set $logout Getting out? (r)estart, (l)ogout, (s)hutdown, (h)ibernate
 mode "$logout" {
