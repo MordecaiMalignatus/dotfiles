@@ -119,6 +119,18 @@ mode "$move" {
         bindsym Escape mode "default"
 }
 
+bindsym $mod+F12 mode "$sound"
+set $sound Sound: (r)aise Volume, (l)ower volume, (m)ute, (u)nmute
+mode "$sound" {
+        bindsym r exec "amixer -q set Master 5%+"
+        bindsym l exec "amixer -q set Master 5%-"
+        bindsym m exec "amixer -q set Master mute"; mode "default"
+        bindsym u exec "amixer -q set Master unmute"; mode "default"
+
+        bindsym Escape mode "default"
+        bindsym Return mode "default"
+}
+
 bindsym $mod+semicolon mode "$focus"
 set $focus Focus: (b)rowser, (c)onsole, (p)hpstorm
 mode "$focus" {
@@ -139,12 +151,6 @@ mode "$focus" {
 
         bindsym Return mode "default"
         bindsym Escape mode "default"
-}
-
-bindsym $mod+n mode "$new"
-set $new New Window: (b)rowser
-mode "$new" {
-        bindsym b exec "$browser"; mode "default"
 }
 
 bindsym $mod+shift+F4 mode "$logout"

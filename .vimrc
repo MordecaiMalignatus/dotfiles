@@ -28,6 +28,7 @@ Plugin 'l04m33/vlime', {'rtp': 'vim/'}
 Plugin 'alx741/vim-hindent'
 Plugin 'elixir-editors/vim-elixir'
 Plugin 'slashmili/alchemist.vim'
+Plugin 'hashivim/vim-terraform'
 
 " Git Things.
 Plugin 'tpope/vim-fugitive'               " Git integration by tpope. May get tossed.

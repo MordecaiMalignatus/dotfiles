@@ -1,9 +1,9 @@
-# Defined in /var/folders/g7/r4g4b9_n1rqd3gk8fdq9d6wm0000gn/T//fish.5BwnFI/upgrade.fish @ line 2
+# Defined in /tmp/fish.dnHo9W/upgrade.fish @ line 2
 function upgrade
 	echo (set_color green)"Upgrading Packages"(set_color normal)
 	switch (uname -s)
         case Linux
-            sudo pacman -Syu
+            yes | sudo pacman -Syu
             
         case Darwin
             brew upgrade
