@@ -23,7 +23,6 @@ bindsym $mod+d exec rofi -show run -modi run
 
 # Userbindings for various programs
 exec_always --no-startup-id setxkbmap -layout us -option ctrl:nocaps -option compose:paus
-exec_always                 ~/.config/xrandr/work-screens.sh 
 exec_always --no-startup-id feh --randomize --bg-fill ~/wallpapers/*
 
 # Sensible power manager. 
@@ -55,11 +54,12 @@ bindsym $mod+Shift+f               fullscreen toggle
 ###################
 
 assign [class="Alacritty"]          workspace Nerdery
+assign [class="(?i)emacs"]          workspace Emacs
 assign [class="(?i)chrom"]          workspace Browser
 assign [class="Firefox"]            workspace Browser
 assign [class="jetbrains-phpstorm"] workspace PHPStorm
 assign [class="(?i)toolbox"]        workspace Toolbox
-assign [class="libre"]    workspace LibreOffice
+assign [class="libre"]              workspace LibreOffice
 
 ###################
 # Design Things
@@ -111,9 +111,9 @@ bindsym $mod+Shift+w     exec "xset dpms force off; sleep 2; xset dpms force on"
 bindsym $mod+m mode "$move"
 set $move Move: (l)eft, (r)ight, (s)mall
 mode "$move" {
-        bindsym l move workspace to output DP-2-1; mode "default"
-        bindsym r move workspace to output DP-2-2; mode "default"
-        bindsym s move workspace to output eDP-1; mode "default"
+        bindsym l move workspace to output DP2-1; mode "default"
+        bindsym r move workspace to output DP2-2; mode "default"
+        bindsym s move workspace to output eDP1; mode "default"
 
         bindsym Return mode "default"
         bindsym Escape mode "default"
@@ -158,8 +158,8 @@ set $logout Getting out? (r)estart, (l)ogout, (s)hutdown, (h)ibernate
 mode "$logout" {
         bindsym r exec "reboot"; mode "default" 
         bindsym l exec "i3-msg exit"
-        bindsym s exec "shutdown now"; mode "default" 
-        bindsym h exec "systemctl hibernate"; mode "default"
+        bindsym s exec "sudo shutdown now"; mode "default" 
+        bindsym h exec "sudo systemctl hibernate"; mode "default"
 
         bindsym Return mode "default"
         bindsym Escape mode "default"
