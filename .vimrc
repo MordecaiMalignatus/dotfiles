@@ -16,6 +16,7 @@ Plugin 'kana/vim-textobj-user'
 Plugin 'bps/vim-textobj-python'
 Plugin 'benmills/vimux'
 Plugin 'janko-m/vim-test'                 " Vim tests for everything!
+Plugin 'valloric/YouCompleteMe'
 
 " language specific things.
 Plugin 'rust-lang/rust.vim'               " Racer/RLS integration.
