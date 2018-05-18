@@ -21,6 +21,12 @@ bindsym $mod+BackSpace kill
 # bindsym $mod+d exec dmenu_run
 bindsym $mod+d exec rofi -show run -modi run
 
+###############################################################################
+# Autostarts
+
+exec $terminal
+exec $browser
+
 # Userbindings for various programs
 exec_always --no-startup-id setxkbmap -layout us -option ctrl:nocaps -option compose:paus
 exec_always --no-startup-id feh --randomize --bg-fill ~/wallpapers/*
@@ -111,8 +117,8 @@ bindsym $mod+Shift+w     exec "xset dpms force off; sleep 2; xset dpms force on"
 bindsym $mod+m mode "$move"
 set $move Move: (l)eft, (r)ight, (s)mall
 mode "$move" {
-        bindsym l move workspace to output DP2-1; mode "default"
-        bindsym r move workspace to output DP2-2; mode "default"
+        bindsym l move workspace to output DP2-2; mode "default"
+        bindsym r move workspace to output DP2-1; mode "default"
         bindsym s move workspace to output eDP1; mode "default"
 
         bindsym Return mode "default"
