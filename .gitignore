@@ -11,6 +11,7 @@
 /fish/fishd.thinkpad-reindlaz
 /fish/functions/
 /fish/handwritten-functions/aws*
+fish/fishd*
 quicklisp.lisp
 ranger/bookmarks
 ranger/history
