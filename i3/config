@@ -66,6 +66,7 @@ assign [class="Firefox"]            workspace Browser
 assign [class="jetbrains-phpstorm"] workspace PHPStorm
 assign [class="(?i)toolbox"]        workspace Toolbox
 assign [class="libre"]              workspace LibreOffice
+assign [class="(?i)anki"]           workspace Anki
 
 ###################
 # Design Things
