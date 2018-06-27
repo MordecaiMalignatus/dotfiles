@@ -119,8 +119,8 @@ bindsym $mod+Shift+w     exec "xset dpms force off; sleep 2; xset dpms force on"
 bindsym $mod+m mode "$move"
 set $move Move: (l)eft, (r)ight, (s)mall
 mode "$move" {
-        bindsym l move workspace to output DP2-2; mode "default"
-        bindsym r move workspace to output DP2-1; mode "default"
+        bindsym l move workspace to output DP2-1; mode "default"
+        bindsym r move workspace to output DP2-2; mode "default"
         bindsym s move workspace to output eDP1; mode "default"
 
         bindsym Return mode "default"
