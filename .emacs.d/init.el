@@ -10,6 +10,11 @@
 (global-set-key (kbd "C-x M-g") 'magit-dispatch-popup)
 (global-set-key (kbd "C-z") 'list-bookmarks)
 
+(setq-default fill-column 80)
+(add-hook 'text-mode-hook 'auto-fill-mode)
+
+(add-hook 'org-mode-hook 'org-indent-mode)
+
 (defun az-kill-buffer ()
   (interactive)
   (kill-buffer (current-buffer)))
