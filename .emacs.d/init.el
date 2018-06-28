@@ -12,7 +12,7 @@
 
 (setq-default fill-column 80)
 (add-hook 'text-mode-hook 'auto-fill-mode)
-
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
 (add-hook 'org-mode-hook 'org-indent-mode)
 
 (defun az-kill-buffer ()
