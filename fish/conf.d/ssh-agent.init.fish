@@ -1,1 +1,1 @@
-/home/az/.config/fisherman/ssh-agent/init.fish
+/Users/az/.config/fisherman/ssh-agent/init.fish
