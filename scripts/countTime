@@ -1,0 +1,64 @@
+#!/usr/bin/env python3
+
+from typing import List
+from datetime import datetime, timedelta, time
+import os
+import os.path as path
+from math import floor
+
+LOGS_DIR = path.expanduser("~/logs/")
+
+
+def main():
+    files = read_relevant_files()
+    total_hours = timedelta()
+
+    for time in map(time_worked, files):
+        total_hours + time
+
+    sec_worked = total_hours.total_seconds()
+    hours = floor(sec_worked / (60 * 60))
+    minutes = floor((sec_worked - (hours * 60 * 60)) / 60)
+    print(f"Worked {hours}h{minutes}m")
+
+
+def read_relevant_files() -> List[str]:
+    current_month = "%02d" % datetime.today().month
+    current_year = datetime.today().year
+    files_in_month = []
+
+    with os.scandir(LOGS_DIR) as dir_iter:
+        for f in dir_iter:
+            if f.name.startswith(f"{current_year}-{current_month}"):
+                files_in_month.append(f.name)
+
+    return files_in_month
+
+
+def time_worked(day: str) -> timedelta:
+    start_time = ""
+    end_time = ""
+
+    with open(path.join(LOGS_DIR, day)) as f:
+        for line in f:
+            if "Arrived at work" in line:
+                start_time = line[:5]
+
+            if "leaving work" in line:
+                end_time = line[:5]
+
+    if start_time is "" and end_time is "":
+        return timedelta()  # No time passed this day.
+
+    if start_time is "" or end_time is "":
+        print(f"Unable to determine amount of work for {day}, start or end missing.")
+        return timedelta()
+
+    start_time = timedelta(hours=int(start_time[:2], minutes=int(start_time[3:])))
+    end_time = timedelta(hours=int(end_time[:2], minutes=int(end_time[3:])))
+
+    return end_time - start_time
+
+
+if __name__ == '__main__': 
+    main()
