@@ -15,7 +15,6 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'kana/vim-textobj-user'
 Plugin 'bps/vim-textobj-python'
 Plugin 'benmills/vimux'
-Plugin 'valloric/YouCompleteMe'
 
 " language specific things.
 Plugin 'rust-lang/rust.vim'               " Racer/RLS integration.
