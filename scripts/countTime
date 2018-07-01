@@ -54,8 +54,8 @@ def time_worked(day: str) -> timedelta:
         print(f"Unable to determine amount of work for {day}, start or end missing.")
         return timedelta()
 
-    start_time = timedelta(hours=int(start_time[:2], minutes=int(start_time[3:])))
-    end_time = timedelta(hours=int(end_time[:2], minutes=int(end_time[3:])))
+    start_time = timedelta(hours=int(start_time[:2]), minutes=int(start_time[3:]))
+    end_time = timedelta(hours=int(end_time[:2]), minutes=int(end_time[3:]))
 
     return end_time - start_time
 
