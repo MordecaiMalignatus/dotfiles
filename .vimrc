@@ -15,17 +15,14 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'kana/vim-textobj-user'
 Plugin 'bps/vim-textobj-python'
 Plugin 'benmills/vimux'
+Plugin 'junegunn/goyo.vim'                " Lightroom-like functionality.
 
 " language specific things.
+Plugin 'sheerun/vim-polyglot'
 Plugin 'rust-lang/rust.vim'               " Racer/RLS integration.
 Plugin 'rhysd/rust-doc.vim'               " Rust Doc support.
 Plugin 'plasticboy/vim-markdown'          " good markdown support.
-Plugin 'vim-ruby/vim-ruby'                " Ruby.
-Plugin 'dag/vim-fish'                     " vim support for fish code.
-Plugin 'alx741/vim-hindent'
-Plugin 'elixir-editors/vim-elixir'
 Plugin 'slashmili/alchemist.vim'
-Plugin 'hashivim/vim-terraform'
 
 " Git Things.
 Plugin 'tpope/vim-fugitive'               " Git integration by tpope. May get tossed.
@@ -47,11 +44,10 @@ Plugin 'justinmk/vim-sneak'
 Plugin 'YankRing.vim'                     " Kill ring implementation in vim, check :h yankring-tutorial
 
 " Snippets.
-Plugin 'honza/vim-snippets'               " Snippet collection that comes in handy.
-Plugin 'SirVer/ultisnips'                 " Snippet engine, integrates with YCM
+" Plugin 'honza/vim-snippets'               " Snippet collection that comes in handy.
+" Plugin 'SirVer/ultisnips'                 " Snippet engine, integrates with YCM
 
 " Themes and colorschemes.
-Plugin 'altercation/vim-colors-solarized' " Solarised yessss
 Plugin 'flazz/vim-colorschemes'           " Giant-ass collection because why not.
 
 " Status/Air/Powerline
@@ -102,6 +98,8 @@ inoremap ± <c-o>~
 nnoremap <leader>tb :Tabularize /
 nnoremap <leader>ln :lnext<CR>
 nnoremap <leader>lp :lprevious<CR>
+
+nnoremap <leader>gy :Goyo<CR>
 
 " Create ranger window in half-split for looking for things.
 nnoremap <leader>sr :!tmux split-window -v \; resize-pane -D 15 \; send-keys "ranger" Enter<CR><CR>
