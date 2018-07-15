@@ -15,15 +15,27 @@
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 (add-hook 'org-mode-hook 'org-indent-mode)
 
+;; Custum interactive-functions
 (defun init-file ()
+  "Opens init.el"
   (interactive)
   (find-file "~/.emacs.d/init.el"))
 
+;; Aesthetics
 (set-face-attribute 'default nil :font "PragmataPro-13")
 (load-theme 'gruvbox t)
 
 ;; Deft configuration
-(global-set-key "±" 'deft)
+(defun launch-deft-in (dir)
+  (let (old-dir deft-directory)
+    (setq deft-directory dir)
+    (deft)
+    (setq deft-directory old-dir)))
+
+(global-set-key (kbd "C-$ r") '(lambda () (interactive)(launch-deft-in "~/Dropbox/Reference")))
+(global-set-key (kbd "C-$ p") '(lambda () (interactive)(launch-deft-in "~/Dropbox/Perceptron")))
+(global-set-key (kbd "C-$ w") '(lambda () (interactive)(launch-deft-in "~/Dropbox/Reference/Work")))
+
 (setq deft-directory "~/Dropbox/Reference")
 (setq deft-use-filename-as-title t)
 (setq deft-recursive t)
