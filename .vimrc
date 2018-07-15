@@ -99,7 +99,7 @@ nnoremap <leader>tb :Tabularize /
 nnoremap <leader>ln :lnext<CR>
 nnoremap <leader>lp :lprevious<CR>
 
-nnoremap <leader>gy :Goyo<CR>
+nnoremap <leader>gy :Goyo 120<CR>
 
 " Create ranger window in half-split for looking for things.
 nnoremap <leader>sr :!tmux split-window -v \; resize-pane -D 15 \; send-keys "ranger" Enter<CR><CR>
