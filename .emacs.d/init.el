@@ -32,9 +32,9 @@
     (deft)
     (setq deft-directory old-dir)))
 
-(global-set-key (kbd "C-$ r") '(lambda () (interactive)(launch-deft-in "~/Dropbox/Reference")))
-(global-set-key (kbd "C-$ p") '(lambda () (interactive)(launch-deft-in "~/Dropbox/Perceptron")))
-(global-set-key (kbd "C-$ w") '(lambda () (interactive)(launch-deft-in "~/Dropbox/Reference/Work")))
+(global-set-key (kbd "C-$ C-$") '(lambda () (interactive)(launch-deft-in "~/Dropbox/Reference")))
+(global-set-key (kbd "C-$ p")   '(lambda () (interactive)(launch-deft-in "~/Dropbox/Perceptron")))
+(global-set-key (kbd "C-$ w")   '(lambda () (interactive)(launch-deft-in "~/Dropbox/Reference/Work")))
 
 (setq deft-directory "~/Dropbox/Reference")
 (setq deft-use-filename-as-title t)
