@@ -60,9 +60,12 @@
  '(custom-safe-themes
    (quote
     ("ce0788113995714fd96970417e8e71d5182d02bc40cc7ffef307f5e01e55942f" "ed2b5df51c3e1f99207074f8a80beeb61757ab18970e43d57dec34fe21af2433" "d411730c6ed8440b4a2b92948d997c4b71332acf9bb13b31e9445da16445fe43" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" default)))
+ '(org-agenda-files
+   (quote
+    ("~/Uni/distributed-systems/examprep.org" "~/Dropbox/Reference/Org/hobby-projects.org")))
  '(package-selected-packages
    (quote
-    (deft magithub magit gruvbox-theme notmuch solarized-theme paredit org-plus-contrib markdown-mode))))
+    (exec-path-from-shell flycheck deft magithub magit gruvbox-theme notmuch solarized-theme paredit org-plus-contrib markdown-mode))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
