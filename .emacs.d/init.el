@@ -6,23 +6,35 @@
 (tool-bar-mode -1)
 (add-hook 'emacs-lisp-mode-hook 'paredit-mode)
 
+;; Magit configuration.
 (global-set-key (kbd "C-x g") 'magit-status)
 (global-set-key (kbd "C-x M-g") 'magit-dispatch-popup)
 (global-set-key (kbd "C-z") 'list-bookmarks)
 
+
+;; Org-Mode Config.
 (setq-default fill-column 80)
 (add-hook 'text-mode-hook 'auto-fill-mode)
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 (add-hook 'org-mode-hook 'org-indent-mode)
 
-;; Custum interactive-functions
+(global-set-key (kbd "C-c a") 'org-agenda)
+(setq org-log-done 'date)
+(setq org-agenda-files (list "~/Dropbox/Reference/Org/hobby-projects.org"
+			     "~/Dropbox/Reference/Org/system.org"))
+
+;; Flycheck configuration
+(exec-path-from-shell-initialize)
+(global-flycheck-mode)
+
+;; Custom interactive-functions
 (defun init-file ()
-  "Opens init.el"
+  "Opens init.el."
   (interactive)
   (find-file "~/.emacs.d/init.el"))
 
 ;; Aesthetics
-(set-face-attribute 'default nil :font "PragmataPro-13")
+(set-face-attribute 'default nil :font "PragmataPro-14")
 (load-theme 'gruvbox t)
 
 ;; Deft configuration
