@@ -11,12 +11,17 @@
 (global-set-key (kbd "C-x M-g") 'magit-dispatch-popup)
 (global-set-key (kbd "C-z") 'list-bookmarks)
 
+;; Wrap-region mode.
+(wrap-region-add-wrappers
+ '(("$" "$" nil '(org-mode markdown-mode))
+   ("`" "`" nil '(markdown-mode))))
 
 ;; Org-Mode Config.
 (setq-default fill-column 80)
 (add-hook 'text-mode-hook 'auto-fill-mode)
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 (add-hook 'org-mode-hook 'org-indent-mode)
+(add-hook 'org-mode-hook 'wrap-region-mode)
 
 (global-set-key (kbd "C-c a") 'org-agenda)
 (setq org-log-done 'date)
