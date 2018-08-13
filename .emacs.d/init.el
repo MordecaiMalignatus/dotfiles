@@ -25,8 +25,6 @@
 
 (global-set-key (kbd "C-c a") 'org-agenda)
 (setq org-log-done 'date)
-(setq org-agenda-files (list "~/Dropbox/Reference/Org/hobby-projects.org"
-			     "~/Dropbox/Reference/Org/system.org"))
 
 ;; Flycheck configuration
 (exec-path-from-shell-initialize)
