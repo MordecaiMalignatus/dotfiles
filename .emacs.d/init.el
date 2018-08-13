@@ -44,10 +44,19 @@
 
 ;; Deft configuration
 (defun launch-deft-in (dir)
+  "Launch Deft in specified directory.
+DIR: The directory that deft should treat as `deft-directory`"
   (let (old-dir deft-directory)
     (setq deft-directory dir)
-    (deft)
+    (relaunch-deft)
     (setq deft-directory old-dir)))
+
+(defun relaunch-deft ()
+  "Relaunch deft instead of just switching back to it."
+  (interactive)
+  (when (get-buffer "*Deft*")
+    (kill-buffer "*Deft*"))
+  (deft))
 
 (global-set-key (kbd "C-$ C-$") '(lambda () (interactive)(launch-deft-in "~/Dropbox/Reference")))
 (global-set-key (kbd "C-$ p")   '(lambda () (interactive)(launch-deft-in "~/Dropbox/Perceptron")))
