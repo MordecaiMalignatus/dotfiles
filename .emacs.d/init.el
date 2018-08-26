@@ -30,6 +30,9 @@
 (exec-path-from-shell-initialize)
 (global-flycheck-mode)
 
+;; Company mode.
+(add-hook 'after-init-hook 'global-company-mode)
+
 ;; Custom interactive-functions
 (defun init-file ()
   "Opens init.el."
