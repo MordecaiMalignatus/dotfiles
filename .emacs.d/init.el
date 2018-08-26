@@ -33,6 +33,14 @@
 ;; Company mode.
 (add-hook 'after-init-hook 'global-company-mode)
 
+;; Haskell specifics
+(add-hook 'haskell-mode-hook 'intero-mode)
+(setq haskell-stylish-on-save t)
+(setq haskell-compile-cabal-build-command "stack build")
+
+(eval-after-load "haskell-mode"
+    '(define-key haskell-mode-map (kbd "C-c C-c") 'haskell-compile))
+
 ;; Custom interactive-functions
 (defun init-file ()
   "Opens init.el."
