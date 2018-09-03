@@ -6,8 +6,9 @@
 (tool-bar-mode -1)
 (add-hook 'emacs-lisp-mode-hook 'paredit-mode)
 
-;; Custom configuration
-(setq custom-file "~/.emacs.d/custom.el")
+(add-to-list 'load-path (concat user-emacs-directory "init-modules"))
+
+(setq custom-file (concat user-emacs-directory "custom.el"))
 (load custom-file)
 
 ;; Magit configuration.
@@ -15,10 +16,10 @@
 (global-set-key (kbd "C-x M-g") 'magit-dispatch-popup)
 (global-set-key (kbd "C-z") 'list-bookmarks)
 
-;; Wrap-region mode.
-(wrap-region-add-wrappers
- '(("$" "$" nil '(org-mode markdown-mode))
-   ("`" "`" nil '(markdown-mode))))
+;; Handle SSH-agent for magit
+(require 'exec-path-from-shell)
+(exec-path-from-shell-copy-env "SSH_AGENT_PID")
+(exec-path-from-shell-copy-env "SSH_AUTH_SOCK")
 
 ;; Org-Mode Config.
 (setq-default fill-column 80)
@@ -52,29 +53,15 @@
   (find-file "~/.emacs.d/init.el"))
 
 ;; Aesthetics
-(set-face-attribute 'default nil :font "PragmataPro-14")
-(load-theme 'gruvbox t)
+(set-face-attribute 'default nil :font "PragmataPro-13")
+(setq solarized-use-variable-pitch nil)
+(load-theme 'solarized-light t)
 
-;; Deft configuration
-(defun launch-deft-in (dir)
-  "Launch Deft in specified directory.
-DIR: The directory that deft should treat as `deft-directory`"
-  (let (old-dir deft-directory)
-    (setq deft-directory dir)
-    (relaunch-deft)
-    (setq deft-directory old-dir)))
+;; My custom modules.
+(defun load-init-settings ()
+  "Load custom modules concerned with things that would exceed the range of an init.el."
+  (mapc 'require '(logrs
+		   custom-deft)))
 
-(defun relaunch-deft ()
-  "Relaunch deft instead of just switching back to it."
-  (interactive)
-  (when (get-buffer "*Deft*")
-    (kill-buffer "*Deft*"))
-  (deft))
-
-(global-set-key (kbd "C-$ C-$") '(lambda () (interactive)(launch-deft-in "~/Dropbox/Reference")))
-(global-set-key (kbd "C-$ p")   '(lambda () (interactive)(launch-deft-in "~/Dropbox/Perceptron")))
-(global-set-key (kbd "C-$ w")   '(lambda () (interactive)(launch-deft-in "~/Dropbox/Reference/Work")))
-
-(setq deft-directory "~/Dropbox/Reference")
-(setq deft-use-filename-as-title t)
-(setq deft-recursive t)
+(add-hook 'after-init-hook 'load-init-settings)
+;;; init.el ends here
