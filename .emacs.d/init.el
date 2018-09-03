@@ -15,6 +15,11 @@
 (global-set-key (kbd "C-x M-g") 'magit-dispatch-popup)
 (global-set-key (kbd "C-z") 'list-bookmarks)
 
+;; Handle SSH-agent for magit
+(require 'exec-path-from-shell)
+(exec-path-from-shell-copy-env "SSH_AGENT_PID")
+(exec-path-from-shell-copy-env "SSH_AUTH_SOCK")
+
 ;; Wrap-region mode.
 (wrap-region-add-wrappers
  '(("$" "$" nil '(org-mode markdown-mode))
