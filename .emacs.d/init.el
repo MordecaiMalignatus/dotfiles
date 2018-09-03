@@ -57,26 +57,11 @@
 (setq solarized-use-variable-pitch nil)
 (load-theme 'solarized-light t)
 
-;; Deft configuration
-(defun launch-deft-in (dir)
-  "Launch Deft in specified directory.
-DIR: The directory that deft should treat as `deft-directory`"
-  (let (old-dir deft-directory)
-    (setq deft-directory dir)
-    (relaunch-deft)
-    (setq deft-directory old-dir)))
+;; My custom modules.
+(defun load-init-settings ()
+  "Load custom modules concerned with things that would exceed the range of an init.el."
+  (mapc 'require '(logrs
+		   custom-deft)))
 
-(defun relaunch-deft ()
-  "Relaunch deft instead of just switching back to it."
-  (interactive)
-  (when (get-buffer "*Deft*")
-    (kill-buffer "*Deft*"))
-  (deft))
-
-(global-set-key (kbd "C-$ C-$") '(lambda () (interactive)(launch-deft-in "~/Dropbox/Reference")))
-(global-set-key (kbd "C-$ p")   '(lambda () (interactive)(launch-deft-in "~/Dropbox/Perceptron")))
-(global-set-key (kbd "C-$ w")   '(lambda () (interactive)(launch-deft-in "~/Dropbox/Reference/Work")))
-
-(setq deft-directory "~/Dropbox/Reference")
-(setq deft-use-filename-as-title t)
-(setq deft-recursive t)
+(add-hook 'after-init-hook 'load-init-settings)
+;;; init.el ends here
