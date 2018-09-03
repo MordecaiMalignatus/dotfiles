@@ -25,15 +25,15 @@ bindsym $mod+d exec rofi -show run -modi run
 # Autostarts
 
 exec $terminal
-exec $browser
+exec --no-startup-id $browser
+exec --no-startup-id jetbrains-toolbox
 
 # Userbindings for various programs
 exec_always --no-startup-id setxkbmap -layout us -option ctrl:nocaps -option compose:paus
 exec_always --no-startup-id feh --randomize --bg-fill ~/wallpapers/*
 
-# Sensible power manager. 
+# Sensible power manager.
 exec --no-startup-id xfce4-power-manager
-exec --no-startup-id nm-applet
 
 bindsym $mod+Shift+p         exec i3lock -et -i "/home/az/wallpapers/lockscreen.png"
 bindsym $mod+Shift+Control+n exec feh --randomize --bg-fill ~/wallpapers/*
@@ -44,7 +44,7 @@ bindsym $mod+k               focus up
 bindsym $mod+l               focus right
 bindsym $mod+h               focus left
 
-# Focus oldest urgent message, processing the queue. 
+# Focus oldest urgent message, processing the queue.
 bindsym $mod+f [urgent="oldest"] focus
 
 # split in horizontal orientation
@@ -119,8 +119,8 @@ bindsym $mod+Shift+w     exec "xset dpms force off; sleep 2; xset dpms force on"
 bindsym $mod+m mode "$move"
 set $move Move: (l)eft, (r)ight, (s)mall
 mode "$move" {
-        bindsym l move workspace to output DP2-1; mode "default"
-        bindsym r move workspace to output DP2-2; mode "default"
+        bindsym l move workspace to output DP2-2; mode "default"
+        bindsym r move workspace to output DP2-1; mode "default"
         bindsym s move workspace to output eDP1; mode "default"
 
         bindsym Return mode "default"
@@ -164,9 +164,9 @@ mode "$focus" {
 bindsym $mod+shift+F4 mode "$logout"
 set $logout Getting out? (r)estart, (l)ogout, (s)hutdown, (h)ibernate
 mode "$logout" {
-        bindsym r exec "reboot"; mode "default" 
+        bindsym r exec "reboot"; mode "default"
         bindsym l exec "i3-msg exit"
-        bindsym s exec "sudo shutdown now"; mode "default" 
+        bindsym s exec "sudo shutdown now"; mode "default"
         bindsym h exec "sudo systemctl hibernate"; mode "default"
 
         bindsym Return mode "default"
