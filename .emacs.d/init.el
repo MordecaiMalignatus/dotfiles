@@ -21,11 +21,6 @@
 (exec-path-from-shell-copy-env "SSH_AGENT_PID")
 (exec-path-from-shell-copy-env "SSH_AUTH_SOCK")
 
-;; Wrap-region mode.
-(wrap-region-add-wrappers
- '(("$" "$" nil '(org-mode markdown-mode))
-   ("`" "`" nil '(markdown-mode))))
-
 ;; Org-Mode Config.
 (setq-default fill-column 80)
 (add-hook 'text-mode-hook 'auto-fill-mode)
