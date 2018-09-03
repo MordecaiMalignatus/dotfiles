@@ -52,8 +52,9 @@
   (find-file "~/.emacs.d/init.el"))
 
 ;; Aesthetics
-(set-face-attribute 'default nil :font "PragmataPro-14")
-(load-theme 'gruvbox t)
+(set-face-attribute 'default nil :font "PragmataPro-13")
+(setq solarized-use-variable-pitch nil)
+(load-theme 'solarized-light t)
 
 ;; Deft configuration
 (defun launch-deft-in (dir)
