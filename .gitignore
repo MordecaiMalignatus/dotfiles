@@ -14,3 +14,6 @@ fish/fishd*
 quicklisp.lisp
 ranger/bookmarks
 ranger/history
+/xrandr/#work-screens.sh#
+/.emacs.d/.#functions.el
+/.emacs.d/custom.el
