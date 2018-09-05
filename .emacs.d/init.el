@@ -6,7 +6,7 @@
 (tool-bar-mode -1)
 (add-hook 'emacs-lisp-mode-hook 'paredit-mode)
 
-(add-to-list 'load-path (concat user-emacs-directory "init-modules"))
+(add-to-list 'load-path (concat user-emacs-directory "init"))
 
 (setq custom-file (concat user-emacs-directory "custom.el"))
 (load custom-file)
