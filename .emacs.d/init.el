@@ -57,6 +57,13 @@
 (setq solarized-use-variable-pitch nil)
 (load-theme 'solarized-light t)
 
+(defun pocket-pop-article ()
+  "Pops a single article off of my pocket queue and opens it in the browser."
+  (interactive)
+  (shell-command "pockyt get -n 1 -r oldest -s unread -o browser | pockyt mod -a 1 -i redirect"))
+
+(global-set-key (kbd "C-x p p") 'pocket-pop-article)
+
 ;; My custom modules.
 (defun load-init-settings ()
   "Load custom modules concerned with things that would exceed the range of an init.el."
