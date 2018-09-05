@@ -6,5 +6,4 @@ function arrive
   sh ~/dotfiles/xrandr/work-screens.sh
   upgrade
   fetch-work-repos
-  task next
 end
