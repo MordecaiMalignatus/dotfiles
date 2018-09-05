@@ -16,6 +16,10 @@
 (global-set-key (kbd "C-x M-g") 'magit-dispatch-popup)
 (global-set-key (kbd "C-z") 'list-bookmarks)
 
+;; Logrs
+(global-set-key (kbd "C-c l l") 'logrs-enter-log)
+(global-set-key (kbd "C-c l v") 'logrs-view-today)
+
 ;; Handle SSH-agent for magit
 (require 'exec-path-from-shell)
 (exec-path-from-shell-copy-env "SSH_AGENT_PID")
