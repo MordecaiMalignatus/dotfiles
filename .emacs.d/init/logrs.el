@@ -8,7 +8,9 @@
 
 ;;; Code:
 (require 's)
-(defvar logrs-base-dir (logrs-find-base-dir))
+
+(defvar logrs-base-dir (logrs-find-base-dir)
+  "Describes the folder in which logrs creates its logs, read from `~/.logrs'.")
 
 (defun logrs-find-base-dir ()
   "Look for the file ~/.logrs and read logging filepath from it."
