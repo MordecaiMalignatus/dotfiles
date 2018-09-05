@@ -8,6 +8,14 @@
 
 (add-to-list 'load-path (concat user-emacs-directory "init"))
 
+;; My custom modules.
+(defun load-init-settings ()
+  "Load custom modules concerned with things that would exceed the range of an init.el."
+  (mapc 'require '(logrs
+		   custom-deft)))
+
+(add-hook 'after-init-hook 'load-init-settings)
+
 (setq custom-file (concat user-emacs-directory "custom.el"))
 (load custom-file)
 
@@ -68,11 +76,4 @@
 
 (global-set-key (kbd "C-x p p") 'pocket-pop-article)
 
-;; My custom modules.
-(defun load-init-settings ()
-  "Load custom modules concerned with things that would exceed the range of an init.el."
-  (mapc 'require '(logrs
-		   custom-deft)))
-
-(add-hook 'after-init-hook 'load-init-settings)
 ;;; init.el ends here
