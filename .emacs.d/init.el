@@ -27,6 +27,7 @@
 ;; Logrs
 (global-set-key (kbd "C-c l l") 'logrs-enter-log)
 (global-set-key (kbd "C-c l v") 'logrs-view-today)
+(global-set-key (kbd "C-c l y") 'logrs-view-yesterday)
 
 ;; Handle SSH-agent for magit
 (require 'exec-path-from-shell)

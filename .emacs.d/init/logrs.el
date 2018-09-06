@@ -37,5 +37,10 @@ This is `logrs-view-today' called with the current date."
   (interactive)
   (logrs-view-day (s-trim (shell-command-to-string "date +%Y-%m-%d"))))
 
+(defun logrs-view-yesterday ()
+  "View yesterday's Logrs file."
+  (interactive)
+  (logrs-view-day (s-trim (shell-command-to-string "date -d 'yesterday' +%Y-%m-%d"))))
+
 (provide 'logrs)
 ;;; logrs.el ends here
