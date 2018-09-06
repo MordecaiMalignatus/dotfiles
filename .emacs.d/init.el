@@ -18,6 +18,9 @@
 (tool-bar-mode -1)
 (add-hook 'emacs-lisp-mode-hook 'paredit-mode)
 
+(setq custom-file (concat user-emacs-directory "custom.el"))
+(load custom-file)
+
 ;; My custom modules.
 (add-to-list 'load-path (concat user-emacs-directory "init"))
 
@@ -34,10 +37,8 @@
     (global-set-key (kbd "C-c l v") 'logrs-view-today)
     (global-set-key (kbd "C-c l y") 'logrs-view-yesterday)))
 
-(add-hook 'after-init-hook '(define-custom-global-hotkeys load-init-settings))
-
-(setq custom-file (concat user-emacs-directory "custom.el"))
-(load custom-file)
+(add-hook 'after-init-hook 'load-init-settings)
+(add-hook 'after-init-hook 'define-custom-global-hotkeys)
 
 ;; Magit configuration.
 (global-set-key (kbd "C-x g") 'magit-status)

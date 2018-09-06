@@ -9,9 +9,6 @@
 ;;; Code:
 (require 's)
 
-(defvar logrs-base-dir (logrs-find-base-dir)
-  "Describes the folder in which logrs creates its logs, read from `~/.logrs'.")
-
 (defun logrs-find-base-dir ()
   "Look for the file ~/.logrs and read logging filepath from it."
   (with-temp-buffer
@@ -41,6 +38,9 @@ This is `logrs-view-today' called with the current date."
   "View yesterday's Logrs file."
   (interactive)
   (logrs-view-day (s-trim (shell-command-to-string "date -d 'yesterday' +%Y-%m-%d"))))
+
+(defvar logrs-base-dir (logrs-find-base-dir)
+  "Describes the folder in which logrs creates its logs, read from `~/.logrs'.")
 
 (provide 'logrs)
 ;;; logrs.el ends here
