@@ -1,6 +1,21 @@
+;;; init.el --- Summary
+;;; Commentary:
+;; Hi, I'm Mordecai and this is my init.el.  It's a bit of a mess.  A lot of
+;; things are splintered off into their own sub modules in init/, you can find a
+;; list of them in `load-inits-settings'.  This is a hybrid init file that is
+;; used between an OSX laptop and a Linux laptop, some things are for Linux
+;; explicitly, like the SSH Agent handling, others for mac, like tool-bar-mode
+;; -1.  Nearly all hotkeys are set in this file, I try not to set hotkeys in
+;; modules.
+
+;;; Code:
 (require 'package)
-(add-to-list 'package-archives '("org"          . "https://orgmode.org/elpa/") t)
-(add-to-list 'package-archives '("melpa"        . "https://melpa.org/packages/") t)
+(require 'exec-path-from-shell)
+
+
+;; Packages.
+(add-to-list 'package-archives '("org"  . "https://orgmode.org/elpa/") t)
+(add-to-list 'package-archives '("melpa". "https://melpa.org/packages/") t)
 (package-initialize)
 
 (tool-bar-mode -1)
@@ -30,7 +45,7 @@
 (global-set-key (kbd "C-c l y") 'logrs-view-yesterday)
 
 ;; Handle SSH-agent for magit
-(require 'exec-path-from-shell)
+
 (exec-path-from-shell-copy-env "SSH_AGENT_PID")
 (exec-path-from-shell-copy-env "SSH_AUTH_SOCK")
 
