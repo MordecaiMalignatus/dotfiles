@@ -6,9 +6,9 @@
 (tool-bar-mode -1)
 (add-hook 'emacs-lisp-mode-hook 'paredit-mode)
 
+;; My custom modules.
 (add-to-list 'load-path (concat user-emacs-directory "init"))
 
-;; My custom modules.
 (defun load-init-settings ()
   "Load custom modules concerned with things that would exceed the range of an init.el."
   (mapc 'require '(logrs
