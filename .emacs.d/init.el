@@ -9,13 +9,10 @@
 ;; modules.
 
 ;;; Code:
-(require 'package)
-(require 'exec-path-from-shell)
-
-
 ;; Packages.
-(add-to-list 'package-archives '("org"  . "https://orgmode.org/elpa/") t)
-(add-to-list 'package-archives '("melpa". "https://melpa.org/packages/") t)
+(require 'package)
+(add-to-list 'package-archives '("org"   . "https://orgmode.org/elpa/") t)
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 (package-initialize)
 
 (tool-bar-mode -1)
@@ -29,7 +26,15 @@
   (mapc 'require '(logrs
 		   custom-deft)))
 
-(add-hook 'after-init-hook 'load-init-settings)
+(defun define-custom-global-hotkeys ()
+  "Load all hotkeys related to custom modules, wher Emacs would bitch otherwise."
+  (progn
+    ;; Logrs
+    (global-set-key (kbd "C-c l l") 'logrs-enter-log)
+    (global-set-key (kbd "C-c l v") 'logrs-view-today)
+    (global-set-key (kbd "C-c l y") 'logrs-view-yesterday)))
+
+(add-hook 'after-init-hook '(define-custom-global-hotkeys load-init-settings))
 
 (setq custom-file (concat user-emacs-directory "custom.el"))
 (load custom-file)
@@ -39,13 +44,9 @@
 (global-set-key (kbd "C-x M-g") 'magit-dispatch-popup)
 (global-set-key (kbd "C-z") 'list-bookmarks)
 
-;; Logrs
-(global-set-key (kbd "C-c l l") 'logrs-enter-log)
-(global-set-key (kbd "C-c l v") 'logrs-view-today)
-(global-set-key (kbd "C-c l y") 'logrs-view-yesterday)
-
 ;; Handle SSH-agent for magit
 
+(require 'exec-path-from-shell)
 (exec-path-from-shell-copy-env "SSH_AGENT_PID")
 (exec-path-from-shell-copy-env "SSH_AUTH_SOCK")
 
