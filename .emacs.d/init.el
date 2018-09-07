@@ -45,6 +45,14 @@
 (global-set-key (kbd "C-x M-g") 'magit-dispatch-popup)
 (global-set-key (kbd "C-z") 'list-bookmarks)
 
+;; Ivy Config
+;; This is experimental and I'm not sure it's going to stay.
+(ivy-mode 1)
+(setq ivy-use-virtual-buffers t)
+(setq enable-recursive-minibuffers t)
+(global-set-key "\C-s" 'swiper)
+(global-set-key (kbd "M-x") 'counsel-M-x)
+
 ;; Handle SSH-agent for magit
 (require 'exec-path-from-shell)
 (exec-path-from-shell-copy-env "SSH_AGENT_PID")
@@ -64,6 +72,7 @@
 (projectile-mode +1)
 (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
 (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+(setq projectile-completion-system 'ivy)
 
 ;; Flycheck configuration
 (exec-path-from-shell-initialize)
@@ -97,5 +106,4 @@
   (shell-command "pockyt get -n 1 -r oldest -s unread -o browser | pockyt mod -a 1 -i redirect"))
 
 (global-set-key (kbd "C-x p p") 'pocket-pop-article)
-
 ;;; init.el ends here
