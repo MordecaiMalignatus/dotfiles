@@ -46,7 +46,6 @@
 (global-set-key (kbd "C-z") 'list-bookmarks)
 
 ;; Handle SSH-agent for magit
-
 (require 'exec-path-from-shell)
 (exec-path-from-shell-copy-env "SSH_AGENT_PID")
 (exec-path-from-shell-copy-env "SSH_AUTH_SOCK")
@@ -60,6 +59,11 @@
 
 (global-set-key (kbd "C-c a") 'org-agenda)
 (setq org-log-done 'date)
+
+;; Projectile config
+(projectile-mode +1)
+(define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
+(define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
 
 ;; Flycheck configuration
 (exec-path-from-shell-initialize)
