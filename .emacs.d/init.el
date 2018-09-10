@@ -45,6 +45,8 @@
 (global-set-key (kbd "C-x M-g") 'magit-dispatch-popup)
 (global-set-key (kbd "C-z") 'list-bookmarks)
 
+(setq auth-sources '("~/.authinfo.gpg"))
+
 ;; Ivy Config
 ;; This is experimental and I'm not sure it's going to stay.
 (ivy-mode 1)
