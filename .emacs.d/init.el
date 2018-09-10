@@ -9,8 +9,12 @@
 ;; modules.
 
 ;;; Code:
+(require 'seq)
+(require 'exec-path-from-shell)
+
 ;; Packages.
 (require 'package)
+
 (add-to-list 'package-archives '("org"   . "https://orgmode.org/elpa/") t)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 (package-initialize)
@@ -20,6 +24,54 @@
 
 (setq custom-file (concat user-emacs-directory "custom.el"))
 (load custom-file)
+
+;; Making sure everything is installed.
+
+(defvar my-packages
+  '(
+    ; Plumbing
+    ivy
+    counsel
+    swiper
+    flycheck
+    exec-path-from-shell
+    company
+
+    ; Document management
+    deft
+    org
+
+    ; Git
+    magit
+    magithub
+
+    ; Haskell
+    haskell-mode
+    intero
+
+    ; Python
+    company-jedi
+    pipenv
+    )
+  "Canonical list of packages.")
+
+(defun my-packages-in-sync-p ()
+  "Decide if all packages in `my-packages' are installed."
+  (seq-every-p 'package-installed-p my-packages))
+
+(defun install-my-packages ()
+  "Make sure every package in `my-packages' is installed from remotes."
+  (interactive)
+  (unless (my-packages-in-sync-p)
+    (message "%s" "Packages out of sync, refreshing contents...")
+    (package-refresh-contents)
+    (message "%s" "Refresh done. Updating missing packages...")
+    (mapc #'(lambda (package-name)
+	      (unless (package-installed-p package-name)
+		(package-install package-name)))
+	  my-packages)))
+
+(add-hook 'after-init-hook 'install-my-packages)
 
 ;; My custom modules.
 (add-to-list 'load-path (concat user-emacs-directory "init"))
@@ -56,7 +108,6 @@
 (global-set-key (kbd "M-x") 'counsel-M-x)
 
 ;; Handle SSH-agent for magit
-(require 'exec-path-from-shell)
 (exec-path-from-shell-copy-env "SSH_AGENT_PID")
 (exec-path-from-shell-copy-env "SSH_AUTH_SOCK")
 
