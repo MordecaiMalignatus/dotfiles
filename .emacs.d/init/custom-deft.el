@@ -28,6 +28,7 @@ DIR: The directory that deft should treat as `deft-directory`"
 (setq deft-directory "~/Dropbox/Reference")
 (setq deft-use-filename-as-title t)
 (setq deft-recursive t)
+(setq deft-extensions '("org" "md"))
 
 (provide 'custom-deft)
 ;;; custom-deft.el ends here
