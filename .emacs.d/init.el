@@ -37,6 +37,14 @@
     exec-path-from-shell
     company
 
+    ; Movement
+    avy
+    ace-window
+
+    ; Prettiness
+    gruvbox-theme
+    solarized-theme
+
     ; Document management
     deft
     org
@@ -91,6 +99,10 @@
 
 (add-hook 'after-init-hook 'load-init-settings)
 (add-hook 'after-init-hook 'define-custom-global-hotkeys)
+
+;; Movement
+(global-set-key (kbd "C-:") 'avy-goto-char-2)
+(global-set-key (kbd "M-o") 'ace-window)
 
 ;; Magit configuration.
 (global-set-key (kbd "C-x g") 'magit-status)
