@@ -10,7 +10,6 @@
 
 ;;; Code:
 (require 'seq)
-(require 'exec-path-from-shell)
 
 ;; Packages.
 (require 'package)
@@ -120,6 +119,7 @@
 (global-set-key (kbd "M-x") 'counsel-M-x)
 
 ;; Handle SSH-agent for magit
+(require 'exec-path-from-shell)
 (exec-path-from-shell-copy-env "SSH_AGENT_PID")
 (exec-path-from-shell-copy-env "SSH_AUTH_SOCK")
 
