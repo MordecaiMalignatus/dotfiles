@@ -21,7 +21,7 @@
   "Log interactively entered string to logrs.
 ENTRY: The string to be fed into logrs."
   (interactive "MLogrs: ")
-  (shell-command (concat "logrs " entry)))
+  (shell-command (concat "logrs " (shell-quote-argument entry))))
 
 (defun logrs-view-day (day)
   "View the log of the specified day.
