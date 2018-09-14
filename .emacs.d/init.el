@@ -130,11 +130,13 @@
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 (add-hook 'org-mode-hook 'org-indent-mode)
 (add-hook 'org-mode-hook 'wrap-region-mode)
-(setq org-default-notes-file "~/Dropbox/Reference/Work/capture.org")
 
 (global-set-key (kbd "C-c a") 'org-agenda)
 (global-set-key (kbd "C-c o c") 'counsel-org-capture)
+
 (setq org-log-done 'date)
+(setq org-default-notes-file "~/Dropbox/Reference/Work/capture.org")
+
 
 ;; Projectile config
 (projectile-mode +1)
