@@ -2,6 +2,10 @@
 #*
 .emacs.d/elpa/
 .emacs.d/bookmarks
+.emacs.d/magithub/
+.emacs.d/var/
+.emacs.d/.#recentf
+.emacs.d/#recentf#
 /fish/fishd.a0999b028ce9
 /fish/functions/test.py
 /fish/functions/z.awk
