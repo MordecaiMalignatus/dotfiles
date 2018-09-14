@@ -8,7 +8,6 @@
 ;; -1.  Nearly all hotkeys are set in this file, I try not to set hotkeys in
 ;; modules.
 
-
 ;; this is padding
 
 ;;; Code:
