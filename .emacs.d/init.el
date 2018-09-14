@@ -117,6 +117,7 @@
 (setq enable-recursive-minibuffers t)
 (global-set-key "\C-s" 'swiper)
 (global-set-key (kbd "M-x") 'counsel-M-x)
+(global-set-key (kbd "C-c k") 'counsel-ag)
 
 ;; Handle SSH-agent for magit
 (require 'exec-path-from-shell)
