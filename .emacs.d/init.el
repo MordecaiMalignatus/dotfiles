@@ -161,6 +161,12 @@
   (interactive)
   (find-file "~/.emacs.d/init.el"))
 
+(defun az/copy-filename-to-clipboard ()
+  "Copies file name of current file to kill ring."
+  (interactive)
+  (kill-new (buffer-file-name))
+  (message "Copied %s to kill ring" (buffer-file-name)))
+
 ;; Aesthetics
 (set-face-attribute 'default nil :font "PragmataPro-13")
 (setq solarized-use-variable-pitch nil)
