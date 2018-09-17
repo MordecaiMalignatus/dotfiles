@@ -173,7 +173,7 @@
   (message "Copied %s to kill ring" (buffer-file-name)))
 
 ;; Aesthetics
-(set-face-attribute 'default nil :font "PragmataPro-13")
+(set-face-attribute 'default nil :font "PragmataPro-12")
 (setq solarized-use-variable-pitch nil)
 (load-theme 'solarized-light t)
 
