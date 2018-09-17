@@ -61,6 +61,7 @@
     ; Python
     company-jedi
     pipenv
+    elpy
     ))
 
 (defun my-packages-in-sync-p ()
@@ -159,6 +160,9 @@
 
 (eval-after-load "haskell-mode"
     '(define-key haskell-mode-map (kbd "C-c C-c") 'haskell-compile))
+
+;; Python stuff
+(elpy-enable)
 
 ;; Custom interactive-functions
 (defun init-file ()
