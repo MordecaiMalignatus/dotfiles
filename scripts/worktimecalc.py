@@ -19,7 +19,8 @@ def main():
     arrived_time = datetime.time(hour=hours, minute=minutes)
     arrived = datetime.datetime.combine(datetime.date.today(), arrived_time)
     leaving = arrived + TIME_AT_WORK
-    print(f"End of day, today: {leaving.time()}")
+    print(f"Arrived today: {arrived_time}")
+    print(f"Leaving today: {leaving.time()}")
 
 
 def get_todays_file() -> str:
