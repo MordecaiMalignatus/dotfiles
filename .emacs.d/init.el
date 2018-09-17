@@ -28,8 +28,8 @@
 
 ;; Making sure everything is installed.
 
-(defvar my-packages
-  '(
+(defvar my-packages '() "Canonical list of packages.")
+(setq my-packages '(
     ; Plumbing
     ivy
     counsel
@@ -61,8 +61,7 @@
     ; Python
     company-jedi
     pipenv
-    )
-  "Canonical list of packages.")
+    ))
 
 (defun my-packages-in-sync-p ()
   "Decide if all packages in `my-packages' are installed."
