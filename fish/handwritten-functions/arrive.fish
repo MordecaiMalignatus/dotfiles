@@ -1,4 +1,4 @@
-# Defined in /tmp/fish.mmEUqX/arrive.fish @ line 2
+# Defined in /tmp/fish.6twK6I/arrive.fish @ line 2
 function arrive
 	logrs "Arrived at work"
   start-ssh          # blocks until entered
@@ -6,5 +6,7 @@ function arrive
   sh ~/dotfiles/xrandr/work-screens.sh
   upgrade
   fetch-work-repos
-  echo (set_color -o green) (~/dotfiles/scripts/worktimecalc.py) (set_color -o normal)
+  emacs &
+  worktimecalc.py
+  inbox-status
 end
