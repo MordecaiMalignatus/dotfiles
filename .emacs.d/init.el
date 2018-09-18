@@ -54,6 +54,9 @@
     magit
     magithub
 
+    ;; Elixir
+    alchemist
+
     ; Haskell
     haskell-mode
     intero
@@ -159,7 +162,11 @@
 (setq haskell-compile-cabal-build-command "stack build")
 
 (eval-after-load "haskell-mode"
-    '(define-key haskell-mode-map (kbd "C-c C-c") 'haskell-compile))
+  '(define-key haskell-mode-map (kbd "C-c C-c") 'haskell-compile))
+
+;; Elixir specifics
+(add-hook 'elixir-mode-hook 'alchemist-mode)
+(setq alchemist-key-command-prefix (kbd "C-c ,"))
 
 ;; Python stuff
 (elpy-enable)
