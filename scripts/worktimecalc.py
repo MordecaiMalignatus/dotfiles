@@ -24,7 +24,7 @@ def main():
     print(f"Arrived today: {str(arrived_time)[:5]}")
     print(f"Leaving today: {str(leaving.time())[:5]}")
     print("-" * 20)
-    print(f"Time to leave: {str(remaining)[2:7]}")
+    print(f"Time to leave: {str(remaining)[:6]}")
 
 
 def get_todays_file() -> str:
