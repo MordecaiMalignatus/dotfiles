@@ -1,9 +1,9 @@
-# Defined in /tmp/fish.pmozHi/upgrade.fish @ line 2
+# Defined in /tmp/fish.5aFL5f/upgrade.fish @ line 2
 function upgrade
 	echo (set_color green)"Upgrading Packages"(set_color normal)
 	switch (uname -s)
         case Linux
-            yes | sudo pacman -Syu
+            sudo pacman -Syu --noconfirm
             
         case Darwin
             brew upgrade
