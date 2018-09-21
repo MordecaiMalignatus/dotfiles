@@ -140,11 +140,11 @@ mode "$sound" {
 }
 
 bindsym $mod+semicolon mode "$focus"
-set $focus Focus: (b)rowser, (c)onsole, (e)macs, (p)hpstorm, (1-10) workspaces
+set $focus Focus: (b)rowser, (c)onsole, (e)macs, (i)ntelliJ, (1-10) workspaces
 mode "$focus" {
         bindsym b workspace Browser; mode "default"
         bindsym c workspace Nerdery; mode "default"
-        bindsym p workspace PHPStorm; mode "default"
+        bindsym i workspace IntelliJ; mode "default"
         bindsym e workspace Emacs; mode "default"
 
         bindsym 1 workspace 1; mode "default"
