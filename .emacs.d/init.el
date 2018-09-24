@@ -104,6 +104,7 @@
 (add-hook 'after-init-hook 'load-init-settings)
 (add-hook 'after-init-hook 'define-custom-global-hotkeys)
 
+
 ;; Movement
 (global-set-key (kbd "C-:") 'avy-goto-char-2)
 (global-set-key (kbd "M-o") 'ace-window)
@@ -183,15 +184,20 @@
   (kill-new (buffer-file-name))
   (message "Copied %s to kill ring" (buffer-file-name)))
 
-;; Aesthetics
-(set-face-attribute 'default nil :font "PragmataPro-12")
-(setq solarized-use-variable-pitch nil)
-(load-theme 'solarized-light t)
-
 (defun pocket-pop-article ()
   "Pops a single article off of my pocket queue and opens it in the browser."
   (interactive)
   (shell-command "pockyt get -n 1 -r oldest -s unread -o browser | pockyt mod -a 1 -i redirect"))
 
 (global-set-key (kbd "C-x p p") 'pocket-pop-article)
+
+;; Aesthetics
+(set-face-attribute 'default nil :font "PragmataPro-12")
+(setq solarized-use-variable-pitch nil)
+(load-theme 'solarized-light t)
+
+;; Custom compose key ;)
+
+(global-set-key (kbd "C-c i c - >") (lambda () (interactive) (insert-char ?→)))
+
 ;;; init.el ends here
