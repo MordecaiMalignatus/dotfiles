@@ -37,6 +37,7 @@
     flycheck
     exec-path-from-shell
     company
+    helpful
 
     ; Movement
     avy
@@ -104,6 +105,10 @@
 (add-hook 'after-init-hook 'load-init-settings)
 (add-hook 'after-init-hook 'define-custom-global-hotkeys)
 
+;; Replace default help with `helpful'
+(global-set-key (kbd "C-h f") #'helpful-callable)
+(global-set-key (kbd "C-h v") #'helpful-variable)
+(global-set-key (kbd "C-h k") #'helpful-key)
 
 ;; Movement
 (global-set-key (kbd "C-:") 'avy-goto-char-2)
