@@ -50,6 +50,7 @@
     ; Document management
     deft
     org
+    markdown-mode
 
     ; Git
     magit
@@ -197,12 +198,15 @@
 (global-set-key (kbd "C-x p p") 'pocket-pop-article)
 
 ;; Aesthetics
+(menu-bar-mode 0)
+(tool-bar-mode 0)
+
 (set-face-attribute 'default nil :font "PragmataPro-12")
 (setq solarized-use-variable-pitch nil)
 (load-theme 'solarized-light t)
 
 ;; Custom compose key ;)
 
-(global-set-key (kbd "C-c i c - >") (lambda () (interactive) (insert-char ?→)))
+(global-set-key (kbd "C-c i c - >") (lambda () (interactive) (insert-char ?→))) ; For rename-commits.
 
 ;;; init.el ends here
