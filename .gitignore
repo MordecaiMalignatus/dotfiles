@@ -22,3 +22,6 @@ ranger/history
 /.emacs.d/.#functions.el
 /.emacs.d/custom.el
 /.gitconfig
+*.el#
+*.py#
+*.fish#
