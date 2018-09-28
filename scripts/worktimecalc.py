@@ -8,7 +8,7 @@ import datetime
 from typing import List
 import re
 
-TIME_AT_WORK = datetime.timedelta(hours=8, minutes=30)
+TIME_AT_WORK = datetime.timedelta(hours=9)
 
 
 def main():
