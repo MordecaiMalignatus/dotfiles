@@ -118,10 +118,10 @@
 ;; Magit configuration.
 (global-set-key (kbd "C-x g") 'magit-status)
 (global-set-key (kbd "C-x M-g") 'magit-dispatch-popup)
+(global-set-key (kbd "C-x C-S-g") 'magithub-dashboard)
 (global-set-key (kbd "C-z") 'list-bookmarks)
 
 (setq auth-sources '("~/.authinfo.gpg"))
-
 ;; Ivy Config
 ;; This is experimental and I'm not sure it's going to stay.
 (ivy-mode 1)
@@ -155,6 +155,7 @@
 (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
 (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
 (setq projectile-completion-system 'ivy)
+(setq projectile-switch-project-action #'magit-status)
 
 ;; Flycheck configuration
 (exec-path-from-shell-initialize)
