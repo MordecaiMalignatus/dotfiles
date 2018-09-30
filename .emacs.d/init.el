@@ -35,6 +35,7 @@
     counsel
     swiper
     flycheck
+    flycheck-inline
     exec-path-from-shell
     company
     helpful
@@ -166,6 +167,8 @@
 ;; Flycheck configuration
 (exec-path-from-shell-initialize)
 (global-flycheck-mode)
+(with-eval-after-load 'flycheck
+  (flycheck-inline-mode))
 
 ;; Company mode.
 (add-hook 'after-init-hook 'global-company-mode)
