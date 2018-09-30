@@ -203,6 +203,8 @@
 (tool-bar-mode 0)
 
 (set-face-attribute 'default nil :font "PragmataPro-12")
+(when (string= (system-name) "albatross.fritz.box")
+  (set-face-attribute 'default nil :font "PragmataPro-14"))
 (setq solarized-use-variable-pitch nil)
 (load-theme 'solarized-light t)
 

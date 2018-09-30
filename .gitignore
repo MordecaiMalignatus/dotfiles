@@ -25,3 +25,6 @@ ranger/history
 *.el#
 *.py#
 *.fish#
+/.emacs.d/recentf
+/.emacs.d/projectile.cache
+/.emacs.d/projectile-bookmarks.eld
