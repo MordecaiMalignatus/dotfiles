@@ -126,7 +126,7 @@
 (global-set-key (kbd "C-x C-S-g") 'magithub-dashboard)
 (global-set-key (kbd "C-z") 'list-bookmarks)
 
-(setq auth-sources '("~/.authinfo.gpg"))
+(setq auth-sources '("~/.authinfo.gpg" "~/.authinfo"))
 ;; Ivy Config
 ;; This is experimental and I'm not sure it's going to stay.
 (ivy-mode 1)
