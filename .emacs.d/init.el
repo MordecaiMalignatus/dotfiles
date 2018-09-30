@@ -67,6 +67,11 @@
     company-jedi
     pipenv
     elpy
+
+    ;; Rust
+    rust-mode
+    racer
+    cargo
     ))
 
 (defun my-packages-in-sync-p ()
@@ -178,6 +183,16 @@
 
 ;; Python stuff
 (elpy-enable)
+
+;; Rust Settings
+(add-hook 'rust-mode-hook 'cargo-mode)
+(add-hook 'rust-mode-hook 'racer-mode)
+(add-hook 'racer-mode-hook 'eldoc-mode)
+(add-hook 'racer-mode-hook #'company-mode)
+
+(require 'rust-mode)
+(define-key rust-mode-map (kbd "TAB") #'company-indent-or-complete-common)
+(setq company-tooltip-align-annotations t)
 
 ;; Custom interactive-functions
 (defun init-file ()
