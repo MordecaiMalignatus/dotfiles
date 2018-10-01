@@ -45,7 +45,6 @@
     ace-window
 
     ; Prettiness
-    gruvbox-theme
     solarized-theme
 
     ; Document management
