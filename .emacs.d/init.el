@@ -101,6 +101,10 @@
   (mapc 'require '(logrs
 		   custom-deft)))
 
+;; Load database connections on work machine.
+;; (when (string= (system-name) "mariner")
+;;   (require 'databases))
+
 (defun define-custom-global-hotkeys ()
   "Load all hotkeys related to custom modules, wher Emacs would bitch otherwise."
   (progn
