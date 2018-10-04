@@ -223,6 +223,21 @@
   (kill-new (buffer-file-name))
   (message "Copied %s to kill ring" (buffer-file-name)))
 
+(defun create-new-scratch-buffer ()
+  "Create a new scratch buffer to work in."
+  (interactive)
+  (let ((n 0)
+        bufname)
+    (while (progn
+             (setq bufname (concat "*scratch"
+                                   (if (= n 0) "" (int-to-string n))
+                                   "*"))
+             (setq n (1+ n))
+             (get-buffer bufname)))
+  (switch-to-buffer (get-buffer-create bufname))
+  (if (= n 1) initial-major-mode))) ; 1, because n was incremented
+(global-set-key (kbd "C-x n") 'create-new-scratch-buffer)
+
 (defun pocket-pop-article ()
   "Pops a single article off of my pocket queue and opens it in the browser."
   (interactive)
