@@ -124,6 +124,7 @@
 ;; Movement
 (global-set-key (kbd "C-:") 'avy-goto-char-2)
 (global-set-key (kbd "M-o") 'ace-window)
+(global-set-key (kbd "C-z") 'ivy-switch-buffer)
 
 (global-set-key (kbd "C-w") 'backward-kill-word)
 (global-set-key (kbd "C-c C-k") 'kill-region)
@@ -133,7 +134,7 @@
 (global-set-key (kbd "C-x g") 'magit-status)
 (global-set-key (kbd "C-x M-g") 'magit-dispatch-popup)
 (global-set-key (kbd "C-x C-S-g") 'magithub-dashboard)
-(global-set-key (kbd "C-z") 'list-bookmarks)
+
 
 (setq auth-sources '("~/.authinfo.gpg" "~/.authinfo"))
 ;; Ivy Config
