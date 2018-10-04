@@ -125,6 +125,10 @@
 (global-set-key (kbd "C-:") 'avy-goto-char-2)
 (global-set-key (kbd "M-o") 'ace-window)
 
+(global-set-key (kbd "C-w") 'backward-kill-word)
+(global-set-key (kbd "C-c C-k") 'kill-region)
+(global-set-key (kbd "C-x C-k") 'kill-region)
+
 ;; Magit configuration.
 (global-set-key (kbd "C-x g") 'magit-status)
 (global-set-key (kbd "C-x M-g") 'magit-dispatch-popup)
