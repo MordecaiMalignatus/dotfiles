@@ -73,6 +73,9 @@
     rust-mode
     racer
     cargo
+
+    ;; Go
+    go-mode
     ))
 
 (defun my-packages-in-sync-p ()
