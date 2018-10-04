@@ -207,7 +207,7 @@
 (defun init-file ()
   "Opens init.el."
   (interactive)
-  (find-file "~/.emacs.d/init.el"))
+  (find-file user-init-file))
 
 (defun az/copy-filename-to-clipboard ()
   "Copies file name of current file to kill ring."
