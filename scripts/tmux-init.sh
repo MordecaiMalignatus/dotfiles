@@ -12,7 +12,6 @@ if ! (tmux has-session -t $SESSION_NAME 2>/dev/null); then
   tmux split-window -t $SESSION_NAME:2 -h
   tmux new-window -t $SESSION_NAME:3 -n localdev -c "$HOME/work/docker-localdev"
   tmux kill-window -t $SESSION_NAME:1
-  tmux select-window -t $SESSION_NAME:$MAIN_WINDOW_NAME.0
 
-  tmux attach -t $SESSION_NAME
+  tmux attach -t $SESSION_NAME:1.0
 fi
