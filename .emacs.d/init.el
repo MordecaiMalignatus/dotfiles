@@ -255,6 +255,16 @@
 (setq solarized-use-variable-pitch nil)
 (load-theme 'solarized-light t)
 
+(defun az/toggle-solarized-theming ()
+  "Switch between solarized-light and solarized-dark."
+  (interactive)
+  (cond ((custom-theme-enabled-p 'solarized-light) (progn
+						     (disable-theme 'solarized-light)
+						     (load-theme 'solarized-dark t)))
+	((custom-theme-enabled-p 'solarized-dark) (progn
+						    (disable-theme 'solarized-dark)
+						    (load-theme 'solarized-light t)))))
+
 ;; Custom compose key ;)
 
 (global-set-key (kbd "C-c i c - >") (lambda () (interactive) (insert-char ?→))) ; For rename-commits.
