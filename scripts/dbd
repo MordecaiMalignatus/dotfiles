@@ -1,0 +1,20 @@
+#!/usr/bin/ruby
+
+pass_string = `pass Ryte/MetaDB`.lines.map { |l| l.strip }
+
+pass = pass_string[0]
+user = pass_string[1]
+database = pass_string[2]
+
+testing = pass_string[4]
+prod = pass_string[5]
+
+mapping = {
+  "mt" => "mysql --user=#{user} --password=#{pass} --host=#{testing} #{database}",
+  "mp" => "mysql --user=#{user} --password=#{pass} --host=#{prod} #{database}"
+}
+
+print "enter mnemonic for the target DB: "
+input = gets.chomp
+resp = mapping[input]
+exec(resp)
