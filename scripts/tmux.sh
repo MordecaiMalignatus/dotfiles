@@ -6,6 +6,10 @@ set -e
 SESSION_NAME="work"
 MAIN_WINDOW_NAME="command-central"
 
+eval `ssh-agent`
+ssh-add
+sudo -v
+
 if ! (tmux has-session -t $SESSION_NAME 2>/dev/null); then
   tmux new -d -s $SESSION_NAME -c "$HOME"
   tmux new-window -t $SESSION_NAME:2 -n $MAIN_WINDOW_NAME -c $HOME 'fish -iC "arrive"'
