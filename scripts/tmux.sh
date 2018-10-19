@@ -8,7 +8,6 @@ MAIN_WINDOW_NAME="command-central"
 
 eval `ssh-agent`
 ssh-add
-sudo -v
 
 if ! (tmux has-session -t $SESSION_NAME 2>/dev/null); then
   tmux new -d -s $SESSION_NAME -c "$HOME"
