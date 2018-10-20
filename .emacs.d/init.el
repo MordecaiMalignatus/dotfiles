@@ -250,10 +250,14 @@
 (tool-bar-mode 0)
 
 (set-face-attribute 'default nil :font "PragmataPro-12")
-(when (string= (system-name) "albatross.fritz.box")
-  (set-face-attribute 'default nil :font "PragmataPro-14"))
+(when (string= system-type 'darwin)
+  (set-face-attribute 'default nil :font "PragmataPro-15"))
 (setq solarized-use-variable-pitch nil)
 (load-theme 'solarized-light t)
+
+;; Fullscreen emacs on launch on OSX.
+(when (string= system-type 'darwin)
+  (set-frame-parameter nil 'fullscreen 'fullboth))
 
 (defun az/toggle-solarized-theming ()
   "Switch between solarized-light and solarized-dark."
