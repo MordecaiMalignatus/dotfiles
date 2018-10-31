@@ -122,6 +122,9 @@
 (global-set-key (kbd "C-h v") #'helpful-variable)
 (global-set-key (kbd "C-h k") #'helpful-key)
 
+;; Use IBuffer instead of Buffer-menu
+(global-set-key (kbd "C-x C-b") #'ibuffer)
+
 ;; Movement
 (global-set-key (kbd "C-:") 'avy-goto-char-2)
 (global-set-key (kbd "M-o") 'ace-window)
