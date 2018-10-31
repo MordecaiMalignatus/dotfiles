@@ -128,6 +128,7 @@
 ;; Movement
 (global-set-key (kbd "C-:") 'avy-goto-char-2)
 (global-set-key (kbd "M-o") 'ace-window)
+(global-set-key (kbd "C-x C-o") 'ace-window)
 (global-set-key (kbd "C-z") 'ivy-switch-buffer)
 
 ;; Magit configuration.
