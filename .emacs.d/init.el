@@ -8,8 +8,6 @@
 ;; -1.  Nearly all hotkeys are set in this file, I try not to set hotkeys in
 ;; modules.
 
-;; this is padding
-
 ;;; Code:
 (require 'seq)
 
@@ -128,10 +126,6 @@
 (global-set-key (kbd "C-:") 'avy-goto-char-2)
 (global-set-key (kbd "M-o") 'ace-window)
 (global-set-key (kbd "C-z") 'ivy-switch-buffer)
-
-(global-set-key (kbd "C-w") 'backward-kill-word)
-(global-set-key (kbd "C-c C-k") 'kill-region)
-(global-set-key (kbd "C-x C-k") 'kill-region)
 
 ;; Magit configuration.
 (global-set-key (kbd "C-x g") 'magit-status)
