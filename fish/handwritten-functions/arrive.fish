@@ -1,4 +1,4 @@
-# Defined in /tmp/fish.6xwAGx/arrive.fish @ line 2
+# Defined in /tmp/fish.nB77mJ/arrive.fish @ line 2
 function arrive
 	logrs "Arrived at work"
   emacs &
@@ -7,5 +7,4 @@ function arrive
   upgrade
   fetch-work-repos
   worktimecalc.py
-  inbox-status
 end
