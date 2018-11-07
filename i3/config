@@ -35,7 +35,7 @@ exec_always --no-startup-id feh --randomize --bg-fill ~/wallpapers/*
 # Sensible power manager.
 exec --no-startup-id xfce4-power-manager
 
-bindsym $mod+Shift+p         exec i3lock -et -i "/home/az/wallpapers/lockscreen.png"
+bindsym $mod+Shift+p         exec i3lock -et -i "~/wallpapers/lockscreen.png"
 bindsym $mod+Shift+Control+n exec feh --randomize --bg-fill ~/wallpapers/*
 
 # change focus
