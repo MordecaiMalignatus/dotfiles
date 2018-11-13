@@ -37,6 +37,7 @@
     exec-path-from-shell
     company
     helpful
+    imenu-list
 
     ; Movement
     avy
@@ -124,6 +125,11 @@
 
 ;; Use IBuffer instead of Buffer-menu
 (global-set-key (kbd "C-x C-b") #'ibuffer)
+
+;; Bind IMenu-list
+(setq imenu-list-focus-after-activation t)
+(setq imenu-list-auto-resize t)
+(global-set-key (kbd "C-c C-'") #'imenu-list-smart-toggle)
 
 ;; Movement
 (global-set-key (kbd "C-:") 'avy-goto-char-2)
