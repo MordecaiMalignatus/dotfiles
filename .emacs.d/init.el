@@ -74,6 +74,11 @@
 
     ;; Go
     go-mode
+
+    ;; Javascript Dev
+    js2-mode
+    js2-refactor
+    xref-js2
     ))
 
 (defun my-packages-in-sync-p ()
@@ -208,6 +213,20 @@
 (require 'rust-mode)
 (define-key rust-mode-map (kbd "TAB") #'company-indent-or-complete-common)
 (setq company-tooltip-align-annotations t)
+
+;; Javascript dev
+
+(require 'js2-refactor)
+(require 'xref-js2)
+
+(add-hook 'js2-mode-hook #'js2-refactor-mode)
+(js2r-add-keybindings-with-prefix "C-c C-r")
+(define-key js2-mode-map (kbd "C-k") #'js2r-kill)
+(define-key js-mode-map (kbd "M-.") nil)
+
+(add-hook 'js2-mode-hook (lambda ()
+			   (add-hook 'xref-backend-functions #'xref-js2-xref-backend nil t)))
+(add-hook 'js2-mode-hook 'prettier-js-hook)
 
 ;; Custom interactive-functions
 (defun init-file ()
