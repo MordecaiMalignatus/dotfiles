@@ -37,6 +37,7 @@
     exec-path-from-shell
     company
     helpful
+    imenu-list
 
     ; Movement
     avy
@@ -130,6 +131,11 @@
 ;; Use IBuffer instead of Buffer-menu
 (global-set-key (kbd "C-x C-b") #'ibuffer)
 
+;; Bind IMenu-list
+(setq imenu-list-focus-after-activation t)
+(setq imenu-list-auto-resize t)
+(global-set-key (kbd "C-c C-'") #'imenu-list-smart-toggle)
+
 ;; Movement
 (global-set-key (kbd "C-:") 'avy-goto-char-2)
 (global-set-key (kbd "M-o") 'ace-window)
@@ -141,10 +147,9 @@
 (global-set-key (kbd "C-x M-g") 'magit-dispatch-popup)
 (global-set-key (kbd "C-x C-S-g") 'magithub-dashboard)
 
-
 (setq auth-sources '("~/.authinfo.gpg" "~/.authinfo"))
+
 ;; Ivy Config
-;; This is experimental and I'm not sure it's going to stay.
 (ivy-mode 1)
 (setq ivy-use-virtual-buffers t)
 (setq enable-recursive-minibuffers t)
@@ -254,13 +259,6 @@
   (switch-to-buffer (get-buffer-create bufname))
   (if (= n 1) initial-major-mode))) ; 1, because n was incremented
 (global-set-key (kbd "C-x n") 'create-new-scratch-buffer)
-
-(defun pocket-pop-article ()
-  "Pops a single article off of my pocket queue and opens it in the browser."
-  (interactive)
-  (shell-command "pockyt get -n 1 -r oldest -s unread -o browser | pockyt mod -a 1 -i redirect"))
-
-(global-set-key (kbd "C-x p p") 'pocket-pop-article)
 
 ;; Aesthetics
 (menu-bar-mode 0)
