@@ -255,7 +255,9 @@
 
 ;; Fullscreen emacs on launch on OSX.
 (when (string= system-type 'darwin)
-  (set-frame-parameter nil 'fullscreen 'fullboth))
+  (progn
+    (set-frame-parameter nil 'fullscreen 'fullboth)
+    (setq ivy-use-selectable-prompt t)))
 
 (defun az/toggle-solarized-theming ()
   "Switch between solarized-light and solarized-dark."
