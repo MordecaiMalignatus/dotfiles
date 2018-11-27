@@ -286,6 +286,13 @@
 						    (disable-theme 'solarized-dark)
 						    (load-theme 'solarized-light t)))))
 
+(defun az/align-on-whitespace (start end)
+  "Aligns selection on whitespace.
+START: Start of region.
+END: End of region."
+  (interactive "r")
+  (align-regexp start end "\\(\\s-*\\)\\s-" 1 0 t))
+
 ;; Custom compose key ;)
 
 (global-set-key (kbd "C-c i c - >") (lambda () (interactive) (insert-char ?→))) ; For rename-commits.
