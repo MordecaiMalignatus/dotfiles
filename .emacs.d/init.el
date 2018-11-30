@@ -50,6 +50,8 @@
     deft
     org
     markdown-mode
+    plantuml-mode
+    graphviz-dot-mode
 
     ; Git
     magit
@@ -73,13 +75,15 @@
     racer
     cargo
 
-    ;; Go
-    go-mode
-
     ;; Javascript Dev
     js2-mode
     js2-refactor
     xref-js2
+
+    ;; Misc Languages and modes
+    go-mode
+    terraform-mode
+    yaml-mode
     ))
 
 (defun my-packages-in-sync-p ()
@@ -175,6 +179,10 @@
 (setq org-log-done 'date)
 (setq org-default-notes-file "~/Dropbox/Reference/Work/capture.org")
 
+
+;; PlantUML Config
+(setq plantuml-jar-path "/opt/plantuml/plantuml.jar")
+(add-to-list 'auto-mode-alist '("\\.plantuml\\'" . plantuml-mode))
 
 ;; Projectile config
 (projectile-mode +1)
