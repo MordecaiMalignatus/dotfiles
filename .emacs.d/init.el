@@ -301,7 +301,7 @@ END: End of region."
   (interactive "r")
   (align-regexp start end "\\(\\s-*\\)\\s-" 1 0 t))
 
-(defun smarter-move-beginning-of-line (arg)
+(defun az/move-beginning-of-line (arg)
   "Move point back to indentation of beginning of line.
 
 Move point to the first non-whitespace character on this line.
