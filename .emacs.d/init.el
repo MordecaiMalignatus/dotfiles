@@ -326,9 +326,9 @@ Copied from [[https://emacsredux.com/blog/2013/05/22/smarter-navigation-to-the-b
     (when (= orig-point (point))
       (move-beginning-of-line 1))))
 
-;; remap C-a to `smarter-move-beginning-of-line'
+;; remap C-a to `az/move-beginning-of-line'
 (global-set-key [remap move-beginning-of-line]
-                'smarter-move-beginning-of-line)
+                'az/move-beginning-of-line)
 
 
 ;; Custom compose key ;)
