@@ -43,10 +43,6 @@ Plugin 'jiangmiao/auto-pairs'             " Automatically match pairs.
 Plugin 'justinmk/vim-sneak'
 Plugin 'YankRing.vim'                     " Kill ring implementation in vim, check :h yankring-tutorial
 
-" Snippets.
-" Plugin 'honza/vim-snippets'               " Snippet collection that comes in handy.
-" Plugin 'SirVer/ultisnips'                 " Snippet engine, integrates with YCM
-
 " Themes and colorschemes.
 Plugin 'flazz/vim-colorschemes'           " Giant-ass collection because why not.
 
@@ -134,11 +130,6 @@ nnoremap <leader>ht :set cursorline! relativenumber!<CR>
 let g:airline_theme='badwolf'     " Make our powerline suit the theme at hand.
 let g:airline_powerline_fonts = 1 " And make it pretty.
 set laststatus=2                  " And make it... appear.
-
-" Snippers
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-let g:UltiSnipsExpandTrigger='<c-e>'
 
 " Vimux things
 let g:VimuxHeight = "30"
