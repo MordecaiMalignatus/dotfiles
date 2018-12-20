@@ -152,6 +152,7 @@
 (global-set-key (kbd "C-x C-S-g") 'magithub-dashboard)
 
 (setq auth-sources '("~/.authinfo.gpg" "~/.authinfo"))
+(magithub-feature-autoinject t)
 
 ;; Ivy Config
 (ivy-mode 1)
