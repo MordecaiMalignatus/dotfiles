@@ -90,9 +90,6 @@ bindsym $mod+space       focus mode_toggle
 # focus the parent container
 bindsym $mod+a           focus parent
 
-# focus the child container
-#bindsym $mod+d focus child
-
 # switch to workspace
 bindsym $mod+i           workspace next_on_output
 bindsym $mod+u           workspace prev_on_output
@@ -113,17 +110,16 @@ bindsym $mod+Shift+Left  move container left
 
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r     restart
-# This "w"akes screens up if they got stuck after hibernation.
-bindsym $mod+Shift+w     exec "xset dpms force off; sleep 2; xset dpms force on"
 
 bindsym $mod+m mode "$move"
-set $move Move: (l)eft, (r)ight, (s)mall
+set $move Move: (l)eft, (r)ight, (s)mall, (b)eamer
 mode "$move" {
         bindsym l move workspace to output DP2-2; mode "default"
         bindsym r move workspace to output DP2-1; mode "default"
         bindsym s move workspace to output eDP1; mode "default"
+        bindsym b move workspace to output HDMI2; mode "default"
 
-        bindsym Return mode "default"
+	bindsym Return mode "default"
         bindsym Escape mode "default"
 }
 
