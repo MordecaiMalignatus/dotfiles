@@ -179,6 +179,8 @@
 
 (setq org-log-done 'date)
 (setq org-default-notes-file "~/Dropbox/Reference/Work/capture.org")
+(setq org-clock-persist 'history)
+(org-clock-persistence-insinuate)
 
 
 ;; PlantUML Config
