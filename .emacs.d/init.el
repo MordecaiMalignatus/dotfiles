@@ -1,6 +1,6 @@
 ;;; init.el --- Summary
 ;;; Commentary:
-;; Hi, I'm Mordecai and this is my init.el.  It's a bit of a mess.  A lot of
+;; Hi, I'm Az and this is my init.el.  It's a bit of a mess.  A lot of
 ;; things are splintered off into their own sub modules in init/, you can find a
 ;; list of them in `load-inits-settings'.  This is a hybrid init file that is
 ;; used between an OSX laptop and a Linux laptop, some things are for Linux
