@@ -20,11 +20,13 @@
 
 (tool-bar-mode -1)
 (add-hook 'emacs-lisp-mode-hook 'paredit-mode)
+(add-hook 'lisp-mode-hook 'paredit-mode)
 
 (setq custom-file (concat user-emacs-directory "custom.el"))
 (load custom-file)
 
 ;; Making sure everything is installed.
+;; I really, really ought to port all this to use-package, and probably straight.el
 
 (defvar my-packages '() "Canonical list of packages.")
 (setq my-packages '(
