@@ -64,9 +64,8 @@
 
     ; Haskell
     haskell-mode
-    intero
 
-    ; Python
+    ;;Python
     company-jedi
     pipenv
     elpy
