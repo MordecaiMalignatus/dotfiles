@@ -1,6 +1,7 @@
 *.swp
 #*
 .emacs.d/elpa/
+.emacs.d/url/
 .emacs.d/bookmarks
 .emacs.d/magithub/
 .emacs.d/var/
