@@ -11,99 +11,20 @@
 ;;; Code:
 (require 'seq)
 
-;; Packages.
-(require 'package)
+;; use-package setup
+(eval-when-compile
+  (add-to-list 'load-path (concat user-emacs-directory "use-package"))
+  (require 'use-package))
 
+(require 'package)
 (add-to-list 'package-archives '("org"   . "https://orgmode.org/elpa/") t)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 (package-initialize)
 
 (tool-bar-mode -1)
-(add-hook 'emacs-lisp-mode-hook 'paredit-mode)
-(add-hook 'lisp-mode-hook 'paredit-mode)
 
 (setq custom-file (concat user-emacs-directory "custom.el"))
 (load custom-file)
-
-;; Making sure everything is installed.
-;; I really, really ought to port all this to use-package, and probably straight.el
-
-(defvar my-packages '() "Canonical list of packages.")
-(setq my-packages '(
-    ; Plumbing
-    ivy
-    counsel
-    swiper
-    flycheck
-    flycheck-inline
-    exec-path-from-shell
-    company
-    helpful
-    imenu-list
-
-    ; Movement
-    avy
-    ace-window
-
-    ; Prettiness
-    solarized-theme
-
-    ; Document management
-    deft
-    org
-    markdown-mode
-    plantuml-mode
-    graphviz-dot-mode
-
-    ; Git
-    magit
-    magithub
-
-    ;; Elixir
-    alchemist
-
-    ; Haskell
-    haskell-mode
-
-    ;;Python
-    company-jedi
-    pipenv
-    elpy
-
-    ;; Rust
-    flycheck-rust
-    rust-mode
-    racer
-    cargo
-
-    ;; Javascript Dev
-    js2-mode
-    js2-refactor
-    xref-js2
-
-    ;; Misc Languages and modes
-    go-mode
-    terraform-mode
-    yaml-mode
-    ))
-
-(defun my-packages-in-sync-p ()
-  "Decide if all packages in `my-packages' are installed."
-  (seq-every-p 'package-installed-p my-packages))
-
-(defun install-my-packages ()
-  "Make sure every package in `my-packages' is installed from remotes."
-  (interactive)
-  (unless (my-packages-in-sync-p)
-    (message "%s" "Packages out of sync, refreshing contents...")
-    (package-refresh-contents)
-    (message "%s" "Refresh done. Updating missing packages...")
-    (mapc #'(lambda (package-name)
-	      (unless (package-installed-p package-name)
-		(package-install package-name)))
-	  my-packages)))
-
-(add-hook 'after-init-hook 'install-my-packages)
 
 ;; My custom modules.
 (add-to-list 'load-path (concat user-emacs-directory "init"))
@@ -113,96 +34,119 @@
   (mapc 'require '(logrs
 		   custom-deft)))
 
-;; Load database connections on work machine.
-;; (when (string= (system-name) "mariner")
-;;   (require 'databases))
-
-(defun define-custom-global-hotkeys ()
-  "Load all hotkeys related to custom modules, wher Emacs would bitch otherwise."
-  (progn
-    ;; Logrs
-    (global-set-key (kbd "C-c l l") 'logrs-enter-log)
-    (global-set-key (kbd "C-c l v") 'logrs-view-today)
-    (global-set-key (kbd "C-c l y") 'logrs-view-yesterday)))
-
 (add-hook 'after-init-hook 'load-init-settings)
-(add-hook 'after-init-hook 'define-custom-global-hotkeys)
 
-;; Replace default help with `helpful'
-(global-set-key (kbd "C-h f") #'helpful-callable)
-(global-set-key (kbd "C-h v") #'helpful-variable)
-(global-set-key (kbd "C-h k") #'helpful-key)
+;; Replace default help functions with `helpful'
+(use-package helpful
+  :ensure t
+  :bind (("C-h f" . #'helpful-callable)
+	 ("C-h v" . #'helpful-variable)
+	 ("C-h k" . #'helpful-key)))
 
 ;; Use IBuffer instead of Buffer-menu
+
 (global-set-key (kbd "C-x C-b") #'ibuffer)
 
-;; Bind IMenu-list
-(setq imenu-list-focus-after-activation t)
-(setq imenu-list-auto-resize t)
-(global-set-key (kbd "C-c C-'") #'imenu-list-smart-toggle)
+(use-package imenu-list
+  :ensure t
+  :bind (("C-c C-'" . #'imenu-list-smart-toggle))
+  :config
+  (setq imenu-list-focus-after-activation t)
+  (setq imenu-list-auto-resize t))
 
 ;; Movement
-(global-set-key (kbd "C-:") 'avy-goto-char-2)
-(global-set-key (kbd "M-o") 'ace-window)
-(global-set-key (kbd "C-x C-o") 'ace-window)
-(global-set-key (kbd "C-z") 'ivy-switch-buffer)
+(use-package avy
+  :ensure t
+  :bind ("C-'" . 'avy-goto-char-2))
 
-;; Magit configuration.
-(global-set-key (kbd "C-x g") 'magit-status)
-(global-set-key (kbd "C-x M-g") 'magit-dispatch-popup)
-(global-set-key (kbd "C-x C-S-g") 'magithub-dashboard)
+(use-package ace-window
+  :ensure t
+  :bind (("M-o" . 'ace-window)
+	 ("C-x C-o" . 'ace-window)))
 
-(setq auth-sources '("~/.authinfo.gpg" "~/.authinfo"))
-(magithub-feature-autoinject t)
+;; Ivy, auto-completion and fuzzy finder.
+(use-package ivy
+  :ensure t
+  :bind (("C-z" . 'ivy-switch-buffer))
+  :config
+  (ivy-mode 1)
+  (setq ivy-use-virtual-buffers t)
+  (setq enable-recursive-minibuffers t))
 
-;; Ivy Config
-(ivy-mode 1)
-(setq ivy-use-virtual-buffers t)
-(setq enable-recursive-minibuffers t)
-(global-set-key "\C-s" 'swiper)
-(global-set-key (kbd "M-x") 'counsel-M-x)
-(global-set-key (kbd "C-c k") 'counsel-ag)
+(use-package swiper
+  :ensure t
+  :bind (("C-s" . 'swiper)))
 
-;; Handle SSH-agent for magit
-(require 'exec-path-from-shell)
-(exec-path-from-shell-copy-env "SSH_AGENT_PID")
-(exec-path-from-shell-copy-env "SSH_AUTH_SOCK")
+(use-package counsel
+  :ensure t
+  :bind (("M-x" . 'counsel-M-x)
+	 ("C-c k" . 'counsel-ag)))
+
+;; Git, and github.
+(use-package magit
+  :ensure t
+  :bind (("C-x g" . 'magit-status)
+	 ("C-x M-g" . 'magit-dispatch-popup))
+  :config
+  (setq auth-sources '("~/.authinfo.gpg" "~/.authinfo")))
+
+(use-package magithub
+  :ensure t
+  :bind (("C-x C-M-g" . 'magithub-dashboard))
+  :config
+  (magithub-feature-autoinject t))
+
+
+;; This package is required to copy SSH agent details from the shell, on linux.
+(use-package exec-path-from-shell
+  :ensure t
+  :config
+  (exec-path-from-shell-copy-env "SSH_AGENT_PID")
+  (exec-path-from-shell-copy-env "SSH_AUTH_SOCK"))
 
 ;; Org-Mode Config.
-(setq-default fill-column 80)
-(add-hook 'text-mode-hook 'auto-fill-mode)
-(add-hook 'before-save-hook 'delete-trailing-whitespace)
-(add-hook 'org-mode-hook 'org-indent-mode)
-(add-hook 'org-mode-hook 'wrap-region-mode)
-
-(global-set-key (kbd "C-c a") 'org-agenda)
-(global-set-key (kbd "C-c o c") 'counsel-org-capture)
-
-(setq org-log-done 'date)
-(setq org-default-notes-file "~/Dropbox/Reference/Work/capture.org")
-(setq org-clock-persist 'history)
-(org-clock-persistence-insinuate)
-
-
-;; PlantUML Config
-(setq plantuml-jar-path "/opt/plantuml/plantuml.jar")
-(add-to-list 'auto-mode-alist '("\\.plantuml\\'" . plantuml-mode))
+(use-package org
+  :ensure t
+  :bind (("C-c a" . 'org-agenda)
+	 ("C-c o c" . 'counsel-org-capture)
+	 ("C-c C-l" . 'org-store-link)
+	 ("C-c l" . 'org-insert-link))
+  :config
+  (setq-default fill-column 80)
+  (add-hook 'text-mode-hook 'auto-fill-mode)
+  (add-hook 'before-save-hook 'delete-trailing-whitespace)
+  (add-hook 'org-mode-hook 'org-indent-mode)
+  (add-hook 'org-mode-hook 'wrap-region-mode)
+  (setq org-log-done 'date)
+  (setq org-default-notes-file "~/Dropbox/Reference/Work/capture.org")
+  (setq org-clock-persist 'history)
+  (org-clock-persistence-insinuate))
 
 ;; Projectile config
-(projectile-mode +1)
-(define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
-(define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
-(setq projectile-completion-system 'ivy)
-(setq projectile-switch-project-action #'magit-status)
+(use-package projectile
+  :ensure t
+  :bind-keymap (("C-c p" . 'projectile-command-map))
+  :config
+  (projectile-mode +1)
+  (setq projectile-completion-system 'ivy)
+  (setq projectile-switch-project-action #'magit-status))
 
 ;; Flycheck configuration
-(exec-path-from-shell-initialize)
-(global-flycheck-mode)
-(with-eval-after-load 'flycheck
+(use-package flycheck
+  :ensure t
+  :config
+  (global-flycheck-mode))
+
+(use-package flycheck-inline
+  :ensure t
+  :after flycheck
+  :config
   (flycheck-inline-mode))
 
 ;; Company mode.
-(add-hook 'after-init-hook 'global-company-mode)
+(use-package company
+  :ensure t
+  :hook (after-init . global-company-mode))
 
 ;; Haskell specifics
 (add-hook 'haskell-mode-hook 'intero-mode)
@@ -217,33 +161,55 @@
 (setq alchemist-key-command-prefix (kbd "C-c ,"))
 
 ;; Python stuff
-(elpy-enable)
+(use-package elpy
+  :ensure t
+  :config
+  (elpy-enable))
+
+;; Lispy stuff.
+(use-package paredit
+  :ensure t
+  :bind (("C-DEL" . 'paredit-backwards-kill-word))
+  :hook ((emacs-lisp . paredit-mode)
+	 (lisp . paredit-rmode)))
 
 ;; Rust Settings
-(add-hook 'rust-mode-hook 'cargo-minor-mode)
-(add-hook 'rust-mode-hook 'racer-mode)
-(add-hook 'racer-mode-hook 'eldoc-mode)
-(add-hook 'racer-mode-hook #'company-mode)
-(with-eval-after-load 'rust-mode
-  (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
+(use-package rust-mode
+  :ensure t
+  :bind (:map rust-mode-map
+	      ("TAB" . #'company-indent-or-complete-common))
+  :config
+  ; (add-hook 'flycheck-mode-hook #'flycheck-rust-setup)
+  (setq company-tooltip-align-annotations t))
 
-(require 'rust-mode)
-(define-key rust-mode-map (kbd "TAB") #'company-indent-or-complete-common)
-(setq company-tooltip-align-annotations t)
+(use-package cargo
+  :ensure t
+  :hook (rust-mode . cargo-minor-mode))
+
+(use-package racer
+  :ensure t
+  :hook (rust-mode)
+  :config
+  (add-hook 'racer-mode-hook 'eldoc-mode)
+  (add-hook 'racer-mode-hook #'company-mode))
 
 ;; Javascript dev
+(use-package js2-mode
+  :ensure t
+  :config
+  (define-key js2-mode-map (kbd "C-k") #'js2r-kill)
+  (define-key js-mode-map (kbd "M-.") nil))
 
-(require 'js2-refactor)
-(require 'xref-js2)
+(use-package js2-refactor
+  :after js2-mode
+  :hook js2
+  :ensure t
+  :config
+  (js2r-add-keybindings-with-prefix "C-c C-r"))
 
-(add-hook 'js2-mode-hook #'js2-refactor-mode)
-(js2r-add-keybindings-with-prefix "C-c C-r")
-(define-key js2-mode-map (kbd "C-k") #'js2r-kill)
-(define-key js-mode-map (kbd "M-.") nil)
-
-(add-hook 'js2-mode-hook (lambda ()
-			   (add-hook 'xref-backend-functions #'xref-js2-xref-backend nil t)))
-(add-hook 'js2-mode-hook 'prettier-js-hook)
+(use-package xref-js2
+  :after js2-mode
+  :ensure t)
 
 ;; Custom interactive-functions
 (defun init-file ()
@@ -277,16 +243,19 @@
 (tool-bar-mode 0)
 
 (set-face-attribute 'default nil :font "PragmataPro-12")
-(when (string= system-type 'darwin)
-  (set-face-attribute 'default nil :font "PragmataPro-15"))
-(setq solarized-use-variable-pitch nil)
-(load-theme 'solarized-light t)
+
+(use-package solarized-theme
+  :ensure t
+  :init
+  (setq solarized-use-variable-pitch nil)
+  (load-theme 'solarized-light t))
 
 ;; Fullscreen emacs on launch on OSX.
 (when (string= system-type 'darwin)
-  (progn
-    (set-frame-parameter nil 'fullscreen 'fullboth)
-    (setq ivy-use-selectable-prompt t)))
+(progn
+  (set-face-attribute 'default nil :font "PragmataPro-15")
+  (set-frame-parameter nil 'fullscreen 'fullboth)
+  (setq ivy-use-selectable-prompt t)))
 
 (defun az/toggle-solarized-theming ()
   "Switch between solarized-light and solarized-dark."
@@ -306,7 +275,7 @@ END: End of region."
   (align-regexp start end "\\(\\s-*\\)\\s-" 1 0 t))
 
 (defun az/move-beginning-of-line (arg)
-  "Move point back to indentation of beginning of line.
+  "Move point back to indentation of beginnning of line.
 
 Move point to the first non-whitespace character on this line.
 If point is already there, move to the beginning of the line.
