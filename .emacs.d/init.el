@@ -96,7 +96,6 @@
   :config
   (magithub-feature-autoinject t))
 
-
 ;; This package is required to copy SSH agent details from the shell, on linux.
 (use-package exec-path-from-shell
   :ensure t
@@ -125,7 +124,7 @@
 ;; Projectile config
 (use-package projectile
   :ensure t
-  :bind-keymap (("C-c p" . 'projectile-command-map))
+  :bind-keymap (("C-c p" . projectile-command-map))
   :config
   (projectile-mode +1)
   (setq projectile-completion-system 'ivy)
