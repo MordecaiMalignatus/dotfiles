@@ -179,7 +179,6 @@
   :bind (:map rust-mode-map
 	      ("TAB" . #'company-indent-or-complete-common))
   :config
-  ; (add-hook 'flycheck-mode-hook #'flycheck-rust-setup)
   (setq company-tooltip-align-annotations t))
 
 (use-package cargo
@@ -192,6 +191,11 @@
   :config
   (add-hook 'racer-mode-hook 'eldoc-mode)
   (add-hook 'racer-mode-hook #'company-mode))
+
+(use-package flycheck-rust
+  :ensure t
+  :config
+  (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
 
 ;; Javascript dev
 (use-package js2-mode
