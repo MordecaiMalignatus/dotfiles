@@ -302,10 +302,21 @@ Copied from [[https://emacsredux.com/blog/2013/05/22/smarter-navigation-to-the-b
     (when (= orig-point (point))
       (move-beginning-of-line 1))))
 
-;; remap C-a to `az/move-beginning-of-line'
 (global-set-key [remap move-beginning-of-line]
                 'az/move-beginning-of-line)
 
+(defun az/search-at-point ()
+  "Search for symbol at point, similar to vim's `*'."
+  (interactive)
+  (save-excursion
+    (backward-word)
+    (push-mark)
+    (forward-word)
+    (counsel-ag (buffer-substring (region-beginning) (region-end))
+	        (file-name-directory (buffer-file-name)))
+    (pop-mark)))
+
+(global-set-key (kbd "C-c *") 'az/search-at-point)
 
 ;; Custom compose key ;)
 
