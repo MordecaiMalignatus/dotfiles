@@ -111,7 +111,8 @@
   (exec-path-from-shell-copy-env "SSH_AGENT_PID")
   (exec-path-from-shell-copy-env "SSH_AUTH_SOCK"))
 
-;; Org-Mode Config.
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Document management.
 (use-package org
   :ensure t
   :bind (("C-c a" . 'org-agenda)
@@ -128,6 +129,12 @@
   (setq org-default-notes-file "~/Dropbox/Reference/Work/capture.org")
   (setq org-clock-persist 'history)
   (org-clock-persistence-insinuate))
+
+(use-package deft
+  :ensure t)
+
+(use-package wrap-region
+  :ensure t)
 
 ;; Projectile config
 (use-package projectile
