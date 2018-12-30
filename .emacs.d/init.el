@@ -173,8 +173,14 @@
   (setq haskell-compile-cabal-build-command "stack build"))
 
 ;; Elixir specifics
-(add-hook 'elixir-mode-hook 'alchemist-mode)
-(setq alchemist-key-command-prefix (kbd "C-c ,"))
+(use-package elixir-mode
+  :ensure t)
+
+(use-package alchemist
+  :ensure t
+  :hook alchemist
+  :config
+  (setq alchemist-key-command-prefix (kbd "C-c ,")))
 
 ;; Python stuff
 (use-package elpy
