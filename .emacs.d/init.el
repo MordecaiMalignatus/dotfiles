@@ -186,8 +186,8 @@
 (use-package paredit
   :ensure t
   :bind (("C-DEL" . 'paredit-backwards-kill-word))
-  :hook ((emacs-lisp . paredit-mode)
-	 (lisp . paredit-rmode)))
+  :hook ((emacs-lisp-mode . paredit-mode)
+	 (lisp-mode . paredit-mode)))
 
 ;; Rust Settings
 (use-package rust-mode
