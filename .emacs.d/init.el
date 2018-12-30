@@ -163,12 +163,14 @@
   :hook (after-init . global-company-mode))
 
 ;; Haskell specifics
-(add-hook 'haskell-mode-hook 'intero-mode)
-(setq haskell-stylish-on-save t)
-(setq haskell-compile-cabal-build-command "stack build")
 
-(eval-after-load "haskell-mode"
-  '(define-key haskell-mode-map (kbd "C-c C-c") 'haskell-compile))
+(use-package haskell-mode
+  :ensure t
+  :bind (:map haskell-mode-map ("C-c C-c" . 'haskell-compile))
+  :config
+  (add-hook 'haskell-mode-hook 'intero-mode)
+  (setq haskell-stylish-on-save t)
+  (setq haskell-compile-cabal-build-command "stack build"))
 
 ;; Elixir specifics
 (add-hook 'elixir-mode-hook 'alchemist-mode)
