@@ -266,12 +266,13 @@
   :ensure t
   :init
   (setq solarized-use-variable-pitch nil)
+  :config
   (load-theme 'solarized-light t))
 
 ;; Fullscreen emacs on launch on OSX.
 (when (string= system-type 'darwin)
 (progn
-  (set-face-attribute 'default nil :font "PragmataPro-15")
+  (set-face-attribute 'default nil :font "PragmataPro-13")
   (set-frame-parameter nil 'fullscreen 'fullboth)
   (setq ivy-use-selectable-prompt t)))
 
@@ -302,8 +303,8 @@ the beginning of the line.
 
 If ARG is not nil or 1, move forward ARG - 1 lines first.  If
 point reaches the beginning or end of the buffer, stop there.
-
-Copied from [[https://emacsredux.com/blog/2013/05/22/smarter-navigation-to-the-beginning-of-a-line/]]"
+Copied from [[https://emacsredux.com/blog/2013/05/22/smarter-navigation-to-the-beginning-of-a-line/]]
+"
   (interactive "^p")
   (setq arg (or arg 1))
 
