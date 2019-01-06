@@ -125,16 +125,12 @@
   (add-hook 'text-mode-hook 'auto-fill-mode)
   (add-hook 'before-save-hook 'delete-trailing-whitespace)
   (add-hook 'org-mode-hook 'org-indent-mode)
-  (add-hook 'org-mode-hook 'wrap-region-mode)
   (setq org-log-done 'date)
   (setq org-default-notes-file "~/Dropbox/Reference/Work/capture.org")
   (setq org-clock-persist 'history)
   (org-clock-persistence-insinuate))
 
 (use-package deft
-  :ensure t)
-
-(use-package wrap-region
   :ensure t)
 
 ;; Projectile config
