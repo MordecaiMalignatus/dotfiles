@@ -53,7 +53,6 @@
 	 ("C-c C-d" . #'helpful-at-point)))
 
 ;; Use IBuffer instead of Buffer-menu
-
 (global-set-key (kbd "C-x C-b") #'ibuffer)
 
 (use-package imenu-list
@@ -245,6 +244,9 @@
   (interactive)
   (kill-new (buffer-file-name))
   (message "Copied %s to kill ring" (buffer-file-name)))
+
+(global-set-key (kbd "C-c C-a f n") 'az/copy-filename-to-clipboard)
+(global-set-key (kbd "C-c C-a l n") 'global-display-line-numbers-mode)
 
 (defun create-new-scratch-buffer ()
   "Create a new scratch buffer to work in."
