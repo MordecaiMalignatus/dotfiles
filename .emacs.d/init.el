@@ -98,11 +98,8 @@
   :config
   (setq auth-sources '("~/.authinfo.gpg" "~/.authinfo")))
 
-(use-package magithub
-  :ensure t
-  :bind (("C-x C-M-g" . 'magithub-dashboard))
-  :config
-  (magithub-feature-autoinject t))
+(use-package forge
+  :ensure t)
 
 ;; This package is required to copy SSH agent details from the shell, on linux.
 (use-package exec-path-from-shell
