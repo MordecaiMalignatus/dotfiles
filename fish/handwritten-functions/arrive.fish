@@ -6,7 +6,6 @@ function arrive
   sh ~/dotfiles/scripts/i3-arrangement.sh
   sh ~/dotfiles/scripts/open-auth-sites.sh
   i3-msg workspace Nerdery
-  upgrade
   fetch-work-repos
   worktimecalc.py
 end
