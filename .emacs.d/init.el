@@ -1,4 +1,4 @@
-;;; init.el --- Summary
+;; init.el --- Summary
 ;;; Commentary:
 ;; Hi, I'm Az and this is my init.el.  It's a bit of a mess.  A lot of
 ;; things are splintered off into their own sub modules in init/, you can find a
@@ -146,7 +146,7 @@
 (use-package flycheck
   :ensure t
   :config
-  (global-flycheck-mode))
+  (global-flycheck-mode t))
 
 (use-package flycheck-inline
   :ensure t
@@ -160,14 +160,17 @@
   :hook (after-init . global-company-mode))
 
 ;; Haskell specifics
-
 (use-package haskell-mode
   :ensure t
   :bind (:map haskell-mode-map ("C-c C-c" . 'haskell-compile))
   :config
-  (add-hook 'haskell-mode-hook 'intero-mode)
   (setq haskell-stylish-on-save t)
   (setq haskell-compile-cabal-build-command "stack build"))
+
+(use-package flycheck-haskell
+  :ensure t
+  :config
+  (add-hook 'haskell-mode #'flycheck-haskell-setup))
 
 ;; Elixir specifics
 (use-package elixir-mode
