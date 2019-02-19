@@ -233,6 +233,12 @@
   :after js2-mode
   :ensure t)
 
+(use-package graphviz-dot-mode
+  :ensure t
+  :config
+  (setq graphviz-dot-auto-indent-on-braces t)
+  (define-key graphviz-dot-mode-map (kbd "C-c C-p") #'graphviz-dot-preview))
+
 ;; Custom interactive-functions
 (defun init-file ()
   "Opens init.el."
