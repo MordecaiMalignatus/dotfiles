@@ -31,3 +31,4 @@ ranger/history
 /.emacs.d/projectile-bookmarks.eld
 /.emacs.d/init/databases.el
 /.emacs.d/forge-database.sqlite
+/.emacs.d/transient/history.el
