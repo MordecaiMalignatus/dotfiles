@@ -205,6 +205,7 @@ au FileType ruby nnoremap <leader>rt :Dispatch rspec<CR>
 let g:hindent_on_save = 0
 au FileType haskell nnoremap <leader>rf :Hindent<CR>
 au FileType haskell nnoremap <leader>rt :call VimuxRunCommand('rake test')<CR>
+au FileType haskell nnoremap gq :%!stylish-haskell<CR>
 
 """"""
 " Markdown things.
