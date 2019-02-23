@@ -129,6 +129,9 @@
 (use-package deft
   :ensure t)
 
+(use-package olivetti
+  :ensure t)
+
 ;; Projectile config
 (use-package projectile
   :ensure t
