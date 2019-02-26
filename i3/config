@@ -44,9 +44,6 @@ bindsym $mod+k               focus up
 bindsym $mod+l               focus right
 bindsym $mod+h               focus left
 
-# Focus oldest urgent message, processing the queue.
-bindsym $mod+f [urgent="oldest"] focus
-
 # split in horizontal orientation
 bindsym $mod+Shift+Control+h split h
 # split in vertical orientation
@@ -135,7 +132,7 @@ mode "$sound" {
         bindsym Return mode "default"
 }
 
-bindsym $mod+semicolon mode "$focus"
+bindsym $mod+f mode "$focus"
 set $focus Focus: (b)rowser, (c)onsole, (e)macs, (i)ntelliJ, (1-10) workspaces
 mode "$focus" {
         bindsym b workspace Browser; mode "default"
