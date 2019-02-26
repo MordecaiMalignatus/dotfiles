@@ -115,7 +115,8 @@
   :bind (("C-c a" . 'org-agenda)
 	 ("C-c o c" . 'counsel-org-capture)
 	 ("C-c C-l" . 'org-store-link)
-	 ("C-c l" . 'org-insert-link))
+	 ("C-c l" . 'org-insert-link)
+	 ("C-c C-M-." . 'org-time-stamp-inactive))
   :config
   (setq-default fill-column 80)
   (add-hook 'text-mode-hook 'auto-fill-mode)
