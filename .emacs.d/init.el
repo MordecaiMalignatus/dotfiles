@@ -102,6 +102,9 @@
   :after magit
   :ensure t)
 
+(use-package gist
+  :ensure t)
+
 ;; This package is required to copy SSH agent details from the shell, on linux.
 (use-package exec-path-from-shell
   :ensure t
