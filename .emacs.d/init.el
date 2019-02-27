@@ -163,6 +163,19 @@
   :ensure t
   :hook (after-init . global-company-mode))
 
+;; YASnippets.
+(use-package yasnippet
+  :ensure t
+  :config
+  (yas-global-mode 1))
+
+(use-package yasnippet-snippets
+  :ensure t
+  :after yasnippet)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Language specifics.
+
 ;; Haskell specifics
 (use-package haskell-mode
   :ensure t
