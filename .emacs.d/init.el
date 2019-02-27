@@ -65,7 +65,7 @@
 ;; Movement
 (use-package avy
   :ensure t
-  :bind ("C-'" . 'avy-goto-char-2))
+  :bind ("C-;" . 'avy-goto-char-2))
 
 (use-package ace-window
   :ensure t
