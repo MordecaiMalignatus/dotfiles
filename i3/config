@@ -116,7 +116,20 @@ mode "$move" {
         bindsym s move workspace to output eDP1; mode "default"
         bindsym b move workspace to output HDMI2; mode "default"
 
-	bindsym Return mode "default"
+        bindsym semicolon mode "$moveFocus"
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+set $moveFocus Move to focus: (b)rowser, (c)onsole, (e)macs, (i)ntelliJ
+mode "$moveFocus" {
+        bindsym b move container to workspace Browser; mode "default"
+        bindsym c move container to workspace Console; mode "default"
+        bindsym e move container to workspace Emacs; mode "default"
+        bindsym i move container to workspace IntelliJ; mode "default"
+
+        bindsym Return mode "default"
         bindsym Escape mode "default"
 }
 
