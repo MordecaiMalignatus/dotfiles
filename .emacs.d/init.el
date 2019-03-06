@@ -226,19 +226,7 @@
   :ensure t
   :hook (rust-mode . cargo-minor-mode))
 
-(use-package racer
-  :ensure t
-  :hook (rust-mode)
-  :config
-  (add-hook 'racer-mode-hook 'eldoc-mode)
-  (add-hook 'racer-mode-hook #'company-mode))
-
-(use-package flycheck-rust
-  :ensure t
-  :config
-  (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
-
-;; Javascript dev
+;; Javascript Dev
 (use-package js2-mode
   :ensure t
   :config
