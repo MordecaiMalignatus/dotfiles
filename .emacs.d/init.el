@@ -135,7 +135,9 @@
   :ensure t)
 
 (use-package olivetti
-  :ensure t)
+  :ensure t
+  :config
+  (global-set-key (kbd "C-c C-8 o") #'olivetti-mode))
 
 ;; Projectile config
 (use-package projectile
