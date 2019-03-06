@@ -176,7 +176,16 @@
   :after yasnippet)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Language specifics.
+;; Programming Stuff.
+
+;; We language servers now, awww yeh
+(use-package lsp-mode
+  :ensure t)
+
+(use-package lsp-ui
+  :ensure t
+  :config
+  (add-hook 'lsp-mode-hook 'lsp-ui-mode))
 
 ;; Haskell specifics
 (use-package haskell-mode
