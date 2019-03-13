@@ -55,6 +55,9 @@
 ;; Use IBuffer instead of Buffer-menu
 (global-set-key (kbd "C-x C-b") #'ibuffer)
 
+;; Enable disabled-by-default commands.
+(put 'narrow-to-region 'disabled nil)
+
 (use-package imenu-list
   :ensure t
   :bind (("C-c C-'" . #'imenu-list-smart-toggle))
