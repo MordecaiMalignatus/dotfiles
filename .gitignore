@@ -32,3 +32,4 @@ ranger/history
 /.emacs.d/init/databases.el
 /.emacs.d/forge-database.sqlite
 /.emacs.d/transient/history.el
+/fish/fish_variables
