@@ -1,0 +1,5 @@
+#+NUMBER: 2
+#+ANCESTORS: (1)
+#+CHILDREN: ()
+
+This is a child card used for demonstrative purposes.
