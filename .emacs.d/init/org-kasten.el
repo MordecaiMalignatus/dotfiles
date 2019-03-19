@@ -31,25 +31,25 @@ STRING: String to extract from."
 	  (pos 0)
           matches)
       (while (string-match regexp string pos)
-        (push `(,(match-string 1 string) ,(match-string 2 string)) matches)
+        (push `(,(match-string 1 string) . ,(match-string 2 string)) matches)
         (setq pos (match-end 0)))
       matches)))
 
+
 (defun org-kasten--read-properties ()
-  (interactive)
   "Read the org-kasten relevant properties from `current-file'."
-  (let ((properties (org-kasten--parse-properties (buffer-string)))
-	(id (make-local-variable 'org-kasten-id))
-	(links (make-local-variable 'org-kasten-links)))
-    (setq id  (alist-get "ID" properties))
-    (setq links (split-string (alist-get "LINKS" properties)))))
+  (interactive)
+  (let* ((buffer-text (buffer-substring-no-properties (point-min) (point-max)))
+         (properties  (org-kasten--parse-properties buffer-text)))
+    (setq-local org-kasten-id    (assoc "ID" properties))
+    (setq-local org-kasten-links (split-string (cdr (assoc "LINKS" ))))))
 
 ;; TODO This isn't creating a proper alist. Make sure it does so we can retrieve the properties.
-(alist-get "LINKS") (org-kasten--extract-properties "#+ID: 1
+(cdr (assoc "LINKS" (org-kasten--parse-properties "#+ID: 1
 #+LINKS: 2 1 5
 
 This is a simple card that I use for checking purposes.
-")
+")))
 
 (provide 'org-kasten)
 ;;; org-kasten.el ends here
