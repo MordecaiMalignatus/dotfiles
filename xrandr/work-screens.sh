@@ -8,3 +8,5 @@ xrandr --output DP2-3 --off
 xrandr --output HDMI2 --off
 xrandr --output HDMI1 --off
 xrandr --output DP2 --off
+
+sh i3-arrangement.sh
