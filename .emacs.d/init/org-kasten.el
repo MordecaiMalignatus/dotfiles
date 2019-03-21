@@ -31,14 +31,13 @@ STRING: String to extract from."
         (setq pos (match-end 0)))
       matches)))
 
-
 (defun org-kasten--read-properties ()
   "Read the org-kasten relevant properties from `current-file'."
   (interactive)
   (let* ((buffer-text (buffer-substring-no-properties (point-min) (point-max)))
          (properties  (org-kasten--parse-properties buffer-text)))
-    (setq-local org-kasten-id    (assoc "ID" properties))
-    (setq-local org-kasten-links (split-string (cdr (assoc "LINKS" ))))))
+    (setq-local org-kasten-id    (cdr (assoc "ID" properties)))
+    (setq-local org-kasten-links (split-string (cdr (assoc "LINKS" properties))))))
 
 ;; TODO This isn't creating a proper alist. Make sure it does so we can retrieve the properties.
 (cdr (assoc "LINKS" (org-kasten--parse-properties "#+ID: 1
