@@ -12,10 +12,6 @@
   "Your home for the kasten.
 If nil, org-kasten won't do anything.")
 
-(defvar org-kasten-data-home nil
-  "Directory where the card index is stored.
-Defaults to user-dir.")
-
 (defun org-kasten--file-in-kasten-p (filepath)
   "Is the file we're looking at in the kasten?
 This is needed for figuring out how to deal with links.
