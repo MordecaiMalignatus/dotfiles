@@ -39,12 +39,34 @@ STRING: String to extract from."
     (setq-local org-kasten-id    (cdr (assoc "ID" properties)))
     (setq-local org-kasten-links (split-string (cdr (assoc "LINKS" properties))))))
 
-;; TODO This isn't creating a proper alist. Make sure it does so we can retrieve the properties.
-(cdr (assoc "LINKS" (org-kasten--parse-properties "#+ID: 1
-#+LINKS: 2 1 5
+(defun org-kasten-navigate-links ()
+  "Navigate to one of the links from the current card."
+  (interactive))
 
-This is a simple card that I use for checking purposes.
-")))
+(defun org-kasten-new-note ()
+  "Create a new, enumerated note in the Kasten."
+  (interactive))
+
+(defun org-kasten-open-index ()
+  "Open your index and link file."
+  (interactive))
+
+(defun org-kasten-create-child ()
+  "Create a new card that is linked to this one."
+  (interactive))
+
+(defun org-kasten-add-link ()
+  "Link this card with another one."
+  (interactive))
+
+(defun org-kasten-remove-link ()
+  "Remove an existing link between this card and another."
+  (interactive))
+
+(defun org-kasten-delete-card ()
+  "Delete a card and all of its links.
+Can be useful, if it's useful too often you might need to reconsider."
+  (interactive))
 
 (provide 'org-kasten)
 ;;; org-kasten.el ends here
