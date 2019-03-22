@@ -1,5 +1,5 @@
 ;;; org-kasten --- A Zettelkasten, but in plain text, using emacs as engine underneath.
-;; Package-Requires: ((org-mode)(s))
+;; Package-Requires: ((org-mode)(s)(dash))
 ;;; Commentary:
 ;; This is my attempt to make Zettelkaesten not suck in the digital space, so
 ;; I'm piggybacking on org-mode.  Org-mode is 80% there, the chiefly missing
@@ -7,8 +7,9 @@
 ;; of convenience functions atop org.
 ;;; Code:
 (require 's)
+(require 'dash)
 
-(defvar org-kasten-home nil
+(defvar org-kasten-home "~/Dropbox/Perceptron/"
   "Your home for the kasten.
 If nil, org-kasten won't do anything.")
 
@@ -38,6 +39,19 @@ STRING: String to extract from."
          (properties  (org-kasten--parse-properties buffer-text)))
     (setq-local org-kasten-id    (cdr (assoc "ID" properties)))
     (setq-local org-kasten-links (split-string (cdr (assoc "LINKS" properties))))))
+
+(defun org-kasten--find-file-for-index (index)
+  "Convert a link INDEX as number or string to a full filepath."
+  (if (not (string= nil org-kasten-home))
+      (let* ((files-in-kasten           (-drop 2 (directory-files org-kasten-home)))
+	     (string-index              (if (numberp index)
+				            (number-to-string index)
+				            index))
+	     (files-starting-with-index (-filter (lambda (file) (s-starts-with-p string-index file))
+						 files-in-kasten)))
+	(if (> (length files-starting-with-index) 1)
+	    (error (concat "Org-Kasten inconsistent, multiple files with index " string-index))
+	  (car files-starting-with-index)))))
 
 (defun org-kasten-navigate-links ()
   "Navigate to one of the links from the current card."
