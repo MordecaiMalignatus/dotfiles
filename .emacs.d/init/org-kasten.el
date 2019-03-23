@@ -9,7 +9,7 @@
 (require 's)
 (require 'dash)
 
-(defvar org-kasten-home "~/Dropbox/Perceptron/"
+(defvar org-kasten-home "~/.emacs.d/init/example-kasten/"
   "Your home for the kasten.
 If nil, org-kasten won't do anything.")
 
@@ -32,6 +32,7 @@ STRING: String to extract from."
         (setq pos (match-end 0)))
       matches)))
 
+
 (defun org-kasten--read-properties ()
   "Read the org-kasten relevant properties from `current-file'."
   (interactive)
@@ -39,6 +40,7 @@ STRING: String to extract from."
          (properties  (org-kasten--parse-properties buffer-text)))
     (setq-local org-kasten-id    (cdr (assoc "ID" properties)))
     (setq-local org-kasten-links (split-string (cdr (assoc "LINKS" properties))))))
+
 
 (defun org-kasten--find-file-for-index (index)
   "Convert a link INDEX as number or string to a full filepath."
@@ -49,13 +51,18 @@ STRING: String to extract from."
 				            index))
 	     (files-starting-with-index (-filter (lambda (file) (s-starts-with-p string-index file))
 						 files-in-kasten)))
+	;; TODO: This needs to error if there is no file, the kasten is inconsistent, then.
 	(if (> (length files-starting-with-index) 1)
 	    (error (concat "Org-Kasten inconsistent, multiple files with index " string-index))
 	  (car files-starting-with-index)))))
 
 (defun org-kasten-navigate-links ()
   "Navigate to one of the links from the current card."
-  (interactive))
+  (interactive)
+  (org-kasten--read-properties)
+  ;; TODO: This is hilariously inefficient, find a better way.
+  (let* ((files (mapcar 'org-kasten--find-file-for-index org-kasten-links)))
+    (find-file (completing-read "Links:" files))))
 
 (defun org-kasten-new-note ()
   "Create a new, enumerated note in the Kasten."
@@ -63,7 +70,8 @@ STRING: String to extract from."
 
 (defun org-kasten-open-index ()
   "Open your index and link file."
-  (interactive))
+  (interactive)
+  (find-file (concat org-kasten-home "/0-index.org")))
 
 (defun org-kasten-create-child ()
   "Create a new card that is linked to this one."
