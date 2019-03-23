@@ -56,12 +56,21 @@ STRING: String to extract from."
 	    (error (concat "Org-Kasten inconsistent, multiple files with index " string-index))
 	  (car files-starting-with-index)))))
 
+
+(defun org-kasten--maybe-parse-properties ()
+  "If the `org-kasten' properties are not set, parse and set."
+  (if (and (not (eq nil org-kasten-links))
+	   (not (eq nil org-kasten-id)))
+      (org-kasten--read-properties)))
+
+
 (defun org-kasten-navigate-links ()
-  "Navigate to one of the links from the current card."
+  "Navigate to one of the links from the current card.
+Uses `completing-read', use with ivy for best results."
   (interactive)
-  (org-kasten--read-properties)
+  (org-kasten--maybe-parse-properties)
   ;; TODO: This is hilariously inefficient, find a better way.
-  (let* ((files (mapcar 'org-kasten--find-file-for-index org-kasten-links)))
+  (let ((files (mapcar 'org-kasten--find-file-for-index org-kasten-links)))
     (find-file (completing-read "Links:" files))))
 
 (defun org-kasten-new-note ()
