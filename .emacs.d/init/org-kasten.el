@@ -13,12 +13,20 @@
   "Your home for the kasten.
 If nil, org-kasten won't do anything.")
 
+(defvar org-kasten-bibligraphic-home (if (eq nil org-kasten-home)
+					 nil
+				       (concat org-kasten-home "bibliography/"))
+  "Home for your bibliographic references.
+You can set this to be the same as your kasten, but I recommend keeping it separate.
+Files in this will be prefixed with 'B' to keep them in a separate index.n")
+
 (defun org-kasten--file-in-kasten-p (filepath)
   "Is the file we're looking at in the kasten?
 This is needed for figuring out how to deal with links.
 FILEPATH: File in question."
-  (s-starts-with-p (file-truename filepath)
-		   (file-truename org-kasten-home)))
+  (s-starts-with-p
+   (file-truename org-kasten-home)
+   (file-truename filepath)))
 
 (defun org-kasten--parse-properties (string)
   "Get list of all regexp match in a string.
@@ -39,13 +47,14 @@ STRING: String to extract from."
   (let* ((buffer-text (buffer-substring-no-properties (point-min) (point-max)))
          (properties  (org-kasten--parse-properties buffer-text)))
     (setq-local org-kasten-id    (cdr (assoc "ID" properties)))
-    (setq-local org-kasten-links (split-string (cdr (assoc "LINKS" properties))))))
+    (setq-local org-kasten-links (split-string (cdr (assoc "LINKS" properties))))
+    (setq-local org-kasten-bibliographical-links (split-string (cdr (assoc "REFERENCES" properties))))))
 
 
 (defun org-kasten--find-file-for-index (index)
   "Convert a link INDEX as number or string to a full filepath."
   (if (not (string= nil org-kasten-home))
-      (let* ((files-in-kasten           (-drop 2 (directory-files org-kasten-home)))
+      (let* ((files-in-kasten           (org-kasten--files-in-kasten))
 	     (string-index              (if (numberp index)
 				            (number-to-string index)
 				            index))
@@ -56,6 +65,19 @@ STRING: String to extract from."
 	    (error (concat "Org-Kasten inconsistent, multiple files with index " string-index))
 	  (car files-starting-with-index)))))
 
+
+(defun org-kasten--file-to-index (filepath)
+  "Take a full FILEPATH, and return the index of the file, if it is in the kasten."
+  (if (org-kasten--file-in-kasten-p filepath)
+      (let* ((file-name (s-chop-prefix org-kasten-home filepath))
+	     (index ())))))
+
+(let ((example-path "~/.emacs.d/init/example-kasten/1-first-title.org"))
+  (org-kasten--file-to-index example-path))
+
+(defun org-kasten--files-in-kasten ()
+  "Return a list of all files in the kasten.  Excludes `.' and `..'."
+  (-drop 2 (directory-files org-kasten-home)))
 
 (defun org-kasten--maybe-parse-properties ()
   "If the `org-kasten' properties are not set, parse and set."
@@ -69,12 +91,22 @@ STRING: String to extract from."
 Uses `completing-read', use with ivy for best results."
   (interactive)
   (org-kasten--maybe-parse-properties)
-  ;; TODO: This is hilariously inefficient, find a better way.
   (let ((files (mapcar 'org-kasten--find-file-for-index org-kasten-links)))
     (find-file (completing-read "Links:" files))))
 
+(defun org-kasten-navigate-references ()
+  "Navigate to the bibliographical references of this card."
+  (interactive)
+  (org-kasten--maybe-parse-properties)
+  (let ((files (mapcar 'org-kasten--find-file-for-index org-kasten-links)))
+    (find-file (completing-read "References:" files))))
+
 (defun org-kasten-new-note ()
   "Create a new, enumerated note in the Kasten."
+  (interactive))
+
+(defun org-kasten-new-literary-note ()
+  "Create a new literary note in the bibliographical reference."
   (interactive))
 
 (defun org-kasten-open-index ()
