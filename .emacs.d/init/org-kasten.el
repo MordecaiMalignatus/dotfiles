@@ -87,8 +87,8 @@ All lines of format `#+KEY: VALUE' will be extracted, to keep with org syntax."
 (defun org-kasten--file-to-index (filepath)
   "Take a full FILEPATH, and return the index of the file, if it is in the kasten."
   (if (org-kasten--file-in-kasten-p filepath)
-      (let* ((file-name (s-chop-prefix org-kasten-home filepath))
-	     (index ())))))
+      (let* ((file-name (s-chop-prefix org-kasten-home filepath)))
+	(substring file-name 0 (s-index-of "-" file-name)))))
 
 (defun org-kasten--files-in-kasten ()
   "Return a list of all files in the kasten.  Excludes `.' and `..'."
