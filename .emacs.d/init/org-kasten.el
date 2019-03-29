@@ -84,15 +84,11 @@ All lines of format `#+KEY: VALUE' will be extracted, to keep with org syntax."
 	    (error (concat "Org-Kasten inconsistent, multiple files with index " string-index))
 	  (car files-starting-with-index)))))
 
-
 (defun org-kasten--file-to-index (filepath)
   "Take a full FILEPATH, and return the index of the file, if it is in the kasten."
   (if (org-kasten--file-in-kasten-p filepath)
       (let* ((file-name (s-chop-prefix org-kasten-home filepath))
 	     (index ())))))
-
-(let ((example-path "~/.emacs.d/init/example-kasten/1-first-title.org"))
-  (org-kasten--file-to-index example-path))
 
 (defun org-kasten--files-in-kasten ()
   "Return a list of all files in the kasten.  Excludes `.' and `..'."
@@ -103,7 +99,6 @@ All lines of format `#+KEY: VALUE' will be extracted, to keep with org syntax."
   (if (or (not (boundp 'org-kasten-links))
 	   (not (boundp 'org-kasten-id)))
       (org-kasten--read-properties)))
-
 
 (defun org-kasten-navigate-links ()
   "Navigate to one of the links from the current card.
