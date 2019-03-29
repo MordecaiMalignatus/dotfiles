@@ -100,6 +100,11 @@ All lines of format `#+KEY: VALUE' will be extracted, to keep with org syntax."
 	   (not (boundp 'org-kasten-id)))
       (org-kasten--read-properties)))
 
+(defun org-kasten--add-link-to-file (file target-index)
+  "Add a link to TARGET-INDEX in FILE."
+  ;; Open/Visit target file, parse properties, push target-index, write properties, go back.
+  )
+
 (defun org-kasten-navigate-links ()
   "Navigate to one of the links from the current card.
 Uses `completing-read', use with ivy for best results."
@@ -132,9 +137,16 @@ Uses `completing-read', use with ivy for best results."
   "Create a new card that is linked to this one."
   (interactive))
 
-(defun org-kasten-add-link ()
-  "Link this card with another one."
-  (interactive))
+(defun org-kasten-add-link (link-index)
+  "Link this card with another one.
+
+The INDEX is a shorthand for the note to create a link to."
+  (interactive)
+  (let* ((files (org-kasten--files-in-kasten))
+	 (candidates (-filter (lambda (file) (not (string= file (buffer-file-name)))) files))
+	 (target-file (completing-read "File to link to:" candidates)))
+    (org-kasten--add-link-to-file (buffer-file-name) (org-kasten--file-to-index target-file))
+    (org-kasten--add-link-to-file (target-file (org-kasten-id)))))
 
 (defun org-kasten-remove-link ()
   "Remove an existing link between this card and another."
