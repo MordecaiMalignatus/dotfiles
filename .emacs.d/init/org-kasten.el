@@ -13,12 +13,13 @@
   "Your home for the kasten.
 If nil, org-kasten won't do anything.")
 
-(defvar org-kasten-bibligraphic-home (if (eq nil org-kasten-home)
+(defvar org-kasten-references-home (if (eq nil org-kasten-home)
 					 nil
 				       (concat org-kasten-home "bibliography/"))
-  "Home for your bibliographic references.
-You can set this to be the same as your kasten, but I recommend keeping it separate.
-Files in this will be prefixed with 'B' to keep them in a separate index.n")
+  "Home for your bibliographic references and notes.
+You can set this to be the same as your kasten, but I recommend
+keeping it separate.  Files in this will be prefixed with 'B' to
+keep them in a separate index.")
 
 (defun org-kasten--file-in-kasten-p (filepath)
   "Is the file we're looking at in the kasten?
@@ -30,7 +31,9 @@ FILEPATH: File in question."
 
 (defun org-kasten--parse-properties (string)
   "Get list of all regexp match in a string.
-STRING: String to extract from."
+STRING: String to extract from.
+
+All lines of format `#+KEY: VALUE' will be extracted, to keep with org syntax."
   (save-match-data
     (let ((regexp "^#\\+\\(\[a-zA-Z\]+\\): \\(.*\\)")
 	  (pos 0)
@@ -48,8 +51,24 @@ STRING: String to extract from."
          (properties  (org-kasten--parse-properties buffer-text)))
     (setq-local org-kasten-id    (cdr (assoc "ID" properties)))
     (setq-local org-kasten-links (split-string (cdr (assoc "LINKS" properties))))
-    (setq-local org-kasten-bibliographical-links (split-string (cdr (assoc "REFERENCES" properties))))))
+    (setq-local org-kasten-references (split-string (cdr (assoc "REFERENCES" properties))))))
 
+(defun org-kasten--write-properties ()
+  "Write the buffer-local variables to the properties header."
+  (interactive))
+
+(defun org-kasten--properties-to-string ()
+  "Make a header string that can be inserted on save, with all local variables stringified."
+    (concat "#+ID: " org-kasten-id "\n"
+	    "#+LINKS: " (string-join org-kasten-links " ") "\n"
+	    "#+REFERENCES: " (string-join org-kasten-references " ") "\n"))
+
+(defun org-kasten--buffer-string-without-header ()
+  "Return the actual content of the current buffer, that is, without the org-kasten header."
+  (let* ((buffer (buffer-substring-no-properties (point-min) (point-max)))
+   	 (lines (split-string buffer "\n"))
+	 (header-less (-drop 4 lines)))
+    (string-join header-less "\n")))
 
 (defun org-kasten--find-file-for-index (index)
   "Convert a link INDEX as number or string to a full filepath."
@@ -81,8 +100,8 @@ STRING: String to extract from."
 
 (defun org-kasten--maybe-parse-properties ()
   "If the `org-kasten' properties are not set, parse and set."
-  (if (and (not (eq nil org-kasten-links))
-	   (not (eq nil org-kasten-id)))
+  (if (or (not (boundp 'org-kasten-links))
+	   (not (boundp 'org-kasten-id)))
       (org-kasten--read-properties)))
 
 
