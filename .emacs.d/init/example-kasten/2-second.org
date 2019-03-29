@@ -1,5 +1,5 @@
-#+NUMBER: 2
-#+ANCESTORS: (1)
-#+CHILDREN: ()
+#+ID: 2
+#+LINKS:
+#+REFERENCES:
 
 This is a child card used for demonstrative purposes.
