@@ -15,10 +15,10 @@ If nil, org-kasten won't do anything.")
 
 (defvar org-kasten-references-home (if (eq nil org-kasten-home)
 					 nil
-				       (concat org-kasten-home "bibliography/"))
+				       (concat org-kasten-home "References/"))
   "Home for your bibliographic references and notes.
 You can set this to be the same as your kasten, but I recommend
-keeping it separate.  Files in this will be prefixed with 'B' to
+keeping it separate.  Files in this will be prefixed with 'R' to
 keep them in a separate index.")
 
 (defun org-kasten--file-in-kasten-p (filepath)
@@ -124,8 +124,8 @@ Uses `completing-read', use with ivy for best results."
   "Create a new, enumerated note in the Kasten."
   (interactive))
 
-(defun org-kasten-new-literary-note ()
-  "Create a new literary note in the bibliographical reference."
+(defun org-kasten-new-reference ()
+  "Create a new literary note in the reference store."
   (interactive))
 
 (defun org-kasten-open-index ()
@@ -139,8 +139,7 @@ Uses `completing-read', use with ivy for best results."
 
 (defun org-kasten-add-link (link-index)
   "Link this card with another one.
-
-The INDEX is a shorthand for the note to create a link to."
+The LINK-INDEX is a shorthand for the note to create a link to."
   (interactive)
   (let* ((files (org-kasten--files-in-kasten))
 	 (candidates (-filter (lambda (file) (not (string= file (buffer-file-name)))) files))
