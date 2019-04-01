@@ -9,7 +9,7 @@
 (require 's)
 (require 'dash)
 
-(defvar org-kasten-home "~/.emacs.d/init/example-kasten/"
+(defvar org-kasten-home "~/Dropbox/Perceptron/"
   "Your home for the kasten.
 If nil, org-kasten won't do anything.")
 
@@ -70,15 +70,17 @@ All lines of format `#+KEY: VALUE' will be extracted, to keep with org syntax."
 	 (header-less (-drop 4 lines)))
     (string-join header-less "\n")))
 
+;; TODO: This needs to be expanded to take a path as well, so I can use it for references.
 (defun org-kasten--find-file-for-index (index)
   "Convert a link INDEX as number or string to a full filepath."
   (if (not (string= nil org-kasten-home))
       (let* ((files-in-kasten           (org-kasten--files-in-kasten))
+	     (files-without-tmp         (-filter (lambda (file) (not (s-ends-with-p "~" file))) files-in-kasten))
 	     (string-index              (if (numberp index)
 				            (number-to-string index)
 				            index))
 	     (files-starting-with-index (-filter (lambda (file) (s-starts-with-p string-index file))
-						 files-in-kasten)))
+						 files-without-tmp)))
 	;; TODO: This needs to error if there is no file, the kasten is inconsistent, then.
 	(if (> (length files-starting-with-index) 1)
 	    (error (concat "Org-Kasten inconsistent, multiple files with index " string-index))
