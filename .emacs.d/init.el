@@ -307,10 +307,10 @@
 
 ;; Fullscreen emacs on launch on OSX.
 (when (string= system-type 'darwin)
-(progn
-  (set-face-attribute 'default nil :font "PragmataPro-14")
-  (set-frame-parameter nil 'fullscreen 'fullboth)
-  (setq ivy-use-selectable-prompt t)))
+  (progn
+    (set-face-attribute 'default nil :font "PragmataPro-14")
+    (set-frame-parameter nil 'fullscreen 'fullboth)
+    (setq ivy-use-selectable-prompt t)))
 
 (defun az/toggle-solarized-theming ()
   "Switch between solarized-light and solarized-dark."
