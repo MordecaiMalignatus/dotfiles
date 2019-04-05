@@ -39,7 +39,9 @@ All lines of format `#+KEY: VALUE' will be extracted, to keep with org syntax."
 	  (pos 0)
           matches)
       (while (string-match regexp string pos)
-        (push `(,(match-string 1 string) . ,(match-string 2 string)) matches)
+	(if (string=  (match-string 2 string) "()")
+	    (push `(,(match-string 1 string) . "") matches)
+            (push `(,(match-string 1 string) . ,(match-string 2 string)) matches))
         (setq pos (match-end 0)))
       matches)))
 
@@ -49,13 +51,19 @@ All lines of format `#+KEY: VALUE' will be extracted, to keep with org syntax."
   (interactive)
   (let* ((buffer-text (buffer-substring-no-properties (point-min) (point-max)))
          (properties  (org-kasten--parse-properties buffer-text)))
-    (setq-local org-kasten-id    (cdr (assoc "ID" properties)))
-    (setq-local org-kasten-links (split-string (cdr (assoc "LINKS" properties))))
+    (setq-local org-kasten-id         (cdr (assoc "ID" properties)))
+    (setq-local org-kasten-links      (split-string (cdr (assoc "LINKS" properties))))
     (setq-local org-kasten-references (split-string (cdr (assoc "REFERENCES" properties))))))
 
 (defun org-kasten--write-properties ()
   "Write the buffer-local variables to the properties header."
-  (interactive))
+  (interactive)
+  (let* ((old-position (point))
+	 (removed-header (org-kasten--buffer-string-without-header))
+	 (new-body (concat (org-kasten--properties-to-string) removed-header)))
+      (erase-buffer)
+      (insert new-body)
+      (goto-char old-position)))
 
 (defun org-kasten--properties-to-string ()
   "Make a header string that can be inserted on save, with all local variables stringified."
@@ -67,7 +75,7 @@ All lines of format `#+KEY: VALUE' will be extracted, to keep with org syntax."
   "Return the actual content of the current buffer, that is, without the org-kasten header."
   (let* ((buffer (buffer-substring-no-properties (point-min) (point-max)))
    	 (lines (split-string buffer "\n"))
-	 (header-less (-drop 4 lines)))
+	 (header-less (-drop 3 lines)))
     (string-join header-less "\n")))
 
 ;; TODO: This needs to be expanded to take a path as well, so I can use it for references.
@@ -143,7 +151,11 @@ NOTE-BODY: Empty String."
 (defun org-kasten--add-link-to-file (file target-index)
   "Add a link to TARGET-INDEX in FILE."
   ;; Open/Visit target file, parse properties, push target-index, write properties, go back.
-  )
+  (save-excursion
+    (find-file file)
+    (org-kasten--maybe-parse-properties)
+    (setq-local org-kasten-links (push target-index org-kasten-links))
+    (org-kasten--write-properties)))
 
 (defun org-kasten-navigate-links ()
   "Navigate to one of the links from the current card.
