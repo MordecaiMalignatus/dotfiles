@@ -79,7 +79,7 @@ All lines of format `#+KEY: VALUE' will be extracted, to keep with org syntax."
 				            (number-to-string index)
 				            index))
 	     (files-starting-with-index (-filter (lambda (file) (s-starts-with-p string-index file))
-						 files-without-tmp)))
+						 files-in-kasten)))
 	;; TODO: This needs to error if there is no file, the kasten is inconsistent, then.
 	(if (> (length files-starting-with-index) 1)
 	    (error (concat "Org-Kasten inconsistent, multiple files with index " string-index))
