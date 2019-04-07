@@ -39,12 +39,11 @@ All lines of format `#+KEY: VALUE' will be extracted, to keep with org syntax."
 	  (pos 0)
           matches)
       (while (string-match regexp string pos)
-	(if (string=  (match-string 2 string) "()")
+	(if (string=  (match-string 2 string) "nil")
 	    (push `(,(match-string 1 string) . "") matches)
             (push `(,(match-string 1 string) . ,(match-string 2 string)) matches))
         (setq pos (match-end 0)))
       matches)))
-
 
 (defun org-kasten--read-properties ()
   "Read the org-kasten relevant properties from `current-file'."
@@ -67,9 +66,16 @@ All lines of format `#+KEY: VALUE' will be extracted, to keep with org syntax."
 
 (defun org-kasten--properties-to-string ()
   "Make a header string that can be inserted on save, with all local variables stringified."
-    (concat "#+ID: " org-kasten-id "\n"
-	    "#+LINKS: " (string-join org-kasten-links " ") "\n"
-	    "#+REFERENCES: " (string-join org-kasten-references " ") "\n"))
+  (let ((id org-kasten-id)		; Must be present
+	(links (if (eq org-kasten-links '())
+		   "nil"
+		 (string-join org-kasten-links " ")))
+	(references (if (eq org-kasten-references '())
+			"nil"
+		      (string-join org-kasten-references " "))))
+    (concat "#+ID: " id "\n"
+	    "#+LINKS: " links  "\n"
+	    "#+REFERENCES: " references "\n")))
 
 (defun org-kasten--buffer-string-without-header ()
   "Return the actual content of the current buffer, that is, without the org-kasten header."
