@@ -114,11 +114,11 @@ HEADLINE: The headline, later also the file name fragment.
 LINKS: A list or string of indices that define the links.
 REFERENCES: A list or string of indices that define the references.
 BODY: The body of the note, the part under the headlines."
-  (let ((strings `(,(concat "#+ID: " note-id)
-		  ,(concat "#+LINKS: " links)
-		  ,(concat "#+REFERENCES: " references "\n")
-		  ,(concat "* " headline"\n")
-		  ,body)))
+  (let ((strings (list (concat "#+ID: " note-id)
+		       (concat "#+LINKS: " links)
+		       (concat "#+REFERENCES: " references "\n")
+		       (concat "* " headline"\n")
+		       body)))
     (string-join strings "\n")))
 
 (defun org-kasten--headline-to-filename-fragment (headline)
@@ -129,24 +129,20 @@ The fragment is the part that goes after the index: `2-this-is-the-fragment.org'
 	 (no-spaces (s-replace-regexp "[[:space:]]" "-" trimmed)))
     no-spaces))
 
-(defun org-kasten--generate-new-note (&optional headline links references note-body)
+(defun org-kasten--generate-new-note (headline links references note-body)
   "Generate a new note according to parameters.
 All parameters can be omitted and will default to:
 HEADLINE: $index.org
 LINKS: ()
 REFERENCES: ()
 NOTE-BODY: Empty String."
-  (let ((headline    (if (eq nil headline) "" headline))
-	(links      (if (eq nil links) "" links))
-	(references (if (eq nil references) "" references))
-	(body       (if (eq nil note-body) "" note-body)))
-    (let* ((current-highest-index (-max (mapcar 'string-to-number  (mapcar 'org-kasten--file-to-index (org-kasten--files-in-kasten)))))
-	   (note-id              (number-to-string (+ 1 current-highest-index)))
-	   (file-content         (org-kasten--mk-default-content note-id headline links references body))
-	   (stringified-headline (org-kasten--headline-to-filename-fragment headline)))
-      (find-file (concat org-kasten-home note-id "-" stringified-headline  ".org"))
-      (org-kasten--maybe-parse-properties)
-      (insert file-content))))
+  (let* ((current-highest-index (-max (mapcar 'string-to-number  (mapcar 'org-kasten--file-to-index (org-kasten--notes-in-kasten)))))
+	 (note-id              (number-to-string (+ 1 current-highest-index)))
+	 (file-content         (org-kasten--mk-default-content note-id headline links references note-body))
+	 (stringified-headline (org-kasten--headline-to-filename-fragment headline)))
+    (find-file (concat org-kasten-home note-id "-" stringified-headline  ".org"))
+    (org-kasten--maybe-parse-properties)
+    (insert file-content)))
 
 (defun org-kasten--maybe-parse-properties ()
   "If the `org-kasten' properties are not set, parse and set."
@@ -178,10 +174,11 @@ Uses `completing-read', use with ivy for best results."
   (let ((files (mapcar 'org-kasten--find-file-for-index org-kasten-links)))
     (find-file (completing-read "References:" files))))
 
-(defun org-kasten-new-note ()
-  "Create a new, enumerated note in the Kasten."
-  (interactive)
-  (org-kasten--generate-new-note org-kasten-home "Test!" "1" "" "This is also a test."))
+(defun org-kasten-new-note (read-title)
+  "Create a new, enumerated note in the Kasten.
+The READ-TITLE is going into the file fragment and the headline of the new note."
+  (interactive "MTitle: ")
+  (org-kasten--generate-new-note read-title "" "" ""))
 
 (defun org-kasten-new-reference ()
   "Create a new literary note in the reference store."
