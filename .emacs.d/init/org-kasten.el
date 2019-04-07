@@ -88,12 +88,12 @@ All lines of format `#+KEY: VALUE' will be extracted, to keep with org syntax."
 (defun org-kasten--find-file-for-index (index)
   "Convert a link INDEX as number or string to a full filepath."
   (if (not (string= nil org-kasten-home))
-      (let* ((files-in-kasten           (org-kasten--files-in-kasten))
+      (let* ((notes-in-kasten           (org-kasten--notes-in-kasten))
 	     (string-index              (if (numberp index)
 				            (number-to-string index)
 				            index))
 	     (files-starting-with-index (-filter (lambda (file) (s-starts-with-p string-index file))
-						 files-in-kasten)))
+						 notes-in-kasten)))
 	;; TODO: This needs to error if there is no file, the kasten is inconsistent, then.
 	(if (> (length files-starting-with-index) 1)
 	    (error (concat "Org-Kasten inconsistent, multiple files with index " string-index))
@@ -103,8 +103,8 @@ All lines of format `#+KEY: VALUE' will be extracted, to keep with org syntax."
   "Take a full FILEPATH, and return the index of the file, if it is in the kasten."
   (substring filepath 0 (s-index-of "-" filepath)))
 
-(defun org-kasten--files-in-kasten ()
-  "Return a list of all files in the kasten.  Excludes `.' and `..'."
+(defun org-kasten--notes-in-kasten ()
+  "Return a list of all viable notes in the kasten."
   (-filter (lambda (file) (s-matches? "[[:digit:]]+-[[:alnum:]-]+.org$" file)) (directory-files org-kasten-home)))
 
 (defun org-kasten--mk-default-content (note-id headline links references body)
@@ -200,7 +200,7 @@ Uses `completing-read', use with ivy for best results."
   "Link this card with another one.
 The LINK-INDEX is a shorthand for the note to create a link to."
   (interactive)
-  (let* ((files (org-kasten--files-in-kasten))
+  (let* ((files (org-kasten--notes-in-kasten))
 	 (candidates (-filter (lambda (file) (not (string= file (buffer-file-name)))) files))
 	 (target-file (completing-read "File to link to:" candidates)))
     (org-kasten--add-link-to-file (buffer-file-name) (org-kasten--file-to-index target-file))
