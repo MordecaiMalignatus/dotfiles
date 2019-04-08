@@ -94,10 +94,13 @@ All lines of format `#+KEY: VALUE' will be extracted, to keep with org syntax."
 				            index))
 	     (files-starting-with-index (-filter (lambda (file) (s-starts-with-p string-index file))
 						 notes-in-kasten)))
-	;; TODO: This needs to error if there is no file, the kasten is inconsistent, then.
-	(if (> (length files-starting-with-index) 1)
-	    (error (concat "Org-Kasten inconsistent, multiple files with index " string-index))
-	  (car files-starting-with-index)))))
+	(cond
+	 ((> (length files-starting-with-index) 1)
+	  (error (concat "Org-Kasten inconsistent, multiple files with index " string-index)))
+	 ((= (length files-starting-with-index) 0)
+	  (error (concat "Org-Kasten inconsistent, does not contain a note with index " string-index)))
+	 (t
+	  (car files-starting-with-index))))))
 
 (defun org-kasten--file-to-index (filepath)
   "Take a full FILEPATH, and return the index of the file, if it is in the kasten."
