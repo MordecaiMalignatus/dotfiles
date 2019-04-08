@@ -114,10 +114,12 @@ HEADLINE: The headline, later also the file name fragment.
 LINKS: A list or string of indices that define the links.
 REFERENCES: A list or string of indices that define the references.
 BODY: The body of the note, the part under the headlines."
-  (let ((strings (list (concat "#+ID: " note-id)
-		       (concat "#+LINKS: " links)
-		       (concat "#+REFERENCES: " references "\n")
-		       (concat "* " headline"\n")
+  (let* ((formatted-links      (if (eq '() links) "nil" (string-join links " ")))
+	(formatted-references (if (eq '() references) "nil" (string-join references " ")))
+	(strings    (list (concat "#+ID: " note-id)
+		       (concat "#+LINKS: " formatted-links)
+		       (concat "#+REFERENCES: " formatted-references "\n")
+		       (concat "* " headline "\n")
 		       body)))
     (string-join strings "\n")))
 
@@ -125,7 +127,8 @@ BODY: The body of the note, the part under the headlines."
   "Turn a typed HEADLINE to a filename fragment.
 The fragment is the part that goes after the index: `2-this-is-the-fragment.org'"
   (let* ((downcased (s-downcase headline))
-	 (trimmed (s-trim downcased))
+	 (no-punctuation (s-replace-regexp "[[:punct:]]" "" downcased))
+	 (trimmed (s-trim no-punctuation))
 	 (no-spaces (s-replace-regexp "[[:space:]]" "-" trimmed)))
     no-spaces))
 
@@ -141,8 +144,8 @@ NOTE-BODY: Empty String."
 	 (file-content         (org-kasten--mk-default-content note-id headline links references note-body))
 	 (stringified-headline (org-kasten--headline-to-filename-fragment headline)))
     (find-file (concat org-kasten-home note-id "-" stringified-headline  ".org"))
-    (org-kasten--maybe-parse-properties)
-    (insert file-content)))
+    (insert file-content)
+    (org-kasten--maybe-parse-properties)))
 
 (defun org-kasten--maybe-parse-properties ()
   "If the `org-kasten' properties are not set, parse and set."
@@ -178,7 +181,7 @@ Uses `completing-read', use with ivy for best results."
   "Create a new, enumerated note in the Kasten.
 The READ-TITLE is going into the file fragment and the headline of the new note."
   (interactive "MTitle: ")
-  (org-kasten--generate-new-note read-title "" "" ""))
+  (org-kasten--generate-new-note read-title '() '() ""))
 
 (defun org-kasten-new-reference ()
   "Create a new literary note in the reference store."
