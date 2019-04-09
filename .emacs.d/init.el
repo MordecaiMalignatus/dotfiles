@@ -32,6 +32,7 @@
 (defun load-init-settings ()
   "Load custom modules concerned with things that would exceed the range of an init.el."
   (mapc 'require '(logrs
+		   org-kasten
 		   custom-deft)))
 
 (add-hook 'after-init-hook 'load-init-settings)
