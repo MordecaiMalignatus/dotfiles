@@ -132,7 +132,9 @@
   (setq org-log-done 'date)
   (setq org-default-notes-file "~/Dropbox/Reference/Work/capture.org")
   (setq org-clock-persist 'history)
-  (org-clock-persistence-insinuate))
+  (org-clock-persistence-insinuate)
+  (org-babel-do-load-languages
+   'org-babel-load-languages '((shell . t))))
 
 (use-package deft
   :ensure t)
