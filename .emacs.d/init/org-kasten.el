@@ -134,19 +134,14 @@ The fragment is the part that goes after the index: `2-this-is-the-fragment.org'
     no-spaces))
 
 (defun org-kasten--generate-new-note (headline links references note-body)
-  "Generate a new note according to parameters.
-All parameters can be omitted and will default to:
-HEADLINE: $index.org
-LINKS: ()
-REFERENCES: ()
-NOTE-BODY: Empty String."
+  "Generate a new note according to parameters."
   (let* ((current-highest-index (-max (mapcar 'string-to-number  (mapcar 'org-kasten--file-to-index (org-kasten--notes-in-kasten)))))
 	 (note-id              (number-to-string (+ 1 current-highest-index)))
 	 (file-content         (org-kasten--mk-default-content note-id headline links references note-body))
 	 (stringified-headline (org-kasten--headline-to-filename-fragment headline)))
     (find-file (concat org-kasten-home note-id "-" stringified-headline  ".org"))
     (insert file-content)
-    (org-kasten--maybe-parse-properties)))
+    (org-kasten--read-properties)))
 
 (defun org-kasten--maybe-parse-properties ()
   "If the `org-kasten' properties are not set, parse and set."
