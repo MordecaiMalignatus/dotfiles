@@ -185,6 +185,11 @@ The READ-TITLE is going into the file fragment and the headline of the new note.
   (org-kasten--generate-new-note read-title '() '() ""))
 
 ;; TODO: Implement.
+;; Needs to:
+;; - Create new file in Reference dir.
+;; - new Reference must have ID and LINKS keys.
+;; - new Reference must have a quotation-summary part and a source part.
+;; - navigation must lead to references and links respectively.
 ;; (defun org-kasten-new-reference ()
 ;;   "Create a new literary note in the reference store."
 ;;   (interactive))
