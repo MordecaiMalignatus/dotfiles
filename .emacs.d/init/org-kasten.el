@@ -47,7 +47,6 @@ All lines of format `#+KEY: VALUE' will be extracted, to keep with org syntax."
 
 (defun org-kasten--read-properties ()
   "Read the org-kasten relevant properties from `current-file'."
-  (interactive)
   (let* ((buffer-text (buffer-substring-no-properties (point-min) (point-max)))
          (properties  (org-kasten--parse-properties buffer-text)))
     (setq-local org-kasten-id         (cdr (assoc "ID" properties)))
@@ -56,7 +55,6 @@ All lines of format `#+KEY: VALUE' will be extracted, to keep with org syntax."
 
 (defun org-kasten--write-properties ()
   "Write the buffer-local variables to the properties header."
-  (interactive)
   (let* ((old-position (point))
 	 (removed-header (org-kasten--buffer-string-without-header))
 	 (new-body (concat (org-kasten--properties-to-string) removed-header)))
