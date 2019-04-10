@@ -184,18 +184,20 @@ The READ-TITLE is going into the file fragment and the headline of the new note.
   (interactive "MTitle: ")
   (org-kasten--generate-new-note read-title '() '() ""))
 
-(defun org-kasten-new-reference ()
-  "Create a new literary note in the reference store."
-  (interactive))
+;; TODO: Implement.
+;; (defun org-kasten-new-reference ()
+;;   "Create a new literary note in the reference store."
+;;   (interactive))
 
 (defun org-kasten-open-index ()
   "Open your index and link file."
   (interactive)
   (find-file (concat org-kasten-home "/0-index.org")))
 
-(defun org-kasten-create-child ()
-  "Create a new card that is linked to this one."
-  (interactive))
+;; TODO: Implement function.
+;; (defun org-kasten-create-child ()
+;;   "Create a new card that is linked to this one."
+;;   (interactive))
 
 (defun org-kasten-add-link (link-index)
   "Link this card with another one.
@@ -207,14 +209,17 @@ The LINK-INDEX is a shorthand for the note to create a link to."
     (org-kasten--add-link-to-file (buffer-file-name) (org-kasten--file-to-index target-file))
     (org-kasten--add-link-to-file (target-file (org-kasten-id)))))
 
-(defun org-kasten-remove-link ()
-  "Remove an existing link between this card and another."
-  (interactive))
+;; TODO: Implmenet function.
+;; (defun org-kasten-remove-link ()
+;;   "Remove an existing link between this card and another."
+;;   (interactive))
 
-(defun org-kasten-delete-card ()
-  "Delete a card and all of its links.
-Can be useful, if it's useful too often you might need to reconsider."
-  (interactive))
+
+;; TODO: Implement function.
+;; (defun org-kasten-delete-note ()
+;;   "Delete a card and all of its links.
+;; Can be useful, if it's useful too often you might need to reconsider."
+;;   (interactive))
 
 (provide 'org-kasten)
 ;;; org-kasten.el ends here
