@@ -167,7 +167,7 @@ NOTE-BODY: Empty String."
   "Navigate to one of the links from the current card.
 Uses `completing-read', use with ivy for best results."
   (interactive)
-  (org-kasten--maybe-parse-properties)
+  (org-kasten--read-properties)
   (let ((files (mapcar 'org-kasten--find-file-for-index org-kasten-links)))
     (find-file (completing-read "Links:" files))))
 
