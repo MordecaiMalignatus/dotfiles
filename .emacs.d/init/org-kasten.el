@@ -201,15 +201,20 @@ The READ-TITLE is going into the file fragment and the headline of the new note.
 ;;   "Create a new card that is linked to this one."
 ;;   (interactive))
 
-(defun org-kasten-add-link (link-index)
+(defun org-kasten-add-link ()
   "Link this card with another one.
 The LINK-INDEX is a shorthand for the note to create a link to."
   (interactive)
+  (org-kasten--read-properties)
+  (when (not (org-kasten--file-in-kasten-p (buffer-file-name)))
+    (error "Current buffer is not part of the kasten"))
   (let* ((files (org-kasten--notes-in-kasten))
 	 (candidates (-filter (lambda (file) (not (string= file (buffer-file-name)))) files))
+	 (current-file-index (org-kasten--file-to-index (buffer-file-name)))
 	 (target-file (completing-read "File to link to:" candidates)))
-    (org-kasten--add-link-to-file (buffer-file-name) (org-kasten--file-to-index target-file))
-    (org-kasten--add-link-to-file (target-file (org-kasten-id)))))
+    (save-current-buffer
+      (org-kasten--add-link-to-file target-file org-kasten-id)
+      (org-kasten--add-link-to-file (buffer-file-name) (org-kasten--file-to-index target-file)))))
 
 ;; TODO: Implmenet function.
 ;; (defun org-kasten-remove-link ()
