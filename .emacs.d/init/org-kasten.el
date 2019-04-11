@@ -135,7 +135,8 @@ The fragment is the part that goes after the index: `2-this-is-the-fragment.org'
     no-spaces))
 
 (defun org-kasten--generate-new-note (headline links references note-body)
-  "Generate a new note according to parameters."
+  "Generate a new note.
+Uses the HEADLINE, LINKS, REFERENCES and the NOTE-BODY as default values for the template."
   (let* ((current-highest-index (-max (mapcar 'string-to-number  (mapcar 'org-kasten--file-to-index (org-kasten--notes-in-kasten)))))
 	 (note-id              (number-to-string (+ 1 current-highest-index)))
 	 (file-content         (org-kasten--mk-default-content note-id headline links references note-body))
