@@ -156,7 +156,7 @@ Uses the HEADLINE, LINKS, REFERENCES and the NOTE-BODY as default values for the
   ;; Open/Visit target file, parse properties, push target-index, write properties, go back.
   (save-excursion
     (find-file file)
-    (org-kasten--maybe-parse-properties)
+    (org-kasten--read-properties)
     (setq-local org-kasten-links (push target-index org-kasten-links))
     (org-kasten--write-properties)))
 
