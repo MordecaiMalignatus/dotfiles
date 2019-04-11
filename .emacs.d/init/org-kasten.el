@@ -119,7 +119,8 @@ BODY: The body of the note, the part under the headlines."
 	(formatted-references (if (eq '() references) "nil" (string-join references " ")))
 	(strings    (list (concat "#+ID: " note-id)
 		       (concat "#+LINKS: " formatted-links)
-		       (concat "#+REFERENCES: " formatted-references "\n")
+		       (concat "#+REFERENCES: " formatted-references)
+		       "#+STARTUP: showall\n"
 		       (concat "* " headline "\n")
 		       body)))
     (string-join strings "\n")))
