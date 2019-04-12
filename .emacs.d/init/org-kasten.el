@@ -150,7 +150,8 @@ Uses the HEADLINE, LINKS, REFERENCES and the NOTE-BODY as default values for the
 	 (stringified-headline (org-kasten--headline-to-filename-fragment headline)))
     (find-file (concat org-kasten-home note-id "-" stringified-headline  ".org"))
     (insert file-content)
-    (org-kasten--read-properties)))
+    (org-kasten--read-properties)
+    note-id))
 
 (defun org-kasten--maybe-parse-properties ()
   "If the `org-kasten' properties are not set, parse and set."
@@ -193,9 +194,11 @@ The READ-TITLE is going into the file fragment and the headline of the new note.
   "Create a new card with TITLE that is linked to this one."
   (interactive "MTitle: ")
   (org-kasten--maybe-parse-properties)
-  ;; TODO: This needs to add a link to the parent file, for which I need the
-  ;; future ID. Might be worth to generate twice.
-  (org-kasten--generate-new-note title (list org-kasten-id) '() ""))
+  (let ((current-file (buffer-file-name))
+	(new-id (org-kasten--generate-new-note title (list org-kasten-id) '() ""))
+	(new-buffer (buffer-name)))
+    (org-kasten--add-link-to-file current-file new-id)
+    (switch-to-buffer new-buffer)))
 
 ;; TODO: Implement.
 ;; Needs to:
