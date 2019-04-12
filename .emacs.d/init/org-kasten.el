@@ -179,7 +179,14 @@ Uses `completing-read', use with ivy for best results."
   "Create a new, enumerated note in the Kasten.
 The READ-TITLE is going into the file fragment and the headline of the new note."
   (interactive "MTitle: ")
+  (org-kasten--maybe-parse-properties)
   (org-kasten--generate-new-note read-title '() '() ""))
+
+(defun org-kasten-create-child-note (title)
+  "Create a new card with TITLE that is linked to this one."
+  (interactive "MTitle: ")
+  (org-kasten--maybe-parse-properties)
+  (org-kasten--generate-new-note title (list org-kasten-id) '() ""))
 
 ;; TODO: Implement.
 ;; Needs to:
@@ -195,11 +202,6 @@ The READ-TITLE is going into the file fragment and the headline of the new note.
   "Open your index and link file."
   (interactive)
   (find-file (concat org-kasten-home "/0-index.org")))
-
-;; TODO: Implement function.
-;; (defun org-kasten-create-child ()
-;;   "Create a new card that is linked to this one."
-;;   (interactive))
 
 (defun org-kasten-add-link ()
   "Link this card with another one.
