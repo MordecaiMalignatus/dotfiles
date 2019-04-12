@@ -113,7 +113,7 @@ All lines of format `#+KEY: VALUE' will be extracted, to keep with org syntax."
 
 (defun org-kasten--notes-in-kasten ()
   "Return a list of all viable notes in the kasten."
-  (-filter (lambda (file) (s-matches? "[[:digit:]]+-[[:alnum:]-]+.org$" file)) (directory-files org-kasten-home)))
+  (-filter (lambda (file) (s-matches? "^[[:digit:]]+-[[:alnum:]-]+.org$" file)) (directory-files org-kasten-home)))
 
 (defun org-kasten--mk-default-content (note-id headline links references body)
   "Take the individual pieces of a new note and stitch together the body.
@@ -166,6 +166,14 @@ Uses the HEADLINE, LINKS, REFERENCES and the NOTE-BODY as default values for the
     (find-file file)
     (org-kasten--read-properties)
     (setq-local org-kasten-links (push target-index org-kasten-links))
+    (org-kasten--write-properties)))
+
+(defun org-kasten--remove-link-from-file (file target-index)
+  "Remove TARGET-INDEX from the links in FILE."
+  (save-excursion
+    (find-file file)
+    (org-kasten--read-properties)
+    (setq-local org-kasten-links (-remove-item target-index org-kasten-links))
     (org-kasten--write-properties)))
 
 (defun org-kasten-navigate-links ()
@@ -230,11 +238,18 @@ The LINK-INDEX is a shorthand for the note to create a link to."
       (org-kasten--add-link-to-file target-file org-kasten-id)
       (org-kasten--add-link-to-file (buffer-file-name) (org-kasten--file-to-index target-file)))))
 
-;; TODO: Implmenet function.
-;; (defun org-kasten-remove-link ()
-;;   "Remove an existing link between this card and another."
-;;   (interactive))
-
+(defun org-kasten-remove-link ()
+  "Remove an existing link between this card and another."
+  (interactive)
+  (org-kasten--read-properties)
+  (when (not (org-kasten--file-in-kasten-p (buffer-file-name)))
+    (error "Current Buffer not part of the kasten"))
+  (let* ((linked-files (mapcar 'org-kasten--find-file-for-index org-kasten-links))
+	 (current-file-index (org-kasten--file-to-index (buffer-file-name)))
+	 (target-file (completing-read "Link to remove: " linked-files)))
+    (save-current-buffer
+      (org-kasten--remove-link-from-file target-file org-kasten-id)
+      (org-kasten--remove-link-from-file (buffer-file-name) (org-kasten--file-to-index target-file)))))
 
 ;; TODO: Implement function.
 ;; (defun org-kasten-delete-note ()
