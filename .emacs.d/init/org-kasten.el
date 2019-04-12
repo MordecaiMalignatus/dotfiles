@@ -13,6 +13,8 @@
   "Your home for the kasten.
 If nil, org-kasten won't do anything.")
 
+;; TODO: This needs to be removed and just replaced with a static
+;; concatenation. There is no need to ever set this separately.
 (defvar org-kasten-references-home (if (eq nil org-kasten-home)
 					 nil
 				       (concat org-kasten-home "References/"))
@@ -20,6 +22,11 @@ If nil, org-kasten won't do anything.")
 You can set this to be the same as your kasten, but I recommend
 keeping it separate.  Files in this will be prefixed with 'R' to
 keep them in a separate index.")
+
+;; TODO: I need to merge references and links if I'm going to distinguish the
+;; two in form of links regardless. Then one header field would fall away and it
+;; would look more unifom, not to mention allow me to largely merge reference
+;; and links navigation.
 
 (defun org-kasten--file-in-kasten-p (filepath)
   "Is the file we're looking at in the kasten?
@@ -186,6 +193,8 @@ The READ-TITLE is going into the file fragment and the headline of the new note.
   "Create a new card with TITLE that is linked to this one."
   (interactive "MTitle: ")
   (org-kasten--maybe-parse-properties)
+  ;; TODO: This needs to add a link to the parent file, for which I need the
+  ;; future ID. Might be worth to generate twice.
   (org-kasten--generate-new-note title (list org-kasten-id) '() ""))
 
 ;; TODO: Implement.
