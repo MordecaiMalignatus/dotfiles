@@ -28,6 +28,19 @@ keep them in a separate index.")
 ;; would look more unifom, not to mention allow me to largely merge reference
 ;; and links navigation.
 
+(define-minor-mode org-kasten-mode
+  "A minor mode providing the features of a Zettelkasten. Requires org."
+  :lighter " org-k"
+  :keymap (let ((map (make-sparse-keymap)))
+	    (define-key map (kbd "C-# c n") 'org-kasten-new-note)
+            ;; (define-key map (kbd "C-# c r") 'org-kasten-new-reference)
+	    (define-key map (kbd "C-# c c") 'org-kasten-create-child-note)
+	    (define-key map (kbd "C-# n") 'org-kasten-navigate-links)
+	    (define-key map (kbd "C-# r") 'org-kasten-navigate-references)
+	    (define-key map (kbd "C-# l a") 'org-kasten-add-link)
+	    (define-key map (kbd "C-# l r") 'org-kasten-remove-link)
+	    map))
+
 (defun org-kasten--file-in-kasten-p (filepath)
   "Is the file we're looking at in the kasten?
 This is needed for figuring out how to deal with links.
