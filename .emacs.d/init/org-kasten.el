@@ -13,23 +13,21 @@
   "Your home for the kasten.
 If nil, org-kasten won't do anything.")
 
-;; TODO: This needs to be removed and just replaced with a static
-;; concatenation. There is no need to ever set this separately.
-(defvar org-kasten-references-home (if (eq nil org-kasten-home)
-					 nil
-				       (concat org-kasten-home "References/"))
-  "Home for your bibliographic references and notes.
-You can set this to be the same as your kasten, but I recommend
-keeping it separate.  Files in this will be prefixed with 'R' to
-keep them in a separate index.")
+(defun org-kasten--reference-dir ()
+  "Home to your references and your otherwise notes.
+Located in `org-kasten-home'/References."
+  (if (eq nil org-kasten-home)
+      nil
+    (concat org-kasten-home "References/")))
+
 
 ;; TODO: I need to merge references and links if I'm going to distinguish the
 ;; two in form of links regardless. Then one header field would fall away and it
 ;; would look more unifom, not to mention allow me to largely merge reference
 ;; and links navigation.
 
-;; TODO: This needs to include a minor mode and a keymap. Like, holy shit.
 (define-minor-mode org-kasten-mode
+  "A minor mode providing the features of a Zettelkasten. Requires org."
   :lighter " org-k"
   :keymap (let ((map (make-sparse-keymap)))
 	    (define-key map (kbd "C-# c n") 'org-kasten-new-note)

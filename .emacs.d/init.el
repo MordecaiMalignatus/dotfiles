@@ -170,6 +170,7 @@
 ;; Company mode.
 (use-package company
   :ensure t
+  :after restclient-company
   :hook (after-init . global-company-mode))
 
 ;; YASnippets.
@@ -193,6 +194,13 @@
   :ensure t
   :config
   (add-hook 'lsp-mode-hook 'lsp-ui-mode))
+
+;; Rest Client, on Taylor's recommendation
+(use-package restclient
+  :ensure t)
+
+(use-package company-restclient
+  :ensure t)
 
 ;; Haskell specifics
 (use-package haskell-mode
