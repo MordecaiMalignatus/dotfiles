@@ -30,13 +30,15 @@ Located in `org-kasten-home'/References."
   "A minor mode providing the features of a Zettelkasten. Requires org."
   :lighter " org-k"
   :keymap (let ((map (make-sparse-keymap)))
+	    (define-key map (kbd "C-# C-#") 'org-kasten-open-index)
 	    (define-key map (kbd "C-# c n") 'org-kasten-new-note)
             ;; (define-key map (kbd "C-# c r") 'org-kasten-new-reference)
+	    ;; (define-key map (kbd "C-# r r") 'org-kasten-remove-reference)
 	    (define-key map (kbd "C-# c c") 'org-kasten-create-child-note)
 	    (define-key map (kbd "C-# n") 'org-kasten-navigate-links)
-	    (define-key map (kbd "C-# r") 'org-kasten-navigate-references)
-	    (define-key map (kbd "C-# l a") 'org-kasten-add-link)
-	    (define-key map (kbd "C-# l r") 'org-kasten-remove-link)
+	    ;; (define-key map (kbd "C-# r") 'org-kasten-navigate-references)
+	    (define-key map (kbd "C-# c l") 'org-kasten-add-link)
+	    (define-key map (kbd "C-# r l") 'org-kasten-remove-link)
 	    map))
 
 (defun org-kasten--file-in-kasten-p (filepath)
@@ -187,6 +189,7 @@ Uses the HEADLINE, LINKS, REFERENCES and the NOTE-BODY as default values for the
     (setq-local org-kasten-links (-remove-item target-index org-kasten-links))
     (org-kasten--write-properties)))
 
+;; TODO: Navigating from Reference to Note does not work. (Error stringp nil)
 (defun org-kasten-navigate-links ()
   "Navigate to one of the links from the current card.
 Uses `completing-read', use with ivy for best results."
