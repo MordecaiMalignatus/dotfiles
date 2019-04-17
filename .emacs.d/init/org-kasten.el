@@ -9,7 +9,7 @@
 (require 's)
 (require 'dash)
 
-(defvar org-kasten-home "~/Dropbox/Perceptron/"
+(defvar org-kasten-home ""
   "Your home for the kasten.
 If nil, org-kasten won't do anything.")
 

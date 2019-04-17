@@ -36,7 +36,11 @@
 
 (add-hook 'after-init-hook 'load-init-settings)
 
-(use-package org-kasten)
+;; Wheeeeee :D
+(use-package org-kasten
+  :config
+  (setq org-kasten-home "~/Dropbox/Perceptron/")
+  (add-hook 'org-mode-hook 'org-kasten-mode))
 
 ;; Auto-upgrade packages and delete old ones.
 (use-package auto-package-update
