@@ -1,5 +1,0 @@
-#+ID: 1
-#+LINKS: 2
-#+REFERENCES:
-
-This is a simple card that I use for checking purposes.

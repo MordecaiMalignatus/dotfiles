@@ -29,18 +29,15 @@
 ;; My custom modules.
 (add-to-list 'load-path (concat user-emacs-directory "init"))
 
-(defun load-init-settings ()
-  "Load custom modules concerned with things that would exceed the range of an init.el."
-  (mapc 'require '(logrs
-		   custom-deft)))
-
-(add-hook 'after-init-hook 'load-init-settings)
-
 ;; Wheeeeee :D
 (use-package org-kasten
   :config
   (setq org-kasten-home "~/Dropbox/Perceptron/")
   (add-hook 'org-mode-hook 'org-kasten-mode))
+
+(use-package custom-deft
+  :after deft)
+
 
 ;; Auto-upgrade packages and delete old ones.
 (use-package auto-package-update
