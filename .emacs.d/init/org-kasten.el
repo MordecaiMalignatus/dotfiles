@@ -166,10 +166,10 @@ Uses the HEADLINE, LINKS, REFERENCES and the NOTE-BODY as default values for the
     (org-kasten--read-properties)
     note-id))
 
-(defun org-kasten--maybe-parse-properties ()
+(defun org-kasten--maybe-read-properties ()
   "If the `org-kasten' properties are not set, parse and set."
   (if (or (not (boundp 'org-kasten-links))
-	   (not (boundp 'org-kasten-id)))
+	  (not (boundp 'org-kasten-id)))
       (org-kasten--read-properties)))
 
 (defun org-kasten--add-link-to-file (file target-index)
@@ -201,7 +201,7 @@ Uses `completing-read', use with ivy for best results."
 (defun org-kasten-navigate-references ()
   "Navigate to the bibliographical references of this card."
   (interactive)
-  (org-kasten--maybe-parse-properties)
+  (org-kasten--maybe-read-properties)
   (let ((files (mapcar 'org-kasten--find-file-for-index org-kasten-links)))
     (find-file (completing-read "References:" files))))
 
@@ -209,13 +209,13 @@ Uses `completing-read', use with ivy for best results."
   "Create a new, enumerated note in the Kasten.
 The READ-TITLE is going into the file fragment and the headline of the new note."
   (interactive "MTitle: ")
-  (org-kasten--maybe-parse-properties)
+  (org-kasten--maybe-read-properties)
   (org-kasten--generate-new-note read-title '() '() ""))
 
 (defun org-kasten-create-child-note (title)
   "Create a new card with TITLE that is linked to this one."
   (interactive "MTitle: ")
-  (org-kasten--maybe-parse-properties)
+  (org-kasten--maybe-read-properties)
   (let ((current-file (buffer-file-name))
 	(new-id (org-kasten--generate-new-note title (list org-kasten-id) '() ""))
 	(new-buffer (buffer-name)))
