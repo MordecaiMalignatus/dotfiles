@@ -308,8 +308,10 @@
 ;; Aesthetics
 (menu-bar-mode 0)
 (tool-bar-mode 0)
+(scroll-bar-mode 0)
 
-(set-face-attribute 'default nil :font "PragmataPro-12")
+(set-face-attribute 'default nil :font "PragmataPro-10")
+
 
 (use-package solarized-theme
   :ensure t
