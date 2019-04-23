@@ -49,10 +49,10 @@ FILEPATH: File in question."
    (file-truename org-kasten-home)
    (file-truename filepath)))
 
-(defun org-kasten--parse-properties (string)
-  "Get list of all regexp match in a string.
-STRING: String to extract from.
 
+
+(defun org-kasten--parse-properties (string)
+  "Get list of all regexp match in a STRING.
 All lines of format `#+KEY: VALUE' will be extracted, to keep with org syntax."
   (save-match-data
     (let ((regexp "^#\\+\\(\[a-zA-Z\]+\\): \\(.*\\)")
