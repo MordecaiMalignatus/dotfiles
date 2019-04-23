@@ -36,7 +36,6 @@
 (use-package custom-deft
   :after deft)
 
-
 ;; Auto-upgrade packages and delete old ones.
 (use-package auto-package-update
    :ensure t
@@ -92,7 +91,7 @@
 (use-package counsel
   :ensure t
   :bind (("M-x" . 'counsel-M-x)
-	 ("C-c k" . 'counsel-ag)))
+	 ("C-c k" . 'counsel-rg)))
 
 ;; Git, and github.
 (use-package magit
