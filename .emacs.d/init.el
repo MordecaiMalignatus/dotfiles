@@ -21,8 +21,6 @@
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 (package-initialize)
 
-(tool-bar-mode -1)
-
 (setq custom-file (concat user-emacs-directory "custom.el"))
 (load custom-file)
 
