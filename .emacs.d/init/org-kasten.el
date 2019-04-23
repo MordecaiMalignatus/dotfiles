@@ -128,6 +128,10 @@ All lines of format `#+KEY: VALUE' will be extracted, to keep with org syntax."
   "Return a list of all viable notes in the kasten."
   (-filter (lambda (file) (s-matches? "^[[:digit:]]+-[[:alnum:]-]+.org$" file)) (directory-files org-kasten-home)))
 
+(defun org-kasten--references-in-kasten ()
+  "Return a list of all references in the kasten."
+  (-filter (lambda (file) (s-matches? "^R[[:digit:]]+-[[:alnum:]-]+.org$" file)) (directory-files (org-kasten--reference-dir))))
+
 (defun org-kasten--mk-default-content (note-id headline links references body)
   "Take the individual pieces of a new note and stitch together the body.
 NOTE-ID: the number that will identitify the new note.
