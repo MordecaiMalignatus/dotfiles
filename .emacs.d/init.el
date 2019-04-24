@@ -183,6 +183,7 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Programming Stuff.
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; We language servers now, awww yeh
 (use-package lsp-mode
@@ -236,6 +237,7 @@
   :config
   (add-hook 'haskell-mode #'flycheck-haskell-setup))
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Elixir specifics
 (use-package elixir-mode
   :ensure t)
@@ -246,12 +248,14 @@
   :config
   (setq alchemist-key-command-prefix (kbd "C-c ,")))
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Python stuff
 (use-package elpy
   :ensure t
   :config
   (elpy-enable))
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Lispy stuff.
 (use-package paredit
   :ensure t
@@ -259,6 +263,7 @@
   :hook ((emacs-lisp-mode . paredit-mode)
 	 (lisp-mode . paredit-mode)))
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Rust Settings
 (use-package rust-mode
   :ensure t
@@ -271,6 +276,7 @@
   :ensure t
   :hook (rust-mode . cargo-minor-mode))
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Javascript Dev
 (use-package js2-mode
   :ensure t
@@ -289,13 +295,17 @@
   :after js2-mode
   :ensure t)
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Graphviz and other diagram stuff.
 (use-package graphviz-dot-mode
   :ensure t
   :config
   (setq graphviz-dot-auto-indent-on-braces t)
   (define-key graphviz-dot-mode-map (kbd "C-c C-p") #'graphviz-dot-preview))
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Custom interactive-functions
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (defun init-file ()
   "Opens init.el."
   (interactive)
