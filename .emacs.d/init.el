@@ -193,6 +193,10 @@
   :config
   (add-hook 'lsp-mode-hook 'lsp-ui-mode))
 
+;; Add company-lsp backend for metals
+(use-package company-lsp
+  :ensure t)
+
 ;; Rest Client, on Taylor's recommendation
 (use-package restclient
   :ensure t)
@@ -200,6 +204,25 @@
 (use-package company-restclient
   :ensure t)
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Scala + Metals.
+(use-package scala-mode
+  :mode "\\.s\\(cala\\|bt\\)$")
+
+(use-package sbt-mode
+  :commands sbt-start sbt-command
+  :config
+  (substitute-key-definition
+   'minibuffer-complete-word
+   'self-insert-command
+   minibuffer-local-completion-map))
+
+(use-package lsp-scala
+  :after scala-mode
+  :demand t
+  :hook (scala-mode . lsp))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Haskell specifics
 (use-package haskell-mode
   :ensure t
