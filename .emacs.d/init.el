@@ -343,8 +343,21 @@
 (tool-bar-mode 0)
 (scroll-bar-mode 0)
 
-(set-face-attribute 'default nil :font "PragmataPro-10")
+;; Coerce fullscreen on OSX
+;; Enable ivy's selectable prompt on OSX because I can M-j on Linux but not OSX.
+(when (string= system-type 'darwin)
+  (progn
+    (set-face-attribute 'default nil :font "PragmataPro-14")
+    (set-frame-parameter nil 'fullscreen 'fullboth)
+    (setq ivy-use-selectable-prompt t)))
 
+;; Font rendering in X11 is fucked -- spaces in TTF files will be rendered
+;; unevenly. FiraCode is an OTF font, hence the rendering is fine. It works on
+;; OSX, which is why it's used there.
+(when (string= system-type 'gnu/linux)
+  (progn
+     ;; (set-face-attribute 'default nil :font "PragmataPro-10")
+    (set-face-attribute 'default nil :font "FiraCode-10")))
 
 (use-package solarized-theme
   :ensure t
@@ -354,11 +367,6 @@
   (load-theme 'solarized-light t))
 
 ;; Fullscreen emacs on launch on OSX.
-(when (string= system-type 'darwin)
-  (progn
-    (set-face-attribute 'default nil :font "PragmataPro-14")
-    (set-frame-parameter nil 'fullscreen 'fullboth)
-    (setq ivy-use-selectable-prompt t)))
 
 (defun az/toggle-solarized-theming ()
   "Switch between solarized-light and solarized-dark."
