@@ -33,3 +33,4 @@ ranger/history
 /.emacs.d/forge-database.sqlite
 /.emacs.d/transient/history.el
 /fish/fish_variables
+/.emacs.d/.lsp-session-v1
