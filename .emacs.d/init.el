@@ -208,9 +208,11 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Scala + Metals.
 (use-package scala-mode
+  :ensure t
   :mode "\\.s\\(cala\\|bt\\)$")
 
 (use-package sbt-mode
+  :ensure t
   :commands sbt-start sbt-command
   :config
   (substitute-key-definition
@@ -220,6 +222,7 @@
 
 (use-package lsp-scala
   :after scala-mode
+  :ensure t
   :demand t
   :hook (scala-mode . lsp))
 
