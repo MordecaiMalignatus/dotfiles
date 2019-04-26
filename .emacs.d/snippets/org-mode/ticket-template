@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: ticket template
+# key: ticket
+# --
+#+STARTUP: showall
+* Overview
+
+$1
+
+* Ticket Description
+
+$0
+
+* Ideas/Resoures
+
+* Things left to do [/]
+** TODO Take stock of the ticket commends.
