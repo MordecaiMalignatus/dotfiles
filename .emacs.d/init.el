@@ -93,6 +93,7 @@
   :bind (("M-x" . 'counsel-M-x)
 	 ("C-c k" . 'counsel-rg)))
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Git, and github.
 (use-package magit
   :ensure t
