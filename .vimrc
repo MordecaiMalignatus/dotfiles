@@ -91,6 +91,8 @@ nnoremap <leader>evm :e ~/dotfiles/.vimrc<CR>
 inoremap ZXZ <c-o>zz
 nnoremap <C-S> :w<CR>
 inoremap ± <c-o>~
+nnoremap ; :
+nnoremap : ;
 nnoremap <leader>tb :Tabularize /
 nnoremap <leader>ln :lnext<CR>
 nnoremap <leader>lp :lprevious<CR>
