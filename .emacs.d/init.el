@@ -145,6 +145,13 @@
   :config
   (global-set-key (kbd "C-c C-8 o") #'olivetti-mode))
 
+(use-package auctex
+  :defer t
+  :ensure t
+  :config
+  (setq TeX-auto-save t))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Projectile config
 (use-package projectile
   :ensure t
