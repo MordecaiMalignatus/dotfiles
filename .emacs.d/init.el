@@ -125,7 +125,8 @@
 	 ("C-c o c" . 'counsel-org-capture)
 	 ("C-c C-l" . 'org-insert-link)
 	 ("C-c l" . 'org-store-link)
-	 ("C-c C-M-." . 'org-time-stamp-inactive))
+	 ("C-c C-M-." . 'org-time-stamp-inactive)
+	 ("C-c n t" . 'org-narrow-to-subtree))
   :config
   (setq-default fill-column 80)
   (add-hook 'text-mode-hook 'auto-fill-mode)
@@ -369,6 +370,10 @@
   (progn
      ;; (set-face-attribute 'default nil :font "PragmataPro-10")
     (set-face-attribute 'default nil :font "FiraCode-14")))
+
+;; Enable/use narrow/widen.
+(global-set-key (kbd "C-x w") 'widen)
+(global-set-key (kbd "C-x n r") 'narrow-to-region)
 
 (use-package solarized-theme
   :ensure t
