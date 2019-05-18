@@ -29,6 +29,7 @@
 
 ;; Wheeeeee :D
 (use-package org-kasten
+  :bind (("C-# C-#" . #'org-kasten-open-index))
   :config
   (setq org-kasten-home "~/Dropbox/Perceptron/")
   (add-hook 'org-mode-hook 'org-kasten-mode))
