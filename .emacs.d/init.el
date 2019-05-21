@@ -348,7 +348,7 @@
              (get-buffer bufname)))
   (switch-to-buffer (get-buffer-create bufname))
   (if (= n 1) initial-major-mode))) ; 1, because n was incremented
-(global-set-key (kbd "C-x n") 'create-new-scratch-buffer)
+(global-set-key (kbd "C-x d") 'create-new-scratch-buffer)
 
 ;; Aesthetics
 (menu-bar-mode 0)
