@@ -369,7 +369,7 @@
 (when (string= system-type 'gnu/linux)
   (progn
      ;; (set-face-attribute 'default nil :font "PragmataPro-10")
-    (set-face-attribute 'default nil :font "FiraCode-14")))
+    (set-face-attribute 'default nil :font "FiraCode-10")))
 
 ;; Enable/use narrow/widen.
 (global-set-key (kbd "C-x w") 'widen)
