@@ -9,9 +9,15 @@ $1
 
 * Ticket Description
 
-$0
+$2
+
+** Acceptance Criteria [/]
+
+- [ ] $3
 
 * Ideas/Resoures
 
 * Things left to do [/]
-** TODO Take stock of the ticket commends.
+** TODO Take stock of the ticket comments.
+
+* Done
