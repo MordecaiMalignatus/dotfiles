@@ -179,7 +179,8 @@
 (use-package company
   :ensure t
   :after restclient-company
-  :hook (after-init . global-company-mode))
+  :config
+  (add-hook 'after-init-hook 'global-company-mode))
 
 ;; YASnippets.
 (use-package yasnippet
@@ -361,7 +362,8 @@
   (progn
     (set-face-attribute 'default nil :font "PragmataPro-14")
     (set-frame-parameter nil 'fullscreen 'fullboth)
-    (setq ivy-use-selectable-prompt t)))
+    (setq ivy-use-selectable-prompt t)
+    (global-set-key (kbd "<backtab>") #'company-complete)))
 
 ;; Font rendering in X11 is fucked -- spaces in TTF files will be rendered
 ;; unevenly. FiraCode is an OTF font, hence the rendering is fine. It works on
