@@ -251,7 +251,7 @@ The LINK-INDEX is a shorthand for the note to create a link to."
   (let* ((files (org-kasten--notes-in-kasten))
 	 (candidates (-filter (lambda (file) (not (string= file (buffer-file-name)))) files))
 	 (current-file-index (org-kasten--file-to-index (buffer-file-name)))
-	 (target-file (completing-read "File to link to:" candidates)))
+	 (target-file (completing-read "File to link to: " candidates)))
     (save-current-buffer
       (org-kasten--add-link-to-file target-file org-kasten-id)
       (org-kasten--add-link-to-file (buffer-file-name) (org-kasten--file-to-index target-file)))))
