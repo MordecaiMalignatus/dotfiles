@@ -129,7 +129,7 @@ All lines of format `#+KEY: VALUE' will be extracted, to keep with org syntax."
   "Return a list of all references in the kasten."
   (-filter (lambda (file) (s-matches? "^R[[:digit:]]+-[[:alnum:]-]+.org$" file)) (directory-files (org-kasten--reference-dir))))
 
-(defun org-kasten--mk-default-content (note-id headline links references body)
+(defun org-kasten--mk-default-note-content (note-id headline links references body)
   "Take the individual pieces of a new note and stitch together the body.
 NOTE-ID: the number that will identitify the new note.
 HEADLINE: The headline, later also the file name fragment.
@@ -146,6 +146,21 @@ BODY: The body of the note, the part under the headlines."
 		       body)))
     (string-join strings "\n")))
 
+(defun org-kasten--mk-default-reference-content (reference-id headline links body)
+  "Take individual pieces and make a new reference.
+The REFERENCE-ID usually is auto-generated, but you can manually
+enumerate a reference.  HEADLINE is used for what it says on the
+tin, LINKS are connections to other notes that you already know
+are relevant, and BODY is for when you're trying to transplant a
+region, and need somewhere for the text to be."
+  (let* ((formatted-links (if (eq '() links) "nil" (string-join links " ")))
+	 (strings (list (concat "#+ID: " reference-id)
+			(concat "#+LINKS: " formatted-links)
+			"#+STARTUP: showall\n"
+			(concat "* " headline "\n")
+			body)))
+    (string-join strings "\n")))
+
 (defun org-kasten--headline-to-filename-fragment (headline)
   "Turn a typed HEADLINE to a filename fragment.
 The fragment is the part that goes after the index: `2-this-is-the-fragment.org'"
@@ -160,7 +175,7 @@ The fragment is the part that goes after the index: `2-this-is-the-fragment.org'
 Uses the HEADLINE, LINKS, REFERENCES and the NOTE-BODY as default values for the template."
   (let* ((current-highest-index (-max (mapcar 'string-to-number  (mapcar 'org-kasten--file-to-index (org-kasten--notes-in-kasten)))))
 	 (note-id              (number-to-string (+ 1 current-highest-index)))
-	 (file-content         (org-kasten--mk-default-content note-id headline links references note-body))
+	 (file-content         (org-kasten--mk-default-note-content note-id headline links references note-body))
 	 (stringified-headline (org-kasten--headline-to-filename-fragment headline)))
     (find-file (concat org-kasten-home note-id "-" stringified-headline  ".org"))
     (insert file-content)
