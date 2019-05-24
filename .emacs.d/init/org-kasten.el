@@ -20,7 +20,6 @@ Located in `org-kasten-home'/References."
       nil
     (concat org-kasten-home "References/")))
 
-
 ;; TODO: I need to merge references and links if I'm going to distinguish the
 ;; two in form of links regardless. Then one header field would fall away and it
 ;; would look more unifom, not to mention allow me to largely merge reference
@@ -48,8 +47,6 @@ FILEPATH: File in question."
   (s-starts-with-p
    (file-truename org-kasten-home)
    (file-truename filepath)))
-
-
 
 (defun org-kasten--parse-properties (string)
   "Get list of all regexp match in a STRING.
@@ -170,12 +167,6 @@ Uses the HEADLINE, LINKS, REFERENCES and the NOTE-BODY as default values for the
     (org-kasten--read-properties)
     note-id))
 
-(defun org-kasten--maybe-read-properties ()
-  "If the `org-kasten' properties are not set, parse and set."
-  (if (or (not (boundp 'org-kasten-links))
-	  (not (boundp 'org-kasten-id)))
-      (org-kasten--read-properties)))
-
 (defun org-kasten--add-link-to-file (file target-index)
   "Add a link to TARGET-INDEX in FILE."
   ;; Open/Visit target file, parse properties, push target-index, write properties, go back.
@@ -205,7 +196,7 @@ Uses `completing-read', use with ivy for best results."
 (defun org-kasten-navigate-references ()
   "Navigate to the bibliographical references of this card."
   (interactive)
-  (org-kasten--maybe-read-properties)
+  (org-kasten--read-properties)
   (let ((files (mapcar 'org-kasten--find-file-for-index org-kasten-links)))
     (find-file (completing-read "References:" files))))
 
@@ -213,13 +204,13 @@ Uses `completing-read', use with ivy for best results."
   "Create a new, enumerated note in the Kasten.
 The READ-TITLE is going into the file fragment and the headline of the new note."
   (interactive "MTitle: ")
-  (org-kasten--maybe-read-properties)
+  (org-kasten--read-properties)
   (org-kasten--generate-new-note read-title '() '() ""))
 
 (defun org-kasten-create-child-note (title)
   "Create a new card with TITLE that is linked to this one."
   (interactive "MTitle: ")
-  (org-kasten--maybe-read-properties)
+  (org-kasten--read-properties)
   (let ((current-file (buffer-file-name))
 	(new-id (org-kasten--generate-new-note title (list org-kasten-id) '() ""))
 	(new-buffer (buffer-name)))
