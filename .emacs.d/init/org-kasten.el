@@ -54,30 +54,33 @@ All lines of format `#+KEY: VALUE' will be extracted, to keep with org syntax."
   (save-match-data
     (let ((regexp "^#\\+\\(\[a-zA-Z\]+\\): \\(.*\\)")
 	  (pos 0)
-          matches)
+	  matches)
       (while (string-match regexp string pos)
-	(if (string=  (match-string 2 string) "nil")
+	(if (string= (match-string 2 string) "nil")
 	    (push `(,(match-string 1 string) . "") matches)
-            (push `(,(match-string 1 string) . ,(match-string 2 string)) matches))
-        (setq pos (match-end 0)))
+	  (push `(,(match-string 1 string) . ,(match-string 2 string)) matches))
+	(setq pos (match-end 0)))
       matches)))
 
 (defun org-kasten--read-properties ()
   "Read the org-kasten relevant properties from `current-file'."
   (let* ((buffer-text (buffer-substring-no-properties (point-min) (point-max)))
-         (properties  (org-kasten--parse-properties buffer-text)))
-    (setq-local org-kasten-id         (cdr (assoc "ID" properties)))
-    (setq-local org-kasten-links      (split-string (cdr (assoc "LINKS" properties))))
+	 (properties (org-kasten--parse-properties buffer-text)))
+    (setq-local org-kasten-id (cdr (assoc "ID" properties)))
+    (setq-local org-kasten-links (split-string (cdr (assoc "LINKS" properties))))
     (setq-local org-kasten-references (split-string (cdr (assoc "REFERENCES" properties))))))
 
 (defun org-kasten--write-properties ()
   "Write the buffer-local variables to the properties header."
   (let* ((old-position (point))
-	 (removed-header (org-kasten--buffer-string-without-header))
+	 (removed-header (let* ((buffer (buffer-substring-no-properties (point-min) (point-max)))
+				(lines (split-string buffer "\n"))
+				(header-less (-drop 3 lines)))
+			   (string-join header-less "\n")))
 	 (new-body (concat (org-kasten--properties-to-string) removed-header)))
-      (erase-buffer)
-      (insert new-body)
-      (goto-char old-position)))
+    (erase-buffer)
+    (insert new-body)
+    (goto-char old-position)))
 
 (defun org-kasten--properties-to-string ()
   "Make a header string that can be inserted on save, with all local variables stringified."
@@ -89,24 +92,17 @@ All lines of format `#+KEY: VALUE' will be extracted, to keep with org syntax."
 			"nil"
 		      (string-join org-kasten-references " "))))
     (concat "#+ID: " id "\n"
-	    "#+LINKS: " links  "\n"
+	    "#+LINKS: " links "\n"
 	    "#+REFERENCES: " references "\n")))
-
-(defun org-kasten--buffer-string-without-header ()
-  "Return the actual content of the current buffer, that is, without the org-kasten header."
-  (let* ((buffer (buffer-substring-no-properties (point-min) (point-max)))
-   	 (lines (split-string buffer "\n"))
-	 (header-less (-drop 3 lines)))
-    (string-join header-less "\n")))
 
 ;; TODO: This needs to be expanded to take a path as well, so I can use it for references.
 (defun org-kasten--find-file-for-index (index)
   "Convert a link INDEX as number or string to a full filepath."
   (if (not (string= nil org-kasten-home))
-      (let* ((notes-in-kasten           (org-kasten--notes-in-kasten))
-	     (string-index              (if (numberp index)
-				            (number-to-string index)
-				            index))
+      (let* ((notes-in-kasten (org-kasten--notes-in-kasten))
+	     (string-index (if (numberp index)
+			       (number-to-string index)
+			     index))
 	     (files-starting-with-index (-filter (lambda (file) (s-starts-with-p string-index file))
 						 notes-in-kasten)))
 	(cond
@@ -119,15 +115,30 @@ All lines of format `#+KEY: VALUE' will be extracted, to keep with org syntax."
 
 (defun org-kasten--file-to-index (filepath)
   "Take a full FILEPATH, and return the index of the file, if it is in the kasten."
-  (substring filepath 0 (s-index-of "-" filepath)))
+  (substring
+   filepath
+   0
+   (s-index-of "-" filepath)))
 
 (defun org-kasten--notes-in-kasten ()
   "Return a list of all viable notes in the kasten."
-  (-filter (lambda (file) (s-matches? "^[[:digit:]]+-[[:alnum:]-]+.org$" file)) (directory-files org-kasten-home)))
+  (-filter
+   (lambda (file)
+     (s-matches?
+      "^[[:digit:]]+-[[:alnum:]-]+.org$"
+      file))
+   (directory-files
+    org-kasten-home)))
 
 (defun org-kasten--references-in-kasten ()
   "Return a list of all references in the kasten."
-  (-filter (lambda (file) (s-matches? "^R[[:digit:]]+-[[:alnum:]-]+.org$" file)) (directory-files (org-kasten--reference-dir))))
+  (-filter
+   (lambda (file)
+     (s-matches?
+      "^R[[:digit:]]+-[[:alnum:]-]+.org$"
+      file))
+   (directory-files
+    (org-kasten--reference-dir))))
 
 (defun org-kasten--mk-default-note-content (note-id headline links references body)
   "Take the individual pieces of a new note and stitch together the body.
