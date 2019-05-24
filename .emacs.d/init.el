@@ -273,11 +273,11 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Lispy stuff.
-(use-package paredit
+
+(use-package lispy
   :ensure t
-  :bind (("C-DEL" . 'paredit-backward-kill-word))
-  :hook ((emacs-lisp-mode . paredit-mode)
-	 (lisp-mode . paredit-mode)))
+  :hook ((emacs-lisp-mode . lispy-mode)
+	 (lisp-mode . lispy-mode)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Rust Settings
