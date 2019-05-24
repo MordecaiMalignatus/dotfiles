@@ -260,7 +260,7 @@
 
 (use-package alchemist
   :ensure t
-  :hook elixir
+  :hook (elixir-mode . alchemist-mode)
   :config
   (setq alchemist-key-command-prefix (kbd "C-c ,")))
 
