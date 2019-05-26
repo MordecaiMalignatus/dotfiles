@@ -97,8 +97,8 @@ bindsym $mod+Shift+r     restart
 bindsym $mod+m mode "$move"
 set $move Move: (l)eft, (r)ight, (s)mall, (b)eamer
 mode "$move" {
-        bindsym l move workspace to output DP2-2; mode "default"
-        bindsym r move workspace to output DP1; mode "default"
+        bindsym l move workspace to output DP2-1; mode "default"
+        bindsym r move workspace to output DP2-2; mode "default"
         bindsym s move workspace to output eDP1; mode "default"
         bindsym b move workspace to output HDMI2; mode "default"
 

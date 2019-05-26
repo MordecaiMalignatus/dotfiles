@@ -260,7 +260,7 @@
 
 (use-package alchemist
   :ensure t
-  :hook elixir
+  :hook (elixir-mode . alchemist-mode)
   :config
   (setq alchemist-key-command-prefix (kbd "C-c ,")))
 
@@ -273,11 +273,11 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Lispy stuff.
-(use-package paredit
+
+(use-package lispy
   :ensure t
-  :bind (("C-DEL" . 'paredit-backward-kill-word))
-  :hook ((emacs-lisp-mode . paredit-mode)
-	 (lisp-mode . paredit-mode)))
+  :hook ((emacs-lisp-mode . lispy-mode)
+	 (lisp-mode . lispy-mode)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Rust Settings
@@ -349,7 +349,7 @@
              (get-buffer bufname)))
   (switch-to-buffer (get-buffer-create bufname))
   (if (= n 1) initial-major-mode))) ; 1, because n was incremented
-(global-set-key (kbd "C-x d") 'create-new-scratch-buffer)
+(global-set-key (kbd "C-x n s") 'create-new-scratch-buffer)
 
 ;; Aesthetics
 (menu-bar-mode 0)
