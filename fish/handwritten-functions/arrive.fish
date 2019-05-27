@@ -3,7 +3,6 @@ function arrive
   logrs "Arrived at work"
   emacs &; disown
   sh ~/dotfiles/xrandr/work-screens.sh
-  sh ~/dotfiles/scripts/i3-arrangement.sh
   i3-msg workspace Nerdery
   fetch-work-repos
   worktimecalc.py
