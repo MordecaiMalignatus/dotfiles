@@ -126,7 +126,7 @@
 	 ("C-c C-l" . 'org-insert-link)
 	 ("C-c l" . 'org-store-link)
 	 ("C-c C-M-." . 'org-time-stamp-inactive)
-	 ("C-c n t" . 'org-narrow-to-subtree))
+	 ("C-x n t" . 'org-narrow-to-subtree))
   :config
   (setq-default fill-column 80)
   (add-hook 'text-mode-hook 'auto-fill-mode)
