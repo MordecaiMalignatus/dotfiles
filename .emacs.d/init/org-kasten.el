@@ -264,7 +264,6 @@ The READ-TITLE is going into the file fragment and the headline of the new note.
 (defun org-kasten-create-reference (title)
   "Create a new literary note in the reference store with TITLE."
   (interactive "MTitle: ")
-  (org-kasten--read-properties)
   (org-kasten--generate-new-reference title '() ""))
 
 (defun org-kasten-open-index ()
