@@ -11,7 +11,7 @@ ssh-add
 
 if ! (tmux has-session -t $SESSION_NAME 2>/dev/null); then
   tmux new -d -s $SESSION_NAME -c "$HOME"
-  tmux new-window -t $SESSION_NAME:2 -n $MAIN_WINDOW_NAME -c $HOME 'fish -iC "arrive"'
+  tmux new-window -t $SESSION_NAME:2 -n $MAIN_WINDOW_NAME -c "$HOME" 'fish -iC "arrive"'
   tmux split-window -t $SESSION_NAME:2 -h
   tmux new-window -t $SESSION_NAME:3 -n wat-infrastructure -c "$HOME/work/wat-infrastructure"
   tmux new-window -t $SESSION_NAME:4 -n docker-localdev -c "$HOME/work/docker-localdev/"
