@@ -30,8 +30,8 @@ Located in `org-kasten-home'/References."
   :lighter " org-k"
   :keymap (let ((map (make-sparse-keymap)))
 	    (define-key map (kbd "C-# C-#") 'org-kasten-open-index)
-	    (define-key map (kbd "C-# c n") 'org-kasten-new-note)
-            (define-key map (kbd "C-# c r") 'org-kasten-new-reference)
+	    (define-key map (kbd "C-# c n") 'org-kasten-create-note)
+            (define-key map (kbd "C-# c r") 'org-kasten-create-reference)
 	    ;; (define-key map (kbd "C-# r r") 'org-kasten-remove-reference)
 	    (define-key map (kbd "C-# c c") 'org-kasten-create-child-note)
 	    (define-key map (kbd "C-# n") 'org-kasten-navigate-links)
@@ -227,7 +227,8 @@ HEADLINE, and REFERENCE-BODY are self explanatory, LINKS are the notes that are 
     (setq-local org-kasten-links (-remove-item target-index org-kasten-links))
     (org-kasten--write-properties)))
 
-;; TODO: Navigating from Reference to Note does not work. (Error stringp nil)
+;; TODO: Navigating from Reference to Note does not work. (Error stringp nil
+;; Meaning this does navigate to ".." for references, landing nowhere.
 (defun org-kasten-navigate-links ()
   "Navigate to one of the links from the current card.
 Uses `completing-read', use with ivy for best results."
@@ -243,7 +244,7 @@ Uses `completing-read', use with ivy for best results."
   (let ((files (mapcar 'org-kasten--find-file-for-index org-kasten-links)))
     (find-file (completing-read "References:" files))))
 
-(defun org-kasten-new-note (read-title)
+(defun org-kasten-create-note (read-title)
   "Create a new, enumerated note in the Kasten.
 The READ-TITLE is going into the file fragment and the headline of the new note."
   (interactive "MTitle: ")
@@ -251,7 +252,7 @@ The READ-TITLE is going into the file fragment and the headline of the new note.
   (org-kasten--generate-new-note read-title '() '() ""))
 
 (defun org-kasten-create-child-note (title)
-  "Create a new card with TITLE that is linked to this one."
+  "Create a new card with TITLE that is linked to the current note."
   (interactive "MTitle: ")
   (org-kasten--read-properties)
   (let ((current-file (buffer-file-name))
@@ -260,8 +261,8 @@ The READ-TITLE is going into the file fragment and the headline of the new note.
     (org-kasten--add-link-to-file current-file new-id)
     (switch-to-buffer new-buffer)))
 
-(defun org-kasten-new-reference (title)
-  "Create a new literary note in the reference store."
+(defun org-kasten-create-reference (title)
+  "Create a new literary note in the reference store with TITLE."
   (interactive "MTitle: ")
   (org-kasten--read-properties)
   (org-kasten--generate-new-reference title '() ""))
