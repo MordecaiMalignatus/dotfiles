@@ -31,7 +31,7 @@ Located in `org-kasten-home'/References."
   :keymap (let ((map (make-sparse-keymap)))
 	    (define-key map (kbd "C-# C-#") 'org-kasten-open-index)
 	    (define-key map (kbd "C-# c n") 'org-kasten-new-note)
-            ;; (define-key map (kbd "C-# c r") 'org-kasten-new-reference)
+            (define-key map (kbd "C-# c r") 'org-kasten-new-reference)
 	    ;; (define-key map (kbd "C-# r r") 'org-kasten-remove-reference)
 	    (define-key map (kbd "C-# c c") 'org-kasten-create-child-note)
 	    (define-key map (kbd "C-# n") 'org-kasten-navigate-links)
@@ -120,6 +120,11 @@ All lines of format `#+KEY: VALUE' will be extracted, to keep with org syntax."
    0
    (s-index-of "-" filepath)))
 
+(defun org-kasten--reference-to-index (filepath)
+  "Take the FILEPATH to a reference, and extract its index from it."
+  ;; Skip one for the "R" in the beginning of the filename.
+  (substring filepath 1 (s-index-of "-" filepath)))
+
 (defun org-kasten--notes-in-kasten ()
   "Return a list of all viable notes in the kasten."
   (-filter
@@ -193,6 +198,18 @@ Uses the HEADLINE, LINKS, REFERENCES and the NOTE-BODY as default values for the
     (org-kasten--read-properties)
     note-id))
 
+(defun org-kasten--generate-new-reference (headline links reference-body)
+  "Generate a new reference out of the given parts and sort it into the kasten.
+HEADLINE, and REFERENCE-BODY are self explanatory, LINKS are the notes that are already linked to it."
+  (let* ((current-highest-index (-max (mapcar 'string-to-number (mapcar'org-kasten--reference-to-index (org-kasten--references-in-kasten)))))
+	 (new-reference-id (number-to-string (+ 1 current-highest-index)))
+	 (file-content (org-kasten--mk-default-reference-content new-reference-id headline links reference-body))
+	 (stringified-headline (org-kasten--headline-to-filename-fragment headline)))
+    (find-file (concat (org-kasten--reference-dir) "R" new-reference-id "-" stringified-headline ".org"))
+    (insert file-content)
+    (org-kasten--read-properties)
+    new-reference-id))
+
 (defun org-kasten--add-link-to-file (file target-index)
   "Add a link to TARGET-INDEX in FILE."
   ;; Open/Visit target file, parse properties, push target-index, write properties, go back.
@@ -243,15 +260,11 @@ The READ-TITLE is going into the file fragment and the headline of the new note.
     (org-kasten--add-link-to-file current-file new-id)
     (switch-to-buffer new-buffer)))
 
-;; TODO: Implement.
-;; Needs to:
-;; - Create new file in Reference dir.
-;; - new Reference must have ID and LINKS keys.
-;; - new Reference must have a quotation-summary part and a source part.
-;; - navigation must lead to references and links respectively.
-;; (defun org-kasten-new-reference ()
-;;   "Create a new literary note in the reference store."
-;;   (interactive))
+(defun org-kasten-new-reference (title)
+  "Create a new literary note in the reference store."
+  (interactive "MTitle: ")
+  (org-kasten--read-properties)
+  (org-kasten--generate-new-reference title '() ""))
 
 (defun org-kasten-open-index ()
   "Open your index and link file."
