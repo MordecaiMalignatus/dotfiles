@@ -103,7 +103,7 @@ All lines of format `#+KEY: VALUE' will be extracted, to keep with org syntax."
 	     (string-index (if (numberp index)
 			       (number-to-string index)
 			     index))
-	     (files-starting-with-index (-filter (lambda (file) (s-starts-with-p string-index file))
+	     (files-starting-with-index (-filter (lambda (file) (s-starts-with-p (concat string-index "-") file))
 						 notes-in-kasten)))
 	(cond
 	 ((> (length files-starting-with-index) 1)
