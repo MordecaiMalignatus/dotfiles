@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: letter
+# key: letter
+# --
+\documentclass[10pt]{letter}
+
+\address{${1:Address of Sender}}
+\signature{${2:Name of Sender}}
+\begin{document}
+
+\begin{letter}{${3:Address of Recipient}
+  \opening{Dear ${4:Name of Recipient}, }
+
+  $0
+
+  \closing{Yours sincerely, }
+\end{letter}
+\end{document}
