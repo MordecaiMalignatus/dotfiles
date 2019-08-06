@@ -321,7 +321,7 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Custom interactive-functions
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 (defun init-file ()
   "Opens init.el."
   (interactive)
@@ -437,7 +437,7 @@ Copied from [[https://emacsredux.com/blog/2013/05/22/smarter-navigation-to-the-b
     (backward-word)
     (push-mark)
     (forward-word)
-    (counsel-ag (buffer-substring (region-beginning) (region-end))
+    (counsel-rg (buffer-substring (region-beginning) (region-end))
 	        (file-name-directory (buffer-file-name)))
     (pop-mark)))
 
