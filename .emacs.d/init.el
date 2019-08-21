@@ -178,7 +178,7 @@
 ;; Company mode.
 (use-package company
   :ensure t
-  :after restclient-company
+  :bind (("TAB" . #'company-indent-or-complete-common))
   :config
   (add-hook 'after-init-hook 'global-company-mode))
 
