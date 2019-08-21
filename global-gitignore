@@ -2,3 +2,5 @@
 *~
 *.yml#
 /.metals
+/project/.bloop/
+/TAGS
