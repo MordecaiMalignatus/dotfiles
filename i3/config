@@ -59,7 +59,7 @@ bindsym $mod+Shift+f               fullscreen toggle
 assign [class="Alacritty"]          workspace Nerdery
 assign [class="(?i)emacs"]          workspace Emacs
 assign [class="(?i)chrom"]          workspace Browser
-assign [class="Firefox"]            workspace Browser
+assign [class="(?i)firefox"]        workspace Browser
 assign [class="jetbrains-phpstorm"] workspace PHPStorm
 assign [class="(?i)toolbox"]        workspace Toolbox
 assign [class="libre"]              workspace LibreOffice
