@@ -8,7 +8,7 @@
 \signature{${2:Name of Sender}}
 \begin{document}
 
-\begin{letter}{${3:Address of Recipient}
+\begin{letter}{${3:Address of Recipient}}
   \opening{Dear ${4:Name of Recipient}, }
 
   $0
