@@ -200,7 +200,10 @@
 
 ;; We language servers now, awww yeh
 (use-package lsp-mode
-  :ensure t)
+  :ensure t
+  :config
+  (add-hook 'scala-mode-hook 'lsp-mode)
+  (setq lsp-prefer-flymake nil))
 
 (use-package lsp-ui
   :ensure t
