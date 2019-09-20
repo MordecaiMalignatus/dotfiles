@@ -1,4 +1,4 @@
-set -g EDITOR (which vim)
+set -g EDITOR (which emacs)
 set -g BROWSER (which firefox)
 
 bind \cf forward-word
