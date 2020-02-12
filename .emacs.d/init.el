@@ -359,6 +359,9 @@
 (tool-bar-mode 0)
 (scroll-bar-mode 0)
 
+;; Force spaces instead of tabs
+(setq-default indent-tabs-mode nil)
+
 ;; Coerce fullscreen on OSX
 ;; Enable ivy's selectable prompt on OSX because I can M-j on Linux but not OSX.
 (when (string= system-type 'darwin)
