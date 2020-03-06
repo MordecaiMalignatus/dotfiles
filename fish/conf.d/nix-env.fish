@@ -1,0 +1,1 @@
+/Users/az/.config/fisherman/nix-env.fish/conf.d/nix-env.fish
