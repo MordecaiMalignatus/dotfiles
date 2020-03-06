@@ -1,0 +1,7 @@
+#+STARTUP: showall
+
+* Overview
+Emacs lisp cheatsheet mode! Wheee.
+
+* defun
+Simply defining a function to take care of stuff that needs to be done.

@@ -1,0 +1,10 @@
+Ah yes, orgmode, the best fucking thing since sliced bread.
+
+Headlines are leading, nested * at the start of a line.
+
+* Formatting
+*bold*
+_underlined_
+/italic/
+~Code~, =also Code=
++strike+
