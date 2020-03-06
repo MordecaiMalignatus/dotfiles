@@ -37,6 +37,10 @@
 (use-package custom-deft
   :after deft)
 
+(use-package cheatsheets
+  :config
+  (cheatsheets-mode))
+
 ;; Auto-upgrade packages and delete old ones.
 (use-package auto-package-update
    :ensure t
@@ -208,7 +212,6 @@
   :hook
   (elixir-mode . lsp)
   :config
-  (add-hook 'scala-mode-hook 'lsp-mode)
   (setq lsp-prefer-flymake nil))
 
 (use-package lsp-ui
@@ -232,41 +235,6 @@
   :ensure t)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Scala + Metals.
-(use-package scala-mode
-  :ensure t
-  :mode "\\.s\\(cala\\|bt\\)$")
-
-(use-package sbt-mode
-  :ensure t
-  :commands sbt-start sbt-command
-  :config
-  (substitute-key-definition
-   'minibuffer-complete-word
-   'self-insert-command
-   minibuffer-local-completion-map))
-
-(use-package lsp-scala
-  :after scala-mode
-  :ensure t
-  :demand t
-  :hook (scala-mode . lsp))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Haskell specifics
-(use-package haskell-mode
-  :ensure t
-  :bind (:map haskell-mode-map ("C-c C-c" . 'haskell-compile))
-  :config
-  (setq haskell-stylish-on-save t)
-  (setq haskell-compile-cabal-build-command "stack build"))
-
-(use-package flycheck-haskell
-  :ensure t
-  :config
-  (add-hook 'haskell-mode #'flycheck-haskell-setup))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Elixir specifics
 (use-package elixir-mode
   :ensure t)
@@ -281,6 +249,11 @@
   :config
   (elpy-enable))
 
+(use-package poetry
+  :ensure t
+  :config
+  (poetry-tracking-mode))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Lispy stuff.
 
@@ -288,6 +261,13 @@
   :ensure t
   :hook ((emacs-lisp-mode . lispy-mode)
 	 (lisp-mode . lispy-mode)))
+
+;; Get you some docs
+(use-package scribble-mode
+  :ensure t)
+
+(use-package racket-mode
+  :ensure t)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Rust Settings
@@ -389,6 +369,9 @@
 ;; Enable/use narrow/widen.
 (global-set-key (kbd "C-x w") 'widen)
 (global-set-key (kbd "C-x n r") 'narrow-to-region)
+
+;; Bind recompile, for example for elpy's test-rerun
+(global-set-key (kbd "<f12>") 'recompile)
 
 (use-package solarized-theme
   :ensure t
