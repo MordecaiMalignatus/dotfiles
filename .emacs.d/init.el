@@ -201,6 +201,12 @@
 ;; We language servers now, awww yeh
 (use-package lsp-mode
   :ensure t
+  :init
+  (setq lsp-keymap-prefix "M-l")
+  (add-to-list 'exec-path "/Users/az/projects/elixir-ls/release/")
+  :commands lsp
+  :hook
+  (elixir-mode . lsp)
   :config
   (add-hook 'scala-mode-hook 'lsp-mode)
   (setq lsp-prefer-flymake nil))
@@ -209,6 +215,10 @@
   :ensure t
   :config
   (add-hook 'lsp-mode-hook 'lsp-ui-mode))
+
+(use-package lsp-ivy
+  :ensure t
+  :commands lsp-ivy-workspace-symbol)
 
 ;; Add company-lsp backend for metals
 (use-package company-lsp
@@ -261,11 +271,8 @@
 (use-package elixir-mode
   :ensure t)
 
-(use-package alchemist
-  :ensure t
-  :hook (elixir-mode . alchemist-mode)
-  :config
-  (setq alchemist-key-command-prefix (kbd "C-c ,")))
+(use-package exunit
+  :ensure t)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Python stuff
