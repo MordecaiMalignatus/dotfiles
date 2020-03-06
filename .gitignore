@@ -35,3 +35,4 @@ ranger/history
 /fish/fish_variables
 /.emacs.d/.lsp-session-v1
 .emacs.d/tramp
+/.emacs.d/elpy/
