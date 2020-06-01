@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: piped-inspect
+# key: _ip
+# --
+|> IO.inspect

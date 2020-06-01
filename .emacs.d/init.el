@@ -73,7 +73,7 @@
 ;; Movement
 (use-package avy
   :ensure t
-  :bind ("C-;" . 'avy-goto-char-2))
+  :bind ("C-\\" . 'avy-goto-char-2))
 
 (use-package ace-window
   :ensure t
@@ -211,8 +211,10 @@
   :commands lsp
   :hook
   (elixir-mode . lsp)
+  (rust-mode . lsp)
   :config
-  (setq lsp-prefer-flymake nil))
+  (setq lsp-prefer-flymake nil)
+  (setq lsp-rust-server 'rust-analyzer))
 
 (use-package lsp-ui
   :ensure t
@@ -235,12 +237,28 @@
   :ensure t)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Nix stuff.
+(use-package nix-mode
+  :ensure t
+  :mode "\\.nix\\'")
+
+(use-package company-nixos-options
+  :ensure t
+  :config
+  (add-to-list 'company-backends 'company-nixos-options))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Elixir specifics
 (use-package elixir-mode
-  :ensure t)
+  :ensure t
+  :config
+  (add-hook 'elixir-mode-hook
+            (lambda () (add-hook 'before-save-hook 'elixir-format nil t)))
+  (add-hook 'elixir-mode-hook (lambda () (define-key elixir-mode-map (kbd "<f12>") 'exunit-verify))))
 
 (use-package exunit
-  :ensure t)
+  :ensure t
+  :hook (elixir . exunit))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Python stuff
@@ -267,7 +285,8 @@
   :ensure t)
 
 (use-package racket-mode
-  :ensure t)
+  :ensure t
+  :hook (racket . racket-xp))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Rust Settings
@@ -287,8 +306,8 @@
 (use-package js2-mode
   :ensure t
   :config
-  (define-key js2-mode-map (kbd "C-k") #'js2r-kill)
-  (define-key js-mode-map (kbd "M-.") nil))
+  (define-key js-mode-map (kbd "M-.") nil)
+  (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode)))
 
 (use-package js2-refactor
   :after js2-mode
@@ -340,6 +359,7 @@
   (switch-to-buffer (get-buffer-create bufname))
   (if (= n 1) initial-major-mode))) ; 1, because n was incremented
 (global-set-key (kbd "C-x n s") 'create-new-scratch-buffer)
+(setq initial-scratch-message "")
 
 ;; Aesthetics
 (menu-bar-mode 0)
@@ -353,7 +373,7 @@
 ;; Enable ivy's selectable prompt on OSX because I can M-j on Linux but not OSX.
 (when (string= system-type 'darwin)
   (progn
-    (set-face-attribute 'default nil :font "PragmataPro-14")
+    (set-face-attribute 'default nil :font "PragmataPro-16")
     (set-frame-parameter nil 'fullscreen 'fullboth)
     (setq ivy-use-selectable-prompt t)
     (global-set-key (kbd "<backtab>") #'company-complete)))
@@ -369,6 +389,7 @@
 ;; Enable/use narrow/widen.
 (global-set-key (kbd "C-x w") 'widen)
 (global-set-key (kbd "C-x n r") 'narrow-to-region)
+(global-set-key (kbd "C-;") 'iedit-mode)
 
 ;; Bind recompile, for example for elpy's test-rerun
 (global-set-key (kbd "<f12>") 'recompile)
@@ -379,8 +400,6 @@
   (setq solarized-use-variable-pitch nil)
   :config
   (load-theme 'solarized-light t))
-
-;; Fullscreen emacs on launch on OSX.
 
 (defun az/toggle-solarized-theming ()
   "Switch between solarized-light and solarized-dark."
@@ -445,3 +464,4 @@ Copied from [[https://emacsredux.com/blog/2013/05/22/smarter-navigation-to-the-b
 (global-set-key (kbd "C-c i c < -") (lambda () (interactive) (insert-char ?←))) ; For rename-commits.
 
 ;;; init.el ends here
+(put 'upcase-region 'disabled nil)

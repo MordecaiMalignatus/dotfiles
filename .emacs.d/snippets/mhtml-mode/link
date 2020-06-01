@@ -1,0 +1,4 @@
+# key: link
+# name: link
+# --
+<a href="$1" target="_blank">$1</a>$0

@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: module doc
+# key: mdoc
+# --
+@moduledoc """
+$0
+"""
