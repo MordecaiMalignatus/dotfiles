@@ -127,7 +127,7 @@
   :ensure t
   :bind (("C-c a" . 'org-agenda)
 	 ("C-c o c" . 'counsel-org-capture)
-	 ("C-c C-l" . 'org-insert-link)
+	 ("C-c C-l o" . 'org-insert-link)
 	 ("C-c l" . 'org-store-link)
 	 ("C-c C-M-." . 'org-time-stamp-inactive)
 	 ("C-x n t" . 'org-narrow-to-subtree))
@@ -259,6 +259,16 @@
 (use-package exunit
   :ensure t
   :hook (elixir . exunit))
+
+(use-package inf-elixir
+  :load-path "packages/inf-elixir/"
+  :bind (
+         ("C-c C-l i i" . 'inf-elixir)
+         ("C-c C-l i p" . 'inf-elixir-project)
+         ("C-c C-l i l" . 'inf-elixir-send-line)
+         ("C-c C-l i r" . 'inf-elixir-send-region)
+         ("C-c C-l i b" . 'inf-elixir-send-buffer)
+         ))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Python stuff

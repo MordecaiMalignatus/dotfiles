@@ -1,0 +1,6 @@
+[submodule ".emacs.d/inf-elixir"]
+	path = .emacs.d/inf-elixir
+	url = https://github.com/J3RN/inf-elixir/
+[submodule ".emacs.d/packages/inf-elixir"]
+	path = .emacs.d/packages/inf-elixir
+	url = https://github.com/J3RN/inf-elixir/
