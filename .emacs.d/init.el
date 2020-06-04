@@ -109,7 +109,9 @@
 
 (use-package forge
   :after magit
-  :ensure t)
+  :ensure t
+  :config
+  (setq forge-topic-list-limit '(50 . 0)))
 
 (use-package gist
   :ensure t)
