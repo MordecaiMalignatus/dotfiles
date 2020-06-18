@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: IEx-defmodule
+# key: idefm
+# --
+defmodule Repl do
+  def $1($2) do
+    $0
+  end
+end
