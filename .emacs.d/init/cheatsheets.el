@@ -19,7 +19,6 @@
 
 (define-minor-mode cheatsheets-mode
   "A tiny minor mode to make using cheatsheets far easier."
-  :lighter " cs"
   :global t
   :keymap (let ((map (make-sparse-keymap)))
 	    (define-key map cheatsheets-hotkey 'cheatsheets-init)
