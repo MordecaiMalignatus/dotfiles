@@ -1,0 +1,14 @@
+* Overview
+Elixir is dope. Some handy cheatsheets go here.
+
+* Syntax
+** KW List as last parameter
+If the last parameter of a function is a KW list, you don't actually need to
+delimit or anything, really.
+
+#+BEGIN_SRC elixir
+Repo.get_by(Query, team: team, slug: slug) == Repo.get_by(Query, [team: team, slug: slug])
+#+END_SRC
+
+This only works in the last list of a parameter list. This is also how the =def
+thing, do: <function body>= syntax works.
