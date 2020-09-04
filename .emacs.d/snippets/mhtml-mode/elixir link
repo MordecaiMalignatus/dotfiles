@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: elixir link
+# key: _el
+# --
+<a href="<%= Routes.query_path(HaruspexWeb.Endpoint, $1, $2, $3, %{$4}) %>">$0</a>
