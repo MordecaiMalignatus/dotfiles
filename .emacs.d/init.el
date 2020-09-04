@@ -29,7 +29,7 @@
 
 ;; Wheeeeee :D
 (use-package org-kasten
-  :bind (("C-# C-#" . #'org-kasten-open-index))
+  :bind ("C-# C-#" . #'org-kasten-open-index)
   :config
   (setq org-kasten-home "~/Dropbox/Perceptron/")
   (add-hook 'org-mode-hook 'org-kasten-mode))
@@ -244,11 +244,6 @@
   :ensure t
   :mode "\\.nix\\'")
 
-(use-package company-nixos-options
-  :ensure t
-  :config
-  (add-to-list 'company-backends 'company-nixos-options))
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Elixir specifics
 (use-package elixir-mode
@@ -314,6 +309,13 @@
   :hook (rust-mode . cargo-minor-mode))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Golang Stuff
+
+(use-package go-mode
+  :ensure t
+  :hook (go-mode . lsp))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Javascript Dev
 (use-package js2-mode
   :ensure t
@@ -363,7 +365,7 @@
   (let ((n 0)
         bufname)
     (while (progn
-             (setq bufname (concat "*scratch"
+             (setq bufname (concat "*scratch-"
                                    (if (= n 0) "" (int-to-string n))
                                    "*"))
              (setq n (1+ n))
@@ -385,7 +387,7 @@
 ;; Enable ivy's selectable prompt on OSX because I can M-j on Linux but not OSX.
 (when (string= system-type 'darwin)
   (progn
-    (set-face-attribute 'default nil :font "PragmataPro-16")
+    (set-face-attribute 'default nil :font "PragmataPro-15")
     (set-frame-parameter nil 'fullscreen 'fullboth)
     (setq ivy-use-selectable-prompt t)
     (global-set-key (kbd "<backtab>") #'company-complete)))
@@ -405,6 +407,7 @@
 
 ;; Bind recompile, for example for elpy's test-rerun
 (global-set-key (kbd "<f12>") 'recompile)
+(setq compile-command "rake")
 
 (use-package solarized-theme
   :ensure t

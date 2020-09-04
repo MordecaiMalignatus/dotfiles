@@ -1,3 +1,4 @@
+#+STARTUP: contents
 * Overview
 Elixir is dope. Some handy cheatsheets go here.
 
@@ -12,3 +13,32 @@ Repo.get_by(Query, team: team, slug: slug) == Repo.get_by(Query, [team: team, sl
 
 This only works in the last list of a parameter list. This is also how the =def
 thing, do: <function body>= syntax works.
+** Maps to structs
+There's the =struct/2= kernel command that turns maps to structs.
+
+#+BEGIN_SRC elixir
+defstruct foo: "", bar: 1, baz: :t
+
+def terrible do
+  attr = %{foo: "some stuff", bar: 2, baz: :f}
+  struct(__MODULE__, attr)
+end
+#+END_SRC
+* Phoenix
+
+** =live_path=
+This rather arcane function handles paths based on what you registered in the
+router
+
+#+BEGIN_SRC elixir
+MyAppWeb.Router.Helpers.page_path(conn_or_endpoint, :show, "hello")
+# "/pages/hello"
+MyAppWeb.Router.Helpers.page_path(conn_or_endpoint, :show, "hello", some: "query")
+# "/pages/hello?some=query"
+MyAppWeb.Router.Helpers.page_url(conn_or_endpoint, :show, "hello")
+# "http://example.com/pages/hello"
+MyAppWeb.Router.Helpers.page_url(conn_or_endpoint, :show, "hello", some: "query")
+# "http://example.com/pages/hello?some=query"
+#+END_SRC
+
+- Parameters are handled buy the last-position kw list or a map.

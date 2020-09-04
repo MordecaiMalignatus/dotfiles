@@ -40,10 +40,6 @@ set hlsearch                   " Highlight search terms
 set lazyredraw                 " Make vim redraw the screen less
 set wildmenu                   " Visual tab complete menu.
 set number                     " And I like to see my numbers.
-set t_Co=256                   " Terminal stuff for Zenburn
-
-colors gruvbox
-set background=dark
 
 " Remaps.
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
