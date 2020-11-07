@@ -283,9 +283,10 @@
 
 (use-package poetry
   :ensure t
-  :config
-  (setq poetry-tracking-mode 'projectile)
-  (poetry-tracking-mode))
+  :hook
+  (python-mode . (lambda () (when (poetry-venv-exist-p)
+                              (setq-local lsp-pyls-server-command '("poetry" "run" "pyls"))
+                              (poetry-venv-workon)))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Lispy stuff.
