@@ -159,6 +159,9 @@
   :config
   (setq TeX-auto-save t))
 
+(use-package yaml-mode
+  :ensure t)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Projectile config
 (use-package projectile
@@ -208,6 +211,7 @@
 (use-package lsp-mode
   :ensure t
   :init
+  (global-unset-key (kbd  "M-l"))
   (setq lsp-keymap-prefix "M-l")
   (add-to-list 'exec-path "/Users/az/projects/elixir-ls/release/")
   :commands lsp
@@ -215,6 +219,7 @@
   (elixir-mode . lsp)
   (rust-mode . lsp)
   :config
+  (setq lsp-auto-configure t)
   (setq lsp-prefer-flymake nil)
   (setq lsp-rust-server 'rust-analyzer))
 
@@ -269,14 +274,17 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Python stuff
-(use-package elpy
+(use-package lsp-python-ms
   :ensure t
-  :config
-  (elpy-enable))
+  :init (setq lsp-python-ms-auto-install-server t)
+  :hook (python-mode . (lambda ()
+                          (require 'lsp-python-ms)
+                          (lsp))))
 
 (use-package poetry
   :ensure t
   :config
+  (setq poetry-tracking-mode 'projectile)
   (poetry-tracking-mode))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
