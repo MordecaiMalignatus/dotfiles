@@ -274,19 +274,15 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Python stuff
-(use-package lsp-python-ms
+(use-package elpy
   :ensure t
-  :init (setq lsp-python-ms-auto-install-server t)
-  :hook (python-mode . (lambda ()
-                          (require 'lsp-python-ms)
-                          (lsp))))
+  :config
+  (elpy-enable))
 
 (use-package poetry
   :ensure t
   :hook
-  (python-mode . (lambda () (when (poetry-venv-exist-p)
-                              (setq-local lsp-pyls-server-command '("poetry" "run" "pyls"))
-                              (poetry-venv-workon)))))
+  (setq poetry-tracking-strategy 'projectile))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Lispy stuff.
