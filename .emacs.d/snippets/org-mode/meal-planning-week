@@ -1,0 +1,25 @@
+# key: ;mw
+# name: meal-planning-week
+# --
+Meal Plan:
+  Mon:
+    - Lunch:
+    - Dinner:
+  Tue:
+    - Lunch:
+    - Dinner:
+  Wed:
+    - Lunch:
+    - Dinner:
+  Thu:
+    - Lunch:
+    - Dinner:
+  Fri:
+    - Lunch:
+    - Dinner:
+  Sat:
+    - Lunch:
+    - Dinner:
+  Sun:
+    - Lunch:
+    - Dinner:
