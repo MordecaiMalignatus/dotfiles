@@ -36,3 +36,4 @@ ranger/history
 /.emacs.d/.lsp-session-v1
 .emacs.d/tramp
 /.emacs.d/elpy/
+/.emacs.d/.cache/

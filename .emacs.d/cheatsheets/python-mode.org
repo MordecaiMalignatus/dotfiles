@@ -1,0 +1,39 @@
+* Overview
+
+Ahh, python, my favorite thing for everything small.
+
+* Stdlib
+** Argparse
+The handy parser for CLI scirpts that need to be actual tools.
+
+**BASIC USAGE**
+#+BEGIN_SRC python
+if __name__ == '__main__':
+    p = argparse.ArgumentParser()
+    p.add_argument('-s', '--long', help="Short or long flags", required=False)
+    p.add_argument('-f', help='store_true indicates presence of a flag', action='store_true')
+    p.add_argument('n', help='this is a pure positional argument')
+    args = p.parse_args()
+#+END_SRC
+
+**SUB COMMANDS**
+#+BEGIN_SRC python
+def foo(args):
+    if args.foo:
+       print("I'm a subcommand")
+
+def main(args):
+    pass
+
+if __name__ == '__main__':
+    p = argparse.ArgumentParser()
+    p.set_defaults(func=main)
+    subparsers = p.add_subparsers()
+    subcmd = subparsers.add_parser('subcommand')
+    subcmd.add_argument('-f', '--foo', help="Some arg")
+    subcmd.set_defaults(func=foo)
+
+    # Parse, and then use. This dispatches to the specified defaults function
+    args = p.parse_args()
+    args.func(args)
+#+END_SRC
