@@ -414,6 +414,11 @@
 (global-set-key (kbd "<f12>") 'recompile)
 (setq compile-command "rake")
 
+;; Use a decent shell, add it to a decent binding.
+(setq explicit-shell-file-name "/usr/local/bin/fish")
+(setq shell-file-name "/usr/local/bin/fish")
+(setq explicit-fish-commands '("--login"))
+
 (use-package solarized-theme
   :ensure t
   :init
