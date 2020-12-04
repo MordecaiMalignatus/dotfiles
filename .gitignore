@@ -37,3 +37,4 @@ ranger/history
 .emacs.d/tramp
 /.emacs.d/elpy/
 /.emacs.d/.cache/
+/fish/completions/*.fish
