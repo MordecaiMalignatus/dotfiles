@@ -149,8 +149,9 @@
   (add-hook 'org-mode-hook 'org-indent-mode)
   (setq org-log-done 'date)
   (setq org-default-notes-file "~/Dropbox/Reference/Work/capture.org")
-  (setq org-clock-persist 'history)
-  (org-clock-persistence-insinuate)
+  (setq org-agenda-dim-blocked-tasks 'invisible)
+  (setq org-enforce-todo-dependencies t)
+  (setq org-enforce-todo-checkbox-dependencies t)
   (org-babel-do-load-languages
    'org-babel-load-languages '((shell . t))))
 
@@ -433,7 +434,7 @@
   :init
   (setq solarized-use-variable-pitch nil)
   :config
-  (load-theme 'solarized-light t))
+  (load-theme 'solarized-zenburn t))
 
 (defun az/toggle-solarized-theming ()
   "Switch between solarized-light and solarized-dark."
