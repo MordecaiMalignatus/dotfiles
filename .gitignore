@@ -38,3 +38,8 @@ ranger/history
 /.emacs.d/elpy/
 /.emacs.d/.cache/
 /fish/completions/*.fish
+/.emacs.d/semanticdb/
+/.emacs.d/recentf~
+/.emacs.d/org-clock-save.el
+/.emacs.d/auto-save-list/
+/.emacs.d/.last-package-update-day
