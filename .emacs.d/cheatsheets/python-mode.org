@@ -37,3 +37,18 @@ if __name__ == '__main__':
     args = p.parse_args()
     args.func(args)
 #+END_SRC
+
+* Functions I often want that aren't in the stdlib.
+
+** Chunked Iterable
+#+begin_src python
+import itertools
+
+def chunked_iterable(iterable, size):
+    it = iter(iterable)
+    while True:
+        chunk = tuple(itertools.islice(it, size))
+        if not chunk:
+            break
+        yield chunk
+#+end_src
