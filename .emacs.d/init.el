@@ -161,7 +161,7 @@
 (use-package olivetti
   :ensure t
   :config
-  (global-set-key (kbd "C-c C-8 o") #'olivetti-mode))
+  (global-set-key (kbd "C-c C-8") #'olivetti-mode))
 
 (use-package auctex
   :defer t
@@ -171,6 +171,18 @@
 
 (use-package yaml-mode
   :ensure t)
+
+(use-package elfeed
+  :ensure t
+  :bind (("C-c C-l r" . 'elfeed))
+  :config
+  (setq elfeed-feeds
+        '(("https://danluu.com/atom.xml" programming tech essays)
+          ("https://lobste.rs/rss" tech programming)
+          ("https://ntietz.com/atom.xml" tech programming)
+          ("https://xkcd.com/atom.xml" comics)
+          ("https://aeon.co/feed.rss" essays)))
+  )
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Projectile config
