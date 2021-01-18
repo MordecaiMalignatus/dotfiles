@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: new project
+# key: ;proj
+# --
+#+STARTUP: showall
+* Overview/Context
+
+$1
+
+* Project Description
+
+$2
+
+* Ideas/Resoures
+
+* Notes
+
+* Things left to do [/]
+** TODO Take stock of the situation
