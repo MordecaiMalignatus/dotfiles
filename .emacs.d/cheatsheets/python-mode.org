@@ -6,7 +6,6 @@ Ahh, python, my favorite thing for everything small.
 ** Argparse
 The handy parser for CLI scirpts that need to be actual tools.
 
-**BASIC USAGE**
 #+BEGIN_SRC python
 if __name__ == '__main__':
     p = argparse.ArgumentParser()
@@ -16,7 +15,7 @@ if __name__ == '__main__':
     args = p.parse_args()
 #+END_SRC
 
-**SUB COMMANDS**
+*** Sub Commands
 #+BEGIN_SRC python
 def foo(args):
     if args.foo:
@@ -37,6 +36,40 @@ if __name__ == '__main__':
     args = p.parse_args()
     args.func(args)
 #+END_SRC
+
+** Subprocess
+Ah yes, the shell, the thing we can't escape. Bring it on then.
+
+#+begin_src python
+import subprocess
+subprocess.run(
+  ["ls", "-l"], # Command as list
+  check=True # Error of $? != 0
+  capture_output=True # Return value has .stdout, .stderr attributes.
+  shell=True # Execute command in shell. Useful for expansion, control flow, custom commands.
+)
+#+end_src
+
+** Pathlib
+A higher level alternative to =os.path=. Finally!
+
+- Offical docs: https://docs.python.org/3/library/pathlib.html#module-pathlib
+
+#+begin_src python
+from pathlib import Path
+import os
+
+p = Path(".")
+
+home = Path(os.environ["HOME"]) # No shell expansion - need to go via env var.
+p.glob("**/*.py") # Globs work, returns iterator
+
+sre = p / "projects" / "sre" # Navigation via div overload.
+sre.exists() # paths can be constructed without being real
+sre.is_dir() # Basic checks also available.
+
+dirs = [d for d in p.iterdir() if d.is_dir()] # Iterators
+#+end_src
 
 * Functions I often want that aren't in the stdlib.
 

@@ -1,0 +1,42 @@
+#!/usr/bin/env python3
+'''
+Script simply runs git fetch in all project dirs. Used to keep things up to date.
+'''
+import argparse
+import os
+from pathlib import Path
+import subprocess
+
+PROJECT_ROOT = Path(os.environ["HOME"]) / "projects"
+
+def _fetch(path):
+    subprocess.run([
+        "git",
+        "-C",
+        path,
+        "fetch",
+        "-a",
+        "--prune",
+    ], check=True)
+
+def main(args):
+    p = Path(PROJECT_ROOT)
+    dirs = [d for d in p.iterdir() if d.is_dir()]
+    print(f"fetching {len(dirs)} projects...\n")
+    for d in dirs:
+        if (d / ".git").exists():
+            print("fetching {}...\n".format(d))
+            _fetch(d)
+
+def install(args):
+    pass
+
+if __name__ == '__main__':
+    p = argparse.ArgumentParser()
+    p.set_defaults(func=main)
+    subp = p.add_subparsers()
+    subcmd = subp.add_parser("install_hook")
+    subcmd.set_defaults(func=install)
+
+    args = p.parse_args()
+    args.func(args)
