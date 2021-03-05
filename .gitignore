@@ -43,3 +43,4 @@ ranger/history
 /.emacs.d/org-clock-save.el
 /.emacs.d/auto-save-list/
 /.emacs.d/.last-package-update-day
+*~
