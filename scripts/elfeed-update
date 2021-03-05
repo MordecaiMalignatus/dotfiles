@@ -1,0 +1,8 @@
+#!/usr/bin/env emacs --script
+
+(require 'package)
+(package-initialize)
+(require 'elfeed)
+(load (concat user-emacs-directory "init.el"))
+
+(elfeed-update)

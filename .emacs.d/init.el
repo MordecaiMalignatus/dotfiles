@@ -172,17 +172,17 @@
 (use-package yaml-mode
   :ensure t)
 
-(use-package elfeed
-  :ensure t
-  :bind (("C-c C-l r" . 'elfeed))
-  :config
-  (setq elfeed-feeds
+(setq elfeed-feeds
         '(("https://danluu.com/atom.xml" programming tech essays)
           ("https://lobste.rs/rss" tech programming)
           ("https://ntietz.com/atom.xml" tech programming)
           ("https://xkcd.com/atom.xml" comics)
+          ("https://surfingcomplexity.blog/feed/" tech resilience)
           ("https://aeon.co/feed.rss" essays)))
-  )
+
+(use-package elfeed
+  :ensure t
+  :bind (("C-c C-l r" . 'elfeed)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Projectile config
@@ -512,3 +512,4 @@ Copied from [[https://emacsredux.com/blog/2013/05/22/smarter-navigation-to-the-b
 
 ;;; init.el ends here
 (put 'upcase-region 'disabled nil)
+(put 'set-goal-column 'disabled nil)
