@@ -26,9 +26,9 @@ DIR: The directory that deft should treat as `deft-directory`"
     (kill-buffer "*Deft*")))
 
 ;; Deft configuration
-(global-set-key (kbd "C-$ C-$") '(lambda () (interactive)(launch-deft-in "~/Dropbox/Reference")))
-(global-set-key (kbd "C-$ p")   '(lambda () (interactive)(launch-deft-in "~/Dropbox/Perceptron")))
-(global-set-key (kbd "C-$ w")   '(lambda () (interactive)(launch-deft-in "~/Dropbox/Reference/Work/Pricehubble")))
+(global-set-key (kbd "C-$ C-$") '(lambda () (interactive)(launch-deft-in "~/Sync/Reference")))
+(global-set-key (kbd "C-$ p")   '(lambda () (interactive)(launch-deft-in "~/Sync/Perceptron")))
+(global-set-key (kbd "C-$ w")   '(lambda () (interactive)(launch-deft-in "~/Sync/Reference/Work/Pricehubble")))
 (define-key deft-mode-map (kbd "C-g") 'az/deft-kill)
 
 (setq deft-directory "~/Dropbox/Reference")

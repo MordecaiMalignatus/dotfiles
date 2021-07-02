@@ -31,7 +31,7 @@
 (use-package org-kasten
   :bind ("C-# C-#" . #'org-kasten-open-index)
   :config
-  (setq org-kasten-home "~/Dropbox/Perceptron/")
+  (setq org-kasten-home "~/Sync/Perceptron/")
   (add-hook 'org-mode-hook 'org-kasten-mode))
 
 (use-package custom-deft
@@ -148,7 +148,7 @@
   (add-hook 'before-save-hook 'delete-trailing-whitespace)
   (add-hook 'org-mode-hook 'org-indent-mode)
   (setq org-log-done 'date)
-  (setq org-default-notes-file "~/Dropbox/Reference/Work/capture.org")
+  (setq org-default-notes-file "~/Sync/Reference/Work/capture.org")
   (setq org-agenda-dim-blocked-tasks 'invisible)
   (setq org-enforce-todo-dependencies t)
   (setq org-enforce-todo-checkbox-dependencies t)
