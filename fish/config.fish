@@ -5,9 +5,6 @@ set -g BROWSER (which firefox)
 alias k=kubectl
 alias ist=istioctl
 
-# Call sq during shell init.
-if isatty
-  sq status
-end
-
 source /usr/local/opt/asdf/asdf.fish
+
+fish_add_path ~/.cargo/bin
