@@ -1,0 +1,25 @@
+# -*- mode: snippet -*-
+# name: person
+# key: ;person
+# --
+* Data
+** Outline
+- Name:
+- Age:
+- Birthday:
+- Sexuality:
+- Gender Identity:
+- Nutrition:
+- Alcohol:
+- Weed:
+- Origin of contact:
+
+** Contact
+- Phone number:
+- Email address:
+- Physical Address:
+
+** Social Media
+* Relationships
+* Gifts
+* Events
