@@ -44,3 +44,5 @@ ranger/history
 /.emacs.d/auto-save-list/
 /.emacs.d/.last-package-update-day
 *~
+/.emacs.d/init/cheatsheets.el
+/.emacs.d/init/org-kasten.el
