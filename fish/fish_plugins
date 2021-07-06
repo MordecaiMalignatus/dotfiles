@@ -1,9 +1,2 @@
-oh-my-fish/plugin-foreign-env
-fisherman/getopts
-fisherman/git_util
-lilyball/nix-env.fish
-tuvistavie/fish-ssh-agent
-fisherman/z
-jorgebucaran/fisher
 hyakt/luna
-evanlucas/fish-kubectl-completions
+jorgebucaran/fisher
