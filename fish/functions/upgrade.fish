@@ -1,12 +1,9 @@
-# Defined in /tmp/fish.5aFL5f/upgrade.fish @ line 2
 function upgrade
-	echo (set_color green)"Upgrading Packages"(set_color normal)
-	switch (uname -s)
-        case Linux
-            sudo pacman -Syu --noconfirm
-            
-        case Darwin
-            brew upgrade
+    echo (set_color green)"Upgrading Packages"(set_color normal)
+    brew upgrade
+    if test hostname = "ALT01896\n"
+      echo (set_color green)"Upgrading Vault"(set_color normal)
+      vault wf upgrade
     end
 
     echo (set_color green)"Updating dotfiles..."(set_color normal)
