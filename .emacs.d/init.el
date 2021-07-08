@@ -27,6 +27,10 @@
 ;; My custom modules.
 (add-to-list 'load-path (concat user-emacs-directory "init"))
 
+;; Work-specific config I can't check in
+(when (string= (system-name) "ALT01896")
+  (load (concat user-emacs-directory "init/" "work.el")))
+
 ;; Wheeeeee :D
 (use-package org-kasten
   :bind ("C-# C-#" . #'org-kasten-open-index)
