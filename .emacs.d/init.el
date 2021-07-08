@@ -136,6 +136,12 @@
   :config
   (global-set-key (kbd "C-c C-=") 'kubernetes-overview))
 
+(use-package puppet-mode
+  :ensure t)
+
+(use-package terraform-mode
+  :ensure t)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Document management.
 (use-package org
