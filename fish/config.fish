@@ -8,3 +8,5 @@ alias ist=istioctl
 source /usr/local/opt/asdf/asdf.fish
 
 fish_add_path ~/.cargo/bin
+
+if [ -f '~/google-cloud-sdk/path.fish.inc' ]; . '~/google-cloud-sdk/path.fish.inc'; end
