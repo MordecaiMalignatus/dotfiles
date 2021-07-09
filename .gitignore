@@ -12,9 +12,6 @@
 /fish/functions/z.awk
 /fish/functions/zadd.awk
 /fish/functions/zclean.awk
-/fish/fishd.thinkpad-reindlaz
-/fish/functions/
-/fish/handwritten-functions/aws*
 fish/fishd*
 quicklisp.lisp
 ranger/bookmarks
