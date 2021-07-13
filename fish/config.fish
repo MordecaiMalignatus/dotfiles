@@ -4,6 +4,7 @@ set -g BROWSER (which firefox)
 # Aliases
 alias k=kubectl
 alias ist=istioctl
+alias tf=terraform
 
 source /usr/local/opt/asdf/asdf.fish
 
