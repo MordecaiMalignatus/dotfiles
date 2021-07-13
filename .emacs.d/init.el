@@ -43,7 +43,7 @@
 
 (use-package cheatsheets
   :config
-  (setq cheatsheets-directory "~/projects/grimoire/cheatsheets")
+  (setq cheatsheets-directory "~/grimoire/cheatsheets")
   (cheatsheets-mode))
 
 ;; Auto-upgrade packages and delete old ones.
