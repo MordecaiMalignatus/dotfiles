@@ -1,0 +1,8 @@
+# key: ;su
+# name: standup
+# --
+** $0
+*Yesterday*: $1
+*Today*: $2
+*In My Way*: $3
+*FYI*: $4
