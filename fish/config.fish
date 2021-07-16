@@ -1,5 +1,6 @@
-set -g EDITOR (which vim)
-set -g BROWSER (which firefox)
+set -gx EDITOR (which vim)
+set -gx BROWSER (which firefox)
+set -gx BAT_THEME "GitHub"
 
 # Aliases
 alias k=kubectl
