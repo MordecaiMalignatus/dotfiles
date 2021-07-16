@@ -8,7 +8,7 @@ function upgrade
     end
 
     echo (set_color green)"Updating gcloud CLI..."(set_color normal)
-    gcloud components update
+    gcloud components update --quiet
 
     echo (set_color green)"Fetching work repos..."(set_color normal)
     fetch-work-repos
