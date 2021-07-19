@@ -1,1 +1,3 @@
-/home/az/dotfiles/fish/handwritten-functions/tree.fish
+function tree
+        exa -T $argv
+end
