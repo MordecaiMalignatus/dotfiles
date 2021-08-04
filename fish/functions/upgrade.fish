@@ -2,7 +2,8 @@ function upgrade
     echo (set_color green)"Upgrading Packages..."(set_color normal)
     brew upgrade
 
-    if test (hostname) = "ALT01896"
+    if test (hostname) = "ALT01896" 
+      and test (math (date '+%j') % 7) = 0
       echo (set_color green)"Upgrading Vault..."(set_color normal)
       vault wf upgrade
     end
@@ -17,4 +18,6 @@ function upgrade
     pushd ~/dotfiles/
     git pull
     popd
+
+    sync-grimoire
 end
