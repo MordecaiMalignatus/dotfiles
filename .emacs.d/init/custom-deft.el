@@ -31,7 +31,7 @@ DIR: The directory that deft should treat as `deft-directory`"
 (global-set-key (kbd "C-$ w")   '(lambda () (interactive)(launch-deft-in "~/Sync/Reference/Work/Pricehubble")))
 (define-key deft-mode-map (kbd "C-g") 'az/deft-kill)
 
-(setq deft-directory "~/Dropbox/Reference")
+(setq deft-directory "~/Sync/Reference")
 (setq deft-use-filename-as-title t)
 (setq deft-recursive t)
 (setq deft-extensions '("org" "md"))
