@@ -222,6 +222,7 @@
   :ensure t
   :bind (("TAB" . #'company-indent-or-complete-common))
   :config
+  (setq lsp-completion-provider :capf)
   (add-hook 'after-init-hook 'global-company-mode))
 
 ;; YASnippets.
@@ -247,10 +248,12 @@
   (global-unset-key (kbd  "M-l"))
   (setq lsp-keymap-prefix "M-l")
   (add-to-list 'exec-path "/Users/az/projects/elixir-ls/release/")
+  (add-to-list 'exec-path "~/go/bin")
   :commands lsp
   :hook
   (elixir-mode . lsp)
   (rust-mode . lsp)
+  (go-mode . lsp)
   :config
   (setq lsp-auto-configure t)
   (setq lsp-prefer-flymake nil)
@@ -264,10 +267,6 @@
 (use-package lsp-ivy
   :ensure t
   :commands lsp-ivy-workspace-symbol)
-
-;; Add company-lsp backend for metals
-(use-package company-lsp
-  :ensure t)
 
 ;; Rest Client, on Taylor's recommendation
 (use-package restclient
