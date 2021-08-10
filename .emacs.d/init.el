@@ -28,15 +28,15 @@
 (add-to-list 'load-path (concat user-emacs-directory "init"))
 
 ;; Work-specific config I can't check in
-(when (string= (system-name) "ALT01896")
-  (load (concat user-emacs-directory "init/" "work.el")))
-
-;; Wheeeeee :D
-(use-package org-kasten
-  :bind ("C-# C-#" . #'org-kasten-open-index)
-  :config
-  (setq org-kasten-home "~/Sync/Perceptron/")
-  (add-hook 'org-mode-hook 'org-kasten-mode))
+(if (string= (system-name) "ALT01896")
+    (progn
+      (load (concat user-emacs-directory "init/" "work.el")))
+  (progn
+    (use-package org-kasten
+      :bind ("C-# C-#" . #'org-kasten-open-index)
+      :config
+      (setq org-kasten-home "~/Sync/Perceptron/")
+      (add-hook 'org-mode-hook 'org-kasten-mode))))
 
 (use-package custom-deft
   :after deft)
@@ -293,16 +293,6 @@
 (use-package exunit
   :ensure t
   :hook (elixir . exunit))
-
-(use-package inf-elixir
-  :load-path "packages/inf-elixir/"
-  :bind (
-         ("C-c C-l i i" . 'inf-elixir)
-         ("C-c C-l i p" . 'inf-elixir-project)
-         ("C-c C-l i l" . 'inf-elixir-send-line)
-         ("C-c C-l i r" . 'inf-elixir-send-region)
-         ("C-c C-l i b" . 'inf-elixir-send-buffer)
-         ))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Python stuff
