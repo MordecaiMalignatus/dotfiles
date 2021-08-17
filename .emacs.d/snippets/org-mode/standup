@@ -1,7 +1,7 @@
 # key: ;su
 # name: standup
 # --
-** $0
+** `(format-time-string "[%F %a]")`
 *Yesterday*: $1
 *Today*: $2
 *In My Way*: $3
