@@ -1,0 +1,6 @@
+# key: ;test
+# name: test
+# --
+func Test$1(t *testing.T) {
+	$0
+}

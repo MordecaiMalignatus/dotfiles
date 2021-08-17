@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: batch-test-harness
+# key: ;batch-test
+# --
+
+input := []struct{
+	input $1
+        expected $2
+        }{
+        {},
+}
+
+for _, test := range input {
+	res := $3
+        if res != test.expected {
+        	t.Errorf("Test failed, expected %s, got %s\n", test.expected, res)
+	}
+}
