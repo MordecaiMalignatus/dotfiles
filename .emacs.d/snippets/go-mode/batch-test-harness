@@ -1,8 +1,6 @@
-# -*- mode: snippet -*-
+# key: ;batch
 # name: batch-test-harness
-# key: ;batch-test
 # --
-
 input := []struct{
 	input $1
         expected $2
