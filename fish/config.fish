@@ -13,5 +13,10 @@ fish_add_path ~/.cargo/bin
 fish_add_path ~/dotfiles/scripts
 fish_add_path ~/go/bin/
 fish_add_path ~/dotfiles/private-scripts
+fish_add_path ~/.local/bin
+
+if test (hostname) = "albatross"
+        sq
+end
 
 if [ -f "$HOME/google-cloud-sdk/path.fish.inc" ]; . "$HOME/google-cloud-sdk/path.fish.inc"; end
