@@ -16,7 +16,15 @@ function upgrade
 
     echo (set_color green)"Updating dotfiles..."(set_color normal)
     pushd ~/dotfiles/
+    git stash
     git pull
+    git stash pop
+    popd
+
+    echo (set_color green)"Updating work music..."(set_color normal)
+    pushd ~/work-music/
+    git pull
+    rake dl
     popd
 
     sync-grimoire
