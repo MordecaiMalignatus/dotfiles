@@ -456,7 +456,7 @@
   :init
   (setq solarized-use-variable-pitch nil)
   :config
-  (load-theme 'solarized-zenburn t))
+  (load-theme 'solarized-light t))
 
 (defun az/toggle-solarized-theming ()
   "Switch between solarized-light and solarized-dark."
