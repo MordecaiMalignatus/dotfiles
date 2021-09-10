@@ -22,6 +22,10 @@ task :fish do
   link_config "fish"
 end
 
+task :alacritty do
+  link_config "alacritty"
+end
+
 def link_home(file)
   sh "ln -s $PWD/#{file} $HOME/#{file}"
 end
