@@ -43,7 +43,7 @@
 
 (use-package cheatsheets
   :config
-  (setq cheatsheets-directory "~/grimoire/cheatsheets")
+  (setq cheatsheets-directory "~/grimoire/cheatsheets/")
   (cheatsheets-mode))
 
 ;; Auto-upgrade packages and delete old ones.
@@ -252,7 +252,7 @@
   :commands lsp
   :hook
   (elixir-mode . lsp)
-  (rust-mode . lsp)
+  (rustic-mode . lsp)
   (go-mode . lsp)
   :config
   (setq lsp-auto-configure t)
@@ -324,16 +324,14 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Rust Settings
-(use-package rust-mode
+(use-package rustic
   :ensure t
-  :bind (:map rust-mode-map
-	      ("TAB" . #'company-indent-or-complete-common))
   :config
   (setq company-tooltip-align-annotations t))
 
 (use-package cargo
   :ensure t
-  :hook (rust-mode . cargo-minor-mode))
+  :hook (rustic-mode . cargo-minor-mode))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Golang Stuff
