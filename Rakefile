@@ -16,6 +16,12 @@ end
 
 task :vim do
   link_home ".vimrc"
+  sh 'git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim'
+  sh 'vim +PluginInstall +qall'
+end
+
+task :hammerspoon do
+  link_config "hammerspoon"
 end
 
 task :fish do
