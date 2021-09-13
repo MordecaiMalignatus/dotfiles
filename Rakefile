@@ -21,7 +21,7 @@ task :vim do
 end
 
 task :hammerspoon do
-  link_config "hammerspoon"
+  link_home ".hammerspoon"
 end
 
 task :fish do
