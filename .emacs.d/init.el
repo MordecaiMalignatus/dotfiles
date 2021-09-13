@@ -28,7 +28,7 @@
 (add-to-list 'load-path (concat user-emacs-directory "init"))
 
 ;; Work-specific config I can't check in
-(if (string= (system-name) "ALT01896")
+(if (string= (system-name) "ALT00622")
     (progn
       (load (concat user-emacs-directory "init/" "work.el")))
   (progn
