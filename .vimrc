@@ -21,7 +21,6 @@ Plugin 'tpope/vim-surround'               " Makes changing delimiters far less o
 Plugin 'tpope/vim-dispatch'               " non-focus stealing builds/tests hooray!
 Plugin 'tpope/vim-commentary'             " Makes commenting not a pain.
 Plugin 'tpope/vim-endwise'                " automatically adds 'end' and similar to certain languages.
-Plugin 'jiangmiao/auto-pairs'             " Automatically match pairs.
 
 " Themes and colorschemes.
 Plugin 'flazz/vim-colorschemes'           " Giant-ass collection because why not.
