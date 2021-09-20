@@ -254,6 +254,7 @@
   (elixir-mode . lsp)
   (rustic-mode . lsp)
   (go-mode . lsp)
+  (lsp-mode . #'lsp-enable-which-key-integration)
   :config
   (setq lsp-auto-configure t)
   (setq lsp-prefer-flymake nil)
@@ -267,6 +268,11 @@
 (use-package lsp-ivy
   :ensure t
   :commands lsp-ivy-workspace-symbol)
+
+(use-package which-key
+  :ensure t
+  :config
+  (which-key-mode))
 
 ;; Rest Client, on Taylor's recommendation
 (use-package restclient
