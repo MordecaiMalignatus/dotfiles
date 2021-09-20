@@ -245,14 +245,15 @@
 (use-package lsp-mode
   :ensure t
   :init
-  (global-unset-key (kbd  "M-l"))
   (setq lsp-keymap-prefix "M-l")
   (add-to-list 'exec-path "/Users/az/projects/elixir-ls/release/")
   (add-to-list 'exec-path "~/go/bin")
+  (add-to-list 'exec-path "~/.asdf/shims")
   :commands lsp
   :hook
   (elixir-mode . lsp)
   (rustic-mode . lsp)
+  (ruby-mode . lsp)
   (go-mode . lsp)
   (lsp-mode . #'lsp-enable-which-key-integration)
   :config
@@ -302,10 +303,12 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Python stuff
-(use-package elpy
+(use-package lsp-python-ms
   :ensure t
-  :config
-  (elpy-enable))
+  :init (setq lsp-python-ms-auto-install-server t)
+  :hook (python-mode . (lambda ()
+                          (require 'lsp-python-ms)
+                          (lsp))))
 
 (use-package poetry
   :ensure t
