@@ -1,27 +1,27 @@
 function upgrade
-    echo (set_color green)"Upgrading Packages..."(set_color normal)
+    print_green "Upgrading Packages..."
     brew upgrade
 
     if test (hostname) = "ALT01896" 
       and test (math (date '+%j') % 7) = 0
-      echo (set_color green)"Upgrading Vault..."(set_color normal)
+      print_green "Upgrading Vault..."
       vault wf upgrade
     end
 
-    echo (set_color green)"Updating gcloud CLI..."(set_color normal)
+    print_green "Updating gcloud CLI..."
     gcloud components update --quiet
 
-    echo (set_color green)"Fetching work repos..."(set_color normal)
+    print_green "Fetching work repos..."
     fetch-work-repos
 
-    echo (set_color green)"Updating dotfiles..."(set_color normal)
+    print_green "Updating dotfiles..."
     pushd ~/dotfiles/
     git stash
     git pull
     git stash pop
     popd
 
-    echo (set_color green)"Updating work music..."(set_color normal)
+    print_green "Updating work music..."
     pushd ~/work-music/
     git pull
     rake dl
