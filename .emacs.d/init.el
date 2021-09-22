@@ -27,17 +27,6 @@
 ;; My custom modules.
 (add-to-list 'load-path (concat user-emacs-directory "init"))
 
-;; Work-specific config I can't check in
-(if (string= (system-name) "ALT00622")
-    (progn
-      (load (concat user-emacs-directory "init/" "work.el")))
-  (progn
-    (use-package org-kasten
-      :bind ("C-# C-#" . #'org-kasten-open-index)
-      :config
-      (setq org-kasten-home "~/Sync/Perceptron/")
-      (add-hook 'org-mode-hook 'org-kasten-mode))))
-
 (use-package custom-deft
   :after deft)
 
@@ -521,6 +510,20 @@ Copied from [[https://emacsredux.com/blog/2013/05/22/smarter-navigation-to-the-b
     (pop-mark)))
 
 (global-set-key (kbd "C-c *") 'az/search-at-point)
+
+
+;; Work-specific config I can't check in.
+;; Load it last so it overrides all that came before.
+(if (string= (system-name) "ALT00622")
+    (progn
+      (load (concat user-emacs-directory "init/" "work.el")))
+  (progn
+    (use-package org-kasten
+      :bind ("C-# C-#" . #'org-kasten-open-index)
+      :config
+      (setq org-kasten-home "~/Sync/Perceptron/")
+      (add-hook 'org-mode-hook 'org-kasten-mode))))
+
 
 ;; Custom compose key ;)
 
