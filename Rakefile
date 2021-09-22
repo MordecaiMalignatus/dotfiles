@@ -12,6 +12,8 @@ end
 
 task :emacs do
   link_home ".emacs.d"
+  sh 'git clone git@github.com:MordecaiMalignatus/cheatsheets.el.git ~/projects/cheatsheets.el'
+  sh 'ln -s $HOME/projects/cheatsheets.el/cheatsheets.el $HOME/.emacs.d/init/cheatsheets.el'
 end
 
 task :vim do
