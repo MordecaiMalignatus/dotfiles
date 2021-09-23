@@ -13,10 +13,11 @@ fish_add_path ~/.cargo/bin
 fish_add_path ~/dotfiles/scripts
 fish_add_path ~/go/bin/
 fish_add_path ~/.local/bin
+fish_add_path ~/.local/elixir-ls
 fish_add_path ~/projects/wf/scripts
 
 if test (hostname) = "albatross"
         sq
+else
+        source "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.fish.inc"
 end
-
-source "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.fish.inc"
