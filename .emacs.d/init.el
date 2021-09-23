@@ -327,10 +327,6 @@
   :config
   (setq company-tooltip-align-annotations t))
 
-(use-package cargo
-  :ensure t
-  :hook (rustic-mode . cargo-minor-mode))
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Golang Stuff
 
