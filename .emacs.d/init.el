@@ -37,11 +37,12 @@
 
 ;; Auto-upgrade packages and delete old ones.
 (use-package auto-package-update
-   :ensure t
-   :config
-   (setq auto-package-update-delete-old-versions t
-         auto-package-update-interval 4)
-   (auto-package-update-maybe))
+  :ensure t
+  :config
+  (setq auto-package-update-delete-old-versions t)
+  (setq auto-package-update-interval 4)
+  (setq auto-package-update-hide-results t)
+  (auto-package-update-maybe))
 
 ;; Replace default help functions with `helpful'
 (use-package helpful
