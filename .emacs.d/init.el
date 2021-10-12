@@ -58,13 +58,6 @@
 ;; Enable disabled-by-default commands.
 (put 'narrow-to-region 'disabled nil)
 
-(use-package imenu-list
-  :ensure t
-  :bind (("C-c C-'" . #'imenu-list-smart-toggle))
-  :config
-  (setq imenu-list-focus-after-activation t)
-  (setq imenu-list-auto-resize t))
-
 ;; Movement
 (use-package avy
   :ensure t
@@ -141,6 +134,8 @@
 	 ("C-c o c" . 'counsel-org-capture)
 	 ("C-c C-l o" . 'org-insert-link)
 	 ("C-c l" . 'org-store-link)
+         ("C-c C-'" . 'org-cycle-agenda-files)
+         ("C-'" . 'imenu)
 	 ("C-c C-M-." . 'org-time-stamp-inactive)
 	 ("C-x n t" . 'org-narrow-to-subtree))
   :config
@@ -150,9 +145,13 @@
   (add-hook 'org-mode-hook 'org-indent-mode)
   (setq org-log-done 'date)
   (setq org-default-notes-file "~/Sync/Reference/Work/capture.org")
+  ;; org-agenda acts like nested projects and dependencies.
   (setq org-agenda-dim-blocked-tasks 'invisible)
   (setq org-enforce-todo-dependencies t)
   (setq org-enforce-todo-checkbox-dependencies t)
+  ;; Make org-goto less interactive, and better.
+  (setq org-goto-interface 'outline-path-completionp)
+  (setq org-outline-path-complete-in-steps nil)
   (org-babel-do-load-languages
    'org-babel-load-languages '((shell . t))))
 
@@ -507,7 +506,8 @@ Copied from [[https://emacsredux.com/blog/2013/05/22/smarter-navigation-to-the-b
     (pop-mark)))
 
 (global-set-key (kbd "C-c *") 'az/search-at-point)
-
+(global-set-key (kbd "C-'") 'imenu)
+(global-set-key (kbd "C-c C-b") 'bury-buffer)
 
 ;; Work-specific config I can't check in.
 ;; Load it last so it overrides all that came before.
