@@ -234,7 +234,6 @@
 (use-package lsp-mode
   :ensure t
   :init
-  (setq lsp-keymap-prefix "M-l")
   (add-to-list 'exec-path "/Users/az/projects/elixir-ls/release/")
   (add-to-list 'exec-path "~/go/bin")
   (add-to-list 'exec-path "~/.asdf/shims")
@@ -244,8 +243,11 @@
   (rustic-mode . lsp)
   (ruby-mode . lsp)
   (go-mode . lsp)
-  (lsp-mode . #'lsp-enable-which-key-integration)
+  (lsp-mode . (lambda ()
+                (let ((lsp-keymap-prefix "M-l"))
+                  (lsp-enable-which-key-integration))))
   :config
+  (define-key lsp-mode-map (kbd "M-l") lsp-command-map)
   (setq lsp-auto-configure t)
   (setq lsp-prefer-flymake nil)
   (setq lsp-rust-server 'rust-analyzer))
