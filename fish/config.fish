@@ -18,7 +18,9 @@ fish_add_path ~/projects/wf/scripts
 fish_add_path /usr/local/opt/curl/bin
 
 if test (hostname) = "albatross"
-        sq
+        if isatty
+                sq
+        end
 else
         source "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.fish.inc"
 end
