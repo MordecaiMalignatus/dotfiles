@@ -6,10 +6,10 @@ function upgrade
       and test (math (date '+%j') % 7) = 0
       print_green "Upgrading Vault..."
       vault wf upgrade
-    end
 
-    print_green "Updating gcloud CLI..."
-    gcloud components update --quiet
+      print_green "Updating gcloud CLI..."
+      gcloud components update --quiet
+    end
 
     print_green "Fetching work repos..."
     fetch-work-repos
