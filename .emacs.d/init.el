@@ -250,7 +250,8 @@
   (define-key lsp-mode-map (kbd "M-l") lsp-command-map)
   (setq lsp-auto-configure t)
   (setq lsp-prefer-flymake nil)
-  (setq lsp-rust-server 'rust-analyzer))
+  (setq lsp-rust-server 'rust-analyzer)
+  (setq lsp-rust-clippy-preference 'on))
 
 (use-package lsp-ui
   :ensure t
