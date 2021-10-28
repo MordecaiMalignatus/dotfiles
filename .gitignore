@@ -46,3 +46,4 @@ ranger/history
 /.emacs.d/init/work.el
 ./private-scripts/
 /private-scripts/puppet-envs
+/.emacs.d/projects
