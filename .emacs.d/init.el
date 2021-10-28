@@ -58,6 +58,10 @@
 ;; Enable disabled-by-default commands.
 (put 'narrow-to-region 'disabled nil)
 
+;; A better term
+(use-package vterm
+  :ensure t)
+
 ;; Movement
 (use-package avy
   :ensure t
