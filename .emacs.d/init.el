@@ -176,18 +176,6 @@
 (use-package yaml-mode
   :ensure t)
 
-(setq elfeed-feeds
-        '(("https://danluu.com/atom.xml" programming tech essays)
-          ("https://lobste.rs/rss" tech programming)
-          ("https://ntietz.com/atom.xml" tech programming)
-          ("https://xkcd.com/atom.xml" comics)
-          ("https://surfingcomplexity.blog/feed/" tech resilience)
-          ("https://aeon.co/feed.rss" essays)))
-
-(use-package elfeed
-  :ensure t
-  :bind (("C-c C-l r" . 'elfeed)))
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Projectile config
 (use-package projectile
