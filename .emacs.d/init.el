@@ -57,10 +57,21 @@
 
 ;; Enable disabled-by-default commands.
 (put 'narrow-to-region 'disabled nil)
+(put 'upcase-region 'disabled nil)
+(put 'set-goal-column 'disabled nil)
 
 ;; A better term
 (use-package vterm
   :ensure t)
+
+(use-package vterm-toggle
+  :ensure t
+  :config
+  (global-set-key (kbd "<f2>") 'vterm-toggle)
+  (define-key vterm-mode-map (kbd "<f2>") 'vterm-toggle)
+  (define-key vterm-mode-map [(control return)]   #'vterm-toggle-insert-cd)
+  (define-key vterm-mode-map (kbd "M-N") 'vterm-toggle-forward)
+  (define-key vterm-mode-map (kbd "M-P") 'vterm-toggle-backward))
 
 ;; Movement
 (use-package avy
@@ -523,5 +534,3 @@ Copied from [[https://emacsredux.com/blog/2013/05/22/smarter-navigation-to-the-b
 (global-set-key (kbd "C-c i c < -") (lambda () (interactive) (insert-char ?←))) ; For rename-commits.
 
 ;;; init.el ends here
-(put 'upcase-region 'disabled nil)
-(put 'set-goal-column 'disabled nil)
