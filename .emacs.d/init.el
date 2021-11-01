@@ -67,9 +67,12 @@
 (use-package vterm-toggle
   :ensure t
   :config
+  ;; Spawn vterm in $HOME rather than $PWD. Then we can hit C-RET to cd to file PWD.
+  (setq vterm-toggle-cd-auto-create-buffer nil)
+  (define-key vterm-mode-map [(control return)]   #'vterm-toggle-insert-cd)
+
   (global-set-key (kbd "<f2>") 'vterm-toggle)
   (define-key vterm-mode-map (kbd "<f2>") 'vterm-toggle)
-  (define-key vterm-mode-map [(control return)]   #'vterm-toggle-insert-cd)
   (define-key vterm-mode-map (kbd "M-N") 'vterm-toggle-forward)
   (define-key vterm-mode-map (kbd "M-P") 'vterm-toggle-backward))
 
@@ -128,12 +131,6 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Infrastructure Management
-
-(use-package kubernetes
-  :ensure t
-  :commands (kubernetes-overview)
-  :config
-  (global-set-key (kbd "C-c C-=") 'kubernetes-overview))
 
 (use-package puppet-mode
   :ensure t)
@@ -270,13 +267,6 @@
   :config
   (which-key-mode))
 
-;; Rest Client, on Taylor's recommendation
-(use-package restclient
-  :ensure t)
-
-(use-package company-restclient
-  :ensure t)
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Nix stuff.
 (use-package nix-mode
@@ -289,8 +279,7 @@
   :ensure t
   :config
   (add-hook 'elixir-mode-hook
-            (lambda () (add-hook 'before-save-hook 'elixir-format nil t)))
-  (add-hook 'elixir-mode-hook (lambda () (define-key elixir-mode-map (kbd "<f12>") 'exunit-verify))))
+            (lambda () (add-hook 'before-save-hook 'elixir-format nil t))))
 
 (use-package exunit
   :ensure t
