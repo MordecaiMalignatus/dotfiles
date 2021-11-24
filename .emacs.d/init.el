@@ -222,10 +222,11 @@
 	(list (concat user-emacs-directory "snippets")))
   (yas-global-mode 1))
 
-(use-package yasnippet-snippets
-  :ensure t
-  :after yasnippet)
+(use-package restclient
+  :ensure t )
 
+(use-package company-restclient
+  :ensure t )
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Programming Stuff.
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -243,6 +244,7 @@
   (rustic-mode . lsp)
   (ruby-mode . lsp)
   (go-mode . lsp)
+  (sh-mode . lsp)
   (lsp-mode . (lambda ()
                 (let ((lsp-keymap-prefix "M-l"))
                   (lsp-enable-which-key-integration))))
@@ -293,6 +295,12 @@
   :hook (python-mode . (lambda ()
                           (require 'lsp-python-ms)
                           (lsp))))
+;; Typechecking
+(use-package lsp-pyright
+  :ensure t
+  :hook (python-mode . (lambda ()
+                         (require 'lsp-pyright)
+                         (lsp))))
 
 (use-package poetry
   :ensure t
