@@ -253,7 +253,9 @@
   (setq lsp-auto-configure t)
   (setq lsp-prefer-flymake nil)
   (setq lsp-rust-server 'rust-analyzer)
-  (setq lsp-rust-clippy-preference 'on))
+  (setq lsp-rust-clippy-preference 'on)
+  (setq lsp-rust-analyzer-cargo-watch-command "clippy"))
+
 
 (use-package lsp-ui
   :ensure t
