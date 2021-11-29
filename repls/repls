@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+SCRIPT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+
+case "$1" in
+        py-date|dates|py)
+                python3 -i "$SCRIPT_DIR"/python-datetime.py
+                ;;
+
+        *)
+                printf "Can't find specified repl, please use one of the ones I have"
+                exit 1
+                ;;
+esac
