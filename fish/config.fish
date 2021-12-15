@@ -1,13 +1,17 @@
 set -gx EDITOR (which vim)
 set -gx BROWSER (which firefox)
-set -gx BAT_THEME "base16"
+
+# GO stuff.
+set -gx GOPATH ~/go
+set -gx GOROOT ~/go
+set -gx GO11MODULE on
 
 # Aliases
 alias k=kubectl
 alias ist=istioctl
 alias tf=terraform
 
-source /usr/local/opt/asdf/asdf.fish
+source /usr/local/opt/asdf/libexec/asdf.fish
 
 fish_add_path ~/.cargo/bin
 fish_add_path ~/dotfiles/scripts
@@ -24,3 +28,4 @@ if test (hostname) = "albatross"
 else
         source "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.fish.inc"
 end
+
