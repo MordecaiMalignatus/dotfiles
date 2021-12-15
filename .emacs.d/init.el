@@ -17,7 +17,6 @@
   (require 'use-package))
 
 (require 'package)
-(add-to-list 'package-archives '("org"   . "https://orgmode.org/elpa/") t)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 (package-initialize)
 
@@ -235,9 +234,9 @@
 (use-package lsp-mode
   :ensure t
   :init
-  (add-to-list 'exec-path "/Users/az/projects/elixir-ls/release/")
   (add-to-list 'exec-path "~/go/bin")
   (add-to-list 'exec-path "~/.asdf/shims")
+  (add-to-list 'exec-path "~/.local/bin")
   :commands lsp
   :hook
   (elixir-mode . lsp)
@@ -252,6 +251,7 @@
   (define-key lsp-mode-map (kbd "M-l") lsp-command-map)
   (setq lsp-auto-configure t)
   (setq lsp-prefer-flymake nil)
+  ;; Rust Config
   (setq lsp-rust-server 'rust-analyzer)
   (setq lsp-rust-clippy-preference 'on)
   (setq lsp-rust-analyzer-cargo-watch-command "clippy"))
@@ -413,6 +413,8 @@
 (menu-bar-mode 0)
 (tool-bar-mode 0)
 (scroll-bar-mode 0)
+(setq inhibit-splash-screen t)
+(setq inhibit-startup-message t)
 
 ;; Force spaces instead of tabs
 (setq-default indent-tabs-mode nil)
