@@ -234,6 +234,7 @@
 (use-package lsp-mode
   :ensure t
   :init
+  (add-to-list 'exec-path "~/.local/elixir-ls/")
   (add-to-list 'exec-path "~/go/bin")
   (add-to-list 'exec-path "~/.asdf/shims")
   (add-to-list 'exec-path "~/.local/bin")
