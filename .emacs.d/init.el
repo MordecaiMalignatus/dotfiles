@@ -154,6 +154,7 @@
   (add-hook 'text-mode-hook 'auto-fill-mode)
   (add-hook 'before-save-hook 'delete-trailing-whitespace)
   (add-hook 'org-mode-hook 'org-indent-mode)
+  (setq sentence-end-double-space nil)
   (setq org-log-done 'date)
   (setq org-default-notes-file "~/Sync/Reference/Work/capture.org")
   ;; org-agenda acts like nested projects and dependencies.
@@ -165,6 +166,11 @@
   (setq org-outline-path-complete-in-steps nil)
   (org-babel-do-load-languages
    'org-babel-load-languages '((shell . t))))
+
+;; Unbind stuff from org that clogs up my free keys.
+(eval-after-load "org" (progn
+                        (define-key org-mode-map (kbd "C-c c-a") 'nil)))
+
 
 (use-package deft
   :ensure t)
@@ -318,6 +324,27 @@
   :hook ((emacs-lisp-mode . lispy-mode)
 	 (lisp-mode . lispy-mode)))
 
+(setq show-paren-delay 0)
+(show-paren-mode)
+
+(use-package rainbow-delimiters
+  :ensure t
+  :config
+  (add-hook 'emacs-lisp-mode-hook 'rainbow-delimiters-mode)
+  (add-hook 'ielm-mode-hook 'rainbow-delimiters-mode)
+  (add-hook 'lisp-interaction-mode-hook 'rainbow-delimiters-mode)
+  (add-hook 'lisp-mode-hook 'rainbow-delimiters-mode)
+  (require 'rainbow-delimiters)
+  (set-face-foreground 'rainbow-delimiters-depth-1-face "#c66") ; red
+  (set-face-foreground 'rainbow-delimiters-depth-2-face "#6c6") ; green
+  (set-face-foreground 'rainbow-delimiters-depth-3-face "#69f") ; blue
+  (set-face-foreground 'rainbow-delimiters-depth-4-face "#cc6") ; yellow
+  (set-face-foreground 'rainbow-delimiters-depth-5-face "#6cc") ; cyan
+  (set-face-foreground 'rainbow-delimiters-depth-6-face "#c6c") ; magenta
+  (set-face-foreground 'rainbow-delimiters-depth-7-face "#ccc") ; light gray
+  (set-face-foreground 'rainbow-delimiters-depth-8-face "#999") ; medium gray
+  (set-face-foreground 'rainbow-delimiters-depth-9-face "#666")) ; dark gray
+
 ;; Get you some docs
 (use-package scribble-mode
   :ensure t)
@@ -416,9 +443,13 @@
 (scroll-bar-mode 0)
 (setq inhibit-splash-screen t)
 (setq inhibit-startup-message t)
+(setq-default show-trailing-whitespace t)
 
 ;; Force spaces instead of tabs
 (setq-default indent-tabs-mode nil)
+
+;; Disable .#FILE# files.
+(setq create-lockfiles nil)
 
 ;; Coerce fullscreen on OSX
 ;; Enable ivy's selectable prompt on OSX because I can M-j on Linux but not OSX.
