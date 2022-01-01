@@ -30,6 +30,14 @@
 (setq custom-file (concat user-emacs-directory "custom.el"))
 (load custom-file)
 
+;; Infrastructure
+(prefer-coding-system       'utf-8)
+(set-default-coding-systems 'utf-8)
+(set-terminal-coding-system 'utf-8)
+(set-keyboard-coding-system 'utf-8)
+(set-language-environment   'utf-8)
+(setq sentence-end-double-space nil)
+
 ;; My custom modules.
 (add-to-list 'load-path (concat user-emacs-directory "init"))
 
@@ -152,28 +160,32 @@
 (use-package org
   :ensure t
   :bind (("C-c a" . 'org-agenda)
-	 ("C-c o c" . 'counsel-org-capture)
-	 ("C-c C-l o" . 'org-insert-link)
-	 ("C-c l" . 'org-store-link)
+	     ("C-c o c" . 'counsel-org-capture)
+	     ("C-c C-l o" . 'org-insert-link)
+	     ("C-c l" . 'org-store-link)
          ("C-c C-'" . 'org-cycle-agenda-files)
          ("C-'" . 'imenu)
-	 ("C-c C-M-." . 'org-time-stamp-inactive)
-	 ("C-x n t" . 'org-narrow-to-subtree))
+	     ("C-c C-M-." . 'org-time-stamp-inactive)
+	     ("C-x n t" . 'org-narrow-to-subtree))
   :config
   (setq-default fill-column 80)
+
   (add-hook 'text-mode-hook 'auto-fill-mode)
   (add-hook 'before-save-hook 'delete-trailing-whitespace)
   (add-hook 'org-mode-hook 'org-indent-mode)
-  (setq sentence-end-double-space nil)
+
+
   (setq org-log-done 'date)
   (setq org-default-notes-file "~/Sync/Reference/Work/capture.org")
-  ;; org-agenda acts like nested projects and dependencies.
-  (setq org-agenda-dim-blocked-tasks 'invisible)
-  (setq org-enforce-todo-dependencies t)
-  (setq org-enforce-todo-checkbox-dependencies t)
+
+  ;; Return follows a link in org, rather than line-breaking.
+  (setq org-return-follows-link t)
+
   ;; Make org-goto less interactive, and better.
   (setq org-goto-interface 'outline-path-completionp)
   (setq org-outline-path-complete-in-steps nil)
+
+  ;; enable being able to C-c C-c execute shell blocks for side effects.
   (org-babel-do-load-languages
    'org-babel-load-languages '((shell . t))))
 
@@ -493,6 +505,7 @@
   :quelpa (nano-emacs
            :fetcher github
            :repo "rougier/nano-emacs")
+
   ;;  This tries to autoload nano in a way that does not work for it. :init is
   ;;  always run, so we require our setup by hand and defer actual package
   ;;  loading into never.
@@ -510,7 +523,6 @@
   (nano-theme)
 
   (require 'nano-layout)
-  (require 'nano-defaults)
   (require 'nano-colors)
   (require 'nano-session)
   (require 'nano-modeline))
