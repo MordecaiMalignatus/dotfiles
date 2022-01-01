@@ -11,14 +11,21 @@
 ;;; Code:
 (require 'seq)
 
-;; use-package setup
-(eval-when-compile
-  (add-to-list 'load-path (concat user-emacs-directory "use-package"))
-  (require 'use-package))
+;; Quelpa Setup
+(unless (package-installed-p 'quelpa)
+  (with-temp-buffer
+    (url-insert-file-contents "https://raw.githubusercontent.com/quelpa/quelpa/master/quelpa.el")
+    (eval-buffer)
+    (quelpa-self-upgrade)))
+
+(quelpa
+ '(quelpa-use-package
+   :fetcher git
+   :url "https://github.com/quelpa/quelpa-use-package.git"))
+(require 'quelpa-use-package)
 
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
-(package-initialize)
 
 (setq custom-file (concat user-emacs-directory "custom.el"))
 (load custom-file)
@@ -42,6 +49,9 @@
   (setq auto-package-update-interval 4)
   (setq auto-package-update-hide-results t)
   (auto-package-update-maybe))
+
+(setq quelpa-upgrade-interval 7)
+(add-hook #'after-init-hook #'quelpa-upgrade-all-maybe)
 
 ;; Replace default help functions with `helpful'
 (use-package helpful
@@ -477,17 +487,42 @@
 (global-set-key (kbd "<f12>") 'recompile)
 (setq compile-command "rake")
 
-;; Use a decent shell, add it to a decent binding.
-(setq explicit-shell-file-name "/usr/local/bin/fish")
-(setq shell-file-name "/usr/local/bin/fish")
-(setq explicit-fish-commands '("--login"))
+(use-package nano-emacs
+  :ensure t
+  :defer t
+  :quelpa (nano-emacs
+           :fetcher github
+           :repo "rougier/nano-emacs")
+  ;;  This tries to autoload nano in a way that does not work for it. :init is
+  ;;  always run, so we require our setup by hand and defer actual package
+  ;;  loading into never.
+  :init
+  (add-to-list 'load-path (concat user-emacs-directory "quelpa/build/nano-emacs"))
+  (setq nano-font-family-monospaced "PragmataPro")
+  (setq nano-font-family-proportional nil)
+  (setq nano-font-size 15)
+
+  (require 'nano-faces)
+  (nano-faces)
+  (require 'nano-theme-light)
+  (nano-theme-set-light)
+  (require 'nano-theme)
+  (nano-theme)
+
+  (require 'nano-layout)
+  (require 'nano-defaults)
+  (require 'nano-colors)
+  (require 'nano-session)
+  (require 'nano-modeline))
+
 
 (use-package solarized-theme
   :ensure t
   :init
   (setq solarized-use-variable-pitch nil)
   :config
-  (load-theme 'solarized-light t))
+  ;; (load-theme 'solarized-light t)
+  )
 
 (defun az/toggle-solarized-theming ()
   "Switch between solarized-light and solarized-dark."
