@@ -499,41 +499,12 @@
 (global-set-key (kbd "<f12>") 'recompile)
 (setq compile-command "rake")
 
-(use-package nano-emacs
-  :ensure t
-  :defer t
-  :quelpa (nano-emacs
-           :fetcher github
-           :repo "rougier/nano-emacs")
-
-  ;;  This tries to autoload nano in a way that does not work for it. :init is
-  ;;  always run, so we require our setup by hand and defer actual package
-  ;;  loading into never.
-  :init
-  (add-to-list 'load-path (concat user-emacs-directory "quelpa/build/nano-emacs"))
-  (setq nano-font-family-monospaced "PragmataPro")
-  (setq nano-font-family-proportional nil)
-  (setq nano-font-size 15)
-
-  (require 'nano-faces)
-  (nano-faces)
-  (require 'nano-theme-light)
-  (nano-theme-set-light)
-  (require 'nano-theme)
-  (nano-theme)
-
-  (require 'nano-layout)
-  (require 'nano-colors)
-  (require 'nano-session)
-  (require 'nano-modeline))
-
-
 (use-package solarized-theme
   :ensure t
   :init
   (setq solarized-use-variable-pitch nil)
   :config
-  ;; (load-theme 'solarized-light t)
+  (load-theme 'solarized-light t)
   )
 
 (defun az/toggle-solarized-theming ()
