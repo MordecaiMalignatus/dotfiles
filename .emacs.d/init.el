@@ -11,7 +11,7 @@
 ;;; Code:
 (require 'seq)
 
-;; Quelpa Setup
+;; Quelpa Setup and use-package bootstrapping.
 (unless (package-installed-p 'quelpa)
   (with-temp-buffer
     (url-insert-file-contents "https://raw.githubusercontent.com/quelpa/quelpa/master/quelpa.el")
@@ -45,6 +45,8 @@
   :after deft)
 
 (use-package cheatsheets
+  :defines cheatsheets-directory
+  :functions cheatsheets-mode
   :config
   (setq cheatsheets-directory "~/grimoire/cheatsheets/")
   (cheatsheets-mode))
@@ -160,20 +162,21 @@
 (use-package org
   :ensure t
   :bind (("C-c a" . 'org-agenda)
-	     ("C-c o c" . 'counsel-org-capture)
-	     ("C-c C-l o" . 'org-insert-link)
-	     ("C-c l" . 'org-store-link)
+	 ("C-c o c" . 'counsel-org-capture)
+	 ("C-c C-l o" . 'org-insert-link)
+	 ("C-c l" . 'org-store-link)
          ("C-c C-'" . 'org-cycle-agenda-files)
          ("C-'" . 'imenu)
-	     ("C-c C-M-." . 'org-time-stamp-inactive)
-	     ("C-x n t" . 'org-narrow-to-subtree))
+	 ("C-c C-M-." . 'org-time-stamp-inactive)
+	 ("C-x n t" . 'org-narrow-to-subtree))
+  :defines (org-goto-interface org-outline-path-complete-in-steps)
+  :functions org-insert-link
   :config
   (setq-default fill-column 80)
 
   (add-hook 'text-mode-hook 'auto-fill-mode)
   (add-hook 'before-save-hook 'delete-trailing-whitespace)
   (add-hook 'org-mode-hook 'org-indent-mode)
-
 
   (setq org-log-done 'date)
   (setq org-default-notes-file "~/Sync/Reference/Work/capture.org")
@@ -205,6 +208,7 @@
 (use-package auctex
   :defer t
   :ensure t
+  :defines TeX-auto-save
   :config
   (setq TeX-auto-save t))
 
@@ -238,7 +242,6 @@
   :ensure t
   :bind (("TAB" . #'company-indent-or-complete-common))
   :config
-  (setq lsp-completion-provider :capf)
   (add-hook 'after-init-hook 'global-company-mode))
 
 ;; YASnippets.
@@ -267,6 +270,11 @@
   (add-to-list 'exec-path "~/.asdf/shims")
   (add-to-list 'exec-path "~/.local/bin")
   :commands lsp
+  :defines (lsp-completion-provider
+            lsp-prefer-flymake
+            lsp-rust-server
+            lsp-rust-clippy-preference
+            lsp-rust-analyzer-cargo-watch-command)
   :hook
   (elixir-mode . lsp)
   (rustic-mode . lsp)
@@ -278,6 +286,7 @@
                   (lsp-enable-which-key-integration))))
   :config
   (define-key lsp-mode-map (kbd "M-l") lsp-command-map)
+  (setq lsp-completion-provider :capf)
   (setq lsp-auto-configure t)
   (setq lsp-prefer-flymake nil)
   ;; Rust Config
@@ -346,6 +355,7 @@
   :hook ((emacs-lisp-mode . lispy-mode)
 	 (lisp-mode . lispy-mode)))
 
+(defvar show-paren-delay)
 (setq show-paren-delay 0)
 (show-paren-mode)
 
@@ -422,6 +432,7 @@
 ;; Graphviz and other diagram stuff.
 (use-package graphviz-dot-mode
   :ensure t
+  :defines graphviz-dot-auto-indent-on-braces
   :config
   (setq graphviz-dot-auto-indent-on-braces t)
   (define-key graphviz-dot-mode-map (kbd "C-c C-p") #'graphviz-dot-preview))
@@ -579,6 +590,7 @@ Copied from [[https://emacsredux.com/blog/2013/05/22/smarter-navigation-to-the-b
   (progn
     (use-package org-kasten
       :bind ("C-# C-#" . #'org-kasten-open-index)
+      :defines org-kasten-home
       :config
       (setq org-kasten-home "~/Sync/Perceptron/")
       (add-hook 'org-mode-hook 'org-kasten-mode))))
