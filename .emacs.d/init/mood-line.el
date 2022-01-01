@@ -15,7 +15,6 @@
 ;;
 ;; Features offered:
 ;; * Clean, minimal design
-;; * Anzu and multiple-cursors counter
 ;; * Version control status indicator
 ;; * Flycheck status indicator
 ;; * Flymake support
@@ -49,12 +48,6 @@
 
 (defvar flycheck-current-errors)
 (defvar flymake--mode-line-format)
-(defvar anzu-cons-mode-line-p)
-(defvar anzu--state)
-(defvar anzu--cached-count)
-(defvar anzu--overflow-p)
-(defvar anzu--current-position)
-(defvar anzu--total-matched)
 (defvar multiple-cursors-mode)
 
 ;;
@@ -231,16 +224,6 @@
   "Displays the name of the current buffer in the mode-line."
   (propertize "%b  " 'face 'mood-line-buffer-name))
 
-(defun mood-line-segment-anzu ()
-  "Displays color-coded anzu status information in the mode-line (if available)."
-  (when (and (boundp 'anzu--state) anzu--state)
-    (cond ((eq anzu--state 'replace-query)
-           (format #("Replace: %d  " 0 11 (face mood-line-status-warning)) anzu--cached-count))
-          (anzu--overflow-p
-           (format #("%d/%d+  " 0 3 (face mood-line-status-info) 3 6 (face mood-line-status-error)) anzu--current-position anzu--total-matched))
-          (t
-           (format #("%d/%d  " 0 5 (face mood-line-status-info)) anzu--current-position anzu--total-matched)))))
-
 (defun mood-line-segment-multiple-cursors ()
   "Displays the number of active multiple-cursors in the mode-line (if available)."
   (when (and (boundp 'multiple-cursors-mode) multiple-cursors-mode)
@@ -308,7 +291,6 @@
 ;;
 
 (defvar-local mood-line--default-mode-line mode-line-format)
-(defvar-local mood-line--anzu-cons-mode-line-p nil)
 
 ;;;###autoload
 (define-minor-mode mood-line-mode
@@ -328,11 +310,6 @@
         (add-hook 'after-save-hook #'mood-line--update-vc-segment)
         (advice-add #'vc-refresh-state :after #'mood-line--update-vc-segment)
 
-        ;; Disable anzu's mode-line segment setting, saving the previous setting to be restored later (if present)
-        (when (boundp 'anzu-cons-mode-line-p)
-          (setq mood-line--anzu-cons-mode-line-p anzu-cons-mode-line-p))
-        (setq-default anzu-cons-mode-line-p nil)
-
         ;; Save previous mode-line-format to be restored later
         (setq mood-line--default-mode-line mode-line-format)
 
@@ -345,7 +322,6 @@
                            '(" "
                              (:eval (mood-line-segment-modified))
                              (:eval (mood-line-segment-buffer-name))
-                             (:eval (mood-line-segment-anzu))
                              (:eval (mood-line-segment-multiple-cursors))
                              (:eval (mood-line-segment-position))))
 
@@ -361,8 +337,7 @@
                              (:eval (mood-line-segment-process))
                              " ")))))))
     (progn
-
-      ;; Remove flycheck hooks
+;; Remove flycheck hooks
       (remove-hook 'flycheck-status-changed-functions #'mood-line--update-flycheck-segment)
       (remove-hook 'flycheck-mode-hook #'mood-line--update-flycheck-segment)
 
@@ -370,9 +345,6 @@
       (remove-hook 'file-find-hook #'mood-line--update-vc-segment)
       (remove-hook 'after-save-hook #'mood-line--update-vc-segment)
       (advice-remove #'vc-refresh-state #'mood-line--update-vc-segment)
-
-      ;; Restore anzu's mode-line segment setting
-      (setq-default anzu-cons-mode-line-p mood-line--anzu-cons-mode-line-p)
 
       ;; Restore the original mode-line format
       (setq-default mode-line-format mood-line--default-mode-line))))
