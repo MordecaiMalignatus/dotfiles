@@ -467,6 +467,11 @@
 (setq inhibit-startup-message t)
 (setq-default show-trailing-whitespace t)
 
+(use-package mood-line
+  :ensure nil
+  :config
+  (mood-line-mode))
+
 ;; Force spaces instead of tabs
 (setq-default indent-tabs-mode nil)
 
