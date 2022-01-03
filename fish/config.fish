@@ -3,7 +3,6 @@ set -gx BROWSER (which firefox)
 
 # GO stuff.
 set -gx GOPATH ~/go
-set -gx GOROOT ~/go
 set -gx GO11MODULE on
 
 # Aliases

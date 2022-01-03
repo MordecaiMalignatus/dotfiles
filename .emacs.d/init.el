@@ -275,6 +275,8 @@
             lsp-rust-server
             lsp-rust-clippy-preference
             lsp-rust-analyzer-cargo-watch-command)
+  :bind (("C-c C-d" . lsp-describe-thing-at-point))
+  :bind-keymap ("M-l" . lsp-command-map)
   :hook
   (elixir-mode . lsp)
   (rustic-mode . lsp)
@@ -399,6 +401,9 @@
   :ensure t
   :hook (go-mode . lsp))
 
+(use-package flycheck-golangci-lint
+  :ensure t)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Javascript Dev
 (use-package js2-mode
@@ -454,7 +459,7 @@
 (global-set-key (kbd "C-c C-a f n") 'az/copy-filename-to-clipboard)
 (global-set-key (kbd "C-c C-a l n") 'global-display-line-numbers-mode)
 
-(defun create-new-scratch-buffer ()
+(defun az/create-new-scratch-buffer ()
   "Create a new scratch buffer to work in."
   (interactive)
   (let ((n 0)
@@ -467,7 +472,7 @@
              (get-buffer bufname)))
   (switch-to-buffer (get-buffer-create bufname))
   (if (= n 1) initial-major-mode))) ; 1, because n was incremented
-(global-set-key (kbd "C-x n s") 'create-new-scratch-buffer)
+(global-set-key (kbd "C-x n s") 'az/create-new-scratch-buffer)
 (setq initial-scratch-message "")
 
 ;; Aesthetics
@@ -579,8 +584,13 @@ Copied from [[https://emacsredux.com/blog/2013/05/22/smarter-navigation-to-the-b
     (pop-mark)))
 
 (global-set-key (kbd "C-c *") 'az/search-at-point)
-(global-set-key (kbd "C-'") 'imenu)
 (global-set-key (kbd "C-c C-b") 'bury-buffer)
+
+;; Imenu configuration
+(global-set-key (kbd "C-'") 'imenu)
+(setq imenu-auto-rescan t)
+(setq imenu-auto-rescan-maxout (* 1024 1024))
+(setq imenu--rescan-item '("" . -99))
 
 ;; Work-specific config I can't check in.
 ;; Load it last so it overrides all that came before.
