@@ -38,6 +38,12 @@
 (set-language-environment   'utf-8)
 (setq sentence-end-double-space nil)
 
+(setq backup-by-copying t)              ; Don't clobber symlinks
+
+(make-directory "~/.emacs-saves")
+;;  no more littered *~ files everywhere.
+(setq backup-directory-alist '(("." . "~/.emacs-saves")))
+
 ;; My custom modules.
 (add-to-list 'load-path (concat user-emacs-directory "init"))
 
