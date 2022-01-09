@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: book
+# key: ;book
+# --
+*** $1 -- $2
+- Added: `(format-time-string "[%F %a]")`
+$0
