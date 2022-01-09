@@ -9,8 +9,6 @@
 ;; modules.
 
 ;;; Code:
-(require 'seq)
-
 ;; Quelpa Setup and use-package bootstrapping.
 (unless (package-installed-p 'quelpa)
   (with-temp-buffer
@@ -471,7 +469,7 @@
   (let ((n 0)
         bufname)
     (while (progn
-             (setq bufname (concat "*scratch-"
+             (setq bufname (concat "*scratch"
                                    (if (= n 0) "" (int-to-string n))
                                    "*"))
              (setq n (1+ n))
@@ -487,7 +485,6 @@
 (scroll-bar-mode 0)
 (setq inhibit-splash-screen t)
 (setq inhibit-startup-message t)
-(setq-default show-trailing-whitespace t)
 
 (use-package mood-line
   :ensure nil
