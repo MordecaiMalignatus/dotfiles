@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: err-format
+# key: ;errf
+# --
+if err != nil {
+	return nil, fmt.Errorf("$0: %s", err)
+}

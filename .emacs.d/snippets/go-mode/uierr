@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: uierr
+# key: ;uierr
+# --
+if err != nil {
+	c.ui.Error(fmt.Sprintf("$1", $2))
+}
+$0
