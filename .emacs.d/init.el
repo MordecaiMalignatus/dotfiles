@@ -527,19 +527,20 @@
   :ensure t
   :init
   (setq solarized-use-variable-pitch nil)
+  (setq solarized-scale-markdown-headlines t)
+  (setq solarized-use-more-italic t)
   :config
-  (load-theme 'solarized-light t)
-  )
+  (load-theme 'solarized-selenized-dark t))
 
 (defun az/toggle-solarized-theming ()
   "Switch between solarized-light and solarized-dark."
   (interactive)
-  (cond ((custom-theme-enabled-p 'solarized-light) (progn
-						     (disable-theme 'solarized-light)
-						     (load-theme 'solarized-dark t)))
-	((custom-theme-enabled-p 'solarized-dark) (progn
-						    (disable-theme 'solarized-dark)
-						    (load-theme 'solarized-light t)))))
+  (cond ((custom-theme-enabled-p 'solarized-selenized-light) (progn
+						     (disable-theme 'solarized-selenized-light)
+						     (load-theme 'solarized-selenized-dark t)))
+	((custom-theme-enabled-p 'solarized-selenized-dark) (progn
+						    (disable-theme 'solarized-selenized-dark)
+						    (load-theme 'solarized-selenized-light t)))))
 
 (defun az/align-on-whitespace (start end)
   "Aligns selection on whitespace.
@@ -593,6 +594,7 @@ Copied from [[https://emacsredux.com/blog/2013/05/22/smarter-navigation-to-the-b
 (global-set-key (kbd "C-'") 'imenu)
 (setq imenu-auto-rescan t)
 (setq imenu-auto-rescan-maxout (* 1024 1024))
+;; Removes the "*rescan*" option from imenu and sends it to the bottom of the list.
 (setq imenu--rescan-item '("" . -99))
 
 ;; Work-specific config I can't check in.
