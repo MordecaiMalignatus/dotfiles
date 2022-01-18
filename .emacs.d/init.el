@@ -201,6 +201,26 @@
                         (define-key org-mode-map (kbd "C-c c-a") 'nil)))
 
 
+
+(defun az/setup-darwin-spellchecking ()
+  "Setup hunspell and settings.
+
+Note: the dictionary for your system's $LANG *must* be available
+or Emacs' `ispell' mode does weird things. I solved this by
+symlinking my desired dictionary, so that both, the default and
+my desired dictionary are loaded."
+  (interactive)
+  (setq ispell-program-name "hunspell")
+  (setq ispell-hunspell-dict-paths-alist '(("en_GB" "/Library/Spelling/en_GB.aff")))
+  (setq hunspell-default-dict "en_GB")
+  (setq ispell-local-dictionary "en_GB")
+  (setq ispell-local-dictionary-alist
+        ;; Please note the list `("-d" "en_US")` contains ACTUAL parameters passed to hunspell
+        ;; You could use `("-d" "en_US,en_US-med")` to check with multiple dictionaries
+        '(("en_GB" "[[:alpha:]]" "[^[:alpha:]]" "[']" nil ("-d" "en_GB") nil utf-8)))
+  (flyspell-mode 1)
+  (global-set-key (kbd "M-]") 'ispell-word))
+
 (use-package deft
   :ensure t)
 
@@ -501,6 +521,7 @@
 ;; Enable ivy's selectable prompt on OSX because I can M-j on Linux but not OSX.
 (when (string= system-type 'darwin)
   (progn
+    (az/setup-darwin-spellchecking)
     (set-face-attribute 'default nil :font "PragmataPro-15")
     (set-frame-parameter nil 'fullscreen 'fullboth)
     (setq ivy-use-selectable-prompt t)
