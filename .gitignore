@@ -47,3 +47,4 @@ ranger/history
 ./private-scripts/
 /private-scripts/puppet-envs
 /.emacs.d/projects
+/.emacs.d/quelpa/melpa/
