@@ -629,8 +629,42 @@ Copied from [[https://emacsredux.com/blog/2013/05/22/smarter-navigation-to-the-b
       :defines org-kasten-home
       :config
       (setq org-kasten-home "~/Sync/Perceptron/")
-      (add-hook 'org-mode-hook 'org-kasten-mode))))
+      (add-hook 'org-mode-hook 'org-kasten-mode))
+    (az/setup-docs-transient)
+    (global-set-key (kbd "M-p") 'docs-transient)))
 
+(defun az/open-link (link)
+  "Open a LINK in $BROWSER."
+  (interactive)
+  (shell-command (concat "open " link)))
+
+(defun az/setup-docs-transient ()
+  "Create and bind docs transient suitable for not-work."
+  (transient-define-prefix docs-transient ()
+    [["Local Documents"
+      ("b" "Open baking.org"
+       (lambda () (interactive)
+         (find-file "~/Sync/Reference/Cooking/baking.org")))
+      ("c" "Open cooking.org"
+       (lambda () (interactive)
+         (find-file "~/Sync/Reference/Cooking/cooking.org")))
+      ("r" "Open reading-list.org"
+       (lambda () (interactive)
+         (find-file "~/Sync/Reference/Books/reading-list.org")))
+      ("e" "Open events.org"
+       (lambda () (interactive)
+         (find-file "~/Sync/Reference/System/events.org")))
+      ("a" "Open literature-archive.org"
+       (lambda () (interactive)
+         (find-file "~/Sync/Reference/Books/literature-archive.org")))
+      ("m" "Open meal-planning.org"
+       (lambda () (interactive)
+         (find-file "~/Sync/Reference/Health/meal-planning.org")))]
+     ["Links"
+      ("u" "Open Pinboard Unread"
+       (lambda () (interactive)
+         (az/open-link "https://pinboard.in/u:MordecaiMalignatus/unread/")))
+      ]]))
 
 ;; Custom compose key ;)
 
