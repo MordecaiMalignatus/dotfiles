@@ -38,7 +38,7 @@
 
 (setq backup-by-copying t)              ; Don't clobber symlinks
 
-(make-directory "~/.emacs-saves")
+(make-directory "~/.emacs-saves" t)
 ;;  no more littered *~ files everywhere.
 (setq backup-directory-alist '(("." . "~/.emacs-saves")))
 
@@ -192,6 +192,7 @@
   ;; Make org-goto less interactive, and better.
   (setq org-goto-interface 'outline-path-completionp)
   (setq org-outline-path-complete-in-steps nil)
+  (setq org-refile-use-outline-path t)
 
   ;; enable being able to C-c C-c execute shell blocks for side effects.
   (org-babel-do-load-languages
@@ -609,8 +610,15 @@ Copied from [[https://emacsredux.com/blog/2013/05/22/smarter-navigation-to-the-b
 	        (file-name-directory (buffer-file-name)))
     (pop-mark)))
 
+(defun az/search-file-for-todos ()
+  "Search current file for the exact string 'TODO: `."
+  (interactive)
+  (swiper "TODO:"))
+
+
 (global-set-key (kbd "C-c *") 'az/search-at-point)
-(global-set-key (kbd "C-c C-b") 'bury-buffer)
+(global-set-key (kbd "C-c t") 'az/search-file-for-todos)
+(global-set-key (kbd "C-c C-q") 'bury-buffer)
 
 ;; Imenu configuration
 (global-set-key (kbd "C-'") 'imenu)
