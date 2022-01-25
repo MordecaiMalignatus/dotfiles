@@ -55,7 +55,7 @@
   (setq cheatsheets-directory "~/grimoire/cheatsheets/")
   (cheatsheets-mode))
 
-;; Auto-upgrade packages and delete old ones.
+;; Auto-upgrade packages and delete old ones.`
 (use-package auto-package-update
   :ensure t
   :config
@@ -610,14 +610,7 @@ Copied from [[https://emacsredux.com/blog/2013/05/22/smarter-navigation-to-the-b
 	        (file-name-directory (buffer-file-name)))
     (pop-mark)))
 
-(defun az/search-file-for-todos ()
-  "Search current file for the exact string 'TODO: `."
-  (interactive)
-  (swiper "TODO:"))
-
-
 (global-set-key (kbd "C-c *") 'az/search-at-point)
-(global-set-key (kbd "C-c t") 'az/search-file-for-todos)
 (global-set-key (kbd "C-c C-q") 'bury-buffer)
 
 ;; Imenu configuration
