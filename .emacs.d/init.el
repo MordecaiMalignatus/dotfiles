@@ -620,21 +620,7 @@ Copied from [[https://emacsredux.com/blog/2013/05/22/smarter-navigation-to-the-b
 ;; Removes the "*rescan*" option from imenu and sends it to the bottom of the list.
 (setq imenu--rescan-item '("" . -99))
 
-;; Work-specific config I can't check in.
-;; Load it last so it overrides all that came before.
-(if (string= (system-name) "ALT00622")
-    (progn
-      (load (concat user-emacs-directory "init/" "work.el")))
-  (progn
-    (use-package org-kasten
-      :bind ("C-# C-#" . #'org-kasten-open-index)
-      :defines org-kasten-home
-      :config
-      (setq org-kasten-home "~/Sync/Perceptron/")
-      (add-hook 'org-mode-hook 'org-kasten-mode))
-    (az/setup-docs-transient)
-    (global-set-key (kbd "M-p") 'docs-transient)))
-
+;; Transient!
 (defun az/open-link (link)
   "Open a LINK in $BROWSER."
   (interactive)
@@ -667,6 +653,21 @@ Copied from [[https://emacsredux.com/blog/2013/05/22/smarter-navigation-to-the-b
        (lambda () (interactive)
          (az/open-link "https://pinboard.in/u:MordecaiMalignatus/unread/")))
       ]]))
+
+;; Work-specific config I can't check in.
+;; Load it last so it overrides all that came before.
+(if (string= (system-name) "ALT00622")
+    (progn
+      (load (concat user-emacs-directory "init/" "work.el")))
+  (progn
+    (use-package org-kasten
+      :bind ("C-# C-#" . #'org-kasten-open-index)
+      :defines org-kasten-home
+      :config
+      (setq org-kasten-home "~/Sync/Perceptron/")
+      (add-hook 'org-mode-hook 'org-kasten-mode))
+    (az/setup-docs-transient)
+    (global-set-key (kbd "M-p") 'docs-transient)))
 
 ;; Custom compose key ;)
 
