@@ -553,7 +553,7 @@ my desired dictionary are loaded."
   (setq solarized-scale-markdown-headlines t)
   (setq solarized-use-more-italic t)
   :config
-  (load-theme 'solarized-selenized-dark t))
+  (load-theme 'solarized-selenized-light t))
 
 (defun az/toggle-solarized-theming ()
   "Switch between solarized-light and solarized-dark."
@@ -564,13 +564,6 @@ my desired dictionary are loaded."
 	((custom-theme-enabled-p 'solarized-selenized-dark) (progn
 						    (disable-theme 'solarized-selenized-dark)
 						    (load-theme 'solarized-selenized-light t)))))
-
-(defun az/align-on-whitespace (start end)
-  "Aligns selection on whitespace.
-START: Start of region.
-END: End of region."
-  (interactive "r")
-  (align-regexp start end "\\(\\s-*\\)\\s-" 1 0 t))
 
 (defun az/move-beginning-of-line (arg)
   "Move point back to indentation of beginnning of line.
@@ -670,7 +663,6 @@ Copied from [[https://emacsredux.com/blog/2013/05/22/smarter-navigation-to-the-b
     (global-set-key (kbd "M-p") 'docs-transient)))
 
 ;; Custom compose key ;)
-
 (global-set-key (kbd "C-c i c - >") (lambda () (interactive) (insert-char ?→))) ; For rename-commits.
 (global-set-key (kbd "C-c i c < -") (lambda () (interactive) (insert-char ?←))) ; For rename-commits.
 
