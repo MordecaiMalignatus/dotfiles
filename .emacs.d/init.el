@@ -193,6 +193,7 @@
   (setq org-goto-interface 'outline-path-completionp)
   (setq org-outline-path-complete-in-steps nil)
   (setq org-refile-use-outline-path t)
+  (setq org-reverse-note-order t)       ; Refile targets top of header rather than appending.
 
   ;; enable being able to C-c C-c execute shell blocks for side effects.
   (org-babel-do-load-languages
