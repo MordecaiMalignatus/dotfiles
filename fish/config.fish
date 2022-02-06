@@ -5,6 +5,11 @@ set -gx BROWSER (which firefox)
 set -gx GOPATH ~/go
 set -gx GO11MODULE on
 
+# Fix locales because locales always suck
+set -gx LC_ALL "en_US.UTF-8"
+set -gx LANG "en_US.UTF-8"
+set -gx LANGUAGE "en_US.UTF-8"
+
 # Aliases
 alias k=kubectl
 alias ist=istioctl
