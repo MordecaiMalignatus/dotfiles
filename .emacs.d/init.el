@@ -222,7 +222,7 @@ my desired dictionary are loaded."
         ;; You could use `("-d" "en_US,en_US-med")` to check with multiple dictionaries
         '(("en_GB" "[[:alpha:]]" "[^[:alpha:]]" "[']" nil ("-d" "en_GB") nil utf-8)))
   (flyspell-mode 1)
-  (global-set-key (kbd "M-]") 'ispell-word))
+  (global-set-key (kbd "M-]") 'ispell))
 
 (use-package deft
   :ensure t)
