@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: errorf
-# key: ;errf
-# --
-if res != expected {
-	t.Errorf("$1", res, expected, $0)
-}

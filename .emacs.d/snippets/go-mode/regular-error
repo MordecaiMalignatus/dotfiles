@@ -1,4 +1,4 @@
-# key: ;err
+# key: regular-error
 # name: ;err
 # --
 if err != nil {

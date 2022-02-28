@@ -1,16 +1,19 @@
-# key: ;batch
-# name: batch-test-harness
+# key: ;tt
+# name: table-test
 # --
-input := []struct{
-	input $1
-        expected $2
+input := map[string]struct{
+		input $1
+        	expected $2
         }{
-        {},
+        "": {},
 }
 
-for _, test := range input {
-	res := $3
-        if res != test.expected {
-        	t.Errorf("Test failed, expected %s, got %s\n", test.expected, res)
-	}
+for name, tc := range input {
+        t.Run(name, func(t *Testing.t) {
+        	res := $0
+                diff := cmp.Diff(tc.expected, res)
+        	if diff != "" {
+        		t.Fatalf(diff)
+		}
+        }
 }
