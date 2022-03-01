@@ -204,7 +204,7 @@
 
 ;; Unbind stuff from org that clogs up my free keys.
 (eval-after-load "org" (progn
-                        (define-key org-mode-map (kbd "C-c c-a") 'nil)))
+                        (define-key org-mode-map (kbd "C-c C-a") 'nil)))
 
 
 
