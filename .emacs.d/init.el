@@ -224,7 +224,6 @@ my desired dictionary are loaded."
         ;; Please note the list `("-d" "en_US")` contains ACTUAL parameters passed to hunspell
         ;; You could use `("-d" "en_US,en_US-med")` to check with multiple dictionaries
         '(("en_GB" "[[:alpha:]]" "[^[:alpha:]]" "[']" nil ("-d" "en_GB") nil utf-8)))
-  (flyspell-mode 1)
   (global-set-key (kbd "M-]") 'ispell))
 
 (use-package deft
@@ -361,13 +360,6 @@ my desired dictionary are loaded."
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Python stuff
-(use-package lsp-python-ms
-  :ensure t
-  :init (setq lsp-python-ms-auto-install-server t)
-  :hook (python-mode . (lambda ()
-                          (require 'lsp-python-ms)
-                          (lsp))))
-;; Typechecking
 (use-package lsp-pyright
   :ensure t
   :hook (python-mode . (lambda ()
