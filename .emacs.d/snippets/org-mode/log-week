@@ -1,0 +1,5 @@
+# key: ;lw
+# name: log-week
+# --
+- `(org-format-time-string "[W%W] [%F %a]")`
+  - $0
