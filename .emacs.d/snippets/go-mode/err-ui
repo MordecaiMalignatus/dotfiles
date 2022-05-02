@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: err-ui
+# key: ;errui
+# --
+if err != nil {
+	log.Fatalf("$0: %s", err)
+}
