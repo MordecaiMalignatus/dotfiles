@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: anyhow
+# key: ;anyhow
+# --
+anyhow = "1.0.56"
