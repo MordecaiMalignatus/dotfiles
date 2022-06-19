@@ -1,1 +1,1 @@
-((nano-emacs :fetcher github :repo "rougier/nano-emacs") (quelpa :repo "quelpa/quelpa" :fetcher github) (quelpa-use-package :fetcher git :url "https://github.com/quelpa/quelpa-use-package.git"))
+((quelpa :repo "quelpa/quelpa" :fetcher github) (quelpa-use-package :fetcher git :url "https://github.com/quelpa/quelpa-use-package.git"))

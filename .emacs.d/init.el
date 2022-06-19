@@ -1,4 +1,4 @@
-;; init.el --- Summary
+;; init.el --- Summary  -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;; Hi, I'm Az and this is my init.el.  It's a bit of a mess.  A lot of
 ;; things are splintered off into their own sub modules in init/, you can find a
@@ -206,7 +206,8 @@
 (eval-after-load "org" (progn
                         (define-key org-mode-map (kbd "C-c C-a") 'nil)))
 
-
+(use-package org-ql
+  :ensure t)
 
 (defun az/setup-darwin-spellchecking ()
   "Setup hunspell and settings.
