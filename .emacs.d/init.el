@@ -543,6 +543,18 @@ my desired dictionary are loaded."
 (global-set-key (kbd "<f12>") 'recompile)
 (setq compile-command "rake")
 
+;; Stolen from http://endlessparentheses.com/ansi-colors-in-the-compilation-buffer-output.html
+;; This will turn ANSI escape codes in *compilation* to actual colour.
+(require 'ansi-color)
+(defun endless/colorize-compilation ()
+  "Colorize from `compilation-filter-start' to `point'."
+  (let ((inhibit-read-only t))
+    (ansi-color-apply-on-region
+     compilation-filter-start (point))))
+
+(add-hook 'compilation-filter-hook
+          #'endless/colorize-compilation)
+
 (use-package solarized-theme
   :ensure t
   :init
