@@ -12,8 +12,9 @@ for name, tc := range input {
         t.Run(name, func(t *Testing.t) {
         	res := $0
                 diff := cmp.Diff(tc.expected, res)
-        	if diff != "" {
+
+		if diff != "" {
         		t.Fatalf(diff)
 		}
-        }
+        })
 }
