@@ -13,9 +13,6 @@ set -gx LANGUAGE "en_US.UTF-8"
 # Aliases
 alias k=kubectl
 alias ist=istioctl
-alias tf=terraform
-
-source /usr/local/opt/asdf/libexec/asdf.fish
 
 fish_add_path ~/.cargo/bin
 fish_add_path ~/dotfiles/scripts
@@ -30,6 +27,5 @@ if test (hostname) = "albatross"
                 sq
         end
 else
-        source "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.fish.inc"
 end
 

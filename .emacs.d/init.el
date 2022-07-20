@@ -9,6 +9,7 @@
 ;; modules.
 
 ;;; Code:
+(require 'package)
 ;; Quelpa Setup and use-package bootstrapping.
 (unless (package-installed-p 'quelpa)
   (with-temp-buffer
@@ -22,7 +23,6 @@
    :url "https://github.com/quelpa/quelpa-use-package.git"))
 (require 'quelpa-use-package)
 
-(require 'package)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 
 (setq custom-file (concat user-emacs-directory "custom.el"))
