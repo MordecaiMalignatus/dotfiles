@@ -198,13 +198,21 @@
   ;; This fixes the indent-on-tab-or-return bug that has been plaguing me.
   (setq org-src-preserve-indentation t)
 
+  ;; Global bibliography for the stuff I read.
+  (setq org-cite-global-bibliography '("~/Sync/bibliography.bib"))
+
   ;; enable being able to C-c C-c execute shell blocks for side effects.
   (org-babel-do-load-languages
    'org-babel-load-languages '((shell . t))))
 
+(defun az/edit-bibliography ()
+  "Edit the global bibliography file."
+  (interactive)
+  (find-file (car org-cite-global-bibliography)))
+
 ;; Unbind stuff from org that clogs up my free keys.
 (eval-after-load "org" (progn
-                        (define-key org-mode-map (kbd "C-c C-a") 'nil)))
+                         (define-key org-mode-map (kbd "C-c C-a") 'nil)))
 
 (use-package org-ql
   :ensure t)
@@ -240,7 +248,12 @@ my desired dictionary are loaded."
   :ensure t
   :defines TeX-auto-save
   :config
-  (setq TeX-auto-save t))
+  (setq TeX-auto-save t)
+  (setq bibtex-dialect 'biblatex))
+
+(use-package reftex
+  :ensure auctex
+  :after latex)
 
 (use-package yaml-mode
   :ensure t)

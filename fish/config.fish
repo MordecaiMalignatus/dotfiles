@@ -26,6 +26,5 @@ if test (hostname) = "albatross"
         if isatty
                 sq
         end
-else
 end
 
