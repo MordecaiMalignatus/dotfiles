@@ -210,6 +210,20 @@
   (interactive)
   (find-file (car org-cite-global-bibliography)))
 
+(use-package org-ref
+  :ensure t
+  :config
+  (define-key org-mode-map (kbd "C-c ]") 'org-ref-insert-link)
+  (define-key bibtex-mode-map (kbd "H-b") 'org-ref-bibtex-hydra/body)
+  (setq bibtex-completion-bibliography '("~/Sync/bibliography.bib"))
+  (setq bibtex-completion-library-path '("~/Sync/Papers/"))
+  (setq bibtex-completion-pdf-open-function
+	(lambda (fpath)
+	  (call-process "open" nil 0 nil fpath))))
+
+(use-package ivy-bibtex
+  :ensure t)
+
 ;; Unbind stuff from org that clogs up my free keys.
 (eval-after-load "org" (progn
                          (define-key org-mode-map (kbd "C-c C-a") 'nil)))
