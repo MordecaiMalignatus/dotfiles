@@ -468,7 +468,8 @@ https://sourceforge.net/projects/wordlist/files/speller/2020.12.07/"
   :hook (go-mode . lsp))
 
 (use-package flycheck-golangci-lint
-  :ensure t)
+  :ensure t
+  :hook (go-mode . flycheck-golangci-lint-setup))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Javascript Dev
