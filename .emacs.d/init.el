@@ -224,6 +224,15 @@
 (use-package ivy-bibtex
   :ensure t)
 
+(defun az/insert-formatted-citation ()
+  "Select a key from the bibliography, then insert citation."
+  (interactive)
+  (insert (bibtex-completion-apa-format-reference (org-ref-read-key))))
+
+;; Make sure we have it available when writing blogposts.q
+(define-key markdown-mode-map (kbd "C-c ]") 'az/insert-formatted-citation)
+
+
 ;; Unbind stuff from org that clogs up my free keys.
 (eval-after-load "org" (progn
                          (define-key org-mode-map (kbd "C-c C-a") 'nil)))
@@ -655,6 +664,7 @@ Copied from [[https://emacsredux.com/blog/2013/05/22/smarter-navigation-to-the-b
   (interactive)
   (shell-command (concat "open " link)))
 
+(require 'transient)
 (defun az/setup-docs-transient ()
   "Create and bind docs transient suitable for not-work."
   (transient-define-prefix docs-transient ()
@@ -676,7 +686,10 @@ Copied from [[https://emacsredux.com/blog/2013/05/22/smarter-navigation-to-the-b
          (find-file "~/Sync/Reference/Books/literature-archive.org")))
       ("m" "Open meal-planning.org"
        (lambda () (interactive)
-         (find-file "~/Sync/Reference/Health/meal-planning.org")))]
+         (find-file "~/Sync/Reference/Health/meal-planning.org")))
+      ("f" "Open file-archive.org"
+       (lambda () (interactive)
+         (find-file "~/Sync/Reference/Archive/file-archive.org")))]
      ["Links"
       ("u" "Open Pinboard Unread"
        (lambda () (interactive)
