@@ -246,7 +246,14 @@
 Note: the dictionary for your system's $LANG *must* be available
 or Emacs' `ispell' mode does weird things. I solved this by
 symlinking my desired dictionary, so that both, the default and
-my desired dictionary are loaded."
+my desired dictionary are loaded. The notion of default here is
+very weird (Albatross II got \"en_DE\"), so if it doesn't make
+sense, run `(ispell-call-process ispell-program-name nil t nil
+\"-D\" \"-a\" null-device)'. It will give you the error from
+Emacs' perspective.
+
+You can find the dictionaries here (yes, it's sourceforge):
+https://sourceforge.net/projects/wordlist/files/speller/2020.12.07/"
   (interactive)
   (setq ispell-program-name "hunspell")
   (setq ispell-hunspell-dict-paths-alist '(("en_GB" "/Library/Spelling/en_GB.aff")))
