@@ -373,7 +373,10 @@ https://sourceforge.net/projects/wordlist/files/speller/2020.12.07/"
   ;; Rust Config
   (setq lsp-rust-server 'rust-analyzer)
   (setq lsp-rust-clippy-preference 'on)
-  (setq lsp-rust-analyzer-cargo-watch-command "clippy"))
+  (setq lsp-rust-analyzer-cargo-watch-command "clippy")
+
+  ;; Go Config
+  (setq lsp-go-use-gofumpt t))
 
 
 (use-package lsp-ui
