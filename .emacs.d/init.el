@@ -92,12 +92,18 @@
   :config
   ;; Spawn vterm in $HOME rather than $PWD. Then we can hit C-RET to cd to file PWD.
   (setq vterm-toggle-cd-auto-create-buffer nil)
-  (define-key vterm-mode-map [(control return)]   #'vterm-toggle-insert-cd)
+)
 
-  (global-set-key (kbd "<f2>") 'vterm-toggle)
-  (define-key vterm-mode-map (kbd "<f2>") 'vterm-toggle)
+(use-package multi-vterm
+  :ensure t
+  :config
+  (global-set-key (kbd "M-<f2>") 'multi-vterm)
   (define-key vterm-mode-map (kbd "M-N") 'vterm-toggle-forward)
-  (define-key vterm-mode-map (kbd "M-P") 'vterm-toggle-backward))
+  (define-key vterm-mode-map (kbd "M-P") 'vterm-toggle-backward)
+  (define-key vterm-mode-map (kbd "C-<return>") #'vterm-toggle-insert-cd)
+
+  (global-set-key (kbd "<f2>") 'multi-vterm-dedicated-toggle)
+  (define-key vterm-mode-map (kbd "<f2>") 'multi-vterm-project))
 
 ;; Movement
 (use-package avy
