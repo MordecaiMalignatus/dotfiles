@@ -19,8 +19,11 @@ fish_add_path ~/dotfiles/scripts
 fish_add_path ~/go/bin/
 fish_add_path ~/.local/bin
 fish_add_path ~/.local/elixir-ls
-fish_add_path ~/projects/shed/scripts
 fish_add_path /usr/local/opt/curl/bin
+
+if test (hostname) = "ALT00622"
+        source ~/dotfiles/fish/work.fish
+end
 
 if test (hostname) = "albatross"
         if isatty
@@ -28,3 +31,5 @@ if test (hostname) = "albatross"
         end
 end
 
+
+source /usr/local/opt/asdf/libexec/asdf.fish
