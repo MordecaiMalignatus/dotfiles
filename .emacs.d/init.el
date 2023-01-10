@@ -91,17 +91,18 @@
   :ensure t
   :config
   ;; Spawn vterm in $HOME rather than $PWD. Then we can hit C-RET to cd to file PWD.
-  (setq vterm-toggle-cd-auto-create-buffer nil)
-)
+  (setq vterm-toggle-cd-auto-create-buffer nil))
 
 (use-package multi-vterm
   :ensure t
   :config
   (global-set-key (kbd "M-<f2>") 'multi-vterm)
+
   (define-key vterm-mode-map (kbd "M-N") 'vterm-toggle-forward)
   (define-key vterm-mode-map (kbd "M-P") 'vterm-toggle-backward)
   (define-key vterm-mode-map (kbd "C-<return>") #'vterm-toggle-insert-cd)
 
+  (define-key vterm-mode-map (kbd "<f2>") 'multi-vterm-project)
   (global-set-key (kbd "<f2>") 'multi-vterm-project))
 
 ;; Movement
@@ -496,6 +497,9 @@ https://sourceforge.net/projects/wordlist/files/speller/2020.12.07/"
 
 (use-package xref-js2
   :after js2-mode
+  :ensure t)
+
+(use-package typescript-mode
   :ensure t)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
