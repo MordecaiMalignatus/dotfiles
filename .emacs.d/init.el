@@ -115,6 +115,11 @@
   :bind (("M-o" . 'ace-window)
 	 ("C-x C-o" . 'ace-window)))
 
+(use-package whole-line-or-region
+  :ensure t
+  :config
+  (whole-line-or-region-global-mode))
+
 ;; Ivy, auto-completion and fuzzy finder.
 (use-package ivy
   :ensure t
