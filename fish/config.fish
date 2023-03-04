@@ -25,11 +25,4 @@ if test (hostname) = "ALT00622"
         source ~/dotfiles/fish/work.fish
 end
 
-if test (hostname) = "albatross"
-        if isatty
-                sq
-        end
-end
-
-
-source /usr/local/opt/asdf/libexec/asdf.fish
+source /opt/homebrew/opt/asdf/libexec/asdf.fish
