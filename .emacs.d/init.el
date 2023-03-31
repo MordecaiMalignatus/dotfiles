@@ -62,6 +62,7 @@
   (setq auto-package-update-delete-old-versions t)
   (setq auto-package-update-interval 4)
   (setq auto-package-update-hide-results t)
+  (setq auto-package-update-prompt-before-update t)
   (auto-package-update-maybe))
 
 (setq quelpa-upgrade-interval 7)
@@ -216,6 +217,11 @@
   (org-babel-do-load-languages
    'org-babel-load-languages '((shell . t))))
 
+(use-package markdown-mode
+  :ensure t
+  :mode ("README\\.md\\'" . gfm-mode)
+  :init (setq markdown-command "multimarkdown"))
+
 (defun az/edit-bibliography ()
   "Edit the global bibliography file."
   (interactive)
@@ -240,7 +246,7 @@
   (interactive)
   (insert (bibtex-completion-apa-format-reference (org-ref-read-key))))
 
-;; Make sure we have it available when writing blogposts.q
+;; Make sure we have it available when writing blogposts.
 (define-key markdown-mode-map (kbd "C-c ]") 'az/insert-formatted-citation)
 
 
