@@ -84,9 +84,15 @@
 (put 'upcase-region 'disabled nil)
 (put 'set-goal-column 'disabled nil)
 
+
+(use-package sqlite3
+  :ensure t)
+
 ;; A better term
 (use-package vterm
-  :ensure t)
+  :ensure t
+  :config
+  (setq vterm-shell "/opt/homebrew/bin/fish"))
 
 (use-package vterm-toggle
   :ensure t
@@ -162,7 +168,8 @@
   :ensure t
   :config
   (exec-path-from-shell-copy-env "SSH_AGENT_PID")
-  (exec-path-from-shell-copy-env "SSH_AUTH_SOCK"))
+  (exec-path-from-shell-copy-env "SSH_AUTH_SOCK")
+  (exec-path-from-shell-copy-env "PATH"))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Infrastructure Management
@@ -587,6 +594,7 @@ https://sourceforge.net/projects/wordlist/files/speller/2020.12.07/"
 ;; Enable ivy's selectable prompt on OSX because I can M-j on Linux but not OSX.
 (when (string= system-type 'darwin)
   (progn
+    (setq mac-command-modifier 'meta)
     (az/setup-darwin-spellchecking)
     (set-face-attribute 'default nil :font "PragmataPro-15")
     (set-frame-parameter nil 'fullscreen 'fullboth)
