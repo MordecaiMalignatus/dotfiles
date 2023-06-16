@@ -45,5 +45,5 @@ def link_home(file)
 end
 
 def link_config(file)
-  sh "ln -s $PWD/#{file} $HOME/.config/#{file}"
+  sh "ln -s $PWD/#{file} $HOME/.config"
 end
