@@ -20,9 +20,3 @@ fish_add_path ~/go/bin/
 fish_add_path ~/.local/bin
 fish_add_path ~/.local/elixir-ls
 fish_add_path /usr/local/opt/curl/bin
-
-if test (hostname) = "ALT00622"
-        source ~/dotfiles/fish/work.fish
-end
-
-source /opt/homebrew/opt/asdf/libexec/asdf.fish
