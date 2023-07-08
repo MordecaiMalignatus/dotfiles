@@ -380,6 +380,7 @@ https://sourceforge.net/projects/wordlist/files/speller/2020.12.07/"
   (ruby-mode . lsp)
   (go-mode . lsp)
   (sh-mode . lsp)
+  (erlang-mode . lsp)
   (lsp-mode . (lambda ()
                 (let ((lsp-keymap-prefix "M-l"))
                   (lsp-enable-which-key-integration))))
@@ -428,6 +429,14 @@ https://sourceforge.net/projects/wordlist/files/speller/2020.12.07/"
 (use-package exunit
   :ensure t
   :hook (elixir . exunit))
+
+(use-package erlang
+  :ensure config
+  :mode "\\.erl"
+  :t
+  (setq erlang-root-dir "/opt/local/lib/erlang")
+  (add-to-list 'exec-path "/opt/local/lib/erlang/bin")
+  (setq erlang-man-root-dir "/opt/local/lib/erlang/man"))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Python stuff
