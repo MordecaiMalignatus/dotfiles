@@ -744,9 +744,13 @@ Copied from [[https://emacsredux.com/blog/2013/05/22/smarter-navigation-to-the-b
          (az/open-link "https://pinboard.in/u:MordecaiMalignatus/unread/")))
       ]]))
 
+(defun az/is-work-p ()
+  "Determine if the current machine is a work machine or not."
+  (file-exists-p "~/.work-machine"))
+
 ;; Work-specific config I can't check in.
 ;; Load it last so it overrides all that came before.
-(if (string= (system-name) "ALT00622")
+(if (az/is-work-p)
     (progn
       (load (concat user-emacs-directory "init/" "work.el")))
   (progn
