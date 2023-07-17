@@ -312,6 +312,12 @@ https://sourceforge.net/projects/wordlist/files/speller/2020.12.07/"
 (use-package yaml-mode
   :ensure t)
 
+(use-package chatgpt-shell
+  :ensure t
+  :config
+  (setq chatgpt-shell-openai-key
+        (auth-source-pick-first-password :host "api.openai.com")))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Projectile config
 (use-package projectile
