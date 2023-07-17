@@ -43,7 +43,6 @@ ranger/history
 *~
 /.emacs.d/init/cheatsheets.el
 /.emacs.d/init/org-kasten.el
-/.emacs.d/init/work.el
 ./private-scripts/
 /private-scripts/puppet-envs
 /.emacs.d/projects
