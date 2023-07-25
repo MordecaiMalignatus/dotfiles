@@ -16,6 +16,8 @@
       ("s" "open slack-integration.org" (lambda () (interactive) (find-file "~/grimoire/Projects/slack-integration.org")))]
      ["Links"
       ("c" "Open GCal" (lambda () (interactive) (az/open-link "https://calendar.google.com")))
+      ("g" "Open Github" (lambda () (interactive) (az/open-link "https://github.com/notifications")))
+      ("h" "Open Honeycomb" (lambda () (interactive) (az/open-link "https://ui.honeycomb.io")))
       ("m" "Open GMail" (lambda () (interactive) (az/open-link "https://mail.google.com")))]])
 
   (global-set-key (kbd "M-p") 'work-docs-transient))
