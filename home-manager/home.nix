@@ -2,9 +2,8 @@
 
 let
   userdata = import ./userdata.nix;
-  dotfiles = "${userdata.homeDirectory}/dotfiles";
-in
-{
+  dotfiles = name: "${userdata.homeDirectory}/dotfiles/${name}";
+in {
   # nodoxxpls.
   home.username = userdata.username;
   home.homeDirectory = userdata.homeDirectory;
@@ -17,20 +16,24 @@ in
 
   home.packages = [
     pkgs.visidata
+    pkgs.vim
+    pkgs.nixfmt
   ];
 
   home.file = {
-    ".vimrc".source     = "${dotfiles}/.vimrc";
-    ".tmux.conf".source = "${dotfiles}/.tmux.conf";
     ".vimrc" = {
       source = dotfiles ".vimrc";
       onChange = "vim +PluginInstall +qall";
     };
+    ".tmux.conf".source = dotfiles ".tmux.conf";
+    ".emacs.d".source = dotfiles ".emacs.d";
+    ".hammerspoon".source = dotfiles ".hammerspoon";
+
+    ".config/fish".source = dotfiles "fish";
+    ".config/bat".source = dotfiles "bat";
   };
 
   home.sessionVariables = {
     # EDITOR = "emacs";
   };
-
-
 }
