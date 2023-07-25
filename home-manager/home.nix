@@ -22,6 +22,10 @@ in
   home.file = {
     ".vimrc".source     = "${dotfiles}/.vimrc";
     ".tmux.conf".source = "${dotfiles}/.tmux.conf";
+    ".vimrc" = {
+      source = dotfiles ".vimrc";
+      onChange = "vim +PluginInstall +qall";
+    };
   };
 
   home.sessionVariables = {

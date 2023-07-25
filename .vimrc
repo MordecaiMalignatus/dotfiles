@@ -3,7 +3,13 @@
 set shell=/bin/bash " Vim chokes on fish.
 set nocompatible    " be iMproved, required
 
-" Vundle! :D
+" Setting up Vundle - the vim plugin bundler
+let vundle_readme=expand('~/.vim/bundle/vundle/README.md')
+if !filereadable(vundle_readme)
+    silent !mkdir -p ~/.vim/bundle
+    silent !git clone https://github.com/VundleVim/Vundle.vim ~/.vim/bundle/vundle
+endif
+
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 
@@ -25,7 +31,7 @@ Plugin 'tpope/vim-endwise'                " automatically adds 'end' and similar
 " Themes and colorschemes.
 Plugin 'flazz/vim-colorschemes'           " Giant-ass collection because why not.
 
-call vundle#end()                       " required
+call vundle#end()                         " required
 filetype plugin indent on                 " required
 
 set autoread                   " automatically read file-changes from disk.
