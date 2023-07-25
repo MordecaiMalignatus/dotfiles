@@ -1,9 +1,13 @@
 set -gx EDITOR (which vim)
-set -gx BROWSER (which firefox)
 
 # GO stuff.
 set -gx GOPATH ~/go
 set -gx GO11MODULE on
+
+if type -q nix
+        babelfish < ~/.nix-profile/etc/profile.d/hm-session-vars.sh | source
+        any-nix-shell fish --info-right | source
+end
 
 # Fix locales because locales always suck
 set -gx LC_ALL "en_US.UTF-8"

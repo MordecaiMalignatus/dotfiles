@@ -40,6 +40,10 @@ task :bat do
   link_config 'bat'
 end
 
+task :homemanager do
+  link_config 'home-manager'
+end
+
 def link_home(file)
   sh "ln -s $PWD/#{file} $HOME/#{file}"
 end
