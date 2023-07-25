@@ -36,6 +36,10 @@
 (set-language-environment   'utf-8)
 (setq sentence-end-double-space nil)
 
+;; GPG/authinfo setup
+(setq epa-pinentry-mode 'loopback)
+(setq auth-sources '("~/.authinfo.gpg" "~/.authinfo"))
+
 (setq backup-by-copying t)              ; Don't clobber symlinks
 
 (make-directory "~/.emacs-saves" t)
@@ -83,7 +87,7 @@
 (put 'narrow-to-region 'disabled nil)
 (put 'upcase-region 'disabled nil)
 (put 'set-goal-column 'disabled nil)
-
+(put 'downcase-region 'disabled nil)
 
 (use-package sqlite3
   :ensure t)
@@ -150,10 +154,7 @@
 (use-package magit
   :ensure t
   :bind (("C-x g" . 'magit-status)
-	 ("C-x M-g" . 'magit-dispatch))
-  :config
-  (setq auth-sources '("~/.authinfo.gpg" "~/.authinfo")))
-
+	 ("C-x M-g" . 'magit-dispatch)))
 (use-package forge
   :after magit
   :ensure t
