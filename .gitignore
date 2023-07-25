@@ -49,3 +49,4 @@ ranger/history
 /.emacs.d/quelpa/melpa/
 /.emacs.d/eln-cache/
 /.emacs.d/quelpa/
+/home-manager/userdata.nix
