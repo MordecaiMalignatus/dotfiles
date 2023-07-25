@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: httpf
+# key: httpf
+# --
+func $1(w http.ResponseWriter, r *http.Request) {
+	$0
+}
