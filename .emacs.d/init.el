@@ -563,6 +563,11 @@ https://sourceforge.net/projects/wordlist/files/speller/2020.12.07/"
   (interactive)
   (find-file user-init-file))
 
+(defun home-manager ()
+  "Opens home.nix."
+  (interactive)
+  (find-file "~/dotfiles/home-manager/home.nix"))
+
 (defun az/copy-filename-to-clipboard ()
   "Copies file name of current file to kill ring."
   (interactive)
