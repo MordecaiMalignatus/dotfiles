@@ -26,7 +26,6 @@ in {
       onChange = "vim +PluginInstall +qall";
     };
     ".tmux.conf".source = dotfiles ".tmux.conf";
-    ".emacs.d".source = dotfiles ".emacs.d";
     ".hammerspoon".source = dotfiles ".hammerspoon";
 
     ".config/fish".source = dotfiles "fish";
