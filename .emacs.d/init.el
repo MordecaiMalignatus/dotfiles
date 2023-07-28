@@ -116,6 +116,9 @@
   (define-key vterm-mode-map (kbd "<f2>") 'multi-vterm-project)
   (global-set-key (kbd "<f2>") 'multi-vterm-project))
 
+(use-package fish-mode
+  :ensure t)
+
 ;; Movement
 (use-package avy
   :ensure t
