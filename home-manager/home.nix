@@ -18,6 +18,7 @@ in {
     pkgs.visidata
     pkgs.vim
     pkgs.nixfmt
+    pkgs.pgcli
   ];
 
   home.file = {
