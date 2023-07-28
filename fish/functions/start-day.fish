@@ -1,8 +1,7 @@
 function start-day
-        switch (hostname)
-                case "albatross"
-                        cls -f ~/Sync/Checklists/morning.md
-                case "ALT00622"
-                        cls -f ~/projects/shed/checklists/start.md
-        end
+    if test -e "~/.work-machine"
+         cls -f "~/grimoire/checklists/day-start.txt"
+    else
+         cls -f "~/Sync/Checklists/morning.md"
+    end
 end
