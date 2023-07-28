@@ -13,7 +13,8 @@
   "Create and bind work transient tree."
   (transient-define-prefix work-docs-transient ()
     [[ "Local Documents"
-      ("s" "open slack-integration.org" (lambda () (interactive) (find-file "~/grimoire/Projects/slack-integration.org")))]
+      ("s" "open slack-integration.org" (lambda () (interactive) (find-file "~/grimoire/Projects/slack-integration.org")))
+      ("i" "open interviewing.org"      (lambda () (interactive) (find-file "~/grimoire/interviewing.org")))]
      ["Links"
       ("c" "Open GCal" (lambda () (interactive) (az/open-link "https://calendar.google.com")))
       ("g" "Open Github" (lambda () (interactive) (az/open-link "https://github.com/notifications")))
