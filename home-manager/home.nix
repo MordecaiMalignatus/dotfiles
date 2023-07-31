@@ -17,8 +17,9 @@ in {
   home.packages = [
     pkgs.visidata
     pkgs.vim
-    pkgs.nixfmt
     pkgs.pgcli
+    pkgs.jless
+    pkgs.gron
   ];
 
   home.file = {
