@@ -2,15 +2,6 @@ function upgrade
     print_green "Upgrading Packages..."
     brew upgrade
 
-    if test (hostname) = "ALT01896" 
-      and test (math (date '+%j') % 7) = 0
-      print_green "Upgrading Vault..."
-      vault wf upgrade
-
-      print_green "Updating gcloud CLI..."
-      gcloud components update --quiet
-    end
-
     print_green "Fetching work repos..."
     fetch-work-repos
 
