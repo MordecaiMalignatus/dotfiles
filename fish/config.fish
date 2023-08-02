@@ -4,7 +4,7 @@ set -gx EDITOR (which vim)
 set -gx GOPATH ~/go
 set -gx GO11MODULE on
 
-if type -q nix
+if type -q home-manager
         babelfish < ~/.nix-profile/etc/profile.d/hm-session-vars.sh | source
         any-nix-shell fish --info-right | source
 end
