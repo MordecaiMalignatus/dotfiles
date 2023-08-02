@@ -441,9 +441,9 @@ https://sourceforge.net/projects/wordlist/files/speller/2020.12.07/"
   :hook (elixir . exunit))
 
 (use-package erlang
-  :ensure config
+  :ensure t
   :mode "\\.erl"
-  :t
+  :config
   (setq erlang-root-dir "/opt/local/lib/erlang")
   (add-to-list 'exec-path "/opt/local/lib/erlang/bin")
   (setq erlang-man-root-dir "/opt/local/lib/erlang/man"))
