@@ -1,3 +1,3 @@
 function fishconf
-  vi ~/.config/fish/config.fish
+  vi ~/dotfiles/fish/config.fish
 end
