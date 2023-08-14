@@ -34,6 +34,16 @@ in {
     ".config/bat".source = dotfiles "bat";
   };
 
+  # Launchd configuration, these are per-user daemons.
+  # Documentation: https://nix-community.github.io/home-manager/options.html#opt-launchd.enable
+  launchd.agents.fetch-work-repos = {
+    enable = true;
+    config = {
+      ProgramArguments = ["/opt/homebrew/bin/fish" "-c" "fetch-work-repos"];
+      StartInterval = (30 * 60); # Interval is in seconds, start every 30 minutes.
+    };
+  };
+
   home.sessionVariables = {
     # EDITOR = "emacs";
   };
