@@ -1,7 +1,12 @@
 function fetch-work-repos
-    set -l srcfiles (~/src/*)
-    set -l projectfiles (~/projects/*)
-    set -a srcfiles projectfiles
+    begin
+        set -l srcfiles (fd --maxdepth=1 --type directory . "$HOME/src/")
+        set -l projectfiles (fd --maxdepth=1 --type directory . "$HOME/projects/")
+        set -a srcfiles $projectfiles
+        for file in $srcfiles
+            printf "$file\n"
+        end
+    end
 
     for dir in $srcfiles
         pushd $dir
