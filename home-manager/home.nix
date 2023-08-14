@@ -20,6 +20,7 @@ in {
     pkgs.pgcli
     pkgs.jless
     pkgs.gron
+    pkgs.fd
   ];
 
   home.file = {
