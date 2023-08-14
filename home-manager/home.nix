@@ -21,6 +21,7 @@ in {
     pkgs.jless
     pkgs.gron
     pkgs.fd
+    pkgs.ripgrep
   ];
 
   home.file = {
