@@ -42,7 +42,7 @@ in {
     enable = true;
     config = {
       ProgramArguments = ["/opt/homebrew/bin/fish" "-c" "fetch-work-repos"];
-      StartInterval = (30 * 60); # Interval is in seconds, start every 30 minutes.
+      StartInterval = (10 * 60); # Interval is in seconds, start every 10 minutes.
     };
   };
 
