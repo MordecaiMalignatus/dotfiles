@@ -4,6 +4,7 @@ function fetch-work-repos
     set -a srcfiles $projectfiles
 
     for dir in $srcfiles
+        print_green "Fetching $dir"
         pushd $dir
         git fetch --all --prune --quiet
         popd
