@@ -184,6 +184,9 @@
 (use-package terraform-mode
   :ensure t)
 
+(use-package dockerfile-mode
+  :ensure t)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Document management.
 (use-package org
