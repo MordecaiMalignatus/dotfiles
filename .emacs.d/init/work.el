@@ -13,13 +13,18 @@
   "Create and bind work transient tree."
   (transient-define-prefix work-docs-transient ()
     [[ "Local Documents"
-      ("s" "open slack-integration.org" (lambda () (interactive) (find-file "~/grimoire/Projects/slack-integration.org")))
-      ("i" "open interviewing.org"      (lambda () (interactive) (find-file "~/grimoire/interviewing.org")))]
+       ("i" "open interviewing.org" (lambda () (interactive) (find-file "~/grimoire/interviewing.org")))]
      ["Links"
       ("c" "Open GCal" (lambda () (interactive) (az/open-link "https://calendar.google.com")))
       ("g" "Open Github" (lambda () (interactive) (az/open-link "https://github.com/notifications")))
       ("h" "Open Honeycomb" (lambda () (interactive) (az/open-link "https://ui.honeycomb.io")))
-      ("m" "Open GMail" (lambda () (interactive) (az/open-link "https://mail.google.com")))]])
+      ("m" "Open GMail" (lambda () (interactive) (az/open-link "https://mail.google.com")))]
+     ["Repositories"
+      ("s" "Open tmc-stack" (lambda () (interactive) (az/open-link "https://github.com/terramate-io/tmc-stack")))
+      ("g" "Open mineiros-io/iac-gcloud" (lambda () (interactive) (az/open-link "https://github.com/mineiros-io/iac-gcloud")))
+      ("t" "Open terramate" (lambda () (interactive) (az/open-link "https://github.com/terramate-io/terramate")))
+      ("e" "Open engineering-docs" (lambda () (interactive) (az/open-link "https://github.com/terramate-io/engineering-documentation")))
+      ("l" "Open engineering-leadership-stuff" (lambda () (interactive) (az/open-link "https://github.com/mordecaimalignatus/engineering-leadership-stuff")))]])
 
   (global-set-key (kbd "M-p") 'work-docs-transient))
 
