@@ -5,6 +5,8 @@
 ;;; Code:
 (require 'custom-deft)
 
+
+
 (defun az/work-deft ()
   "Override standard bindings set in custom-deft.el with work-appropriate settings."
   (global-set-key (kbd "C-$ C-$") (lambda () (interactive) (launch-deft-in "~/grimoire"))))
@@ -28,9 +30,19 @@
 
   (global-set-key (kbd "M-p") 'work-docs-transient))
 
+;; https://emacsredux.com/blog/2013/06/13/using-emacs-as-a-database-client/
+(defun az/setup-sql-mode ()
+  "Configure SQL modes for use."
+  (setq sql-connection-alist '((pgsql-localhost (sql-product 'postgres)
+                                                (sql-user "wi-stack-service-prd@terramate-gke-prd.iam")
+                                                (sql-database "cloud")
+                                                (sql-server "localhost")
+                                                (sql-port 9000)))))
+
 (progn
   (az/work-deft)
-  (az/setup-work-transient))
+  (az/setup-work-transient)
+  (az/setup-sql-mode))
 
 (provide 'work)
 ;;; work.el ends here.
