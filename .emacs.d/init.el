@@ -664,7 +664,7 @@ https://sourceforge.net/projects/wordlist/files/speller/2020.12.07/"
   (setq solarized-scale-markdown-headlines t)
   (setq solarized-use-more-italic t)
   :config
-  (load-theme 'solarized-selenized-light t))
+  (load-theme 'solarized-selenized-dark t))
 
 (defun az/toggle-solarized-theming ()
   "Switch between solarized-light and solarized-dark."
