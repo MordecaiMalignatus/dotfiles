@@ -339,7 +339,9 @@ https://sourceforge.net/projects/wordlist/files/speller/2020.12.07/"
 (use-package flycheck
   :ensure t
   :config
-  (global-flycheck-mode t))
+  (global-flycheck-mode t)
+  (global-set-key (kbd "C-M-n") 'flycheck-next-error)
+  (global-set-key (kbd "C-M-p") 'flycheck-previous-error))
 
 (use-package flycheck-inline
   :ensure t
