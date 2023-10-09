@@ -401,6 +401,7 @@ https://sourceforge.net/projects/wordlist/files/speller/2020.12.07/"
                   (lsp-enable-which-key-integration))))
   :config
   (define-key lsp-mode-map (kbd "M-l") lsp-command-map)
+  (define-key lsp-mode-map [remap xref-find-apropos] #'lsp-ivy-workspace-symbol)
   (setq lsp-completion-provider :capf)
   (setq lsp-auto-configure t)
   (setq lsp-prefer-flymake nil)
