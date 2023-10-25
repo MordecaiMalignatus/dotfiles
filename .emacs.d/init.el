@@ -517,10 +517,19 @@ https://sourceforge.net/projects/wordlist/files/speller/2020.12.07/"
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Golang Stuff
+(require 's)
+
+(defun az/golang-go-to-test-file ()
+  "Go to the test file corresponding to file.
+If none exists,create a new test file."
+  (interactive)
+  (let ((raw-name (s-chop-suffix ".go" (buffer-file-name))))
+    (find-file (concat raw-name "_test.go"))))
 
 (use-package go-mode
   :ensure t
-  :hook (go-mode . lsp))
+  :hook (go-mode . lsp)
+  :bind ("M-l f t" . 'az/golang-go-to-test-file))
 
 (use-package flycheck-golangci-lint
   :ensure t
