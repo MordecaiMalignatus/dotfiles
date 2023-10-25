@@ -1,0 +1,30 @@
+#!/usr/bin/env -S deno run --allow-env --ext=ts
+
+const projects = [
+    "JSON parser",
+    "XML parser (recursive descent)",
+    "LISP parser (recursive descent)",
+    "HTTP based TODO list",
+    "Dice Roll Generator",
+    "Legal-time keeper and aggregator",
+]
+
+const constraints = [
+    "No external dependencies",
+    "100% test coverage",
+]
+
+const language = [
+    "Go",
+    "Rust",
+    "Python",
+    "Elixir",
+]
+
+function pick<T>(xs: Array<T>): T {
+    return xs[Math.floor(Math.random() * xs.length)]
+}
+
+console.log(`Project: ${pick(projects)}`)
+console.log(`Language: ${pick(language)}`)
+console.log(`Constraint: ${pick(constraints)}\n`)
