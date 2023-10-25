@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: def
+# key: ;def
+# --
+task :default do
+	sh "$0"
+end
