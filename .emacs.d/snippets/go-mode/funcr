@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: funcr
+# key: funcr
+# --
+func (c *$1) $2() $3 {
+	$0
+}

@@ -1,5 +1,5 @@
 # -*- mode: snippet -*-
-# name: err-format
+# name: errf
 # key: ;errf
 # --
 if err != nil {

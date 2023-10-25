@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: tdiff
+# key: ;tdiff
+# --
+func Test$1(t *testing.T) {
+	res, err := $2
+        expected := $3
+
+	if d := cmp.Diff(t, res, expected); d != "" {
+		t.Fatalf("Diff was not nil: %v", d)
+	}
+}

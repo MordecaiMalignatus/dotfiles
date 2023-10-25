@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
-# name: httpf
-# key: httpf
+# name: fhttp
+# key: ;fhttp
 # --
 func $1(w http.ResponseWriter, r *http.Request) {
 	$0

@@ -1,7 +1,0 @@
-# key: regular-error
-# name: ;err
-# --
-if err != nil {
-	log.Fatalf("$1")
-}
-$0
