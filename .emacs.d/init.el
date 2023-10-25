@@ -36,6 +36,9 @@
 (set-language-environment   'utf-8)
 (setq sentence-end-double-space nil)
 
+;; Disable transpose-word, the notorious troublemaker.
+(global-unset-key (kbd "M-t"))
+
 ;; GPG/authinfo setup
 (setq epa-pinentry-mode 'loopback)
 (setq auth-sources '("~/.authinfo.gpg" "~/.authinfo"))
