@@ -1,5 +1,5 @@
 # key: ;tt
-# name: table-test
+# name: tt
 # --
 input := map[string]struct{
 		input $1

@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
-# name: err-test
-# key: ;errt
+# name: terr
+# key: ;terr
 # --
 if err != nil {
 	t.Fatalf("$0: %s", err)
