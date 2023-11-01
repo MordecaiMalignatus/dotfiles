@@ -529,7 +529,7 @@ If none exists,create a new test file."
 (use-package go-mode
   :ensure t
   :hook (go-mode . lsp)
-  :bind ("M-l f t" . 'az/golang-go-to-test-file))
+  :bind ("C-c f t" . 'az/golang-go-to-test-file))
 
 (use-package flycheck-golangci-lint
   :ensure t
