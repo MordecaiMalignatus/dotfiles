@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: theaders
+# key: ;theaders
+# --
+import (
+	"testing"
+
+	"github.com/google/go-cmp/cmp"
+)
