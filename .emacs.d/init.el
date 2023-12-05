@@ -360,6 +360,11 @@ https://sourceforge.net/projects/wordlist/files/speller/2020.12.07/"
   (add-hook 'after-init-hook 'global-company-mode))
 
 ;; YASnippets.
+(defun az/go-to-language-snippets ()
+  "Opens the folder in dotfiles for the snippets of `major-mode'."
+  (interactive)
+  (dired (concat (car yas-snippet-dirs) "/" (symbol-name major-mode))))
+
 (use-package yasnippet
   :ensure t
   :config
