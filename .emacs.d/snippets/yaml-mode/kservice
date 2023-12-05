@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: kservice
+# key: ;kservice
+# --
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: $1-service
+spec:
+  selector:
+    app.kubernetes.io/name: $1
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080

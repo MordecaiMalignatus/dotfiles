@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: kpod
+# key: ;kpod
+# --
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: $1
+  labels:
+    app.kubernetes.io/name: $1
+spec:
+  containers:
+  - name: $1
+    image: $2
+    ports:
+      - containerPort: 8080
+        name: $1-port
