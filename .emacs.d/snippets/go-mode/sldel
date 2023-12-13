@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: sldel
+# key: ;sldel
+# --
+append(${1:slice}[:${2:index}], $1[$2+1:]...)

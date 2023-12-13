@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: golang-ci
+# key: ;goci
+# --
+# Additional config see here: https://golangci-lint.run/usage/linters/#revive
+linters:
+   enable:
+     - revive
+   rules:
+     revive:
+       enable-all-rules: true
