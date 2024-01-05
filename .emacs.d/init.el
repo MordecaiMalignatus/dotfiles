@@ -625,6 +625,7 @@ If none exists,create a new test file."
 (scroll-bar-mode 0)
 (setq inhibit-splash-screen t)
 (setq inhibit-startup-message t)
+(setq line-spacing 0.1)
 
 (use-package mood-line
   :ensure nil
@@ -654,7 +655,7 @@ If none exists,create a new test file."
 (when (string= system-type 'gnu/linux)
   (progn
      ;; (set-face-attribute 'default nil :font "PragmataPro-10")
-    (set-face-attribute 'default nil :font "FiraCode-10")))
+    (set-face-attribute 'default nil :font "FiraCode-15")))
 
 ;; Enable/use narrow/widen.
 (global-set-key (kbd "C-x w") 'widen)
