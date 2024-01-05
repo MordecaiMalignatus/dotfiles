@@ -50,3 +50,4 @@ ranger/history
 /.emacs.d/eln-cache/
 /.emacs.d/quelpa/
 /home-manager/userdata.nix
+/.emacs.d/*.sqlite
