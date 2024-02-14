@@ -15,18 +15,14 @@
   "Create and bind work transient tree."
   (transient-define-prefix work-docs-transient ()
     [[ "Local Documents"
-       ("i" "open interviewing.org" (lambda () (interactive) (find-file "~/grimoire/interviewing.org")))]
+       ("i" "open interviewing.org" (lambda () (interactive) (find-file "~/grimoire/interviewing.org")))
+       ("j" "Open jumpsheet" (lambda () (interactive) (find-file "~/grimoire/stripe-jumpsheet.org")))]
      ["Links"
       ("c" "Open GCal" (lambda () (interactive) (az/open-link "https://calendar.google.com")))
-      ("g" "Open Github" (lambda () (interactive) (az/open-link "https://github.com/notifications")))
       ("h" "Open Honeycomb" (lambda () (interactive) (az/open-link "https://ui.honeycomb.io")))
       ("m" "Open GMail" (lambda () (interactive) (az/open-link "https://mail.google.com")))]
      ["Repositories"
-      ("s" "Open tmc-stack" (lambda () (interactive) (az/open-link "https://github.com/terramate-io/tmc-stack")))
-      ("g" "Open mineiros-io/iac-gcloud" (lambda () (interactive) (az/open-link "https://github.com/mineiros-io/iac-gcloud")))
-      ("t" "Open terramate" (lambda () (interactive) (az/open-link "https://github.com/terramate-io/terramate")))
-      ("e" "Open engineering-docs" (lambda () (interactive) (az/open-link "https://github.com/terramate-io/engineering-documentation")))
-      ("l" "Open engineering-leadership-stuff" (lambda () (interactive) (az/open-link "https://github.com/mordecaimalignatus/engineering-leadership-stuff")))]])
+      ("g" "Open gocode" (lambda () (interactive) (az/open-link "https://go/code")))]])
 
   (global-set-key (kbd "M-p") 'work-docs-transient))
 
@@ -34,9 +30,9 @@
 (defun az/setup-sql-mode ()
   "Configure SQL modes for use."
   (setq sql-connection-alist '((pgsql-localhost (sql-product 'postgres)
-                                                (sql-user "wi-stack-service-prd@terramate-gke-prd.iam")
-                                                (sql-database "cloud")
-                                                (sql-server "localhost")
+                                                (sql-user "")
+                                                (sql-database "")
+                                                (sql-server "")
                                                 (sql-port 9000)))))
 
 (progn
