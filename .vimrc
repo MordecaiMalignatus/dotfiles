@@ -4,14 +4,14 @@ set shell=/bin/bash " Vim chokes on fish.
 set nocompatible    " be iMproved, required
 
 " Setting up Vundle - the vim plugin bundler
-let vundle_readme=expand('~/.vim/bundle/vundle/README.md')
+let vundle_readme=expand('~/.vim/vundle/README.md')
 if !filereadable(vundle_readme)
-    silent !mkdir -p ~/.vim/bundle
-    silent !git clone https://github.com/VundleVim/Vundle.vim ~/.vim/bundle/vundle
+    silent !mkdir -p ~/.vim/
+    silent !git clone https://github.com/VundleVim/Vundle.vim ~/.vim/vundle
 endif
 
 " set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
+set rtp+=~/.vim/vundle/
 
 filetype off                  " required
 call vundle#begin()
@@ -27,9 +27,6 @@ Plugin 'tpope/vim-surround'               " Makes changing delimiters far less o
 Plugin 'tpope/vim-dispatch'               " non-focus stealing builds/tests hooray!
 Plugin 'tpope/vim-commentary'             " Makes commenting not a pain.
 Plugin 'tpope/vim-endwise'                " automatically adds 'end' and similar to certain languages.
-
-" Themes and colorschemes.
-Plugin 'flazz/vim-colorschemes'           " Giant-ass collection because why not.
 
 call vundle#end()                         " required
 filetype plugin indent on                 " required
