@@ -190,6 +190,9 @@
 (use-package dockerfile-mode
   :ensure t)
 
+(use-package protobuf-mode
+  :ensure t)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Document management.
 (use-package org
