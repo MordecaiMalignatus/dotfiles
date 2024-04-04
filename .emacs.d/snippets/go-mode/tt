@@ -9,8 +9,8 @@ input := map[string]struct{
 }
 
 for name, tc := range input {
-        t.Run(name, func(t *Testing.t) {
-        	res := $0
+        t.Run(name, func(t *testing.T) {
+        	res := nil // $0
                 diff := cmp.Diff(tc.expected, res)
 
 		if diff != "" {
