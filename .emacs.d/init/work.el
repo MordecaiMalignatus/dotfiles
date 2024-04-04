@@ -16,6 +16,7 @@
   (transient-define-prefix work-docs-transient ()
     [[ "Local Documents"
        ("i" "open interviewing.org" (lambda () (interactive) (find-file "~/grimoire/interviewing.org")))
+       ("s" "open stripe.org" (lambda () (interactive) (find-file "~/grimoire/stripe.org.org")))
        ("j" "Open jumpsheet" (lambda () (interactive) (find-file "~/grimoire/stripe-jumpsheet.org")))]
      ["Links"
       ("c" "Open GCal" (lambda () (interactive) (az/open-link "https://calendar.google.com")))
