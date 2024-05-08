@@ -16,7 +16,7 @@
   (transient-define-prefix work-docs-transient ()
     [[ "Local Documents"
        ("i" "open interviewing.org" (lambda () (interactive) (find-file "~/grimoire/interviewing.org")))
-       ("s" "open stripe.org" (lambda () (interactive) (find-file "~/grimoire/stripe.org.org")))
+       ("s" "open stripe.org" (lambda () (interactive) (find-file "~/grimoire/stripe.org")))
        ("j" "Open jumpsheet" (lambda () (interactive) (find-file "~/grimoire/stripe-jumpsheet.org")))]
      ["Links"
       ("c" "Open GCal" (lambda () (interactive) (az/open-link "https://calendar.google.com")))
@@ -35,6 +35,12 @@
                                                 (sql-database "")
                                                 (sql-server "")
                                                 (sql-port 9000)))))
+
+(with-eval-after-load 'lsp-mode
+  (lsp-register-client
+   (make-lsp-client :new-connection (lsp-stdio-connection '("pay" "exec" "scripts/bin/typecheck" "--lsp"))
+                    :activation-fn (lsp-activate-on "ruby")
+                    :server-id 'payserver-lsp)))
 
 (progn
   (az/work-deft)
