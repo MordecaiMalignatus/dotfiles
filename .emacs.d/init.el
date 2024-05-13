@@ -290,10 +290,17 @@ sense, run `(ispell-call-process ispell-program-name nil t nil
 Emacs' perspective.
 
 You can find the dictionaries here (yes, it's sourceforge):
-https://sourceforge.net/projects/wordlist/files/speller/2020.12.07/"
+https://sourceforge.net/projects/wordlist/files/speller/2020.12.07/
+
+The full process:
+1. Install hunspell
+2. Grab dictionaries from Sourceforge
+3. Move contained .dic and .aff file into ~/Library/Spelling
+4. Rename to `en_GB.aff' and `en_GB.dic'
+5. Re-run this function."
   (interactive)
   (setq ispell-program-name "hunspell")
-  (setq ispell-hunspell-dict-paths-alist '(("en_GB" "/Library/Spelling/en_GB.aff")))
+  (setq ispell-hunspell-dict-paths-alist '(("en_GB" "~/Library/Spelling/en_GB.aff")))
   (setq hunspell-default-dict "en_GB")
   (setq ispell-local-dictionary "en_GB")
   (setq ispell-local-dictionary-alist
