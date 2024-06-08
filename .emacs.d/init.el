@@ -161,6 +161,7 @@
   :ensure t
   :bind (("C-x g" . 'magit-status)
 	 ("C-x M-g" . 'magit-dispatch)))
+
 (use-package forge
   :after magit
   :ensure t
@@ -240,7 +241,10 @@
 (use-package markdown-mode
   :ensure t
   :mode ("README\\.md\\'" . gfm-mode)
-  :init (setq markdown-command "multimarkdown"))
+  :init (setq markdown-command "multimarkdown")
+  :config
+  ;; Make sure we have it available when writing blogposts.
+  (define-key markdown-mode-map (kbd "C-c ]") 'az/insert-formatted-citation))
 
 (defun az/edit-bibliography ()
   "Edit the global bibliography file."
@@ -266,8 +270,6 @@
   (interactive)
   (insert (bibtex-completion-apa-format-reference (org-ref-read-key))))
 
-;; Make sure we have it available when writing blogposts.
-(define-key markdown-mode-map (kbd "C-c ]") 'az/insert-formatted-citation)
 
 
 ;; Unbind stuff from org that clogs up my free keys.
@@ -399,7 +401,8 @@ The full process:
   (add-to-list 'exec-path "~/go/bin")
   (add-to-list 'exec-path "~/.asdf/shims")
   (add-to-list 'exec-path "~/.local/bin")
-  :commands lsp
+  (add-to-list 'exec-path "~/.rbenv/shims")
+q  :commands lsp
   :defines (lsp-completion-provider
             lsp-prefer-flymake
             lsp-rust-server
@@ -427,7 +430,9 @@ The full process:
   (setq lsp-rust-server 'rust-analyzer)
   (setq lsp-rust-clippy-preference 'on)
   (setq lsp-rust-analyzer-cargo-watch-command "clippy")
-
+  ;; Ruby Config
+  ;; (setq lsp-disabled-clients '(rubocop-ls))
+  (setq lsp-sorbet-use-bundler t)
   ;; Go Config
   (setq lsp-go-use-gofumpt t))
 
@@ -654,7 +659,7 @@ If none exists,create a new test file."
   (progn
     (setq mac-command-modifier 'meta)
     (az/setup-darwin-spellchecking)
-    (set-face-attribute 'default nil :font "PragmataPro-15")
+    (set-face-attribute 'default nil :font "PragmataPro-13")
     (set-frame-parameter nil 'fullscreen 'fullboth)
     (setq ivy-use-selectable-prompt t)
     (global-set-key (kbd "<backtab>") #'company-complete)))
