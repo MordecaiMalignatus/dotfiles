@@ -29,6 +29,7 @@ set -gx LANGUAGE "en_US.UTF-8"
 
 # Aliases
 alias k=kubectl
+alias exa=eza # Legacy compat for old scripts.
 
 fish_add_path ~/.cargo/bin
 fish_add_path ~/dotfiles/scripts
