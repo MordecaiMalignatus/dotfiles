@@ -18,9 +18,9 @@ if work-machine-p
     source ~/.config/fish/work.fish
 end
 
-if test -e ~/.ssh/id_ed25519
-    ssh-add ~/.ssh/id_ed25519
-end
+# if test -e ~/.ssh/id_ed25519
+#     ssh-add ~/.ssh/id_ed25519
+# end
 
 # Fix locales because locales always suck
 set -gx LC_ALL "en_US.UTF-8"
