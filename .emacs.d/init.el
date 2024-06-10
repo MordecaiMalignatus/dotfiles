@@ -753,6 +753,15 @@ Copied from [[https://emacsredux.com/blog/2013/05/22/smarter-navigation-to-the-b
 (global-set-key (kbd "C-c *") 'az/search-at-point)
 (global-set-key (kbd "C-c C-q") 'bury-buffer)
 
+(defun az/research-tasks ()
+  "Open a buffer listing all research tasks that need to be done."
+  (interactive)
+  (switch-to-buffer "*Research TODOs*")
+  (erase-buffer)
+  (save-excursion (insert (shell-command-to-string "rg -A 3 -ne \"TODO(\(sar\))?\" ~/grimoire/")))
+  (flush-lines "/\@archive/")
+  (flush-lines "^--$"))
+
 ;; Imenu configuration
 (global-set-key (kbd "C-'") 'imenu)
 (setq imenu-auto-rescan t)
