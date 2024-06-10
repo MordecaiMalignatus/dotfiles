@@ -760,6 +760,9 @@ Copied from [[https://emacsredux.com/blog/2013/05/22/smarter-navigation-to-the-b
   (erase-buffer)
   (save-excursion (insert (shell-command-to-string "rg -A 3 -ne \"TODO(\(sar\))?\" ~/grimoire/")))
   (flush-lines "/\@archive/")
+  ;; rg uses -- as separator between findings when used in non-tty mode, when I
+  ;; drop the archive links the separators remain. Therefore, needing to drop
+  ;; the separators.
   (flush-lines "^--$"))
 
 ;; Imenu configuration

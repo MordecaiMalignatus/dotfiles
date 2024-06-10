@@ -24,21 +24,22 @@
       ("h" "Open Honeycomb" (lambda () (interactive) (az/open-link "https://ui.honeycomb.io")))
       ("m" "Open GMail" (lambda () (interactive) (az/open-link "https://mail.google.com")))]
      ["Repositories"
-      ("g" "Open gocode" (lambda () (interactive) (az/open-link "https://go/code")))]])
+      ("g" "Open gocode" (lambda () (interactive) (az/open-link "https://go/code")))
+      ("p" "Open pay-server" (lambda () (interactive) (az/open-link "https://go/pay")))]])
 
   (global-set-key (kbd "M-p") 'work-docs-transient))
 
 (defun az/append-to-work-log (event)
   "Append an EVENT to the work log."
-  (interactive "sEvent to log:")
+  (interactive "sEvent to log: ")
   (if (eq nil (get-buffer "*work-log*"))
       (with-current-buffer (find-file-noselect "~/grimoire/work-log.org")
         (rename-buffer "*work-log*"))
   (with-current-buffer "*work-log*"
     (goto-char (point-max))
-    (insert (concat (format-time-string "%F %T") " - " event "\n")))))
+    (insert (concat "- " (format-time-string "%F %T") " - " event "\n"))
+    (org-fill-paragraph))))
 
-(global-set-key (kbd "M-'") 'az/append-to-work-log)
 
 ;; https://emacsredux.com/blog/2013/06/13/using-emacs-as-a-database-client/
 (defun az/setup-sql-mode ()
@@ -58,7 +59,8 @@
 (progn
   (az/work-deft)
   (az/setup-work-transient)
-  (az/setup-sql-mode))
+  ;; (az/setup-sql-mode)
+  (global-set-key (kbd "M-'") 'az/append-to-work-log))
 
 (provide 'work)
 ;;; work.el ends here.
