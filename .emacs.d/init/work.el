@@ -17,7 +17,8 @@
     [[ "Local Documents"
        ("i" "open interviewing.org" (lambda () (interactive) (find-file "~/grimoire/interviewing.org")))
        ("s" "open stripe.org" (lambda () (interactive) (find-file "~/grimoire/stripe.org")))
-       ("j" "Open jumpsheet" (lambda () (interactive) (find-file "~/grimoire/stripe-jumpsheet.org")))]
+       ("j" "Open jumpsheet" (lambda () (interactive) (find-file "~/grimoire/stripe-jumpsheet.org")))
+       ("l" "Open work-log.org" (lambda () (interactive) (find-file "~/grimoire/work-log.org")))]
      ["Links"
       ("c" "Open GCal" (lambda () (interactive) (az/open-link "https://calendar.google.com")))
       ("h" "Open Honeycomb" (lambda () (interactive) (az/open-link "https://ui.honeycomb.io")))
@@ -26,6 +27,18 @@
       ("g" "Open gocode" (lambda () (interactive) (az/open-link "https://go/code")))]])
 
   (global-set-key (kbd "M-p") 'work-docs-transient))
+
+(defun az/append-to-work-log (event)
+  "Append an EVENT to the work log."
+  (interactive "sEvent to log:")
+  (if (eq nil (get-buffer "*work-log*"))
+      (with-current-buffer (find-file-noselect "~/grimoire/work-log.org")
+        (rename-buffer "*work-log*"))
+  (with-current-buffer "*work-log*"
+    (goto-char (point-max))
+    (insert (concat (format-time-string "%F %T") " - " event "\n")))))
+
+(global-set-key (kbd "M-'") 'az/append-to-work-log)
 
 ;; https://emacsredux.com/blog/2013/06/13/using-emacs-as-a-database-client/
 (defun az/setup-sql-mode ()
