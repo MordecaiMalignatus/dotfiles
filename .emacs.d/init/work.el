@@ -37,8 +37,9 @@
         (rename-buffer "*work-log*"))
   (with-current-buffer "*work-log*"
     (goto-char (point-max))
-    (insert (concat "- " (format-time-string "%F %T") " - " event "\n"))
-    (org-fill-paragraph))))
+    (insert (concat "- *" (format-time-string "%F %T") "* - " event "\n"))
+    (org-fill-paragraph)
+    (save-buffer))))
 
 
 ;; https://emacsredux.com/blog/2013/06/13/using-emacs-as-a-database-client/
