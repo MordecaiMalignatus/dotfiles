@@ -402,7 +402,7 @@ The full process:
   (add-to-list 'exec-path "~/.asdf/shims")
   (add-to-list 'exec-path "~/.local/bin")
   (add-to-list 'exec-path "~/.rbenv/shims")
-q  :commands lsp
+  :commands lsp
   :defines (lsp-completion-provider
             lsp-prefer-flymake
             lsp-rust-server
