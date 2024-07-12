@@ -5,6 +5,9 @@ function fetch-work-repos
       echo (set_color green) "updating $dir" (set_color normal)
       pushd $dir
       git fetch -a --prune
+      git checkout master
+      git pull
+      git switch -
       popd
     else
       echo "skipping $dir"
