@@ -1,0 +1,26 @@
+# -*- mode: snippet -*-
+# name: german-recipe
+# key: ;recipe-de
+# --
+\\documentclass[10pt]{article}
+
+\\usepackage[T1]{fontenc}
+
+% Cheat Sheet:
+% {\\ss} = sharp s
+% {\\"a} = Umlaut.
+
+\\begin{document}
+
+\\section*{Recipe Title Goes Here}
+
+\\subsection*{Zutaten}
+\\begin{itemize}
+\\item
+\\end{itemize}
+
+\\subsection*{Rezept}
+\\begin{enumerate}
+\\item
+\\end{enumerate}
+\\end{document}
