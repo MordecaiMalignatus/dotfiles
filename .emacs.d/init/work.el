@@ -5,7 +5,6 @@
 ;;; Code:
 (require 'custom-deft)
 
-
 (defun az/work-deft ()
   "Override standard bindings set in custom-deft.el with work-appropriate settings."
   (setq deft-directory "~/grimoire")
