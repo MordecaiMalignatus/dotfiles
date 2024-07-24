@@ -810,6 +810,13 @@ Copied from [[https://emacsredux.com/blog/2013/05/22/smarter-navigation-to-the-b
          (az/open-link "https://pinboard.in/u:MordecaiMalignatus/unread/")))
       ]]))
 
+(defun az/dired-open-externally ()
+  "Call `open' on file under point."
+  (interactive)
+  (call-process "open" nil nil nil "-a VLC" (dired-get-filename nil nil)))
+
+(define-key dired-mode-map (kbd "e") 'az/dired-open-externally)
+
 (defun az/is-work-p ()
   "Determine if the current machine is a work machine or not."
   (file-exists-p "~/.work-machine"))
