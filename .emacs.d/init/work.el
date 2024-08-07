@@ -36,9 +36,9 @@
         (rename-buffer "*work-log*"))
   (with-current-buffer "*work-log*"
     (goto-char (point-max))
-    (if (not (s-contains? (concat "** " (format-time-string "%F") "\n")
+    (if (not (s-contains? (concat "**** " (format-time-string "%F") "\n")
                           (buffer-substring-no-properties (point-min) (point-max))))
-        (insert (concat "\n** " (format-time-string "%F") "\n")))
+        (insert (concat "\n**** " (format-time-string "%F") "\n")))
     (insert (concat "- *" (format-time-string "%F %T") "* - " event "\n"))
     (org-fill-paragraph)
     (save-buffer))))
@@ -53,11 +53,11 @@
                                                 (sql-server "")
                                                 (sql-port 9000)))))
 
-(with-eval-after-load 'lsp-mode
-  (lsp-register-client
-   (make-lsp-client :new-connection (lsp-stdio-connection '("pay" "exec" "scripts/bin/typecheck" "--lsp"))
-                    :activation-fn (lsp-activate-on "ruby")
-                    :server-id 'payserver-lsp)))
+;; (with-eval-after-load 'lsp-mode
+;;   (lsp-register-client
+;;    (make-lsp-client :new-connection (lsp-stdio-connection '("pay" "exec" "scripts/bin/typecheck" "--lsp"))
+;;                     :activation-fn (lsp-activate-on "ruby")
+;;                     :server-id 'payserver-lsp)))
 
 (progn
   (az/work-deft)

@@ -16,6 +16,7 @@ end
 
 if work-machine-p
     source ~/.config/fish/work.fish
+    alias git=/usr/local/bin/stripe-git
 end
 
 # if test -e ~/.ssh/id_ed25519
