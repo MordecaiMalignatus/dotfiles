@@ -4,6 +4,9 @@ source (rbenv init -|psub)
 source ~/stripe/space-commander/bin/sc-env-activate.fish
 functions -e fish_right_prompt
 
+set -gx CMH "us-east-2"
+set -gx NORTHWEST "us-west-2"
+
 ## Work sources
 fish_add_path "/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 fish_add_path "$HOME/.rbenv/shims"
