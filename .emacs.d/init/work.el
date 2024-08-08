@@ -15,16 +15,11 @@
   (transient-define-prefix work-docs-transient ()
     [[ "Local Documents"
        ("i" "open interviewing.org" (lambda () (interactive) (find-file "~/grimoire/interviewing.org")))
-       ("s" "open stripe.org" (lambda () (interactive) (find-file "~/grimoire/stripe.org")))
-       ("j" "Open jumpsheet" (lambda () (interactive) (find-file "~/grimoire/stripe-jumpsheet.org")))
        ("l" "Open work-log.org" (lambda () (interactive) (find-file "~/grimoire/work-log.org")))]
      ["Links"
       ("c" "Open GCal" (lambda () (interactive) (az/open-link "https://calendar.google.com")))
-      ("h" "Open Honeycomb" (lambda () (interactive) (az/open-link "https://ui.honeycomb.io")))
       ("m" "Open GMail" (lambda () (interactive) (az/open-link "https://mail.google.com")))]
-     ["Repositories"
-      ("g" "Open gocode" (lambda () (interactive) (az/open-link "https://go/code")))
-      ("p" "Open pay-server" (lambda () (interactive) (az/open-link "https://go/pay")))]])
+     ["Repositories"]])
 
   (global-set-key (kbd "M-p") 'work-docs-transient))
 
@@ -48,16 +43,10 @@
 (defun az/setup-sql-mode ()
   "Configure SQL modes for use."
   (setq sql-connection-alist '((pgsql-localhost (sql-product 'postgres)
-                                                (sql-user "")
-                                                (sql-database "")
-                                                (sql-server "")
+                                                (sql-user "TODO: FIXME")
+                                                (sql-database "cloud")
+                                                (sql-server "localhost")
                                                 (sql-port 9000)))))
-
-;; (with-eval-after-load 'lsp-mode
-;;   (lsp-register-client
-;;    (make-lsp-client :new-connection (lsp-stdio-connection '("pay" "exec" "scripts/bin/typecheck" "--lsp"))
-;;                     :activation-fn (lsp-activate-on "ruby")
-;;                     :server-id 'payserver-lsp)))
 
 (progn
   (az/work-deft)
