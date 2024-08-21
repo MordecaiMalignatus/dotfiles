@@ -397,7 +397,6 @@ The full process:
 (use-package lsp-mode
   :ensure t
   :init
-  (add-to-list 'exec-path "~/.local/elixir-ls/")
   (add-to-list 'exec-path "~/go/bin")
   (add-to-list 'exec-path "~/.asdf/shims")
   (add-to-list 'exec-path "~/.local/bin")
@@ -434,7 +433,9 @@ The full process:
   ;; (setq lsp-disabled-clients '(rubocop-ls))
   (setq lsp-sorbet-use-bundler t)
   ;; Go Config
-  (setq lsp-go-use-gofumpt t))
+  (setq lsp-go-use-gofumpt t)
+  ;; Elixir Config
+  (setq lsp-elixir-ls-version "v0.23.0"))
 
 
 (use-package lsp-ui
