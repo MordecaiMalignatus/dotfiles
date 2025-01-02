@@ -427,6 +427,7 @@ The full process:
   (setq lsp-prefer-flymake nil)
   ;; Rust Config
   (setq lsp-rust-server 'rust-analyzer)
+  (setq rustic-lsp-server 'rust-analyzer)
   (setq lsp-rust-clippy-preference 'on)
   (setq lsp-rust-analyzer-cargo-watch-command "clippy")
   ;; Ruby Config
@@ -533,6 +534,7 @@ The full process:
 ;; Rust Settings
 (use-package rustic
   :ensure t
+  :mode ("\\.rs\\'" . 'rustic-mode)
   :config
   (setq company-tooltip-align-annotations t))
 
