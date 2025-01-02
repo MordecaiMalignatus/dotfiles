@@ -6,11 +6,16 @@ end)
 
 -- Terminal automation
 hs.hotkey.bind({"shift", "ctrl"}, "D", function()
+    -- local spawnNewTerminal = [[
+    --     tell application "Terminal"
+    --       do script ""
+    --       activate
+    --     end tell
+    -- ]]
     local spawnNewTerminal = [[
-        tell application "Terminal"
-          do script ""
-          activate
-        end tell
+      tell application "Ghostty"
+        activate
+      end tell
     ]]
     local success, object, description = hs.osascript.applescript(spawnNewTerminal)
     if not success then
