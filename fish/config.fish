@@ -9,11 +9,6 @@ if type -q home-manager
     any-nix-shell fish --info-right | source
 end
 
-status --is-interactive; and rbenv init - fish | source
-if type -q gcloud
-    source /opt/homebrew/share/google-cloud-sdk/path.fish.inc
-end
-
 if work-machine-p
     source ~/.config/fish/work.fish
     alias git=/usr/local/bin/stripe-git
