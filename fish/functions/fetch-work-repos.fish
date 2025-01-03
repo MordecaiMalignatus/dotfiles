@@ -1,6 +1,6 @@
 # Defined in /tmp/fish.Pf6slL/fetch-work-repos.fish @ line 2
 function fetch-work-repos
-  for dir in ~/stripe/*
+  for dir in ~/src/*
     if test -d $dir 
       echo (set_color green) "updating $dir" (set_color normal)
       pushd $dir
