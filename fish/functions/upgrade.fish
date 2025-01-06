@@ -19,4 +19,9 @@ function upgrade
     popd
 
     sync-grimoire
+
+    if work-machine-p
+        print_green "Logging into AWS SSO..."
+        aws sso login
+    end
 end
