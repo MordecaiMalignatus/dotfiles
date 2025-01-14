@@ -33,6 +33,14 @@ fish_add_path ~/.local/bin
 fish_add_path ~/.local/elixir-ls
 fish_add_path /opt/homebrew/bin
 
+# Puppet may or may not be installed, it's a very work thing.
+if test -d /opt/puppetlabs/pdk
+        fish_add_path /opt/puppetlabs/pdk/bin
+end
+
+if test -d /opt/puppetlabs/bin
+        fish_add_path /opt/puppetlabs/bin
+end
 
 # BEGIN opam configuration
 # This is useful if you're using opam as it adds:
