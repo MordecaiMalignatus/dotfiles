@@ -399,6 +399,7 @@ The full process:
   :init
   (add-to-list 'exec-path "~/go/bin")
   (add-to-list 'exec-path "~/.asdf/shims")
+  (add-to-list 'exec-path "~/.local/share/mise/shims")
   (add-to-list 'exec-path "~/.local/bin")
   (add-to-list 'exec-path "~/.rbenv/shims")
   :commands lsp
@@ -425,14 +426,15 @@ The full process:
   (setq lsp-completion-provider :capf)
   (setq lsp-auto-configure t)
   (setq lsp-prefer-flymake nil)
+  ;; Bash Config
+  ;; Reminder: the brew formula for the bash LSP is named `bash-language-server'.
   ;; Rust Config
   (setq lsp-rust-server 'rust-analyzer)
   (setq rustic-lsp-server 'rust-analyzer)
   (setq lsp-rust-clippy-preference 'on)
   (setq lsp-rust-analyzer-cargo-watch-command "clippy")
   ;; Ruby Config
-  ;; (setq lsp-disabled-clients '(rubocop-ls))
-  (setq lsp-sorbet-use-bundler t)
+  ;; Server installation: gem install ruby-lsp.
   ;; Go Config
   (setq lsp-go-use-gofumpt t)
   ;; Elixir Config
