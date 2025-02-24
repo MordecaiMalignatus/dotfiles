@@ -669,12 +669,22 @@ If none exists,create a new test file."
     (setq ivy-use-selectable-prompt t)
     (global-set-key (kbd "<backtab>") #'company-complete)))
 
+(defvar az/font-size-min 13)
+(defvar az/font-size-max 17)
+(defvar az/font "PragmataPro")
+(defun az/toggle-font-size ()
+  "Toggle font size between `az/font-size-min' and `az/font-size-max'."
+  (interactive)
+  (if (eq (font-get (face-attribute 'default :font) :size) az/font-size-min)
+      (set-face-attribute 'default nil :font (format "%s-%d" az/font az/font-size-max))
+    (set-face-attribute 'default nil :font (format "%s-%d" az/font az/font-size-min))))
+
 ;; Font rendering in X11 is fucked -- spaces in TTF files will be rendered
 ;; unevenly. FiraCode is an OTF font, hence the rendering is fine. It works on
 ;; OSX, which is why it's used there.
 (when (string= system-type 'gnu/linux)
   (progn
-     ;; (set-face-attribute 'default nil :font "PragmataPro-10")
+    ;; (set-face-attribute 'default nil :font "PragmataPro-10")
     (set-face-attribute 'default nil :font "FiraCode-15")))
 
 ;; Enable/use narrow/widen.
