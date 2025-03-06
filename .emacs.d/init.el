@@ -139,10 +139,12 @@
 
 ;; Ivy, auto-completion and fuzzy finder.
 (use-package ivy
+  :commands ivy-define-key
   :ensure t
   :bind (("C-z" . 'ivy-switch-buffer))
   :config
   (ivy-mode 1)
+  (setq ivy-use-selectable-prompt t)
   (setq ivy-use-virtual-buffers t)
   (setq enable-recursive-minibuffers t))
 
@@ -664,9 +666,11 @@ If none exists,create a new test file."
   (progn
     (setq mac-command-modifier 'meta)
     (az/setup-darwin-spellchecking)
+    ;; on macOS, bind C-Δ to be immediate done. This is usually bound to C-M-j,
+    ;; but that is swapping windows to my usual mac setup.
+    (ivy-define-key ivy-mode-map "C-Δ" 'ivy-immediate-done)
     (set-face-attribute 'default nil :font "PragmataPro-13")
     (set-frame-parameter nil 'fullscreen 'fullboth)
-    (setq ivy-use-selectable-prompt t)
     (global-set-key (kbd "<backtab>") #'company-complete)))
 
 (defvar az/font-size-min 13)
