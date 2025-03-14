@@ -350,6 +350,7 @@ The full process:
   :config
   (projectile-mode +1)
   (setq projectile-completion-system 'ivy)
+  (setq projectile-enable-caching t)
   (setq projectile-switch-project-action #'magit-status))
 
 ;; Flycheck configuration
@@ -783,6 +784,14 @@ Copied from [[https://emacsredux.com/blog/2013/05/22/smarter-navigation-to-the-b
   ;; drop the archive links the separators remain. Therefore, needing to drop
   ;; the separators.
   (flush-lines "^--$"))
+
+(defun az/work-tasks ()
+  "Open a buffer listing all `TODO(sar)' tasks in the work files."
+  (interactive)
+  (switch-to-buffer "*Work TODOs*")
+  (erase-buffer)
+  (save-excursion
+    (insert (shell-command-to-string "rg -A 2 -ne \"TODO\\(sar\\):\" ~/src/"))))
 
 ;; Imenu configuration
 (global-set-key (kbd "C-'") 'imenu)
