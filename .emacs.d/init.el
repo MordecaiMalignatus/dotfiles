@@ -667,9 +667,6 @@ If none exists,create a new test file."
   (progn
     (setq mac-command-modifier 'meta)
     (az/setup-darwin-spellchecking)
-    ;; on macOS, bind C-Δ to be immediate done. This is usually bound to C-M-j,
-    ;; but that is swapping windows to my usual mac setup.
-    (ivy-define-key ivy-mode-map "C-Δ" 'ivy-immediate-done)
     (set-face-attribute 'default nil :font "PragmataPro-13")
     (set-frame-parameter nil 'fullscreen 'fullboth)
     (global-set-key (kbd "<backtab>") #'company-complete)))
