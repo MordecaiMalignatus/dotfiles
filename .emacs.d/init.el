@@ -339,12 +339,6 @@ The full process:
 (use-package yaml-mode
   :ensure t)
 
-(use-package chatgpt-shell
-  :ensure t
-  :config
-  (setq chatgpt-shell-openai-key
-        (auth-source-pick-first-password :host "api.openai.com")))
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Projectile config
 (use-package projectile
