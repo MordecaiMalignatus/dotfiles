@@ -36,6 +36,9 @@
 (set-language-environment   'utf-8)
 (setq sentence-end-double-space nil)
 
+(require 're-builder)
+(setq reb-re-syntax 'string)
+
 ;; Disable transpose-word, the notorious troublemaker.
 (global-unset-key (kbd "M-t"))
 
