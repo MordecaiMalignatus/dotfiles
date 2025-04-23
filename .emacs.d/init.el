@@ -645,7 +645,7 @@ If none exists,create a new test file."
 (scroll-bar-mode 0)
 (setq inhibit-splash-screen t)
 (setq inhibit-startup-message t)
-(setq line-spacing 0.1)
+(setq line-spacing 0.2)
 
 (use-package mood-line
   :ensure nil
@@ -826,11 +826,7 @@ Copied from [[https://emacsredux.com/blog/2013/05/22/smarter-navigation-to-the-b
       ("f" "Open file-archive.org"
        (lambda () (interactive)
          (find-file "~/Sync/Reference/Archive/file-archive.org")))]
-     ["Links"
-      ("u" "Open Pinboard Unread"
-       (lambda () (interactive)
-         (az/open-link "https://pinboard.in/u:MordecaiMalignatus/unread/")))
-      ]]))
+     ]))
 
 (defun az/dired-open-externally ()
   "Call `open' on file under point."
