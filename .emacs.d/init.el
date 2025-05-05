@@ -645,7 +645,6 @@ If none exists,create a new test file."
 (scroll-bar-mode 0)
 (setq inhibit-splash-screen t)
 (setq inhibit-startup-message t)
-(setq line-spacing 0.2)
 
 (use-package mood-line
   :ensure nil
@@ -668,6 +667,7 @@ If none exists,create a new test file."
     (set-frame-parameter nil 'fullscreen 'fullboth)
     (global-set-key (kbd "<backtab>") #'company-complete)))
 
+(setq line-spacing 0.2)
 (defvar az/font-size-min 13)
 (defvar az/font-size-max 17)
 (defvar az/font "PragmataPro")
@@ -785,7 +785,7 @@ Copied from [[https://emacsredux.com/blog/2013/05/22/smarter-navigation-to-the-b
   (switch-to-buffer "*Work TODOs*")
   (erase-buffer)
   (save-excursion
-    (insert (shell-command-to-string "rg -A 2 -ne \"TODO\\(sar\\):\" ~/src/"))))
+    (insert (shell-command-to-string "rg -A 3 -ne \"TODO\\(sar\\):\" ~/src/"))))
 
 ;; Imenu configuration
 (global-set-key (kbd "C-'") 'imenu)
