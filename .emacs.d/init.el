@@ -667,10 +667,12 @@ If none exists,create a new test file."
     (set-frame-parameter nil 'fullscreen 'fullboth)
     (global-set-key (kbd "<backtab>") #'company-complete)))
 
-(setq line-spacing 0.2)
+(setq line-spacing 0.3)
 (defvar az/font-size-min 13)
 (defvar az/font-size-max 17)
 (defvar az/font "PragmataPro")
+;; (defvar az/font "Kelmscott Mono")
+(defvar az/font-weight 100)
 (defun az/toggle-font-size ()
   "Toggle font size between `az/font-size-min' and `az/font-size-max'."
   (interactive)
