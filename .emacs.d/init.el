@@ -667,7 +667,7 @@ If none exists,create a new test file."
     (set-frame-parameter nil 'fullscreen 'fullboth)
     (global-set-key (kbd "<backtab>") #'company-complete)))
 
-(setq line-spacing 0.3)
+(setq-default line-spacing 0.3)
 (defvar az/font-size-min 13)
 (defvar az/font-size-max 17)
 (defvar az/font "PragmataPro")
