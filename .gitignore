@@ -7,6 +7,7 @@
 .emacs.d/var/
 .emacs.d/.#recentf
 .emacs.d/#recentf#
+/fish/work.fish
 /fish/fishd.a0999b028ce9
 /fish/functions/test.py
 /fish/functions/z.awk

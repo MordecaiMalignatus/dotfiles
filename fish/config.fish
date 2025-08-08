@@ -10,7 +10,7 @@ if type -q home-manager
 end
 
 if work-machine-p
-
+    source ~/dotfiles/fish/work.fish
 end
 
 # if test -e ~/.ssh/id_ed25519
@@ -32,15 +32,6 @@ fish_add_path ~/go/bin/
 fish_add_path ~/.local/bin
 fish_add_path ~/.local/elixir-ls
 fish_add_path /opt/homebrew/bin
-
-# Puppet may or may not be installed, it's a very work thing.
-if test -d /opt/puppetlabs/pdk
-        fish_add_path /opt/puppetlabs/pdk/bin
-end
-
-if test -d /opt/puppetlabs/bin
-        fish_add_path /opt/puppetlabs/bin
-end
 
 # bun
 set --export BUN_INSTALL "$HOME/.bun"
