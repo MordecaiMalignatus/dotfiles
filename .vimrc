@@ -49,8 +49,6 @@ set number                     " And I like to see my numbers.
 let mapleader=' '
 nnoremap <leader>evm :e ~/dotfiles/.vimrc<CR>
 inoremap ± <c-o>~
-nnoremap ; :
-nnoremap : ;
 nnoremap <leader>ln :lnext<CR>
 nnoremap <leader>lp :lprevious<CR>
 
