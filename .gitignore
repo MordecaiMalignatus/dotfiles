@@ -52,3 +52,4 @@ ranger/history
 /.emacs.d/quelpa/
 /home-manager/userdata.nix
 /.emacs.d/*.sqlite
+/fish/functions/work.fish
