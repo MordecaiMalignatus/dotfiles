@@ -1,6 +1,8 @@
 function ,ssm --argument-names profile
         set -l region "eu-central-1"
-        set -l profile "htg-platform"
+        if test -z $profile
+                set profile "htg-platform"
+        end
         set -l ec2output (aws ec2 describe-instances --profile $profile --region eu-central-1 | jq '.Reservations[].Instances[]')
         echo $ec2output | jq -r '.PrivateIpAddress' > /tmp/ssm-ip-addresses
         echo $ec2output | jq -r '.InstanceId' > /tmp/ssm-instance-ids
