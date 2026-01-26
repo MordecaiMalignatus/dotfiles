@@ -426,6 +426,7 @@ The full process:
   (setq lsp-completion-provider :capf)
   (setq lsp-auto-configure t)
   (setq lsp-prefer-flymake nil)
+  (setq lsp-disabled-clients '(rubocop-ls sorbet-ls typeprof-ls))
   ;; Bash Config
   ;; Reminder: the brew formula for the bash LSP is named `bash-language-server'.
   ;; Rust Config
@@ -435,6 +436,7 @@ The full process:
   (setq lsp-rust-analyzer-cargo-watch-command "clippy")
   ;; Ruby Config
   ;; Server installation: gem install ruby-lsp.
+  (setq lsp-ruby-lsp-server-command '("mise" "x" "--" "ruby-lsp"))
   ;; Go Config
   (setq lsp-go-use-gofumpt t)
   ;; Elixir Config
