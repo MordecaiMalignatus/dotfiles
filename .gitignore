@@ -53,3 +53,4 @@ ranger/history
 /home-manager/userdata.nix
 /.emacs.d/*.sqlite
 /fish/functions/work.fish
+/.agent-shell/

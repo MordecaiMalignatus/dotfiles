@@ -671,7 +671,7 @@ If none exists,create a new test file."
 
 (setq-default line-spacing 0.3)
 (defvar az/font-size-min 13)
-(defvar az/font-size-max 17)
+(defvar az/font-size-max 20)
 (defvar az/font "PragmataPro")
 (defun az/toggle-font-size ()
   "Toggle font size between `az/font-size-min' and `az/font-size-max'."
