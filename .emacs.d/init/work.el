@@ -38,6 +38,15 @@
     (org-fill-paragraph)
     (save-buffer))))
 
+;; Setup agent shell for trial.
+;; See https://github.com/xenodium/agent-shell for setup details
+(use-package agent-shell
+  :ensure t
+  :config
+  (setq agent-shell-preferred-agent-config (agent-shell-anthropic-make-claude-code-config)))
+
+(use-package acp
+  :ensure t)
 
 ;; https://emacsredux.com/blog/2013/06/13/using-emacs-as-a-database-client/
 (defun az/setup-sql-mode ()
