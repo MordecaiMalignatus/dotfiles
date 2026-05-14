@@ -19,4 +19,9 @@ function upgrade
     popd
 
     sync-grimoire
-end 
+
+    if type -q peasant_road
+        print_green "PeasantRoad report:"
+        peasant_road pull
+    end
+end
