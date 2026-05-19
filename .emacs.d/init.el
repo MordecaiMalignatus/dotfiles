@@ -719,7 +719,15 @@ If none exists,create a new test file."
   (setq solarized-scale-markdown-headlines t)
   (setq solarized-use-more-italic t)
   :config
-  (load-theme 'solarized-selenized-dark t))
+  ;; (load-theme 'solarized-selenized-dark t)
+  )
+
+(use-package catppuccin-theme
+  :ensure t
+  :functions 'catppuccin-reload
+  :config
+  (setq catppuccin-flavor 'frappe)
+  (catppuccin-reload))
 
 (defun az/toggle-solarized-theming ()
   "Switch between solarized-light and solarized-dark."
