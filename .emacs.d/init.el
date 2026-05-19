@@ -339,6 +339,9 @@ The full process:
 (use-package yaml-mode
   :ensure t)
 
+(use-package asciidoc-mode
+  :ensure t)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Projectile config
 (use-package projectile
