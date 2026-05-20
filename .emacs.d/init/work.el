@@ -4,6 +4,7 @@
 ;; Work-specific code, this time even code I can check in!
 ;;; Code:
 (require 'custom-deft)
+(require 'work-sensitive nil 't)
 
 (defun az/work-deft ()
   "Override standard bindings set in custom-deft.el with work-appropriate settings."
@@ -40,10 +41,10 @@
 
 ;; Setup agent shell for trial.
 ;; See https://github.com/xenodium/agent-shell for setup details
-(use-package agent-shell
-  :ensure t
-  :config
-  (setq agent-shell-preferred-agent-config (agent-shell-anthropic-make-claude-code-config)))
+;; (use-package agent-shell
+;;   :ensure t
+;;   :config
+;;   (setq agent-shell-preferred-agent-config (agent-shell-anthropic-make-claude-code-config)))
 
 (use-package acp
   :ensure t)
