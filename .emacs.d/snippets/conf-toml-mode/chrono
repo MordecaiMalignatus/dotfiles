@@ -1,4 +1,0 @@
-# key: ;chrono
-# name: chrono
-# --
-chrono = { version = "0.4.19", features = ["serde"] }
