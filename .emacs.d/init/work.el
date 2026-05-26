@@ -4,7 +4,7 @@
 ;; Work-specific code, this time even code I can check in!
 ;;; Code:
 (require 'custom-deft)
-(require 'work-sensitive nil 't)
+(require 'work-sensitive nil 't)        ; don't error on failure-to-load
 
 (defun az/work-deft ()
   "Override standard bindings set in custom-deft.el with work-appropriate settings."

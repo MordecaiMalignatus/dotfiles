@@ -740,17 +740,6 @@ If none exists,create a new test file."
 						              (load-theme 'solarized-selenized-light t)))
         (t (load-theme 'solarized-selenized-light t))))
 
-(defun az/toggle-gruvbox-theming ()
-  "Switch between gruvbox-light and gruvbox-dark."
-  (interactive)
-  (cond ((custom-theme-enabled-p 'solarized-gruvbox-light) (progn
-						               (disable-all-custom-themes)
-						               (load-theme 'solarized-gruvbox-dark t)))
-	((custom-theme-enabled-p 'solarized-gruvbox-dark) (progn
-						              (disable-all-custom-themes)
-						              (load-theme 'solarized-gruvbox-light t)))
-        (t (load-theme 'solarized-gruvbox-dark t))))
-
 (defun disable-all-custom-themes ()
   "Disable all themes in `custom-enabled-themes'."
   (mapcar (lambda (theme) (disable-theme theme)) custom-enabled-themes))
