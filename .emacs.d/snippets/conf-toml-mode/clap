@@ -1,5 +1,0 @@
-# -*- mode: snippet -*-
-# name: clap
-# key: ;rclap
-# --
-clap = "3.1.6"
