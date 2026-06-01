@@ -5,6 +5,14 @@ function fetch-work-repos
       echo (set_color green) "updating $dir" (set_color normal)
       pushd $dir
       git fetch -a --prune
+      set -l branch (git-main)
+      if test (git branch --show-current) != $branch
+        git stash
+        git switch $branch
+        git pull --rebase --autostash
+        git switch -
+        git stash pop
+      end
       popd
     else
       echo "skipping $dir"
