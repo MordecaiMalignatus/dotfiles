@@ -342,6 +342,9 @@ The full process:
 (use-package asciidoc-mode
   :ensure t)
 
+(use-package systemd
+  :ensure t)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Projectile config
 (use-package projectile
