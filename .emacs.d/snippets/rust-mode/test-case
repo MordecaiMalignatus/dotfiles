@@ -1,8 +1,0 @@
-# -*- mode: snippet -*-
-# name: test-case
-# key: ;test
-# --
-#[test]
-fn test_$1() {
-  $0
-}
