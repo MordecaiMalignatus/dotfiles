@@ -6,13 +6,7 @@ function fetch-work-repos
       pushd $dir
       git fetch -a --prune
       set -l branch (git-main)
-      if test (git branch --show-current) != $branch
-        git stash
-        git switch $branch
-        git pull --rebase --autostash
-        git switch -
-        git stash pop
-      end
+      git pull origin "$branch:$branch"
       popd
     else
       echo "skipping $dir"
