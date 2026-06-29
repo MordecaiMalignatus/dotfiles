@@ -1,6 +1,6 @@
 function upgrade
     print_green "Upgrading Packages..."
-    brew upgrade
+    brew upgrade -y
 
     print_green "Fetching work repos..."
     fetch-work-repos
