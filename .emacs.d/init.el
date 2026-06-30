@@ -743,6 +743,14 @@ If none exists,create a new test file."
 						              (load-theme 'solarized-selenized-light t)))
         (t (load-theme 'solarized-selenized-light t))))
 
+(defun az/load-catpuccin ()
+  "Disable current themes, then load catpuccin."
+  (interactive)
+  (disable-all-custom-themes)
+  (setq catppuccin-flavor 'frappe)
+  (load-theme 'catppuccin)
+  (catppuccin-reload))
+
 (defun disable-all-custom-themes ()
   "Disable all themes in `custom-enabled-themes'."
   (mapcar (lambda (theme) (disable-theme theme)) custom-enabled-themes))
@@ -818,7 +826,6 @@ Copied from [[https://emacsredux.com/blog/2013/05/22/smarter-navigation-to-the-b
 ;; Transient!
 (defun az/open-link (link)
   "Open a LINK in $BROWSER."
-  (interactive)
   (shell-command (concat "open " link)))
 
 (require 'transient)
