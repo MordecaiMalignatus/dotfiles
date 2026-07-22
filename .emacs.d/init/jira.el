@@ -105,6 +105,20 @@ Uses magit when it is loaded, otherwise shells out to git."
     (when (string-match az/jira-ticket-regexp branch)
       (match-string 0 branch))))
 
+(defun az/jira--extract-ticket (input)
+  "Return the canonical Jira ticket id contained in INPUT, or nil.
+Handles a bare id, an id embedded in surrounding text, and a Jira
+URL such as \"https://host/browse/PROJ-123\" — for URLs the id in
+the browse path or issue query parameter is preferred over any other
+ticket-shaped token that may appear earlier in the string."
+  (let ((case-fold-search t))
+    (when (or (string-match
+               (concat "\\(?:browse/\\|selectedIssue=\\|issueKey=\\|issues/\\)"
+                       "\\(" az/jira-ticket-regexp "\\)")
+               input)
+              (string-match (concat "\\(" az/jira-ticket-regexp "\\)") input))
+      (upcase (match-string 1 input)))))
+
 (defun az/jira-ticket ()
   "Return the current Jira ticket id, or nil.
 Prefer a ticket set explicitly for this repository, otherwise fall
@@ -169,13 +183,16 @@ back to a ticket parsed from the current branch name."
 (defun az/jira-set-ticket (ticket)
   "Set TICKET as the current Jira ticket for this repository.
 Interactively, read the ticket with completion over previously used
-ids, defaulting to any ticket found in the current branch name."
+ids, defaulting to any ticket found in the current branch name.  The
+ticket id is extracted from the input, so a bare id, a full Jira URL
+\(https://host/browse/PROJ-123), or text with a leaked prompt fragment
+all work."
   (interactive
    (list (completing-read "Jira ticket: " az/jira--history nil nil
                           nil 'az/jira--history (az/jira--ticket-from-branch))))
-  (setq ticket (string-trim ticket))
-  (unless (string-match-p (concat "\\`" az/jira-ticket-regexp "\\'") ticket)
-    (user-error "%S does not look like a Jira ticket id" ticket))
+  (if-let ((found (az/jira--extract-ticket ticket)))
+      (setq ticket found)
+    (user-error "No Jira ticket id found in %S" ticket))
   (let ((root (or (az/jira--repo-root)
                   (user-error "Not inside a git repository"))))
     (setf (alist-get root az/jira--ticket-alist nil nil #'equal) ticket)
