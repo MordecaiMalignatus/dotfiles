@@ -30,6 +30,7 @@ ranger/history
 /.emacs.d/init/databases.el
 /.emacs.d/forge-database.sqlite
 /.emacs.d/transient/history.el
+/.emacs.d/jira-state.eld
 /fish/fish_variables
 /.emacs.d/.lsp-session-v1
 .emacs.d/tramp

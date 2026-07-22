@@ -4,6 +4,7 @@
 ;; Work-specific code, this time even code I can check in!
 ;;; Code:
 (require 'custom-deft)
+(require 'jira)
 (require 'work-sensitive nil 't)        ; don't error on failure-to-load
 
 (defun az/work-deft ()
@@ -62,7 +63,10 @@
   (az/work-deft)
   (az/setup-work-transient)
   ;; (az/setup-sql-mode)
-  (global-set-key (kbd "M-'") 'az/append-to-work-log))
+  (global-set-key (kbd "M-'") 'az/append-to-work-log)
+  (global-set-key (kbd "C-c j s") #'az/jira-set-ticket)
+  (global-set-key (kbd "C-c j c") #'az/jira-clear-ticket)
+  (global-set-key (kbd "C-c j o") #'az/jira-open-ticket))
 
 (provide 'work)
 ;;; work.el ends here.
