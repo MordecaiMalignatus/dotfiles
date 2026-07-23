@@ -14,6 +14,7 @@
 ;;; Code:
 
 (require 'subr-x)
+(require 'cl-lib)
 
 ;;
 ;; Config
@@ -65,10 +66,7 @@ Change this if the glyph does not render in your font."
 ;;
 
 (declare-function magit-get-current-branch "magit-git")
-(declare-function magit-branch-and-checkout "magit-branch")
-(declare-function magit-branch-create "magit-branch")
-(declare-function magit-read-string-ns "magit-utils")
-(declare-function transient-replace-suffix "transient")
+(declare-function magit-branch--read-name "magit-branch")
 (declare-function az/open-link "init")
 (defvar git-commit-setup-hook)
 (defvar magit-post-refresh-hook)
@@ -243,45 +241,31 @@ Does nothing when there is no ticket, when a subject already exists
 ;; New-branch prefix in magit
 ;;
 
-(defvar az/jira--branch-prefill nil
-  "When non-nil, initial input to inject into a magit branch-name prompt.")
-
 (defun az/jira--branch-prefill-string ()
   "Return the branch-name prefill for the current ticket, or nil."
   (when-let ((tid (az/jira-ticket)))
     (format az/jira-branch-format tid)))
 
-(defun az/jira--read-string-ns-advice (orig prompt &optional initial-input &rest args)
-  "Inject `az/jira--branch-prefill' as INITIAL-INPUT for branch-name prompts.
-ORIG is the advised `magit-read-string-ns'; PROMPT and ARGS are its
-remaining arguments.  Only fires while a wrapper command is active and
-the prompt concerns a branch name."
-  (when (and az/jira--branch-prefill
-             (not initial-input)
-             (string-match-p "branch" prompt))
-    (setq initial-input az/jira--branch-prefill))
-  (apply orig prompt initial-input args))
-
-(defun az/jira-branch-and-checkout ()
-  "Like `magit-branch-and-checkout', but pre-fill the branch name with the ticket."
-  (interactive)
-  (let ((az/jira--branch-prefill (az/jira--branch-prefill-string)))
-    (call-interactively #'magit-branch-and-checkout)))
-
-(defun az/jira-branch-create ()
-  "Like `magit-branch-create', but pre-fill the branch name with the ticket."
-  (interactive)
-  (let ((az/jira--branch-prefill (az/jira--branch-prefill-string)))
-    (call-interactively #'magit-branch-create)))
-
-(defun az/jira--install-branch-suffix (loc spec)
-  "Replace the `magit-branch' suffix located by LOC with SPEC.
-Warn instead of erroring when LOC cannot be found, so a change in
-magit's transient layout never breaks loading."
-  (condition-case err
-      (transient-replace-suffix 'magit-branch loc spec)
-    (error (message "jira.el: could not install branch suffix %S: %s"
-                    loc (error-message-string err)))))
+(defun az/jira--branch-read-name-advice (orig prompt &rest args)
+  "Prefill the current ticket into magit's new-branch NAME read.
+ORIG is the advised `magit-branch--read-name'; PROMPT and ARGS are its
+arguments.  The ticket is injected as initial input by wrapping
+`magit-completing-read' for the duration of this one read only, so the
+separate starting-point (base branch) prompt — which also uses
+`magit-completing-read' — is never affected.  With no ticket, or when
+magit already supplies its own initial input, behaviour is unchanged.
+Covers `magit-branch-create' and `magit-branch-and-checkout' alike,
+however they are invoked."
+  (let ((prefill (az/jira--branch-prefill-string)))
+    (if (not prefill)
+        (apply orig prompt args)
+      (cl-letf* ((real (symbol-function 'magit-completing-read))
+                 ((symbol-function 'magit-completing-read)
+                  (lambda (p coll &optional pred req init &rest more)
+                    (apply real p coll pred req
+                           (if (or (null init) (equal init "")) prefill init)
+                           more))))
+        (apply orig prompt args)))))
 
 ;;
 ;; Setup
@@ -299,11 +283,16 @@ magit's transient layout never breaks loading."
 
 (with-eval-after-load 'magit
   (add-hook 'magit-post-refresh-hook #'az/jira--refresh-all-buffers)
-  (advice-add 'magit-read-string-ns :around #'az/jira--read-string-ns-advice)
-  (az/jira--install-branch-suffix 'magit-branch-and-checkout
-    '("c" "branch/checkout (ticket)" az/jira-branch-and-checkout))
-  (az/jira--install-branch-suffix 'magit-branch-create
-    '("n" "new branch (ticket)" az/jira-branch-create)))
+  ;; Remove advice installed by earlier versions of this module, so that
+  ;; reloading (rather than restarting) can never leave a stale prefill hook
+  ;; attached — in particular one that leaks into the base-branch prompt.
+  (advice-remove 'magit-completing-read 'az/jira--completing-read-advice)
+  (advice-remove 'magit-branch-read-args 'az/jira--branch-read-args-advice)
+  (advice-remove 'magit-read-string-ns 'az/jira--read-string-ns-advice)
+  (if (fboundp 'magit-branch--read-name)
+      (advice-add 'magit-branch--read-name :around
+                  #'az/jira--branch-read-name-advice)
+    (message "jira.el: `magit-branch--read-name' not found; branch prefill off")))
 
 (az/jira--load-state)
 (az/jira--refresh-all-buffers)
