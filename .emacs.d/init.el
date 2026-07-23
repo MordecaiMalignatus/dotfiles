@@ -1,3 +1,4 @@
+
 ;; init.el --- Summary  -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;; Hi, I'm Az and this is my init.el.  It's a bit of a mess.  A lot of
@@ -98,29 +99,34 @@
 (use-package sqlite3
   :ensure t)
 
+(use-package ghostel
+  :ensure t
+  :config
+  (global-set-key (kbd "<f2>") 'ghostel-project))
+
 ;; A better term
-(use-package vterm
-  :ensure t
-  :config
-  (setq vterm-shell "/opt/homebrew/bin/fish"))
+;; (use-package vterm
+;;   :ensure t
+;;   :config
+;;   (setq vterm-shell "/opt/homebrew/bin/fish"))
 
-(use-package vterm-toggle
-  :ensure t
-  :config
-  ;; Spawn vterm in $HOME rather than $PWD. Then we can hit C-RET to cd to file PWD.
-  (setq vterm-toggle-cd-auto-create-buffer nil))
+;; (use-package vterm-toggle
+;;   :ensure t
+;;   :config
+;;   ;; Spawn vterm in $HOME rather than $PWD. Then we can hit C-RET to cd to file PWD.
+;;   (setq vterm-toggle-cd-auto-create-buffer nil))
 
-(use-package multi-vterm
-  :ensure t
-  :config
-  (global-set-key (kbd "M-<f2>") 'multi-vterm)
+;; (use-package multi-vterm
+;;   :ensure t
+;;   :config
+;;   (global-set-key (kbd "M-<f2>") 'multi-vterm)
 
-  (define-key vterm-mode-map (kbd "M-N") 'vterm-toggle-forward)
-  (define-key vterm-mode-map (kbd "M-P") 'vterm-toggle-backward)
-  (define-key vterm-mode-map (kbd "C-<return>") #'vterm-toggle-insert-cd)
+;;   (define-key vterm-mode-map (kbd "M-N") 'vterm-toggle-forward)
+;;   (define-key vterm-mode-map (kbd "M-P") 'vterm-toggle-backward)
+;;   (define-key vterm-mode-map (kbd "C-<return>") #'vterm-toggle-insert-cd)
 
-  (define-key vterm-mode-map (kbd "<f2>") 'multi-vterm-project)
-  (global-set-key (kbd "<f2>") 'multi-vterm-project))
+;;   (define-key vterm-mode-map (kbd "<f2>") 'multi-vterm-project)
+;;   )
 
 (use-package fish-mode
   :ensure t)
@@ -855,6 +861,36 @@ Copied from [[https://emacsredux.com/blog/2013/05/22/smarter-navigation-to-the-b
        (lambda () (interactive)
          (find-file "~/Sync/Reference/Archive/file-archive.org")))]
      ]))
+
+(defvar az/file-archive-path "~/Sync/Reference/Archive/file-archive.org"
+  "Path to the paper file archive org file.")
+
+(defun az/file-archive-new-entry ()
+  "Create a new entry in the file archive.
+The number is the next linear increment after the highest existing
+entry, and the date defaults to today.  Point is left after the
+date so the description can be typed in."
+  (interactive)
+  (find-file az/file-archive-path)
+  (let ((max-num 0))
+    (save-excursion
+      (goto-char (point-min))
+      (while (re-search-forward "^- \\([0-9]+\\):" nil t)
+        (setq max-num (max max-num (string-to-number (match-string 1))))))
+    (goto-char (point-max))
+    (unless (bolp) (insert "\n"))
+    (insert (format "- %03d: %s "
+                    (1+ max-num)
+                    (format-time-string "[%Y-%m-%d %a]")))))
+
+(defun az/file-archive-maybe-disable-auto-fill ()
+  "Disable `auto-fill-mode' when visiting the file archive."
+  (when (and buffer-file-name
+             (string= (file-truename buffer-file-name)
+                      (file-truename az/file-archive-path)))
+    (auto-fill-mode -1)))
+
+(add-hook 'find-file-hook #'az/file-archive-maybe-disable-auto-fill)
 
 (defun az/dired-open-externally ()
   "Call `open' on file under point."
