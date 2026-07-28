@@ -1,0 +1,4 @@
+#!/usr/bin/env fish
+
+set -lx BRANCH (git branch --list master main | tr -d '* ' | head -n1)
+git switch "$BRANCH"
