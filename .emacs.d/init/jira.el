@@ -6,7 +6,8 @@
 ;; * `az/jira-set-ticket' stores a ticket per git repository (persisted).
 ;; * The ticket is shown in the mood-line status bar.
 ;; * Fresh magit commit messages are prefixed with `[PROJ-123] '.
-;; * New magit branches are pre-filled with `PROJ-123/'.
+;; * New magit branches are pre-filled with `PROJ-123/', whether they come
+;;   from `magit-branch-create' or from `magit-branch-spinoff'.
 ;;
 ;; When no ticket has been set explicitly for a repo, one is derived from the
 ;; current branch name, so a checkout of `PROJ-999/spike' needs no setup.
@@ -40,6 +41,20 @@
   :group 'az/jira
   :type 'string)
 
+(defcustom az/jira-branch-prefill-commands
+  '(magit-branch-spinoff
+    magit-branch-spinout
+    magit-stash-branch
+    magit-stash-branch-here)
+  "Commands whose `magit-read-string-ns' read names a new branch.
+These commands do not go through `magit-branch--read-name', they read
+the name straight from their interactive form, so they need the prefill
+hung off `magit-read-string-ns' instead.  Each of them reads exactly one
+string, which is why naming the command is enough to keep the prefill
+out of the other prompts these commands may raise."
+  :group 'az/jira
+  :type '(repeat function))
+
 (defcustom az/jira-mode-line-prefix "🎫 "
   "String shown before the ticket id in the mode line.
 Change this if the glyph does not render in your font."
@@ -67,6 +82,7 @@ Change this if the glyph does not render in your font."
 
 (declare-function magit-get-current-branch "magit-git")
 (declare-function magit-branch--read-name "magit-branch")
+(declare-function magit-read-string-ns "magit-base")
 (declare-function az/open-link "init")
 (defvar git-commit-setup-hook)
 (defvar magit-post-refresh-hook)
@@ -79,7 +95,17 @@ Change this if the glyph does not render in your font."
   "Alist mapping a git repository root to its explicit ticket id.")
 
 (defvar az/jira--history nil
-  "History list of Jira ticket ids entered via `az/jira-set-ticket'.")
+  "History list of Jira ticket ids entered via `az/jira-set-ticket'.
+Holds canonical ids only, most recently used first; see
+`az/jira--read-history' for why the raw input is kept out of it.")
+
+(defvar az/jira--read-history nil
+  "Throwaway minibuffer history for the `az/jira-set-ticket' read.
+`completing-read' records what was typed verbatim in the history
+variable it is handed, so handing it `az/jira--history' directly filed
+pasted URLs and prompt fragments alongside the ids.  It gets this list
+instead, seeded from `az/jira--history' so that M-p still walks the ids
+and then thrown away; only the extracted id is recorded for real.")
 
 (defun az/jira--repo-root ()
   "Return the git top-level directory for the current buffer, or nil."
@@ -117,13 +143,30 @@ ticket-shaped token that may appear earlier in the string."
               (string-match (concat "\\(" az/jira-ticket-regexp "\\)") input))
       (upcase (match-string 1 input)))))
 
+(defvar az/jira--resolve-cache nil
+  "Hash table memoising ticket resolution, or nil outside a refresh.
+Bound by `az/jira--refresh-all-buffers' for the duration of one pass, so
+that refreshing hundreds of buffers costs at most one git call per
+repository instead of one per buffer.  Keys are repository roots, or
+`default-directory' for buffers outside a repository.")
+
+(defun az/jira--resolve-ticket ()
+  "Return the Jira ticket id for the current buffer, uncached."
+  (or (when-let ((root (az/jira--repo-root)))
+        (cdr (assoc root az/jira--ticket-alist)))
+      (az/jira--ticket-from-branch)))
+
 (defun az/jira-ticket ()
   "Return the current Jira ticket id, or nil.
 Prefer a ticket set explicitly for this repository, otherwise fall
 back to a ticket parsed from the current branch name."
-  (or (when-let ((root (az/jira--repo-root)))
-        (cdr (assoc root az/jira--ticket-alist)))
-      (az/jira--ticket-from-branch)))
+  (if (null az/jira--resolve-cache)
+      (az/jira--resolve-ticket)
+    (let* ((key (or (az/jira--repo-root) default-directory))
+           (hit (gethash key az/jira--resolve-cache 'miss)))
+      (if (eq hit 'miss)
+          (puthash key (az/jira--resolve-ticket) az/jira--resolve-cache)
+        hit))))
 
 ;;
 ;; Persistence
@@ -139,6 +182,20 @@ back to a ticket parsed from the current branch name."
                      :history az/jira--history)
                (current-buffer))))))
 
+(defun az/jira--clean-history (history)
+  "Return HISTORY reduced to canonical ticket ids, most recent first.
+Entries are run through `az/jira--extract-ticket' and de-duplicated, so a
+history persisted by an older version of this module — which could hold
+pasted URLs and other raw input — collapses into the ids it meant."
+  (let ((seen (make-hash-table :test #'equal))
+        (clean nil))
+    (dolist (entry history)
+      (when-let ((tid (and (stringp entry) (az/jira--extract-ticket entry))))
+        (unless (gethash tid seen)
+          (puthash tid t seen)
+          (push tid clean))))
+    (nreverse clean)))
+
 (defun az/jira--load-state ()
   "Load the ticket map and history from `az/jira-state-file'."
   (when (file-readable-p az/jira-state-file)
@@ -147,7 +204,8 @@ back to a ticket parsed from the current branch name."
         (insert-file-contents az/jira-state-file)
         (let ((data (read (current-buffer))))
           (setq az/jira--ticket-alist (plist-get data :tickets)
-                az/jira--history (plist-get data :history)))))))
+                az/jira--history (az/jira--clean-history
+                                  (plist-get data :history))))))))
 
 ;;
 ;; Status bar
@@ -156,19 +214,41 @@ back to a ticket parsed from the current branch name."
 (defvar-local az/jira--modeline-cache nil
   "Cached mode-line string for the current buffer's ticket.")
 
+(defun az/jira--resolvable-p ()
+  "Return non-nil when a ticket may safely be resolved for this buffer.
+Resolution shells out to git in `default-directory', which we refuse to
+do when that directory is remote (a Tramp round trip per buffer) or no
+longer exists (`process-file' signals there)."
+  (and (stringp default-directory)
+       (not (file-remote-p default-directory))
+       (file-directory-p default-directory)))
+
+(defun az/jira--mode-line-ticket ()
+  "Return the ticket to show in this buffer's mode line, or nil.
+Never signals: a buffer whose ticket cannot be resolved shows nothing,
+rather than aborting the refresh of every buffer that comes after it."
+  (and (az/jira--resolvable-p)
+       (ignore-errors (az/jira-ticket))))
+
+(defun az/jira--update-mode-line-cache ()
+  "Recompute `az/jira--modeline-cache' for the current buffer."
+  (setq az/jira--modeline-cache
+        (when-let ((tid (az/jira--mode-line-ticket)))
+          (propertize (concat az/jira-mode-line-prefix tid)
+                      'face 'az/jira-ticket-face))))
+
 (defun az/jira-refresh-mode-line (&rest _)
   "Recompute the cached Jira mode-line string for the current buffer."
-  (setq az/jira--modeline-cache
-        (when-let ((tid (az/jira-ticket)))
-          (propertize (concat az/jira-mode-line-prefix tid)
-                      'face 'az/jira-ticket-face)))
+  (az/jira--update-mode-line-cache)
   (force-mode-line-update t))
 
 (defun az/jira--refresh-all-buffers (&rest _)
   "Refresh the Jira mode-line cache in every live buffer."
-  (dolist (buf (buffer-list))
-    (with-current-buffer buf
-      (az/jira-refresh-mode-line))))
+  (let ((az/jira--resolve-cache (make-hash-table :test #'equal)))
+    (dolist (buf (buffer-list))
+      (with-current-buffer buf
+        (az/jira--update-mode-line-cache))))
+  (force-mode-line-update t))
 
 (defun az/jira--mode-line-string ()
   "Return the cached Jira ticket string for the mode line, or empty."
@@ -186,30 +266,38 @@ ticket id is extracted from the input, so a bare id, a full Jira URL
 \(https://host/browse/PROJ-123), or text with a leaked prompt fragment
 all work."
   (interactive
-   (list (completing-read "Jira ticket: " az/jira--history nil nil
-                          nil 'az/jira--history (az/jira--ticket-from-branch))))
+   (list (let ((az/jira--read-history (copy-sequence az/jira--history)))
+           (completing-read "Jira ticket: " az/jira--history nil nil
+                            nil 'az/jira--read-history
+                            (az/jira--ticket-from-branch)))))
   (if-let ((found (az/jira--extract-ticket ticket)))
       (setq ticket found)
     (user-error "No Jira ticket id found in %S" ticket))
   (let ((root (or (az/jira--repo-root)
                   (user-error "Not inside a git repository"))))
     (setf (alist-get root az/jira--ticket-alist nil nil #'equal) ticket)
-    (add-to-list 'az/jira--history ticket)
+    (setq az/jira--history (cons ticket (delete ticket az/jira--history)))
     (az/jira--save-state)
     (az/jira--refresh-all-buffers)
     (message "Current Jira ticket for %s: %s"
              (abbreviate-file-name root) ticket)))
 
 (defun az/jira-clear-ticket ()
-  "Remove the explicit Jira ticket set for this repository."
+  "Remove the explicit Jira ticket set for this repository.
+The branch-name fallback still applies afterwards, so on a branch such
+as `PROJ-999/spike' the mode line keeps showing PROJ-999; the echo area
+says so, to distinguish that from nothing having happened."
   (interactive)
   (if-let ((root (az/jira--repo-root)))
       (progn
         (setf (alist-get root az/jira--ticket-alist nil t #'equal) nil)
         (az/jira--save-state)
         (az/jira--refresh-all-buffers)
-        (message "Cleared explicit Jira ticket for %s"
-                 (abbreviate-file-name root)))
+        (message "Cleared explicit Jira ticket for %s%s"
+                 (abbreviate-file-name root)
+                 (if-let ((tid (az/jira-ticket)))
+                     (format " (still showing %s, from the branch name)" tid)
+                   "")))
     (user-error "Not inside a git repository")))
 
 (defun az/jira-open-ticket ()
@@ -267,6 +355,23 @@ however they are invoked."
                            more))))
         (apply orig prompt args)))))
 
+(defun az/jira--branch-read-string-advice (orig prompt &optional init &rest args)
+  "Prefill the current ticket into new-branch reads that bypass magit's.
+ORIG is the advised `magit-read-string-ns'; PROMPT, INIT and ARGS are its
+arguments.  `magit-branch-spinoff' and the other commands in
+`az/jira-branch-prefill-commands' read the new branch name here, from
+their interactive form, so the advice on `magit-branch--read-name' never
+sees them.  Gating on `this-command' — which is already the suffix
+command while its interactive form runs, including when it was invoked
+from a transient — keeps this out of every unrelated
+`magit-read-string-ns' prompt.  An INIT supplied by the caller wins."
+  (apply orig prompt
+         (or (and (memq this-command az/jira-branch-prefill-commands)
+                  (or (null init) (equal init ""))
+                  (az/jira--branch-prefill-string))
+             init)
+         args))
+
 ;;
 ;; Setup
 ;;
@@ -292,7 +397,11 @@ however they are invoked."
   (if (fboundp 'magit-branch--read-name)
       (advice-add 'magit-branch--read-name :around
                   #'az/jira--branch-read-name-advice)
-    (message "jira.el: `magit-branch--read-name' not found; branch prefill off")))
+    (message "jira.el: `magit-branch--read-name' not found; branch prefill off"))
+  (if (fboundp 'magit-read-string-ns)
+      (advice-add 'magit-read-string-ns :around
+                  #'az/jira--branch-read-string-advice)
+    (message "jira.el: `magit-read-string-ns' not found; spin-off prefill off")))
 
 (az/jira--load-state)
 (az/jira--refresh-all-buffers)
