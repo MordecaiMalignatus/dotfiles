@@ -8,8 +8,6 @@ function fetch-work-repos
       set -l branch (git-main)
       git pull origin "$branch:$branch"
       popd
-    else
-      echo "skipping $dir"
     end
   end
 end
