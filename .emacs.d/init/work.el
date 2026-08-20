@@ -25,20 +25,65 @@
 
   (global-set-key (kbd "M-p") 'work-docs-transient))
 
+(defvar az/work-log-file "~/grimoire/work-log.org"
+  "File the work log lives in.")
+
+(defun az/work-log-buffer ()
+  "Return the work log buffer, visiting `az/work-log-file' if needed."
+  (or (get-buffer "*work-log*")
+      (with-current-buffer (find-file-noselect az/work-log-file)
+        (rename-buffer "*work-log*")
+        (current-buffer))))
+
+(defun az/work-log--ensure-heading (title level)
+  "Find or create the heading TITLE at LEVEL in the current restriction.
+Missing headings are appended at the end of the restriction.  Narrows to
+the heading's subtree, so nested calls walk down the tree."
+  (let ((stars (make-string level ?*)))
+    (goto-char (point-min))
+    (if (re-search-forward (concat "^" (regexp-quote (concat stars " " title))
+                                   "[ \t]*$")
+                           nil 't)
+        (beginning-of-line)
+      (goto-char (point-max))
+      ;; Take over the trailing blank lines rather than pushing them ahead of
+      ;; the new heading, so the separator below stays a single blank line.
+      (skip-chars-backward " \t\n")
+      (delete-region (point) (point-max))
+      (insert (cond ((bobp) "")
+                    ;; Sibling headings get a blank line between them, but a
+                    ;; freshly created parent stays flush with its first child.
+                    ((org-at-heading-p) "\n")
+                    ('t "\n\n"))
+              stars " " title "\n")
+      (forward-line -1))
+    (org-narrow-to-subtree)))
+
 (defun az/append-to-work-log (event)
-  "Append an EVENT to the work log."
+  "Append an EVENT to the work log, creating the year/month/day tree as needed."
   (interactive "sEvent to log: ")
-  (if (eq nil (get-buffer "*work-log*"))
-      (with-current-buffer (find-file-noselect "~/grimoire/work-log.org")
-        (rename-buffer "*work-log*"))
-  (with-current-buffer "*work-log*"
-    (goto-char (point-max))
-    (if (not (s-contains? (concat "**** " (format-time-string "%F") "\n")
-                          (buffer-substring-no-properties (point-min) (point-max))))
-        (insert (concat "\n**** " (format-time-string "%F") "\n")))
-    (insert (concat "- *" (format-time-string "%F %T") "* - " event "\n"))
-    (org-fill-paragraph)
-    (save-buffer))))
+  (with-current-buffer (az/work-log-buffer)
+    (save-excursion
+      (save-restriction
+        (widen)
+        (az/work-log--ensure-heading "Log" 1)
+        (az/work-log--ensure-heading (format-time-string "%Y") 2)
+        (az/work-log--ensure-heading (let ((system-time-locale "C"))
+                                       (format-time-string "%B"))
+                                     3)
+        (az/work-log--ensure-heading (format-time-string "%F") 4)
+        (goto-char (point-max))
+        (skip-chars-backward " \t\n")
+        (insert "\n- *" (format-time-string "%F %T") "* - " event)
+        (org-fill-paragraph)
+        ;; Every heading inserted above pushed the file's final newline down a
+        ;; line, so collapse the end of the file back to a single one.
+        (widen)
+        (goto-char (point-max))
+        (skip-chars-backward " \t\n")
+        (delete-region (point) (point-max))
+        (insert "\n")))
+    (save-buffer)))
 
 ;; Setup agent shell for trial.
 ;; See https://github.com/xenodium/agent-shell for setup details
