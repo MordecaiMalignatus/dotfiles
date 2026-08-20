@@ -6,11 +6,11 @@ function fetch-work-repos
         continue
       end
       echo (set_color green) "updating $dir" (set_color normal)
-      pushd $dir
+      fish -c "pushd $dir
       git fetch -a --prune
       set -l branch (git-main)
-      git pull origin "$branch:$branch"
-      popd
+      git pull origin \"$branch:$branch\"
+      popd" &
     end
   end
 end
