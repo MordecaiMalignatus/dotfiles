@@ -193,8 +193,19 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Infrastructure Management
 
+;; Used by init/puppet-setup.el to drive `puppet-lint --fix'.
+(use-package reformatter
+  :ensure t
+  :defer t)
+
+;; The language server and the formatter both live in init/puppet-setup.el,
+;; pulled in here so that neither it nor lsp-mode is loaded until a manifest is
+;; actually opened.
 (use-package puppet-mode
-  :ensure t)
+  :ensure t
+  :mode "\\.pp\\'"
+  :config
+  (require 'puppet-setup))
 
 (use-package terraform-mode
   :ensure t)
