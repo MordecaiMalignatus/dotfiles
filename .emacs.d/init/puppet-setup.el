@@ -20,6 +20,7 @@
 ;;; Code:
 (require 'cl-lib)
 (require 'lsp-mode)
+(require 'projectile)
 (require 'puppet-mode)
 (require 'reformatter)
 
@@ -67,14 +68,8 @@ cold start."
 ;; Formatting
 
 (defun az/puppet-project-root ()
-  "Return the root of the module or control repo around the current buffer."
-  (expand-file-name
-   (or (locate-dominating-file default-directory "metadata.json")
-       (locate-dominating-file default-directory ".puppet-lint.rc")
-       (locate-dominating-file default-directory "Puppetfile")
-       (locate-dominating-file default-directory "environment.conf")
-       (locate-dominating-file default-directory ".git")
-       default-directory)))
+  "Return the root of the control repo or module around the current buffer."
+  (or (projectile-project-root) default-directory))
 
 ;; puppet-lint reads .puppet-lint.rc from its working directory, so run it from
 ;; the project root rather than from the manifest's own directory.  It writes
