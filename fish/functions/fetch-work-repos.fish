@@ -1,4 +1,3 @@
-# Defined in /tmp/fish.Pf6slL/fetch-work-repos.fish @ line 2
 function fetch-work-repos
   for dir in ~/src/*
     if test -d $dir
@@ -7,9 +6,9 @@ function fetch-work-repos
       end
       echo (set_color green) "updating $dir" (set_color normal)
       fish -c "pushd $dir
-      git fetch -a --prune
+      git fetch -a --prune &> /dev/null
       set -l branch (git-main)
-      git pull origin \"$branch:$branch\"
+      git pull origin \"$branch:$branch\" &> /dev/null
       popd" &
     end
   end
