@@ -55,3 +55,4 @@ ranger/history
 /.emacs.d/*.sqlite
 /fish/functions/work.fish
 /.agent-shell/
+*.eld
