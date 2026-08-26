@@ -56,3 +56,4 @@ ranger/history
 /fish/functions/work.fish
 /.agent-shell/
 *.eld
+.emacs.d/init/work-sensitive.el
