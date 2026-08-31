@@ -11,7 +11,10 @@
 ;;
 ;;   The server is looked for on `exec-path' first, so `gem install
 ;;   puppet-editor-services' transparently takes over from the checkout in
-;;   `az/puppet-editor-services-directory' once it is installed.
+;;   `az/puppet-editor-services-directory' once it is installed.  Either way
+;;   it needs Ruby 3.1 or newer, which is why the checkout is started as an
+;;   argument to an explicitly chosen interpreter -- see
+;;   `az/puppet-languageserver-command'.
 ;;
 ;; * Formatting: `puppet-lint --fix' -- which sorts out arrow alignment, quote
 ;;   style and ensure-first ordering, but not indentation -- followed by a
@@ -38,20 +41,53 @@ Only consulted when `puppet-languageserver' is not already on `exec-path'."
   :group 'az/puppet
   :type 'directory)
 
+(defcustom az/puppet-ruby-executable nil
+  "Ruby interpreter that runs the language server checkout.
+nil means the first `ruby' on `exec-path', which -- with the mise and rbenv
+shims sitting at the front of it -- is the version-managed one.  It has to be
+3.1 or newer: puppet-editor-services declares that as its
+`required_ruby_version' and uses the shorthand hash syntax that older parsers
+reject outright."
+  :group 'az/puppet
+  :type '(choice (const :tag "First ruby on `exec-path'" nil)
+                 (file :must-match t)))
+
+(defun az/puppet-ruby ()
+  "Return the Ruby interpreter to run the language server checkout with."
+  (or az/puppet-ruby-executable (executable-find "ruby") "ruby"))
+
 (defun az/puppet-languageserver-executable ()
   "Return the path to `puppet-languageserver', or nil when it is not installed."
   (or (executable-find "puppet-languageserver")
       (let ((script (expand-file-name "puppet-languageserver"
                                       az/puppet-editor-services-directory)))
-        (and (file-executable-p script) script))))
+        (and (file-readable-p script) script))))
+
+(defun az/puppet-languageserver-checkout-p (executable)
+  "Say whether EXECUTABLE lives in `az/puppet-editor-services-directory'.
+The checkout tends to be on PATH too, so finding the server on `exec-path'
+is no proof that we found a gem-installed one."
+  (file-in-directory-p executable az/puppet-editor-services-directory))
 
 (defun az/puppet-languageserver-command ()
   "Return the command line that starts the Puppet language server.
+
+The checkout is passed to `az/puppet-ruby' rather than executed directly:
+its shebang says /usr/bin/env ruby, and the PATH Emacs hands to subprocesses
+is not the one an interactive shell has -- it finds the macOS system Ruby 2.6
+first, which cannot even parse the server sources.  A gem-installed
+`puppet-languageserver' already carries a shebang for the Ruby it was
+installed under, so that one is run as it is.
+
 --timeout=0 keeps the server from giving up on us: it loads all of Puppet's
 types and functions in the background, which takes some twenty seconds on a
 cold start."
-  (list (or (az/puppet-languageserver-executable) "puppet-languageserver")
-        "--stdio" "--timeout=0"))
+  (let ((server (az/puppet-languageserver-executable))
+        (args (list "--stdio" "--timeout=0")))
+    (cond ((null server) (cons "puppet-languageserver" args))
+          ((az/puppet-languageserver-checkout-p server)
+           (append (list (az/puppet-ruby) server) args))
+          (t (cons server args)))))
 
 (add-to-list 'lsp-language-id-configuration '(puppet-mode . "puppet"))
 
