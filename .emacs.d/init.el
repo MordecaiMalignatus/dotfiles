@@ -104,30 +104,6 @@
   :config
   (global-set-key (kbd "<f2>") 'ghostel-project))
 
-;; A better term
-;; (use-package vterm
-;;   :ensure t
-;;   :config
-;;   (setq vterm-shell "/opt/homebrew/bin/fish"))
-
-;; (use-package vterm-toggle
-;;   :ensure t
-;;   :config
-;;   ;; Spawn vterm in $HOME rather than $PWD. Then we can hit C-RET to cd to file PWD.
-;;   (setq vterm-toggle-cd-auto-create-buffer nil))
-
-;; (use-package multi-vterm
-;;   :ensure t
-;;   :config
-;;   (global-set-key (kbd "M-<f2>") 'multi-vterm)
-
-;;   (define-key vterm-mode-map (kbd "M-N") 'vterm-toggle-forward)
-;;   (define-key vterm-mode-map (kbd "M-P") 'vterm-toggle-backward)
-;;   (define-key vterm-mode-map (kbd "C-<return>") #'vterm-toggle-insert-cd)
-
-;;   (define-key vterm-mode-map (kbd "<f2>") 'multi-vterm-project)
-;;   )
-
 (use-package fish-mode
   :ensure t)
 
