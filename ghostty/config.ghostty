@@ -1,0 +1,15 @@
+macos-option-as-alt = left
+keybind = alt+backspace=text:\x1b\x7f
+keybind = shift+enter=text:\n
+font-family = "PragmataPro Liga"
+font-size = 16
+
+# Emacs-style split creation
+keybind = ctrl+x>2=new_split:down
+keybind = ctrl+x>3=new_split:right
+
+# Vim-style split navigation
+keybind = cmd+h=goto_split:left
+keybind = cmd+j=goto_split:down
+keybind = cmd+k=goto_split:up
+keybind = cmd+l=goto_split:right
