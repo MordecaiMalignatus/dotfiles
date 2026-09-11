@@ -1,0 +1,302 @@
+#!/bin/bash
+# focus - macOS distraction blocker.
+#   focus on      block Steam + distracting sites, dark mode, calm wallpaper
+#   focus off     full restore of everything `on` changed
+#   focus status  show current state (exit 0 if on, 1 if off)
+#
+# Site blocking uses /etc/hosts, not resolv.conf - the macOS resolver
+# (mDNSResponder) never reads resolv.conf. Firefox with DoH enabled bypasses
+# /etc/hosts; Safari and Chrome honor it.
+#
+# The osascript calls need a one-time Automation grant (System Settings ->
+# Privacy & Security -> Automation -> your terminal -> System Events). macOS
+# major upgrades can silently drop the grant; we detect error -1743.
+
+STATE_DIR="$HOME/.local/state/focus-mode"
+DOTFILES="$(cd "$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")/.." && pwd)"
+DOMAINS_FILE="$DOTFILES/focus/blocked-domains.txt"
+WALLPAPER="$DOTFILES/focus/wallpaper.png"
+HOSTS_BEGIN="# BEGIN FOCUS-BLOCK"
+HOSTS_END="# END FOCUS-BLOCK"
+FAILURES=0
+
+warn() {
+    echo "  warning: $*" >&2
+    FAILURES=$((FAILURES + 1))
+}
+
+tcc_help() {
+    warn "$1: Automation permission missing - System Settings -> Privacy & Security -> Automation -> your terminal -> System Events"
+}
+
+flush_dns() {
+    sudo dscacheutil -flushcache
+    sudo killall -HUP mDNSResponder
+}
+
+hosts_on() {
+    if [ ! -f "$DOMAINS_FILE" ]; then
+        warn "hosts: $DOMAINS_FILE missing, skipping site block"
+        return
+    fi
+    echo "blocking sites (sudo for /etc/hosts)..."
+    [ -f "$STATE_DIR/hosts.orig" ] || cat /etc/hosts > "$STATE_DIR/hosts.orig"
+    # remove any stale block so re-running never duplicates it
+    if grep -q "$HOSTS_BEGIN" /etc/hosts; then
+        sudo sed -i '' "/$HOSTS_BEGIN/,/$HOSTS_END/d" /etc/hosts
+    fi
+    {
+        echo "$HOSTS_BEGIN"
+        grep -Ev '^[[:space:]]*(#|$)' "$DOMAINS_FILE" | while read -r domain; do
+            echo "0.0.0.0 $domain"
+        done
+        echo "$HOSTS_END"
+    } | sudo tee -a /etc/hosts > /dev/null || warn "hosts: failed to write /etc/hosts"
+    flush_dns
+}
+
+hosts_off() {
+    grep -q "$HOSTS_BEGIN" /etc/hosts || return
+    echo "unblocking sites (sudo for /etc/hosts)..."
+    sudo sed -i '' "/$HOSTS_BEGIN/,/$HOSTS_END/d" /etc/hosts || warn "hosts: failed to clean /etc/hosts"
+    flush_dns
+}
+
+steam_on() {
+    if [ ! -e "/Applications/Steam.app" ] && [ ! -e "$STATE_DIR/Steam.app" ]; then
+        echo "steam: not installed, skipping"
+        return
+    fi
+    echo "blocking steam..."
+    # kill games before the client: SIGTERM with a grace period so saves flush
+    if pgrep -qf "Steam/steamapps/common"; then
+        pkill -f "Steam/steamapps/common"
+        for _ in $(seq 1 10); do
+            pgrep -qf "Steam/steamapps/common" || break
+            sleep 1
+        done
+        pgrep -qf "Steam/steamapps/common" && pkill -9 -f "Steam/steamapps/common"
+    fi
+    # the client process is steam_osx, not Steam
+    if pgrep -qx steam_osx; then
+        osascript -e 'quit app "Steam"' 2>/dev/null
+        for _ in $(seq 1 10); do
+            pgrep -qx steam_osx || break
+            sleep 1
+        done
+        if pgrep -qx steam_osx; then
+            pkill -x steam_osx
+            sleep 2
+            pgrep -qx steam_osx && pkill -9 -x steam_osx
+        fi
+    fi
+    # move out of /Applications entirely - a renamed bundle there is still
+    # indexed and launchable via Spotlight; ~/.local is not indexed
+    if [ -e "/Applications/Steam.app" ]; then
+        if [ -e "$STATE_DIR/Steam.app" ]; then
+            warn "steam: $STATE_DIR/Steam.app already exists (reinstalled while blocked?) - leaving both in place"
+        else
+            mv /Applications/Steam.app "$STATE_DIR/Steam.app" || warn "steam: failed to move Steam.app out of /Applications"
+        fi
+    fi
+}
+
+steam_off() {
+    [ -e "$STATE_DIR/Steam.app" ] || return
+    if [ -e "/Applications/Steam.app" ]; then
+        warn "steam: /Applications/Steam.app already exists (reinstalled while blocked?) - blocked copy kept at $STATE_DIR/Steam.app"
+        return
+    fi
+    echo "restoring steam..."
+    mv "$STATE_DIR/Steam.app" /Applications/Steam.app || warn "steam: failed to restore Steam.app"
+}
+
+darkmode_on() {
+    echo "forcing dark mode..."
+    if [ ! -f "$STATE_DIR/appearance.prev" ]; then
+        prev="$(osascript -e 'tell application "System Events" to tell appearance preferences to get dark mode' 2>&1)"
+        case "$prev" in
+            true|false) echo "$prev" > "$STATE_DIR/appearance.prev" ;;
+            *-1743*) tcc_help "dark mode"; return ;;
+            *) warn "dark mode: could not read current appearance: $prev"; return ;;
+        esac
+    fi
+    out="$(osascript -e 'tell application "System Events" to tell appearance preferences to set dark mode to true' 2>&1)"
+    case "$out" in
+        *-1743*) tcc_help "dark mode" ;;
+    esac
+}
+
+darkmode_off() {
+    [ -f "$STATE_DIR/appearance.prev" ] || return
+    echo "restoring appearance..."
+    prev="$(cat "$STATE_DIR/appearance.prev")"
+    out="$(osascript -e "tell application \"System Events\" to tell appearance preferences to set dark mode to $prev" 2>&1)"
+    case "$out" in
+        *-1743*) tcc_help "dark mode" ;; # keep appearance.prev so a retry works
+        *) rm -f "$STATE_DIR/appearance.prev" ;;
+    esac
+}
+
+wallpaper_on() {
+    if [ ! -f "$WALLPAPER" ]; then
+        warn "wallpaper: $WALLPAPER missing - run: swift $DOTFILES/focus/generate-wallpaper.swift $WALLPAPER"
+        return
+    fi
+    echo "setting wallpaper..."
+    # known macOS 14+ limitation: only the current space reliably changes
+    out="$(osascript -e "tell application \"System Events\" to set picture of every desktop to POSIX file \"$WALLPAPER\"" 2>&1)"
+    case "$out" in
+        "") touch "$STATE_DIR/wallpaper.set" ;;
+        *-1743*) tcc_help "wallpaper" ;;
+        *) warn "wallpaper: $out" ;;
+    esac
+}
+
+# Restores the built-in "Sequoia Sunrise" wallpaper: the aerial with assetID
+# 6D6834A4-... in /Library/Application Support/com.apple.idleassetsd/Customer/
+# entries.json. Aerials have no image file to point osascript at, so we write
+# the wallpaper store's Index.plist directly and SIGKILL WallpaperAgent (a
+# plain kill lets it flush its stale in-memory state back over our edit; the
+# respawned agent then reads the new config).
+wallpaper_off() {
+    [ -f "$STATE_DIR/wallpaper.set" ] || return
+    echo "restoring wallpaper (Sequoia Sunrise)..."
+    if python3 - <<'EOF'
+import plistlib, os
+from datetime import datetime, timezone
+p = os.path.expanduser('~/Library/Application Support/com.apple.wallpaper/Store/Index.plist')
+with open(p, 'rb') as f:
+    idx = plistlib.load(f)
+now = datetime.now(timezone.utc).replace(tzinfo=None)
+desktop = {
+    'Content': {
+        'Choices': [{
+            'Configuration': plistlib.dumps(
+                {'assetID': '6D6834A4-2F0F-479A-B053-7D4DC5CB8EB7'},
+                fmt=plistlib.FMT_BINARY),
+            'Files': [],
+            'Provider': 'com.apple.wallpaper.choice.aerials',
+        }],
+        'EncodedOptionValues': plistlib.dumps(
+            {'values': {}}, fmt=plistlib.FMT_BINARY),
+        'Shuffle': '$null',
+    },
+    'LastSet': now,
+    'LastUse': now,
+}
+idle = {
+    'Content': {
+        'Choices': [{'Configuration': b'', 'Files': [], 'Provider': 'default'}],
+        'EncodedOptionValues': '$null',
+        'Shuffle': '$null',
+    },
+    'LastSet': now,
+    'LastUse': now,
+}
+# setting wallpaper via osascript scatters per-Space/per-Display overrides;
+# wipe them so the sequoia choice applies everywhere
+for section in ('AllSpacesAndDisplays', 'SystemDefault'):
+    prev = idx.get(section, {})
+    idx[section] = {
+        'Type': 'individual',
+        'Desktop': desktop,
+        'Idle': prev.get('Idle', idle),
+    }
+idx['Spaces'] = {}
+idx['Displays'] = {}
+with open(p, 'wb') as f:
+    plistlib.dump(idx, f, fmt=plistlib.FMT_BINARY)
+EOF
+    then
+        killall -9 WallpaperAgent 2>/dev/null
+        rm -f "$STATE_DIR/wallpaper.set"
+    else
+        warn "wallpaper: failed to write wallpaper store config"
+    fi
+}
+
+cmd_on() {
+    mkdir -p "$STATE_DIR"
+    [ -f "$STATE_DIR/active" ] && echo "focus already on - refreshing"
+    date -Iseconds > "$STATE_DIR/active"
+    hosts_on
+    steam_on
+    darkmode_on
+    wallpaper_on
+    report on
+}
+
+cmd_off() {
+    mkdir -p "$STATE_DIR"
+    hosts_off
+    steam_off
+    darkmode_off
+    wallpaper_off
+    rm -f "$STATE_DIR/active"
+    report off
+}
+
+report() {
+    if [ "$FAILURES" -eq 0 ]; then
+        echo "focus $1: done"
+    else
+        echo "focus $1: done with $FAILURES warning(s)"
+        exit 1
+    fi
+}
+
+cmd_status() {
+    if [ -f "$STATE_DIR/active" ]; then
+        echo "focus: ON (since $(cat "$STATE_DIR/active"))"
+        active=0
+    else
+        echo "focus: OFF"
+        active=1
+    fi
+
+    if [ -e "$STATE_DIR/Steam.app" ]; then
+        echo "  steam:     blocked"
+    elif [ -e "/Applications/Steam.app" ]; then
+        echo "  steam:     available"
+    else
+        echo "  steam:     not installed"
+    fi
+
+    if grep -q "$HOSTS_BEGIN" /etc/hosts; then
+        count="$(sed -n "/$HOSTS_BEGIN/,/$HOSTS_END/p" /etc/hosts | grep -c '^0\.0\.0\.0')"
+        echo "  hosts:     $count domains blocked"
+    else
+        echo "  hosts:     no block"
+    fi
+
+    if defaults read -g AppleInterfaceStyle > /dev/null 2>&1; then
+        mode="dark"
+    else
+        mode="light"
+    fi
+    if [ -f "$STATE_DIR/appearance.prev" ]; then
+        [ "$(cat "$STATE_DIR/appearance.prev")" = "true" ] && saved="dark" || saved="light"
+        echo "  darkmode:  $mode (saved previous: $saved)"
+    else
+        echo "  darkmode:  $mode"
+    fi
+
+    if [ -f "$STATE_DIR/wallpaper.set" ]; then
+        echo "  wallpaper: focus wallpaper set"
+    else
+        echo "  wallpaper: untouched"
+    fi
+
+    exit "$active"
+}
+
+case "$1" in
+    on) cmd_on ;;
+    off) cmd_off ;;
+    status) cmd_status ;;
+    *)
+        echo "usage: focus on|off|status"
+        exit 2
+        ;;
+esac

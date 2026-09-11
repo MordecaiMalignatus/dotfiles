@@ -1,0 +1,17 @@
+# Domains blocked while focus mode is on. One per line, # comments allowed.
+# hosts(5) has no wildcards - list each subdomain explicitly.
+lobste.rs
+www.lobste.rs
+news.ycombinator.com
+reddit.com
+www.reddit.com
+old.reddit.com
+np.reddit.com
+twitter.com
+www.twitter.com
+x.com
+www.x.com
+# Uncomment to also block YouTube:
+# youtube.com
+# www.youtube.com
+# m.youtube.com
