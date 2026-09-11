@@ -252,7 +252,7 @@
 (use-package org-ref
   :ensure t
   :config
-  (define-key org-mode-map (kbd "C-c ]") 'org-ref-insert-link)
+  (define-key org-mode-map (kbd "C-c ]") 'org-ref-insert-cite-link)
   (define-key bibtex-mode-map (kbd "H-b") 'org-ref-bibtex-hydra/body)
   (setq bibtex-completion-bibliography '("~/Sync/bibliography.bib"))
   (setq bibtex-completion-library-path '("~/Sync/Papers/"))
@@ -262,6 +262,14 @@
 
 (use-package ivy-bibtex
   :ensure t)
+
+(defvar az/bibliography-file
+  "~/Sync/bibliography.bib")
+
+(defun az/open-bibliography ()
+  "Open the global bibliography I use for Perceptron."
+  (interactive)
+  (find-file az/bibliography-file))
 
 (defun az/insert-formatted-citation ()
   "Select a key from the bibliography, then insert citation."
