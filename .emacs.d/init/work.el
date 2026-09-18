@@ -71,10 +71,12 @@ the heading's subtree, so nested calls walk down the tree."
         (az/work-log--ensure-heading (let ((system-time-locale "C"))
                                        (format-time-string "%B"))
                                      3)
-        (az/work-log--ensure-heading (format-time-string "%F") 4)
+        (az/work-log--ensure-heading (let ((system-time-locale "C"))
+                                       (format-time-string "CW %V, [%F], %A"))
+                                     4)
         (goto-char (point-max))
         (skip-chars-backward " \t\n")
-        (insert "\n- *" (format-time-string "%F %T") "* - " event)
+        (insert "\n- *" (format-time-string "%H:%M") "* - " event)
         (org-fill-paragraph)
         ;; Every heading inserted above pushed the file's final newline down a
         ;; line, so collapse the end of the file back to a single one.
