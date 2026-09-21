@@ -72,7 +72,7 @@ the heading's subtree, so nested calls walk down the tree."
                                        (format-time-string "%B"))
                                      3)
         (az/work-log--ensure-heading (let ((system-time-locale "C"))
-                                       (format-time-string "CW %V, [%F], %A"))
+                                       (format-time-string "CW %V, [%F %a]"))
                                      4)
         (goto-char (point-max))
         (skip-chars-backward " \t\n")
