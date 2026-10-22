@@ -1,0 +1,130 @@
+#!/usr/bin/env python3
+"""Append a timestamped event to the Org work log."""
+
+from __future__ import annotations
+
+import datetime as dt
+import fcntl
+import os
+import re
+import sys
+import textwrap
+from pathlib import Path
+from typing import NoReturn
+
+HEADING_RE = re.compile(r"^(\*+) (.*?)[ \t]*$")
+DEFAULT_LOG = "~/grimoire/work-log.org"
+
+
+def fail(message: str) -> NoReturn:
+    print(f",log: {message}", file=sys.stderr)
+    raise SystemExit(2)
+
+
+def heading(line: str) -> tuple[int, str] | None:
+    match = HEADING_RE.match(line)
+    if not match:
+        return None
+    return len(match.group(1)), match.group(2)
+
+
+def subtree_end(lines: list[str], start: int, level: int) -> int:
+    for index in range(start + 1, len(lines)):
+        candidate = heading(lines[index])
+        if candidate and candidate[0] <= level:
+            return index
+    return len(lines)
+
+
+def ensure_heading(
+    lines: list[str], title: str, level: int, parent: int | None
+) -> int:
+    start = 0 if parent is None else parent + 1
+    end = len(lines) if parent is None else subtree_end(lines, parent, level - 1)
+
+    for index in range(start, end):
+        if heading(lines[index]) == (level, title):
+            return index
+
+    # Match the Emacs command's layout: children sit directly below a newly
+    # created parent, while sibling headings have one blank line between them.
+    while end > start and not lines[end - 1].strip():
+        del lines[end - 1]
+        end -= 1
+
+    insertion: list[str] = []
+    previous = heading(lines[end - 1]) if end > 0 else None
+    if end > 0 and (previous is None or previous[0] != level - 1):
+        insertion.append("")
+    insertion.append(f"{'*' * level} {title}")
+    if end < len(lines):
+        insertion.append("")
+
+    lines[end:end] = insertion
+    return end + (1 if insertion[0] == "" else 0)
+
+
+def append_event(lines: list[str], day: int, event: str, now: dt.datetime) -> None:
+    end = subtree_end(lines, day, 4)
+    while end > day + 1 and not lines[end - 1].strip():
+        del lines[end - 1]
+        end -= 1
+
+    prefix = f"- *{now:%H:%M}* - "
+    wrapped = textwrap.wrap(
+        event,
+        width=80,
+        initial_indent=prefix,
+        subsequent_indent="  ",
+        break_long_words=False,
+        break_on_hyphens=False,
+    ) or [prefix.rstrip()]
+
+    insertion = wrapped
+    if end < len(lines):
+        insertion = wrapped + [""]
+    lines[end:end] = insertion
+
+
+def main() -> None:
+    if len(sys.argv) == 1:
+        fail("usage: ,log MESSAGE")
+
+    event = " ".join(sys.argv[1:]).strip()
+    if not event:
+        fail("message must not be empty")
+
+    path = Path(os.path.expanduser(os.environ.get("WORK_LOG_FILE", DEFAULT_LOG)))
+    if not path.parent.is_dir():
+        fail(f"directory does not exist: {path.parent}")
+
+    lock_path = path.with_name(f".{path.name}.lock")
+    with lock_path.open("w") as lock:
+        fcntl.flock(lock, fcntl.LOCK_EX)
+
+        if path.exists():
+            lines = path.read_text(encoding="utf-8").splitlines()
+        else:
+            lines = []
+
+        now = dt.datetime.now().astimezone()
+        iso = now.isocalendar()
+        months = (
+            "",
+            "January", "February", "March", "April", "May", "June",
+            "July", "August", "September", "October", "November", "December",
+        )
+        weekdays = ("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun")
+
+        log = ensure_heading(lines, "Log", 1, None)
+        year = ensure_heading(lines, f"{now.year:04d}", 2, log)
+        month = ensure_heading(lines, months[now.month], 3, year)
+        day_title = f"CW {iso.week:02d}, [{now:%Y-%m-%d} {weekdays[now.weekday()]}]"
+        day = ensure_heading(lines, day_title, 4, month)
+        append_event(lines, day, event, now)
+
+        path.write_text("\n".join(lines).rstrip() + "\n", encoding="utf-8")
+
+
+if __name__ == "__main__":
+    main()

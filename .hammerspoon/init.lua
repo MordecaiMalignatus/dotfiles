@@ -7,13 +7,13 @@ end)
 -- Terminal automation
 hs.hotkey.bind({"shift", "ctrl"}, "D", function()
     local spawnNewTerminal = [[
-      tell application "Ghostty"
+      tell application "Rex Beta"
         activate
       end tell
     ]]
     local success, object, description = hs.osascript.applescript(spawnNewTerminal)
     if not success then
-        hs.notify.new({title="Spawning new Terminal not successful :(",
+        hs.notify.new({title="Activating Rex not successful :(",
             informativeText="Error message: " .. description}):send()
     end
 end)
